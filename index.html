@@ -392,7 +392,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/16/%E4%BD%BF%E7%94%A8-FFMPEG-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -406,7 +406,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">使用 FFMPEG 压缩 png 图片 与 tinypng 压缩结果对比</a>
+            <a href="/2018/01/16/%E4%BD%BF%E7%94%A8-FFMPEG-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">使用 FFMPEG 压缩 png 图片 与 tinypng 压缩结果对比</a>
         </h2>
 
         <div class="post-meta">
@@ -439,8 +439,8 @@
       
           <p><a target="_blank" rel="noopener" href="https://tinypng.com/">Tinypng</a> 是一个在线 png 压缩工具   </p>
 <p><a target="_blank" rel="noopener" href="https://ffmpeg.org/download.html">FFmpeg</a> 下载地址   </p>
-<h2 id="原图-903-kb"><a href="#原图-903-kb" class="headerlink" title="原图 903 kb"></a>原图 903 kb</h2><p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/input.png" alt="原图 903 kb"></p>
-<h2 id="Tinypng压缩过的-96KB"><a href="#Tinypng压缩过的-96KB" class="headerlink" title="Tinypng压缩过的 96KB"></a>Tinypng压缩过的 96KB</h2><p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/tiny.png" alt="Tinypng压缩过的 96KB"></p>
+<h2 id="原图-903-kb"><a href="#原图-903-kb" class="headerlink" title="原图 903 kb"></a>原图 903 kb</h2><p><img src="/input.png" alt="原图 903 kb"></p>
+<h2 id="Tinypng压缩过的-96KB"><a href="#Tinypng压缩过的-96KB" class="headerlink" title="Tinypng压缩过的 96KB"></a>Tinypng压缩过的 96KB</h2><p><img src="/tiny.png" alt="Tinypng压缩过的 96KB"></p>
 <blockquote>
 <p><strong>目标就是用 FFmpeg 做到近似 Tinypng 的处理效果</strong></p>
 </blockquote>
@@ -450,11 +450,11 @@
 <p>in.log文件中 “pix_fmt”: “pal8”, 这个就是对应的色彩</p>
 <p>直接转换 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -hide_banner -i in.png -pix_fmt pal8 out_1.png</span><br></pre></td></tr></table></figure>
-<h2 id="颗粒感很厚重-而且体积也不小-123-KB"><a href="#颗粒感很厚重-而且体积也不小-123-KB" class="headerlink" title="颗粒感很厚重 而且体积也不小 123 KB"></a>颗粒感很厚重 而且体积也不小 123 KB</h2><p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/zhichu.png" alt="颗粒感很厚重 而且体积也不小 123 KB"></p>
+<h2 id="颗粒感很厚重-而且体积也不小-123-KB"><a href="#颗粒感很厚重-而且体积也不小-123-KB" class="headerlink" title="颗粒感很厚重 而且体积也不小 123 KB"></a>颗粒感很厚重 而且体积也不小 123 KB</h2><p><img src="/zhichu.png" alt="颗粒感很厚重 而且体积也不小 123 KB"></p>
 <p>效果看起来很差，于是我想到了降噪 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -hide_banner -i in.png -pix_fmt pal8  -vf dctdnoiz=4.5 -y out_2.png</span><br></pre></td></tr></table></figure>
 <p>2D DCT降噪 但好像没什么效果  看来原因并不是这样的 124 KB</p>
-<p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/jiangzao.png" alt="但好像没什么效果  看来原因并不是这样的 124 KB"></p>
+<p><img src="/jiangzao.png" alt="但好像没什么效果  看来原因并不是这样的 124 KB"></p>
 <p>我尝试调整了多种降噪和dither参数,但是效果都很惨。这里就不细说了看起来问题并不是出在内容上面，应该是思路有错误。</p>
 <p>后来友人提醒：</p>
 <blockquote>
@@ -467,7 +467,7 @@
 <p>再用优化过的调色板去转换 得到结果 116 KB</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i in.png -i out_3.png -lavfi &quot;[0][1:v] paletteuse&quot; -pix_fmt pal8 -y out_4.png</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/output.png" alt="结果 116 KB"></p>
+<p><img src="/output.png" alt="结果 116 KB"></p>
 <p>至此，效果上已经可以接受了但是体积还差 10KB 的差距，我还是搞不清楚差距在哪里。<br>如果有人知道希望可以指导一下</p>
 
       
@@ -488,7 +488,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/30/QQ-%E7%BE%A4%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA-mht-%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/30/QQ-%E7%BE%A4%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA-mht-%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2/QQ-%E7%BE%A4%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA-mht-%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -502,7 +502,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/03/30/QQ-%E7%BE%A4%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA-mht-%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2/" class="post-title-link" itemprop="url">QQ 群聊天记录导出 mht 文件的分割</a>
+            <a href="/2014/03/30/QQ-%E7%BE%A4%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA-mht-%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2/QQ-%E7%BE%A4%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA-mht-%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2/" class="post-title-link" itemprop="url">QQ 群聊天记录导出 mht 文件的分割</a>
         </h2>
 
         <div class="post-meta">
