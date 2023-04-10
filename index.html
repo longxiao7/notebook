@@ -423,7 +423,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-09 16:12:05" itemprop="dateModified" datetime="2023-04-09T16:12:05+08:00">2023-04-09</time>
+                <time title="修改时间：2023-04-10 10:20:26" itemprop="dateModified" datetime="2023-04-10T10:20:26+08:00">2023-04-10</time>
               </span>
 
           
@@ -439,37 +439,14 @@
       
           <p><a target="_blank" rel="noopener" href="https://tinypng.com/">Tinypng</a> 是一个在线 png 压缩工具   </p>
 <p><a target="_blank" rel="noopener" href="https://ffmpeg.org/download.html">FFmpeg</a> 下载地址   </p>
-<h2 id="原图-903-kb"><a href="#原图-903-kb" class="headerlink" title="原图 903 kb"></a>原图 903 kb</h2><p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/input.png" alt="原图 903 kb"></p>
-<h2 id="Tinypng压缩过的-96KB"><a href="#Tinypng压缩过的-96KB" class="headerlink" title="Tinypng压缩过的 96KB"></a>Tinypng压缩过的 96KB</h2><p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/tiny.png" alt="Tinypng压缩过的 96KB"></p>
-<blockquote>
-<p><strong>目标就是用 FFmpeg 做到近似 Tinypng 的处理效果</strong></p>
-</blockquote>
-<p>首先是判断颜色格式 这里我提前做好了准备 原图的rgb24 输出是 pal8 也就是输入 24位 输出256色</p>
-<p>如果不清楚 可以用下面的命令来输出一个log看一眼</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffprobe -hide_banner -v quiet -print_format json -show_format -show_streams in.png &gt; in.log</span><br></pre></td></tr></table></figure>
-<p>in.log文件中 “pix_fmt”: “pal8”, 这个就是对应的色彩</p>
-<p>直接转换 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -hide_banner -i in.png -pix_fmt pal8 out_1.png</span><br></pre></td></tr></table></figure>
-<h2 id="颗粒感很厚重-而且体积也不小-123-KB"><a href="#颗粒感很厚重-而且体积也不小-123-KB" class="headerlink" title="颗粒感很厚重 而且体积也不小 123 KB"></a>颗粒感很厚重 而且体积也不小 123 KB</h2><p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/zhichu.png" alt="颗粒感很厚重 而且体积也不小 123 KB"></p>
-<p>效果看起来很差，于是我想到了降噪 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -hide_banner -i in.png -pix_fmt pal8  -vf dctdnoiz=4.5 -y out_2.png</span><br></pre></td></tr></table></figure>
-<p>2D DCT降噪 但好像没什么效果  看来原因并不是这样的 124 KB</p>
-<p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/jiangzao.png" alt="但好像没什么效果  看来原因并不是这样的 124 KB"></p>
-<p>我尝试调整了多种降噪和dither参数,但是效果都很惨。这里就不细说了看起来问题并不是出在内容上面，应该是思路有错误。</p>
-<p>后来友人提醒：</p>
-<blockquote>
-<p>我看了下圖像信息<br>不會是因爲調色板吧？<br>統計一下，第一張圖用到了256色<br>第二張衹有133<br>那麽就是第一張圖用了調色板來映射256色<br>而第二張就是老老實實地按照原本的256色來<br>其實gif就是這樣的<br>通過調色板來映射256色，所以能勉强達到一個能接受的效果 </p>
-</blockquote>
-<p>好吧 看来需要优化一下调色板 </p>
-<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i in.png -vf palettegen=max_colors=256:stats_mode=single -y out_3.png</span><br></pre></td></tr></table></figure>
-
-<p>这里的输出结果是一个调色板 并不是完整图像 由于这是单张静图所以mode使用的是single ;<br>这个参数有几种具体区别可以看文档 <a target="_blank" rel="noopener" href="http://ffmpeg.org/ffmpeg-all.html#palettegen-1">http://ffmpeg.org/ffmpeg-all.html#palettegen-1</a></p>
-<p>再用优化过的调色板去转换 得到结果 116 KB</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i in.png -i out_3.png -lavfi &quot;[0][1:v] paletteuse&quot; -pix_fmt pal8 -y out_4.png</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/output.png" alt="结果 116 KB"></p>
-<p>至此，效果上已经可以接受了但是体积还差 10KB 的差距，我还是搞不清楚差距在哪里。<br>如果有人知道希望可以指导一下</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/01/16/%E4%BD%BF%E7%94%A8-FFmpeg-%E5%8E%8B%E7%BC%A9-png-%E5%9B%BE%E7%89%87-%E4%B8%8E-tinypng-%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9E%9C%E5%AF%B9%E6%AF%94/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
