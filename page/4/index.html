@@ -154,6 +154,71 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/PHP%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%91%A8%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/12/PHP%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%91%A8%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4/" class="post-title-link" itemprop="url">PHP获取本周开始时间</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-12 19:05:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:05:00+08:00">2014-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-07 19:37:37" itemprop="dateModified" datetime="2023-04-07T19:37:37+08:00">2023-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/*先设置时区*/</span></span><br><span class="line"><span class="title function_ invoke__">date_default_timezone_set</span>(<span class="string">&#x27;PRC&#x27;</span>);</span><br><span class="line"><span class="comment">/*网上的写法：总觉得这周跨年或者跨月的时候会悲剧 未验证*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">mktime</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="title function_ invoke__">date</span>(<span class="string">&#x27;m&#x27;</span>),<span class="title function_ invoke__">date</span>(<span class="string">&#x27;d&#x27;</span>)-<span class="title function_ invoke__">date</span>(<span class="string">&#x27;w&#x27;</span>),<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">/*同事的写法：当本日为周日的时候 就坑了*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last sunday&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*自己的写法: 目前还没发现问题*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$now</span> = <span class="title function_ invoke__">time</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$now</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;w&#x27;</span>,<span class="variable">$now</span>) )*<span class="number">86400</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;H&#x27;</span>,<span class="variable">$now</span>) )*<span class="number">3600</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;i&#x27;</span>,<span class="variable">$now</span>) ) *<span class="number">60</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;s&#x27;</span>,<span class="variable">$now</span>) );</span><br><span class="line"></span><br><span class="line"><span class="comment">/*过后的思考*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last saturday&#x27;</span>)+<span class="number">86400</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*如果获取的不是0点 而是当前时间*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$t</span> = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last saturday &#x27;</span>.<span class="variable">$t</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/11/Typecho%E9%9B%86%E6%88%90ueditor%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -396,14 +461,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

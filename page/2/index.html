@@ -154,6 +154,232 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/08/05/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-linux-%E7%9A%84-iptables-%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%9A%E4%BF%A1%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/08/05/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-linux-%E7%9A%84-iptables-%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%80%9A%E4%BF%A1%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">快速入门 linux 的 iptables 防火墙的基本通信管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-08-05 12:15:00" itemprop="dateCreated datePublished" datetime="2014-08-05T12:15:00+08:00">2014-08-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-10 10:55:30" itemprop="dateModified" datetime="2023-04-10T10:55:30+08:00">2023-04-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>iptables是一种运行在linux下的防火墙组件，下面的介绍可以快速的学习iptables的入门使用。</p>
+<p>iptables 的特点（重要）</p>
+<ol>
+<li>它的工作逻辑分为 链、表、规则三层结构。</li>
+<li>数据包通过的时候，在对应表中，规则从上向下匹配，匹配到即跳出，后续规则忽略。</li>
+<li>常用于过滤数据包和转发数据包（代理服务器）。</li>
+<li>工作方式基于 IP、端口和MAC</li>
+</ol>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><table border="1" align="center">
+<tbody>
+<tr align="center">
+<td><strong>链名</strong></td>
+<td>PREROUTING</td>
+<td>FORWARD</td>
+<td>POSTROUTING</td>
+<td>INPUT</td>
+<td>OUTPUT</td>
+</tr>
+<tr>
+<td align="center"><strong>含义</strong></td>
+<td style="text-align: center">
+<p>&nbsp;一般是指从外网发送到当前主机上</p>
+<p>并且在路由规则处理<strong>之前</strong></p>
+</td>
+<td>
+<p style="text-align: center">&nbsp;一般指从外网发送到当前主机上</p>
+<p style="text-align: center">路由规则处理的情况，这种情况</p>
+<p style="text-align: center">大概有两种可能性</p>
+<ol>
+<li>本机处理外部来源的网络数据</li>
+<li>转发外部来源的网络数据到其他地址</li>
+</ol></td>
+<td>&nbsp;
+<p style="text-align: center">&nbsp;一般是指从外网发送到当前主机上</p>
+<p style="text-align: center">并且在路由规则处理<strong>之后</strong>，这种情</p>
+<p style="text-align: center">况出现的可能性也有两种</p>
+<ol>
+<li>本机主动向外请求时产生</li>
+<li>转发网络数据的时候产生</li>
+</ol></td>
+<td style="text-align: center">&nbsp;发送给本机的数据</td>
+<td style="text-align: center">&nbsp;本机向外主动发送的数据</td>
+</tr>
+<tr align="left" valign="middle">
+<td align="center"><strong>默认可用表</strong></td>
+<td style="text-align: center"><ol>
+<li style="text-align: left">mangel(特殊数据包标记&nbsp;)</li>
+<li style="text-align: left">NAT(地址转换)</li>
+</ol></td>
+<td style="text-align: center"><ol>
+<li style="text-align: left">mangel(特殊数据包标记&nbsp;)</li>
+<li style="text-align: left">filter(过滤)</li>
+</ol></td>
+<td style="text-align: center" align="left"><ol>
+<li style="text-align: left">mangel(特殊数据包标记&nbsp;)</li>
+<li style="text-align: left">NAT(地址转换)</li>
+</ol></td>
+<td style="text-align: center"><ol>
+<li style="text-align: left">mangel(特殊数据包标记&nbsp;)</li>
+<li style="text-align: left">filter(过滤)</li>
+</ol></td>
+<td style="text-align: center"><ol>
+<li style="text-align: left">mangel(特殊数据包标记&nbsp;)</li>
+<li style="text-align: left">filter(过滤)</li>
+</ol></td>
+</tr>
+</tbody>
+</table>
+
+<p>iptables的工作流程大体上可以表达为三种 </p>
+<ol>
+<li>源地址发送数据–&gt; {PREROUTING–&gt;路由规则–&gt;POSTROUTING} –&gt;目的地址接收到数据</li>
+<li>源地址发送数据–&gt; {PREROUTING–&gt;INPUT–&gt;本机} </li>
+<li>{本机–&gt;OUTPUT–&gt;POSTROUTING} –&gt;目的地址接收到数据</li>
+</ol>
+<p>从上表当中我们可以看到，对于不考虑地址转发的情况下，例如一台独立的主机的网络管理，我们只需要配置 INPUT 和 OUTPUT 两条链即可完成对网络的管理，本次的重点也是这两条链接。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>先启一个定时任务 5分钟 清空一次规则 防止把自己关外面，进不去ssh<br>crontab -e</p>
+<p><code>*/5 * * * * /usr/sbin/iptables -F</code></p>
+<p>然后随便加个不疼不痒的规则，等5分钟看看定时任务能起作用以后再动手</p>
+<h3 id="1-管理规则"><a href="#1-管理规则" class="headerlink" title="1. 管理规则"></a>1. 管理规则</h3><blockquote>
+<p>iptables  [-t 表名]  [选项]   -n </p>
+</blockquote>
+<p>选项：</p>
+<p> -L  查看</p>
+<p> -F  清除所有规则</p>
+<p> -X  清除自定义链</p>
+<p> -Z  清除所有链统计</p>
+<p>-n的含义是用ip和端口的方式来显示规则</p>
+<p>例：</p>
+<p>查看filter表中的所有规则</p>
+<p><code>iptables -t filter -L -n</code></p>
+<p>清空filter表中的规则</p>
+<p><code>iptables -t filter -F</code></p>
+<h3 id="2-定义表的默认规则"><a href="#2-定义表的默认规则" class="headerlink" title="2. 定义表的默认规则"></a>2. 定义表的默认规则</h3><p>首先要牢记iptables是有链 有表的结构 ， 那么定义每一条链上的每一条表的默认规则的格式为</p>
+<blockquote>
+<p>iptables -t 表 -P 链  动作类型</p>
+</blockquote>
+<p>-t 就不说了 -P 这里要大写  链的名称也是大小写敏感的注意不要写错  动作类型有ACCEPT允许通过 DROP丢弃 也就是禁止 还有一种动作是LOG作为日志记录，目前我还没有用过。</p>
+<p>禁止访问还有 REJECT，类似DROP，但这个是主动拒绝，DROP是直接丢弃，区别是另一端能否感知到。</p>
+<p>例：</p>
+<p>设置INPUT链上filter表默认规则</p>
+<p><code>iptables -t filter -P INPUT ACCEPT</code></p>
+<p>这里要注意的是，默认允许了所有的链接都可以通过，到达服务器。这样的设置在正式生产服务器环境上是十分危险的，不建议这么设置，应当设置为DROP，但是默认允许所有的链接都禁止的后果就是把自己的远程操作也踢掉了，服务器在本地还无所谓，但是在远程这就麻烦了。于是要牢记，默认规则要在设置好自己访问的规则以后再设置，最好是在最后设置。</p>
+<h3 id="3-自定义规则"><a href="#3-自定义规则" class="headerlink" title="3.自定义规则"></a>3.自定义规则</h3><p>下面我们来真正设置某一条链上的某个表中一个基于IP和端口的规则，也是iptables最常见的用途</p>
+<p>格式：</p>
+<blockquote>
+<p>iptables  [-AI  链]  [-io  网卡]  [-p  协议]  [-s  源IP]  [-d  目标ip]  -j  动作</p>
+</blockquote>
+<p>例：</p>
+<p>禁止ip为192.168.1.110的计算机访问本机eth0网卡</p>
+<p>分析：</p>
+<p>禁止XXX访问本机 所以是INPUT链 增加规则使用-A<br>网卡是eth0因为是INPUT链 所以参数应该是 -i<br>源ip是 192.168.1.110<br>动作是  DROP<br>于是应该这样写</p>
+<p><code>iptables -A INPUT -i eth0 -s 192.168.1.110 -j DROP </code></p>
+<p>反过来，禁止本机访问192.168.1.110可以这么写</p>
+<p><code>iptables -A OUTPUT -o eth0 -d 192.168.1.110 -j DROP</code> </p>
+<p>例：</p>
+<p>允许本机访问本地回环网卡 localhost</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -o lo -j ACCEPT </span><br></pre></td></tr></table></figure>
+
+<p>现在我们可以添加一个针对固定IP的策略了，那么如何添加一个网段的策略的，例如禁止192.168.1.xxx 这个网段所有的IP访问本机，这里是要用下面的写法的</p>
+<p><code>iptables -A INPUT -i eth0 -s 192.168.1.0/24 -j DROP</code></p>
+<p>这里的192.168.0&#x2F;24是代表网段，具体含义可以去了解 计算机网络原理，24其实指的是二进制的从左到右 有24个1 ，在IPV4的ip地址表示方法下 有32位，那么32-24&#x3D;8 也就是十进制IP最后一段位置代表是0</p>
+<p>于是我们可以 1 针对IP  2 针对IP段 设置策略 </p>
+<p>下面来添加对端口的策略，这个往往也是最细节最有用的内容</p>
+<p>格式：</p>
+<blockquote>
+<p>iptables  -A  链 -io 网卡 -p 协议  -s 源ip  –sport  源端口  -d  目标ip  –dport  目标端口  -j  动作</p>
+</blockquote>
+<p>这里有几个点要注意</p>
+<p>和IP一样 链的不同（可能是INPUT也可能是OUTPUT） 使用不同的-i或者-o<br>-p是小写的。 代表协议，类型可以是tcp、udp、icmp或者all，特别是要注意的是我们平时使用的ping命令 其实是icmp协议，而这个协议比较特殊，不使用端口 所以在使用all的时候（包含icmp）同时设置端口可能会出错！<br>INPUT要有源，OUTPUT要有目标，但是INPUT往往是限制目标端口，OUTPUT往往是限制源端口，注意逻辑不要乱。</p>
+<p>例：</p>
+<p>web服务器添加80服务</p>
+<p><code>iptables -A INPUT -p tcp --dport 80 -j ACCEPT</code></p>
+<p>允许192.168.1.x网段访问mysql数据库</p>
+<p><code>iptables -A INPUT -p tcp -s 192.168.1.0/24 --dport 3306 -j ACCEPT</code></p>
+<p>最后说明一下，当有多条规则匹配一次访问的时候，以最前面的规则为准，当无法匹配到对应规则的时候，使用默认规则</p>
+<p>在前面的例子中相信你已经发现了-A 往往是代表 ADD的意思，每次ADD都是增加规则到列表的最后，那么除了ADD 其实还有-I  INSERT插入规则</p>
+<p>具体用法是将I替换成A 同时在链名后添加数字排序</p>
+<blockquote>
+<p>-I 链名  1</p>
+</blockquote>
+<p>1 代表了第一位顺序 也就是最优先的匹配规则</p>
+<p>例</p>
+<p><code>iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT</code></p>
+<p>例</p>
+<p>删除某一条特定规则</p>
+<p>先查看该规则的序号</p>
+<p><code>iptables --line -vnL</code><br>然后根据最前面的序号</p>
+<p><code>iptables -t 表名（非必须） -D 链名 序号</code></p>
+<p>删掉对应的规则</p>
+<hr>
+<p>上面的介绍都是具体的规则配置，这些配置在防火墙重启的时候会丢失，那么如何管理防火墙服务是下面的内容</p>
+<p>开机自启动</p>
+<p><code>chkconfig iptables on</code></p>
+<p>规则保存</p>
+<p><code>service iptables save </code></p>
+<p>上面的命令其实是把规则保存在&#x2F;etc&#x2F;sysconfig&#x2F;iptables文件中，重启会自动读取</p>
+<p>如果是业务相对固定的服务器这样做无所谓，但如果需要经常切换规则，那么讲规则都写在这一个文件中并不是十分容易管理</p>
+<p>可以把规则写成单独的文件，在开机的时候自动载入（&#x2F;etc&#x2F;rc.local中添加），但是要注意权限设置（755），这样做的好处是便于管理，缺点是只有开机的时候有效</p>
+<p>如果是重启防火墙服务，则无法载入对应规则。</p>
+<p>总结：iptables看似复杂，实际上找好逻辑对应关系还是不难的关键是5条链的几个表要理解含义，这里只简单的介绍了本机和外界通信的基本管理。</p>
+<p>持久化防火墙规则 （开机自启动）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">iptables-save &gt; /etc/sysconfig/iptables</span><br><span class="line"></span><br><span class="line">#修改/etc/rc.d/rc.local 添加</span><br><span class="line">/usr/sbin/iptables-restore &lt; /etc/sysconfig/iptables</span><br><span class="line"></span><br><span class="line">#增加执行权限</span><br><span class="line">chmod a+x /etc/rc.d/rc.local </span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/05/05/SSO-%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E5%9C%A8-web-%E4%B8%8A%E7%9A%84%E5%85%B3%E9%94%AE%E5%8E%9F%E7%90%86-cookie%E8%B7%A8%E5%9F%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -441,94 +667,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/25/MySQL-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/25/MySQL-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" class="post-title-link" itemprop="url">MySQL 数据备份与恢复</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-25 22:52:00" itemprop="dateCreated datePublished" datetime="2014-03-25T22:52:00+08:00">2014-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-07 22:27:51" itemprop="dateModified" datetime="2023-04-07T22:27:51+08:00">2023-04-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h1><p>备份</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">INTO</span> OUTFILE &quot;D:\\1.sql&quot; <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
-
-<p>恢复</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOAD DATA INFILE &quot;D:\\1.sql&quot; <span class="keyword">INTO</span> <span class="keyword">TABLE</span> 表名;</span><br></pre></td></tr></table></figure>
-
-<p>补充几个设置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FIELDS TERMINATED BY &#x27;,&#x27; #字段间隔符</span><br><span class="line">OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27; #字符串类型字段包围符</span><br><span class="line">LINES TERMINATED BY &#x27;\n&#x27; #换行符</span><br></pre></td></tr></table></figure>
-<p>于是备份命令改为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    * INTO OUTFILE &quot;D:\\1.sql&quot; FIELDS TERMINATED BY &#x27;,&#x27;</span><br><span class="line">    *  OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27; LINES TERMINATED BY &#x27;\n&#x27;</span><br><span class="line">FROM</span><br><span class="line">    表名;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-<p>恢复数据改为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LOAD DATA INFILE &quot;D:\\1.sql&quot; </span><br><span class="line">    INTO TABLE 表名 </span><br><span class="line">    FIELDS TERMINATED BY &#x27;,&#x27; OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27; LINES TERMINATED BY &#x27;\n&#x27;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>要有文件目录的读写权限 特别是在linux下</p>
-<p>此方法不能备份表结构。 需要用 <code>SHOW CREATE TABLE</code> 表名来获取结构并备份;</p>
-<hr>
-<h1 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h1><h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>uroot <span class="operator">-</span>p密码 数据库名 <span class="operator">-</span>l <span class="operator">-</span>F <span class="operator">&gt;</span> <span class="string">&#x27;/usr/data.sql&#x27;</span></span><br><span class="line"></span><br><span class="line">#在mysql5<span class="number">.6</span>中失效原因是不能在命令行中出现密码   需要在etc下的my.cnf中写入</span><br><span class="line"></span><br><span class="line">[mysqldump]</span><br><span class="line"><span class="keyword">user</span><span class="operator">=</span>备份用户名</span><br><span class="line">password<span class="operator">=</span>备份用户密码</span><br><span class="line">#然后执行</span><br><span class="line">mysqldump 数据库名 <span class="operator">-</span>l <span class="operator">-</span>F <span class="operator">&gt;</span> <span class="string">&#x27;/usr/data.sql&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 恢复的时候可能会因为数据过大造成失败 先运行</span><br><span class="line">set global wait_timeout=60000;</span><br><span class="line">set global max_allowed_packet = 64*1024*1024</span><br><span class="line">mysql -uroot -p123456 数据库名 -v -f&lt;/usr/data.sql</span><br><span class="line">#-v 查看详细信息</span><br><span class="line">#-f 当中间遇到错误 可以跳过 忽略错误</span><br></pre></td></tr></table></figure>
-
-<h1 id="方法3-恢复-binlog-数据"><a href="#方法3-恢复-binlog-数据" class="headerlink" title="方法3 恢复 binlog 数据"></a>方法3 恢复 binlog 数据</h1><blockquote>
-<p>（不详细 仅作记录 具体可以参考 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/83372804">https://zhuanlan.zhihu.com/p/83372804</a> ）</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#恢复全部数据</span><br><span class="line">mysqlbinlog --no-defaults mysql.000001 |mysql -uroot -p123456 数据库名</span><br><span class="line"></span><br><span class="line">#恢复部分数据</span><br><span class="line">#根据pos位置193到280之间 恢复数据</span><br><span class="line">mysqlbinlog --no-defaults mysqlbinlog.00001 --start-position=&quot;193&quot; --stop-position=&quot;280&quot;  |mysql -uroot -p123456 数据库名</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -598,14 +736,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

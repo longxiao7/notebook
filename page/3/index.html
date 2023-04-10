@@ -154,6 +154,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/25/MySQL-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/25/MySQL-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" class="post-title-link" itemprop="url">MySQL 数据备份与恢复</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-25 22:52:00" itemprop="dateCreated datePublished" datetime="2014-03-25T22:52:00+08:00">2014-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-07 22:27:51" itemprop="dateModified" datetime="2023-04-07T22:27:51+08:00">2023-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h1><p>备份</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">INTO</span> OUTFILE &quot;D:\\1.sql&quot; <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<p>恢复</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOAD DATA INFILE &quot;D:\\1.sql&quot; <span class="keyword">INTO</span> <span class="keyword">TABLE</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<p>补充几个设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FIELDS TERMINATED BY &#x27;,&#x27; #字段间隔符</span><br><span class="line">OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27; #字符串类型字段包围符</span><br><span class="line">LINES TERMINATED BY &#x27;\n&#x27; #换行符</span><br></pre></td></tr></table></figure>
+<p>于是备份命令改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    * INTO OUTFILE &quot;D:\\1.sql&quot; FIELDS TERMINATED BY &#x27;,&#x27;</span><br><span class="line">    *  OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27; LINES TERMINATED BY &#x27;\n&#x27;</span><br><span class="line">FROM</span><br><span class="line">    表名;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>恢复数据改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LOAD DATA INFILE &quot;D:\\1.sql&quot; </span><br><span class="line">    INTO TABLE 表名 </span><br><span class="line">    FIELDS TERMINATED BY &#x27;,&#x27; OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27; LINES TERMINATED BY &#x27;\n&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>要有文件目录的读写权限 特别是在linux下</p>
+<p>此方法不能备份表结构。 需要用 <code>SHOW CREATE TABLE</code> 表名来获取结构并备份;</p>
+<hr>
+<h1 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h1><h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>uroot <span class="operator">-</span>p密码 数据库名 <span class="operator">-</span>l <span class="operator">-</span>F <span class="operator">&gt;</span> <span class="string">&#x27;/usr/data.sql&#x27;</span></span><br><span class="line"></span><br><span class="line">#在mysql5<span class="number">.6</span>中失效原因是不能在命令行中出现密码   需要在etc下的my.cnf中写入</span><br><span class="line"></span><br><span class="line">[mysqldump]</span><br><span class="line"><span class="keyword">user</span><span class="operator">=</span>备份用户名</span><br><span class="line">password<span class="operator">=</span>备份用户密码</span><br><span class="line">#然后执行</span><br><span class="line">mysqldump 数据库名 <span class="operator">-</span>l <span class="operator">-</span>F <span class="operator">&gt;</span> <span class="string">&#x27;/usr/data.sql&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 恢复的时候可能会因为数据过大造成失败 先运行</span><br><span class="line">set global wait_timeout=60000;</span><br><span class="line">set global max_allowed_packet = 64*1024*1024</span><br><span class="line">mysql -uroot -p123456 数据库名 -v -f&lt;/usr/data.sql</span><br><span class="line">#-v 查看详细信息</span><br><span class="line">#-f 当中间遇到错误 可以跳过 忽略错误</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法3-恢复-binlog-数据"><a href="#方法3-恢复-binlog-数据" class="headerlink" title="方法3 恢复 binlog 数据"></a>方法3 恢复 binlog 数据</h1><blockquote>
+<p>（不详细 仅作记录 具体可以参考 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/83372804">https://zhuanlan.zhihu.com/p/83372804</a> ）</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#恢复全部数据</span><br><span class="line">mysqlbinlog --no-defaults mysql.000001 |mysql -uroot -p123456 数据库名</span><br><span class="line"></span><br><span class="line">#恢复部分数据</span><br><span class="line">#根据pos位置193到280之间 恢复数据</span><br><span class="line">mysqlbinlog --no-defaults mysqlbinlog.00001 --start-position=&quot;193&quot; --stop-position=&quot;280&quot;  |mysql -uroot -p123456 数据库名</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/20/ssh-%E6%8E%89%E7%BA%BF%E6%95%91%E6%98%9F-screen-%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -433,71 +521,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/PHP%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%91%A8%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/12/PHP%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%91%A8%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4/" class="post-title-link" itemprop="url">PHP获取本周开始时间</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-12 19:05:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:05:00+08:00">2014-03-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-07 19:37:37" itemprop="dateModified" datetime="2023-04-07T19:37:37+08:00">2023-04-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/*先设置时区*/</span></span><br><span class="line"><span class="title function_ invoke__">date_default_timezone_set</span>(<span class="string">&#x27;PRC&#x27;</span>);</span><br><span class="line"><span class="comment">/*网上的写法：总觉得这周跨年或者跨月的时候会悲剧 未验证*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">mktime</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="title function_ invoke__">date</span>(<span class="string">&#x27;m&#x27;</span>),<span class="title function_ invoke__">date</span>(<span class="string">&#x27;d&#x27;</span>)-<span class="title function_ invoke__">date</span>(<span class="string">&#x27;w&#x27;</span>),<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">/*同事的写法：当本日为周日的时候 就坑了*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last sunday&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*自己的写法: 目前还没发现问题*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$now</span> = <span class="title function_ invoke__">time</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$now</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;w&#x27;</span>,<span class="variable">$now</span>) )*<span class="number">86400</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;H&#x27;</span>,<span class="variable">$now</span>) )*<span class="number">3600</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;i&#x27;</span>,<span class="variable">$now</span>) ) *<span class="number">60</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;s&#x27;</span>,<span class="variable">$now</span>) );</span><br><span class="line"></span><br><span class="line"><span class="comment">/*过后的思考*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last saturday&#x27;</span>)+<span class="number">86400</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*如果获取的不是0点 而是当前时间*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$t</span> = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last saturday &#x27;</span>.<span class="variable">$t</span>);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -567,14 +590,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
