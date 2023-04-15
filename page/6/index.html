@@ -155,6 +155,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/11/Typecho%E9%9B%86%E6%88%90ueditor%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/11/Typecho%E9%9B%86%E6%88%90ueditor%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Typecho集成ueditor笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-11 00:21:00" itemprop="dateCreated datePublished" datetime="2014-03-11T00:21:00+08:00">2014-03-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>前言：萝卜青菜各有所爱，因为个人需求所以需要在博客中集成ueditor，并非是我不喜欢md语法 其实本篇的笔记的书写最早也是在本地的md编辑器上完成的</p>
+</blockquote>
+<p>首先下载 ueditor 编辑器，然后重命名文件为 ueditor，将文件夹复制到 admin 目录,打开 admin 目录的 editor-js.php 文件 在文件末尾处</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;?php endif;?&gt;</span><br></pre></td></tr></table></figure>
+<p>之间插入以下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php else:?&gt;</span><br><span class="line">&lt;!--不开启markdown时使用ueditor--&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 配置文件 --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./ueditor/ueditor.config.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 编辑器源码文件 --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./ueditor/ueditor.all.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 语言包文件(建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败) --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./ueditor/lang/zh-cn/zh-cn.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	var editor = UE.getEditor(&#x27;text&#x27;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>打开 var\Typecho\Common\Paragraph.php 文件注释掉152行的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$text = Typecho_Common::lockHTML($text);</span><br></pre></td></tr></table></figure>
+<p>此处是否会对原有功能产生bug未知,如果不注释掉 会对 ueditor 编辑器的部分代码高亮功能产生显示 bug<br>打开模版文件夹的 footer.php 这里我使用的是默认模版 所以路径是 \usr\themes\default 在 <?php $this->footer(); ?> 的下面插入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;&lt;?php $this-&gt;options-&gt;siteUrl(); ?&gt;admin/ueditor/third-party/SyntaxHighlighter/shCore.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;&lt;?php $this-&gt;options-&gt;siteUrl(); ?&gt;admin/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css&quot; type=&quot;text/css&quot; /&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">SyntaxHighlighter.all() //执行代码高亮</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>在 \ueditor\third-party\SyntaxHighlighter 下的shCore.js中搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textarea.appendChild(document.createTextNode(code));</span><br></pre></td></tr></table></figure>
+<p>在后面添加一句 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textarea.style.height = &quot;100%&quot;; </span><br></pre></td></tr></table></figure>
+<p>此处是为了修正代码高亮时 双击代码全选出错的BUG，新版的 SyntaxHighlighter 插件中已经默认双击代码全选，去掉了以前的flash复制功能</p>
+<p>保存所有文件并关闭，并在个人设置页面关闭 markdown 语法编辑选项。目前还没仔细测试是否有 BUG ，也没去调整图片上传的功能。 所以对于本文的修改内容请慎重使用。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/11/CentOS-5-5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85MariaDB-5-5-35/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -308,14 +383,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
