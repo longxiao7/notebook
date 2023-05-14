@@ -202,14 +202,20 @@
 </blockquote>
 <hr>
 <h2 id="APPArmor"><a href="#APPArmor" class="headerlink" title="APPArmor"></a>APPArmor</h2><h4 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /sys/module/apparmor/parameters/enabled</span><br></pre></td></tr></table></figure>
-<h2 id="Y：表示正在运行。-临时关闭-完全禁用-重启系统后不会再次开启"><a href="#Y：表示正在运行。-临时关闭-完全禁用-重启系统后不会再次开启" class="headerlink" title="Y：表示正在运行。### 临时关闭### 完全禁用 (重启系统后不会再次开启)"></a>Y：表示正在运行。<br>### 临时关闭<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop apparmor</span><br></pre></td></tr></table></figure><br>### 完全禁用 (重启系统后不会再次开启)<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl disable apparmor</span><br></pre></td></tr></table></figure></h2><h2 id="SELinux"><a href="#SELinux" class="headerlink" title="SELinux"></a>SELinux</h2><h3 id="查看运行状态-1"><a href="#查看运行状态-1" class="headerlink" title="查看运行状态"></a>查看运行状态</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sestatus </span><br><span class="line">getenforce</span><br></pre></td></tr></table></figure>
+<p>Y：表示正在运行。</p>
+<h3 id="临时关闭"><a href="#临时关闭" class="headerlink" title="临时关闭"></a>临时关闭</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop apparmor</span><br></pre></td></tr></table></figure>
+
+<h3 id="完全禁用-重启系统后不会再次开启"><a href="#完全禁用-重启系统后不会再次开启" class="headerlink" title="完全禁用 (重启系统后不会再次开启)"></a>完全禁用 (重启系统后不会再次开启)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl disable apparmor</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="SELinux"><a href="#SELinux" class="headerlink" title="SELinux"></a>SELinux</h2><h3 id="查看运行状态-1"><a href="#查看运行状态-1" class="headerlink" title="查看运行状态"></a>查看运行状态</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sestatus </span><br><span class="line">getenforce</span><br></pre></td></tr></table></figure>
 <ul>
 <li>如果SELinux处于“Enforcing”模式，这意味着它正在强制执行系统的安全策略。</li>
 <li>如果SELinux处于“Permissive”模式，这意味着它只会记录安全事件，而不会强制执行任何策略。</li>
 <li>如果SELinux处于“Disabled”模式，这意味着它已经被禁用，不会提供任何安全保护</li>
 </ul>
-<h3 id="临时关闭"><a href="#临时关闭" class="headerlink" title="临时关闭"></a>临时关闭</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
-<h3 id="完全禁用-重启系统后不会再次开启"><a href="#完全禁用-重启系统后不会再次开启" class="headerlink" title="完全禁用 (重启系统后不会再次开启)"></a>完全禁用 (重启系统后不会再次开启)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#编辑 /etc/selinux/config 将 SELINUX=enforcing 改为 disabled 保存并退出。</span><br><span class="line">sed -i &#x27;/^SELINUX=enforcing$/c\SELINUX=disabled&#x27; /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<h3 id="临时关闭-1"><a href="#临时关闭-1" class="headerlink" title="临时关闭"></a>临时关闭</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+<h3 id="完全禁用-重启系统后不会再次开启-1"><a href="#完全禁用-重启系统后不会再次开启-1" class="headerlink" title="完全禁用 (重启系统后不会再次开启)"></a>完全禁用 (重启系统后不会再次开启)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#编辑 /etc/selinux/config 将 SELINUX=enforcing 改为 disabled 保存并退出。</span><br><span class="line">sed -i &#x27;/^SELINUX=enforcing$/c\SELINUX=disabled&#x27; /etc/selinux/config</span><br></pre></td></tr></table></figure>
 
       
     </div>
