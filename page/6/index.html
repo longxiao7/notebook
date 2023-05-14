@@ -155,6 +155,64 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/28/PHP-%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%86%85%E7%BD%AE-filter-%EF%BC%88%E4%BA%8C%EF%BC%89-%E5%AE%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/28/PHP-%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%86%85%E7%BD%AE-filter-%EF%BC%88%E4%BA%8C%EF%BC%89-%E5%AE%8C/" class="post-title-link" itemprop="url">PHP 强大的内置 filter （二） 完</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-28 18:43:00" itemprop="dateCreated datePublished" datetime="2014-03-28T18:43:00+08:00">2014-03-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">#Sanitize filters</span></span><br><span class="line"><span class="comment">#Sanitize filters 可以清理掉不规范的字符</span></span><br><span class="line"><span class="comment"># FILTER_SANITIZE_EMAIL 可以清理除了 字母和数字 以及  !#$%&amp;&#x27;*+-/=?^_`&#123;|&#125;~@.[] 以外的字符  （感觉没什么用啊）</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;这里是一个email地址asdjaslkd@sdjkasdj.com&#x27;</span>,FILTER_SANITIZE_EMAIL);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment"># FILTER_SANITIZE_ENCODED 处理URL编码 有4个flags</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_STRIP_LOW - 去除 ASCII 值在 32 以下的字符</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_STRIP_HIGH - 去除 ASCII 值在 32 以上的字符</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_ENCODE_LOW - 编码 ASCII 值在 32 以下的字符</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_ENCODE_HIGH - 编码 ASCII 值在 32 以上的字符</span></span><br><span class="line"><span class="comment"># 感觉还是urlencode函数更实用</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;http://www.longxiao7.com&#x27;</span>,FILTER_SANITIZE_ENCODED);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment"># FILTER_SANITIZE_MAGIC_QUOTES  等同于  addslashes 函数</span></span><br><span class="line"><span class="comment"># FILTER_SANITIZE_NUMBER_FLOAT 删除浮点数中所有非法的字符 此FILTER可能存在的flags如下</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_ALLOW_FRACTION  允许小数部分</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_ALLOW_THOUSAND  允许千分位计数</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_ALLOW_SCIENTIFIC 允许科学计数</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;0.54548&#x27;</span>,FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;1000,000,000&#x27;</span>,FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_THOUSAND);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;1E20&#x27;</span>,FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_SCIENTIFIC);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment"># FILTER_SANITIZE_NUMBER_INT 过滤整数以外的字符</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;54548）*）（……&amp;*%6554……￥测试字符.055&#x27;</span>,FILTER_SANITIZE_NUMBER_INT);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment"># FILTER_SANITIZE_SPECIAL_CHARS  处理HTML转义字符 &#x27;&quot;&lt;&gt;&amp; 以及 ASCII 值小于 32 的字符</span></span><br><span class="line"><span class="comment"># flags</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_STRIP_LOW - 去除 ASCII 值在 32 以下的字符</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_STRIP_HIGH - 去除 ASCII 值在 32 以上的字符</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_ENCODE_HIGH - 编码 ASCII 值在 32 以上的字符</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;&lt;script&gt;alert(\&#x27;&amp;nbsp;中文\&#x27;)&lt;/script&gt;&#x27;</span>,FILTER_SANITIZE_SPECIAL_CHARS);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment"># FILTER_SANITIZE_FULL_SPECIAL_CHARS 上面那个加强版？貌似和htmlspecialchars函数是一样的</span></span><br><span class="line"><span class="comment">#FILTER_SANITIZE_STRING 过滤器去除或编码不需要的字符。</span></span><br><span class="line"><span class="comment"># flags</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_NO_ENCODE_QUOTES - 该标志不编码引号</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_STRIP_LOW - 去除 ASCII 值在 32 以下的字符</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_STRIP_HIGH - 去除 ASCII 值在 32 以上的字符</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_ENCODE_LOW - 编码 ASCII 值在 32 以下的字符</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_ENCODE_HIGH - 编码 ASCII 值在 32 以上的字符</span></span><br><span class="line"><span class="comment"># FILTER_FLAG_ENCODE_AMP - 把 &amp; 字符编码为 &amp;amp;</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;&lt;script&gt;alert(\&#x27;&amp;nbsp;中文\&#x27;)&lt;/a&gt;&#x27;</span>,FILTER_SANITIZE_STRING,FILTER_FLAG_ENCODE_AMP);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment"># FILTER_SANITIZE_URL 可以清理除了 字母和数字 以及 $-_.+!*&#x27;(),&#123;&#125;|\\^~[]`&lt;&gt;#%&quot;;/?:@&amp;=以外的字符</span></span><br><span class="line"><span class="comment"># FILTER_UNSAFE_RAW 感觉意义不大，需要配合flags才能工作 详见PHP手册</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/27/PHP-%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%86%85%E7%BD%AE-filter-%EF%BC%88%E4%B8%80%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -408,76 +466,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/%E6%9C%AC%E5%9C%B0%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/12/%E6%9C%AC%E5%9C%B0%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">本地虚拟机挂载 windows 共享目录搭建开发环境</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-12 19:30:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:30:00+08:00">2014-03-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="windows-宿主机-（192-168-1-216）"><a href="#windows-宿主机-（192-168-1-216）" class="headerlink" title="windows 宿主机 （192.168.1.216）"></a>windows 宿主机 （192.168.1.216）</h2><p>设置目录共享 ，建立一个有密码帐号 可以访问共享文件夹 假设为 htdocs<br>假设 用户名是 admin  密码是 123456 然后切换账户登录访问测试</p>
-<h2 id="虚拟机下的linux"><a href="#虚拟机下的linux" class="headerlink" title="虚拟机下的linux"></a>虚拟机下的linux</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭防火墙(本地环境 直接关掉即可)</span></span><br><span class="line"></span><br><span class="line">service iptables stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查是否安装了需要的samba软件包</span></span><br><span class="line">rpm –q samba</span><br><span class="line"><span class="comment"># 如果没安装</span></span><br><span class="line">yum install samba system-config-samba samba-client samba-common</span><br><span class="line"><span class="comment"># linux挂载</span></span><br><span class="line">mount -t cifs -o username=admin,password=123456 //192.168.1.216/htdocs /usr/wwwroot</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>最后在win系统下用PSTrayFactory把虚拟机窗口缩到任务栏托盘</p>
-<h2 id="开机启动-1"><a href="#开机启动-1" class="headerlink" title="开机启动 (1)"></a>开机启动 (1)</h2><p>编辑 &#x2F;etc&#x2F;init.d&#x2F;rc.local （有些系统已经失效了，这个只适合旧版本的centos）</p>
-<p>vi &#x2F;etc&#x2F;init.d&#x2F;rc.local<br>写入挂载命令</p>
-<p>同时使用ls -l shared会发现shared目录所有者和用户组均是root，即使使用sudo chmod和sudo chown修改权限也提示权限不够。不过可以添加两个参数即可达到我们所要的效果：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t smbfs -o username=&quot;***&quot;,password=&quot;***&quot;,gid=&quot;***&quot;,uid=&quot;****&quot; //WindowsHost/sharefolder  /home/xxx/shared</span><br></pre></td></tr></table></figure>
-<h2 id="开机启动-2"><a href="#开机启动-2" class="headerlink" title="开机启动 (2)"></a>开机启动 (2)</h2><p>vi &#x2F;etc&#x2F;fstab 最后加入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//WindowsHost/sharefolder /home/xxx/shared cifs defaults,auto,username=&quot;xxxx&quot;,password=&quot;***&quot;,gid=&quot;1000&quot;,uid=&quot;1000&quot; 0 0</span><br></pre></td></tr></table></figure>
-<p>属性中的gid、uid，是你想要让挂载属于哪个用户的gid和uid。至于这个gid和uid，你可以使用id username来获得，比如说我的xxx，用户获得的gid和uid就是1000。<br>同时上述命令中的username和password是访问用来WindowsHost的。</p>
-<h2 id="卸载挂载目录："><a href="#卸载挂载目录：" class="headerlink" title="卸载挂载目录："></a>卸载挂载目录：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo umount shared</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -547,14 +535,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

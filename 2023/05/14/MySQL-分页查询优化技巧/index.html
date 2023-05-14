@@ -22,17 +22,21 @@
     var CONFIG = {"hostname":"np.lvtoude.ltd","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="凑字数">
-<meta property="og:type" content="website">
-<meta property="og:title" content="名字还没想好">
-<meta property="og:url" content="https://np.lvtoude.ltd/archives/2015/08/index.html">
+  <meta name="description" content="情况：分页前面很快，后面的页很慢 原始语句 1select id,birthday,title from person order by title limit 400000,1 分析：此语句效率低主要是因为有排序 改进 1234select id,birthday,title from person as p1 join (select id from person order by title">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 分页查询优化技巧">
+<meta property="og:url" content="https://np.lvtoude.ltd/2023/05/14/MySQL-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="名字还没想好">
-<meta property="og:description" content="凑字数">
+<meta property="og:description" content="情况：分页前面很快，后面的页很慢 原始语句 1select id,birthday,title from person order by title limit 400000,1 分析：此语句效率低主要是因为有排序 改进 1234select id,birthday,title from person as p1 join (select id from person order by title">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-14T03:34:59.000Z">
+<meta property="article:modified_time" content="2023-05-14T03:39:59.574Z">
 <meta property="article:author" content="透明白">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://np.lvtoude.ltd/archives/2015/08/">
+<link rel="canonical" href="https://np.lvtoude.ltd/2023/05/14/MySQL-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/">
 
 
 <script id="page-configurations">
@@ -40,12 +44,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | 名字还没想好</title>
+  <title>MySQL 分页查询优化技巧 | 名字还没想好</title>
   
 
 
@@ -149,51 +153,89 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 35 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/05/14/MySQL-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL 分页查询优化技巧
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-14 11:34:59" itemprop="dateCreated datePublished" datetime="2023-05-14T11:34:59+08:00">2023-05-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2015</span>
+        <p>情况：分页前面很快，后面的页很慢</p>
+<p>原始语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id,birthday,title <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> title limit <span class="number">400000</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>分析：此语句效率低主要是因为有排序</p>
+<p>改进</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id,birthday,title <span class="keyword">from</span> person <span class="keyword">as</span> p1 </span><br><span class="line"><span class="keyword">join</span> </span><br><span class="line">(<span class="keyword">select</span> id <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> title limit <span class="number">400000</span>,<span class="number">1</span>) p2</span><br><span class="line"><span class="keyword">on</span> p1.id<span class="operator">=</span>p2.id;</span><br></pre></td></tr></table></figure>
+<p>表结构</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `person` (</span><br><span class="line">	`id` <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">	`birthday` <span class="type">date</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	`title` <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	`comm1` <span class="type">varchar</span>(<span class="number">6383</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	<span class="keyword">PRIMARY</span> KEY (`id`) ,</span><br><span class="line">	KEY `p_1`(`title`)</span><br><span class="line">)ENGINE<span class="operator">=</span>InnODB AUTO_INCRENENT<span class="operator">=</span><span class="number">438174</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8mb4_0900_ai_ci;</span><br></pre></td></tr></table></figure>
+<p>总结：<br>二级索引 p_1 实际上是包含 主键索引的，P2临时表只查询这两个字段所以会提高查询速度<br>利用的就是索引比表小的多的原理，如果索引不合适，条件覆盖不到，那一样会很慢。</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12M4y1m7N9">转载来源</a></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2015-08-25T17:56:00+08:00"
-              content="2015-08-25">
-          08-25
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2015/08/25/MySQL-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/" itemprop="url">
-            <span itemprop="name">MySQL 触发器简单实例</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/15/%E8%AE%A9-html-%E9%A1%B5%E9%9D%A2%E9%87%8C%E9%9D%A2%E7%9A%84%E8%B6%85%E9%93%BE%E6%8E%A5%E9%BB%98%E8%AE%A4%E4%BB%A5%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%89%93%E5%BC%80/" rel="prev" title="让 html 页面里面的超链接默认以新标签页打开">
+      <i class="fa fa-chevron-left"></i> 让 html 页面里面的超链接默认以新标签页打开
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
