@@ -155,6 +155,138 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/05/14/PHP-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%BA%93-iconv-%E7%9A%84%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82%E9%94%99%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/14/PHP-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%BA%93-iconv-%E7%9A%84%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">PHP 字符编码转换库 iconv 的一个细节错误</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-14 13:45:54" itemprop="dateCreated datePublished" datetime="2023-05-14T13:45:54+08:00">2023-05-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先来看代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$charset</span> = <span class="string">&#x27;GBK&#x27;</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;中华人民共和国中华人民共和国中华人民共和国中华人民共和国&#x27;</span>;</span><br><span class="line"><span class="variable">$size</span> = <span class="number">17</span>;</span><br><span class="line"><span class="comment">//先创造一个 GBK 编码的字符串</span></span><br><span class="line"><span class="variable">$str2</span> = <span class="title function_ invoke__">iconv</span>(<span class="string">&#x27;UTF-8&#x27;</span>, <span class="variable">$charset</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="variable">$str3</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$str2</span>, <span class="number">0</span>, <span class="variable">$size</span>);<span class="comment">//.$str2;</span></span><br><span class="line"><span class="variable">$s</span> = <span class="title function_ invoke__">iconv</span>(<span class="variable">$charset</span>, <span class="string">&#x27;UTF-8//IGNORE&#x27;</span>, <span class="variable">$str3</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$s</span>);</span><br></pre></td></tr></table></figure>
+<p>这里GBK因为一个汉字字符算2个英文字符 所以当长度为17的时候 会有字符破损</p>
+<p>经过转换 UTF-8 并且忽略不合法字符的时候，结果竟然是 false 和文档中说的忽略字符返回值达不到预期效果，经过测试发现这种情况仅出现在末尾字符不合法的时候<br>当拼接其他字符的时候（注释掉的部分）返回是达到预期的</p>
+<p>这个问题在 iconv 原版是不会出现的，也就是说这是 PHP 版本独有的问题</p>
+<p>在命令行下测试iconv工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -c -f gbk -t utf-8 input</span><br></pre></td></tr></table></figure>
+<p>input为 17长度的$str3输出的内容</p>
+<p>结果iconv的输出是忽略了最后那半个破损的字符</p>
+<p>以下为无证大师原话</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c的iconv即使加//ignore也会返回错误码</span><br><span class="line">处理不处理要调用方决定</span><br><span class="line">但php没做</span><br><span class="line">因此,php巨烂</span><br><span class="line">等人喷</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/05/14/centos-xampp%E5%AE%89%E8%A3%85-PHP-GMP%E6%89%A9%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/14/centos-xampp%E5%AE%89%E8%A3%85-PHP-GMP%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">centos xampp安装 PHP_GMP扩展</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-14 13:32:12" itemprop="dateCreated datePublished" datetime="2023-05-14T13:32:12+08:00">2023-05-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>环境</p>
+<ul>
+<li>CentOS 6.4</li>
+<li>Xampp 7.1.12</li>
+</ul>
+<p>首先下载 PHP7.1.12 的源码包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install gmp-devel</span><br><span class="line">yum install m4</span><br><span class="line">tar -xvf php-7.1.12.tar.xz </span><br><span class="line">cd /root/php-7.1.12/ext/gmp</span><br><span class="line">/opt/lampp/bin/phpize</span><br><span class="line">./configure  --with-php-config=/opt/lampp/bin/php-config</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">/opt/lampp/bin/php -m | grep gmp</span><br><span class="line">/opt/lampp/lampp reloadapache</span><br></pre></td></tr></table></figure>
+<p>reload apache 之前 记得在 php.ini里面 写extension&#x3D;”&#x2F;opt&#x2F;lampp&#x2F;lib&#x2F;php&#x2F;extensions&#x2F;no-debug-non-zts-20160303&#x2F;gmp.so”</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/05/14/%E5%85%B3%E9%97%AD-SELinux-%E5%92%8C-AppArmor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -360,153 +492,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/04/06/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/06/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-06 16:52:27" itemprop="dateCreated datePublished" datetime="2023-04-06T16:52:27+08:00">2023-04-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">ffmpeg 使用 nvenc 编码的结论记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-14 20:53:00" itemprop="dateCreated datePublished" datetime="2020-12-14T20:53:00+08:00">2020-12-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
-<li><p>同码率下 速度比x264快很多，但是质量比不过，从字幕边缘可以看出来</p>
-</li>
-<li><p>涉及到 -vf “ass&#x3D;1.ass” 做字幕内嵌，连编码速度的优势也没了</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe -y -i &quot;demo.mp4&quot; -c:v h264_nvenc -preset llhq -bf 4 -b:v 400k -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
-
-<p>于是内嵌字幕请直接使用x264</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe  -y -i &quot;demo.mp4&quot; -c:v libx264 -preset veryslow -crf 24 -bf 6 -refs 6 -qcomp 0.5 -aq-mode 2 -aq-strength 0.8 -psy-rd 0.3:0 -deblock 1:1 -x264opts min-keyint=1 -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意这个ass&#x3D;1.ass 在windows下，路径会有编码问题，最好把字幕和ffmpeg放在一起 避免输入路径，文件名也要用简单的。</p>
-</blockquote>
-<ol start="3">
-<li>要速度不要质量的时候，可以批量处理提高处理速度</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -572,14 +561,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

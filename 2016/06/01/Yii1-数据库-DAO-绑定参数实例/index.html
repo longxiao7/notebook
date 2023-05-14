@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"np.lvtoude.ltd","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="绑定参数预处理 SQL 可以有效的防 SQL 注入攻击; Yii1 框架的 ActiveRecord 操作数据库默认就可以防止注入 ，但是复杂业务下 使用 DAO 操作数据库就需要小心了  123456789&lt;?php$sql &#x3D; &quot;SELECT * FROM admin_user WHERE user_name&#x3D;:uname AND password LIKE :c&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yii1 数据库 DAO 绑定参数实例">
+<meta property="og:url" content="https://np.lvtoude.ltd/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/index.html">
+<meta property="og:site_name" content="名字还没想好">
+<meta property="og:description" content="绑定参数预处理 SQL 可以有效的防 SQL 注入攻击; Yii1 框架的 ActiveRecord 操作数据库默认就可以防止注入 ，但是复杂业务下 使用 DAO 操作数据库就需要小心了  123456789&lt;?php$sql &#x3D; &quot;SELECT * FROM admin_user WHERE user_name&#x3D;:uname AND password LIKE :c&quot;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-06-01T09:30:00.000Z">
+<meta property="article:modified_time" content="2023-05-14T04:57:08.624Z">
+<meta property="article:author" content="透明白">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Yii1">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://np.lvtoude.ltd/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Yii1 数据库 DAO 绑定参数实例 | 名字还没想好</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">名字还没想好</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">等想好了在写</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Yii1 数据库 DAO 绑定参数实例
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-06-01 17:30:00" itemprop="dateCreated datePublished" datetime="2016-06-01T17:30:00+08:00">2016-06-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>绑定参数预处理 SQL 可以有效的防 SQL 注入攻击; Yii1 框架的 ActiveRecord 操作数据库默认就可以防止注入 ，但是复杂业务下 使用 DAO 操作数据库就需要小心了</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM admin_user WHERE user_name=:uname AND password LIKE :c&quot;</span>;</span><br><span class="line"><span class="variable">$command</span> = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;admin1&#x27;</span>;</span><br><span class="line"><span class="variable">$c</span> = <span class="string">&#x27;%mkjymji%&#x27;</span>;</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:uname&quot;</span>,<span class="variable">$a</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:c&quot;</span>,<span class="variable">$c</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$r</span> = <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">queryAll</span>();</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$r</span>);<span class="keyword">exit</span>;</span><br></pre></td></tr></table></figure>
+
+<p>绑定参数的时候 如果是PDO::PARAM_STR类型的参数 是不需要在SQL里面再写引号的  </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/Yii1/" rel="tag"># Yii1</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/25/%E9%9A%90%E8%97%8F-Apache-NGINX-PHP-%E7%89%88%E6%9C%AC%E5%8F%B7/" rel="prev" title="隐藏 Apache NGINX PHP 版本号">
+      <i class="fa fa-chevron-left"></i> 隐藏 Apache NGINX PHP 版本号
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/" rel="next" title="Apache 2.4 针对某个文件限速">
+      Apache 2.4 针对某个文件限速 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">透明白</p>
+  <div class="site-description" itemprop="description">凑字数</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">透明白</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
