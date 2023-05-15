@@ -155,6 +155,72 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/MySQL-5-6-%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF-command-line-interface-can-be-insecure-%E4%BF%AE%E5%A4%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/12/MySQL-5-6-%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF-command-line-interface-can-be-insecure-%E4%BF%AE%E5%A4%8D/" class="post-title-link" itemprop="url">MySQL 5.6 警告信息 command line interface can be insecure 修复</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-12 19:24:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:24:00+08:00">2014-03-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在命令行输入密码，就会提示这些安全警告信息。</p>
+<blockquote>
+<p>Warning: Using a password on the command line interface can be insecure.</p>
+</blockquote>
+<p>注: mysql -u root -pPASSWORD 或 mysqldump -u root -pPASSWORD 都会输出这样的警告信息.</p>
+<h3 id="1、针对mysql"><a href="#1、针对mysql" class="headerlink" title="1、针对mysql"></a>1、针对mysql</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -pPASSWORD </span><br><span class="line"></span><br><span class="line">#改成</span><br><span class="line"></span><br><span class="line">mysql -u root -p回车</span><br><span class="line"></span><br><span class="line"># 再输入密码即可.</span><br></pre></td></tr></table></figure>
+<h3 id="2、mysqldump就比较麻烦了，通常都写在scripts脚本中。"><a href="#2、mysqldump就比较麻烦了，通常都写在scripts脚本中。" class="headerlink" title="2、mysqldump就比较麻烦了，通常都写在scripts脚本中。"></a>2、mysqldump就比较麻烦了，通常都写在scripts脚本中。</h3><p>vim &#x2F;etc&#x2F;mysql&#x2F;my.cnf 编辑配置文件 ，在里面指定用户名和密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqldump]</span><br><span class="line">user=your_backup_user_name</span><br><span class="line">password=your_backup_password</span><br></pre></td></tr></table></figure>
+<p>修改完配置文件后, 只需要执行mysqldump 脚本就可以了。备份脚本中不需要涉及用户名密码相关信息。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/PHP%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%91%A8%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -441,7 +507,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

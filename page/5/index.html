@@ -155,6 +155,74 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/12/22/Oracle-VM-VirtualBox-5-0-%E5%AE%89%E8%A3%85-CentOS-6-4-%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/12/22/Oracle-VM-VirtualBox-5-0-%E5%AE%89%E8%A3%85-CentOS-6-4-%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/" class="post-title-link" itemprop="url">Oracle VM VirtualBox 5.0 安装 CentOS 6.4 与宿主机共享文件夹</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-12-22 17:07:00" itemprop="dateCreated datePublished" datetime="2015-12-22T17:07:00+08:00">2015-12-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>首先在宿主机（windows）的硬盘建立需要共享文件夹 例如 D:\share_test</p>
+</li>
+<li><p>然后虚拟机光驱加载 Oracle VM VirtualBox 安装目录的 iso  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso</span><br></pre></td></tr></table></figure></li>
+<li><p>虚拟机开机 保证正常联网</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /mnt/share_test</span><br><span class="line">mount /dev/dvd /mnt/share_test/</span><br><span class="line">yum update -y </span><br><span class="line"><span class="built_in">cd</span> /mnt/share_test/</span><br><span class="line">sudo ./VBoxLinuxAdditions.run</span><br><span class="line"><span class="built_in">cd</span> /mnt/</span><br><span class="line">umount /mnt/share_test/</span><br><span class="line">mount -t vboxsf share_test /mnt/share_test/</span><br><span class="line"><span class="built_in">cd</span> share_test/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>之前用 VMWare 的时候相关信息</p>
+<p><a href="/2014/03/12/本地虚拟机挂载-windows-共享目录搭建开发环境/" target="_blank">本地虚拟机挂载 windows 共享目录搭建开发环境</a></p>
+<p><a href="/2014/09/26/通过-VMware-Tools-将主机-windows-的目录共享给-linux-虚拟机/" target="_blank">通过 VMware Tools 将主机windows的目录共享给linux虚拟机</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/11/17/MySql-5-6-%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97-%E4%B8%8E-%E6%85%A2%E6%9F%A5%E8%AF%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -417,66 +485,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/08/25/MySQL-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/08/25/MySQL-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">MySQL 触发器简单实例</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-08-25 17:56:00" itemprop="dateCreated datePublished" datetime="2015-08-25T17:56:00+08:00">2015-08-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*取消外键约束*/</span></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*创建C1表 主键ID 字段name*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `c1`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `c1` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">120</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>MEMORY <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*C2与C1结构相同 去掉了ID自增*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `c2`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `c2` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">120</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>MEMORY <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*给C1创建一个触发器 名称叫c1-insert*/</span><span class="comment">/*触发条件是 AFTER INSERT*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> `c1<span class="operator">-</span><span class="keyword">insert</span>`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> `c1<span class="operator">-</span><span class="keyword">insert</span>` AFTER <span class="keyword">INSERT</span> <span class="keyword">ON</span> `c1` <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="keyword">BEGIN</span> </span><br><span class="line"><span class="comment">/*插入后的ID*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@id</span> <span class="operator">=</span> NEW.id; </span><br><span class="line"><span class="comment">/*插入后的name*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@name</span> <span class="operator">=</span> NEW.name ;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `c2` (`id`, `name`) <span class="keyword">VALUES</span> (<span class="variable">@id</span>,<span class="variable">@name</span>); <span class="comment">/*插入到C2表*/</span></span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*给C1创建一个触发器 名称叫c1-update*/</span><span class="comment">/*触发条件是 AFTER UPDATE*/</span></span><br><span class="line">DELIMITER ;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> `c1<span class="operator">-</span><span class="keyword">update</span>`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> `c1<span class="operator">-</span><span class="keyword">update</span>` AFTER <span class="keyword">UPDATE</span> <span class="keyword">ON</span> `c1` <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> BEGIN.</span><br><span class="line"><span class="comment">/*修改前的ID*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@id</span> <span class="operator">=</span> OLD.id; </span><br><span class="line"><span class="comment">/*修改后的name*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@name</span> <span class="operator">=</span> NEW.name;</span><br><span class="line"><span class="keyword">UPDATE</span> `c2` <span class="keyword">SET</span> `name`<span class="operator">=</span><span class="variable">@name</span> <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="variable">@id</span>; <span class="comment">/*更新到C2表*/</span></span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -546,7 +554,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

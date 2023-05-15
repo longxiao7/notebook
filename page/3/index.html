@@ -155,6 +155,71 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/08/centos-xampp%E5%AE%89%E8%A3%85-PHP-GMP%E6%89%A9%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/08/centos-xampp%E5%AE%89%E8%A3%85-PHP-GMP%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">centos xampp安装 PHP_GMP扩展</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-08 18:35:00" itemprop="dateCreated datePublished" datetime="2018-01-08T18:35:00+08:00">2018-01-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>环境</p>
+<ul>
+<li>CentOS 6.4</li>
+<li>Xampp 7.1.12</li>
+</ul>
+<p>首先下载 PHP7.1.12 的源码包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install gmp-devel</span><br><span class="line">yum install m4</span><br><span class="line">tar -xvf php-7.1.12.tar.xz </span><br><span class="line">cd /root/php-7.1.12/ext/gmp</span><br><span class="line">/opt/lampp/bin/phpize</span><br><span class="line">./configure  --with-php-config=/opt/lampp/bin/php-config</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">/opt/lampp/bin/php -m | grep gmp</span><br><span class="line">/opt/lampp/lampp reloadapache</span><br></pre></td></tr></table></figure>
+<p>reload apache 之前 记得在 php.ini里面 写extension&#x3D;”&#x2F;opt&#x2F;lampp&#x2F;lib&#x2F;php&#x2F;extensions&#x2F;no-debug-non-zts-20160303&#x2F;gmp.so”</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/05/Yii2-%E8%BE%93%E5%87%BA%E5%9B%BE%E7%89%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -425,71 +490,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2017/02/01/Oracle-VM-VirtualBox-%E6%97%A0%E6%B3%95%E5%8D%B8%E8%BD%BD-%E6%9B%B4%E6%96%B0-%E5%92%8C%E4%BF%AE%E5%A4%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/02/01/Oracle-VM-VirtualBox-%E6%97%A0%E6%B3%95%E5%8D%B8%E8%BD%BD-%E6%9B%B4%E6%96%B0-%E5%92%8C%E4%BF%AE%E5%A4%8D/" class="post-title-link" itemprop="url">Oracle VM VirtualBox 无法卸载 更新 和修复</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-02-01 14:02:00" itemprop="dateCreated datePublished" datetime="2017-02-01T14:02:00+08:00">2017-02-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>好久没更新Oracle VM VirtualBox 突然发现不能更新了。<br>提示要某个msi文件，回想起来好像是被某个清理垃圾的软件清理掉了。</p>
-<p>于是根据提示的版本号网上搜了种子又把安装包下载回来。在命令行下解压安装包到某个目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VirtualBox-5.1.0-108711-Win.exe --extract --path d:\path\</span><br></pre></td></tr></table></figure>
-
-<p>再将错误提示的时候 手动选择对应的msi文件即可 。</p>
-<p>虽然解决方法很简单，但是找对应安装包的过程倒是很艰巨。</p>
-<p>这里做个记录 提醒自己以后安装后记得备份安装包。</p>
-<p>顺便吐槽VirtualBox的卸载真难用</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -559,7 +559,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

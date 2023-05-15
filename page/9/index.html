@@ -155,6 +155,63 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/27/PHP-%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%86%85%E7%BD%AE-filter-%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/27/PHP-%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%86%85%E7%BD%AE-filter-%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-title-link" itemprop="url">PHP 强大的内置 filter （一）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-27 22:57:00" itemprop="dateCreated datePublished" datetime="2014-03-27T22:57:00+08:00">2014-03-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">#PHP内置的validate filter</span></span><br><span class="line"><span class="variable">$input_data</span> = True;</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="variable">$input_data</span>,FILTER_VALIDATE_BOOLEAN);</span><br><span class="line"><span class="comment">#FILTER_VALIDATE_BOOLEAN对应验证布尔值</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>); <span class="comment">#因为input_data是真，所以结果是 True</span></span><br><span class="line"><span class="variable">$input_data</span> = <span class="number">123</span>;</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="variable">$input_data</span>,FILTER_VALIDATE_BOOLEAN);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>); <span class="comment">#因为input_data是123数字类型，所以结果是 False</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">filter_var 函数有三个参数 分别是 输入数据 filter对应的id 和选项</span></span><br><span class="line"><span class="comment">输入数据类型可以是多种的</span></span><br><span class="line"><span class="comment">filter的对应id在这里可以查看列表 http://www.php.net/manual/zh/filter.filters.php</span></span><br><span class="line"><span class="comment">选项是一个关联数组 可以在上面的地址中查看可以使用的选项，也可以自己使用回调函数来处理输入数据</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">#使用回调例子</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callback_filter</span>(<span class="params"><span class="variable">$value</span></span>) #回调函数</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$value</span>.<span class="string">&#x27;_callback&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;input&#x27;</span>,FILTER_CALLBACK,<span class="keyword">array</span>(<span class="string">&#x27;options&#x27;</span>=&gt;<span class="string">&#x27;callback_filter&#x27;</span>));</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment">#验证一个非10进制的整数</span></span><br><span class="line"><span class="comment">#8进制</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;0755&#x27;</span>, FILTER_VALIDATE_INT, <span class="keyword">array</span>(<span class="string">&#x27;flags&#x27;</span>=&gt;FILTER_FLAG_ALLOW_OCTAL));</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment">#16进制</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;0XAF&#x27;</span>, FILTER_VALIDATE_INT, <span class="keyword">array</span>(<span class="string">&#x27;flags&#x27;</span>=&gt;FILTER_FLAG_ALLOW_HEX));</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment">#注意这里输出的结果是10进制的</span></span><br><span class="line"><span class="comment">#当验证失败时设置默认值  因为字符a不是整数，所以在无法通过验证的时候被强制替换成了默认值123 </span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;a&#x27;</span>,FILTER_VALIDATE_INT,<span class="keyword">array</span>(<span class="string">&#x27;options&#x27;</span>=&gt;<span class="keyword">array</span>(<span class="string">&#x27;default&#x27;</span>=&gt;<span class="number">123</span>)));</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment">#限制数字范围</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="number">99</span>,FILTER_VALIDATE_INT,<span class="keyword">array</span>(<span class="string">&#x27;options&#x27;</span>=&gt;<span class="keyword">array</span>(<span class="string">&#x27;default&#x27;</span>=&gt;<span class="number">50</span>,<span class="string">&#x27;max_range&#x27;</span>=&gt;<span class="number">98</span>)));</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="number">99</span>,FILTER_VALIDATE_INT,<span class="keyword">array</span>(<span class="string">&#x27;options&#x27;</span>=&gt;<span class="keyword">array</span>(<span class="string">&#x27;default&#x27;</span>=&gt;<span class="number">50</span>,<span class="string">&#x27;min_range&#x27;</span>=&gt;<span class="number">100</span>)));</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment">#min与max可以同时使用</span></span><br><span class="line"><span class="comment">#验证email格式</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;a@a.c&#x27;</span>,FILTER_VALIDATE_EMAIL);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment">#验证IP</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;192.168.1.1&#x27;</span>,FILTER_VALIDATE_IP);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment">#FILTER_VALIDATE_IP的flags有四个分别是</span></span><br><span class="line"><span class="comment">#FILTER_FLAG_IPV4, FILTER_FLAG_IPV6, FILTER_FLAG_NO_PRIV_RANGE, FILTER_FLAG_NO_RES_RANGE</span></span><br><span class="line"><span class="comment">#对应 IPV4 IPV6 过滤私有地址 与 过滤保留地址</span></span><br><span class="line"><span class="comment">#验证url</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;http://www.yahoo.com/&#x27;</span>,FILTER_VALIDATE_URL);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment">#url 有两种flags 其中FILTER_FLAG_QUERY_REQUIRED 要求url中必须包含查询字符串</span></span><br><span class="line"><span class="comment">#FILTER_FLAG_PATH_REQUIRED 要求格式必须包含为/结尾的路径或者包含文件</span></span><br><span class="line"><span class="comment">#简单来说就是 http://aaa.com是不能通过的 但是http://aaa.com/或者http://aaa.com/index.html就可以通过）</span></span><br><span class="line"><span class="comment">#注意 url并不仅限于http与https ，而且目前也只支持ASCII字符，例如中文域名就会失败</span></span><br><span class="line"><span class="comment">#根据正则验证</span></span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">filter_var</span>(<span class="string">&#x27;0000112884634874&#x27;</span>,FILTER_VALIDATE_REGEXP,<span class="keyword">array</span>(<span class="string">&#x27;options&#x27;</span>=&gt;<span class="keyword">array</span>(<span class="string">&#x27;regexp&#x27;</span>=&gt;<span class="string">&quot;/\d+/&quot;</span>)));</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"><span class="comment">#在php 5.4.11之前 +0与-0只能通过float验证，在5.4.11之后可以通过int和float验证</span></span><br><span class="line"><span class="comment">#以上就是PHP内置的几种validate filter，下回介绍其他filter</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/25/MySQL-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -421,72 +478,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/MySQL-5-6-%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF-command-line-interface-can-be-insecure-%E4%BF%AE%E5%A4%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/12/MySQL-5-6-%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF-command-line-interface-can-be-insecure-%E4%BF%AE%E5%A4%8D/" class="post-title-link" itemprop="url">MySQL 5.6 警告信息 command line interface can be insecure 修复</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-12 19:24:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:24:00+08:00">2014-03-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在命令行输入密码，就会提示这些安全警告信息。</p>
-<blockquote>
-<p>Warning: Using a password on the command line interface can be insecure.</p>
-</blockquote>
-<p>注: mysql -u root -pPASSWORD 或 mysqldump -u root -pPASSWORD 都会输出这样的警告信息.</p>
-<h3 id="1、针对mysql"><a href="#1、针对mysql" class="headerlink" title="1、针对mysql"></a>1、针对mysql</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -pPASSWORD </span><br><span class="line"></span><br><span class="line">#改成</span><br><span class="line"></span><br><span class="line">mysql -u root -p回车</span><br><span class="line"></span><br><span class="line"># 再输入密码即可.</span><br></pre></td></tr></table></figure>
-<h3 id="2、mysqldump就比较麻烦了，通常都写在scripts脚本中。"><a href="#2、mysqldump就比较麻烦了，通常都写在scripts脚本中。" class="headerlink" title="2、mysqldump就比较麻烦了，通常都写在scripts脚本中。"></a>2、mysqldump就比较麻烦了，通常都写在scripts脚本中。</h3><p>vim &#x2F;etc&#x2F;mysql&#x2F;my.cnf 编辑配置文件 ，在里面指定用户名和密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqldump]</span><br><span class="line">user=your_backup_user_name</span><br><span class="line">password=your_backup_password</span><br></pre></td></tr></table></figure>
-<p>修改完配置文件后, 只需要执行mysqldump 脚本就可以了。备份脚本中不需要涉及用户名密码相关信息。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -556,7 +547,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
