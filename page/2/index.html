@@ -378,7 +378,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/05/06/PHP-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%BA%93-iconv-%E7%9A%84%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82%E9%94%99%E8%AF%AF/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -392,7 +392,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/05/06/PHP-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%BA%93-iconv-%E7%9A%84%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">PHP 字符编码转换库 iconv 的一个细节错误</a>
+            <a href="/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/" class="post-title-link" itemprop="url">PHP.ini 能不能加载子配置文件 ？</a>
         </h2>
 
         <div class="post-meta">
@@ -402,7 +402,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-05-06 15:19:00" itemprop="dateCreated datePublished" datetime="2018-05-06T15:19:00+08:00">2018-05-06</time>
+              <time title="创建时间：2019-04-30 11:15:00" itemprop="dateCreated datePublished" datetime="2019-04-30T11:15:00+08:00">2019-04-30</time>
             </span>
 
           
@@ -416,17 +416,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>先来看代码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$charset</span> = <span class="string">&#x27;GBK&#x27;</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;中华人民共和国中华人民共和国中华人民共和国中华人民共和国&#x27;</span>;</span><br><span class="line"><span class="variable">$size</span> = <span class="number">17</span>;</span><br><span class="line"><span class="comment">//先创造一个 GBK 编码的字符串</span></span><br><span class="line"><span class="variable">$str2</span> = <span class="title function_ invoke__">iconv</span>(<span class="string">&#x27;UTF-8&#x27;</span>, <span class="variable">$charset</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="variable">$str3</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$str2</span>, <span class="number">0</span>, <span class="variable">$size</span>);<span class="comment">//.$str2;</span></span><br><span class="line"><span class="variable">$s</span> = <span class="title function_ invoke__">iconv</span>(<span class="variable">$charset</span>, <span class="string">&#x27;UTF-8//IGNORE&#x27;</span>, <span class="variable">$str3</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$s</span>);</span><br></pre></td></tr></table></figure>
-<p>这里GBK因为一个汉字字符算2个英文字符 所以当长度为17的时候 会有字符破损</p>
-<p>经过转换 UTF-8 并且忽略不合法字符的时候，结果竟然是 false 和文档中说的忽略字符返回值达不到预期效果，经过测试发现这种情况仅出现在末尾字符不合法的时候<br>当拼接其他字符的时候（注释掉的部分）返回是达到预期的</p>
-<p>这个问题在 iconv 原版是不会出现的，也就是说这是 PHP 版本独有的问题</p>
-<p>在命令行下测试iconv工具</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -c -f gbk -t utf-8 input</span><br></pre></td></tr></table></figure>
-<p>input为 17长度的$str3输出的内容</p>
-<p>结果iconv的输出是忽略了最后那半个破损的字符</p>
-<p>以下为无证大师原话</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c的iconv即使加//ignore也会返回错误码</span><br><span class="line">处理不处理要调用方决定</span><br><span class="line">但php没做</span><br><span class="line">因此,php巨烂</span><br><span class="line">等人喷</span><br></pre></td></tr></table></figure>
+          <p>配置 nginx 的时候，在配置文件中可以方便的使用 include 指令来把配置文件内容分割，从而达到方便管理的目的。<br>但是在使用 php 的时候也希望有这样的功能，这样在升级或者重装环境的时候就知道自己曾经改过哪些配置了。<br>但是 php.ini 里面并不能直接载入其他文件，但是在官方文档中给出了<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">解决方案</a> 。</p>
+<p>首先明确一点，php在加载配置文件的时候分为主配置文件和附加配置文件。<br>主配置文件这里不讨论，因为不同操作系统下位置不同，搜索机制也不同。具体参见文档中的说明。</p>
+<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><p>这里我们只看在主配置文件 php.ini 加载完成以后如何补充加载从配置文件。<br>它有以下两个方法</p>
+<ol>
+<li>编译 php 的时候，使用参数 –with-config-file-scan-dir 指定目录 php在加载主配置文件之后再加载在这个目录里面 ini 文件</li>
+<li>设置环境变量 PHP_INI_SCAN_DIR 的值为子配置文件的目录</li>
+</ol>
+<p>方法1 适合自己有编译环境或者很方便编译的系统，例如 linux 下经常自己编译 php 。<br>方法2 适合下载别人编译好的版本。</p>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ul>
+<li>无论 1 还是 2 都可以按顺序指定多个目录，加载顺序也会根据目录顺序，每个目录里面 ini 文件文件名排序按顺序加载。</li>
+<li>多个目录设置分隔符根据操作系统不同而不同，具体可以用PHP打印 PATH_SEPARATOR 常量查看，windows是分号，linux 是冒号</li>
+<li>环境变量并不是只有操作系统才有，Apache 运行 或者 IIS 运行也有专门的环境变量设置，在鼓捣的时候不要弄混了去设置成系统环境变量，如果是命令行执行，可以使用 export 或者 set 命令来分别给 linux 和 windows 添加临时环境变量</li>
+</ul>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>可以使用phpinfo();查看<br>代码验证相关函数 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">php_ini_scanned_files</a></p>
+
       
     </div>
 
@@ -445,7 +449,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/02/28/linux%E9%80%92%E5%BD%92%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E5%B9%B6%E6%9B%BF%E6%8D%A2-sed-%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -459,7 +463,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/02/28/linux%E9%80%92%E5%BD%92%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E5%B9%B6%E6%9B%BF%E6%8D%A2-sed-%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">linux递归查找文件内容并替换 sed 命令的使用</a>
+            <a href="/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/" class="post-title-link" itemprop="url">PHP 处理表单数据的一个安全回顾（记录教训）</a>
         </h2>
 
         <div class="post-meta">
@@ -469,7 +473,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-02-28 14:10:00" itemprop="dateCreated datePublished" datetime="2018-02-28T14:10:00+08:00">2018-02-28</time>
+              <time title="创建时间：2019-03-29 10:32:00" itemprop="dateCreated datePublished" datetime="2019-03-29T10:32:00+08:00">2019-03-29</time>
             </span>
 
           
@@ -483,19 +487,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/原字符串/替换后字符串/g&#x27; `grep &#x27;搜索关键字&#x27; -rl /data/目标目录/ --include &quot;*.html&quot;`</span><br></pre></td></tr></table></figure>
-<p>上面是递归查找目录中所有的 html 文件（grep实现） 把包含符合关键字的文件用 sed 去做替换</p>
-<p>这里要注意如果sed要替换的字符串中如果有&#x2F; ^ ‘ 之类的需要用\做转义</p>
-<p>多个替换用;分割 例如 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/原字符串1/替换后字符串1/g;s/原字符串2/替换后字符串2/g&#x27;</span><br></pre></td></tr></table></figure>
-<p>替换整个行(c\)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/原字符串1/c\新行内容/&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>参考资料</p>
-<p><a target="_blank" rel="noopener" href="http://man.linuxde.net/grep">http://man.linuxde.net/grep</a></p>
-<p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_5fd841bf0101dt0r.html">http://blog.sina.com.cn/s/blog_5fd841bf0101dt0r.html</a></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/decisiveness/article/details/45602789">http://blog.csdn.net/decisiveness/article/details/45602789</a></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000008293993">https://segmentfault.com/q/1010000008293993</a></p>
+          <p>曾经看过一个讲 PHP 代码安全的文章中写过这么一条</p>
+<p>表单输入数据要做 htmlspecialchars_decode 处理</p>
+<p>表单输出数据要做 htmlspecialchars 处理</p>
+<p>当时还不是很理解为什么，自己也没遇到问题，所以就没做</p>
+<p>然而不是不报 时候未到 今天终于遇到了这个坑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input  type=&quot;text&quot; value=&quot;&lt;?php echo $value; ?&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>当采用上面代码输出的时候</p>
+<p>假如 $value 里面有 “ 双引号 那么value这个键将会被提前闭合，造成表单数据显示不完全，而且会多出来其他内容被识别为键的情况</p>
+<p>这下就惨了 所有这么输出的地方都要处理了，暂时也只能头痛医头，脚痛医脚了，先做转义好了</p>
 
       
     </div>
@@ -514,7 +514,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -580,14 +580,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
