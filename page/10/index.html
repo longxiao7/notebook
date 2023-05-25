@@ -155,6 +155,65 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/10/08/%E7%94%A8-PHP-%E7%9A%84-CURL-%E6%8F%92%E4%BB%B6-%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE-JSONRPC-%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/10/08/%E7%94%A8-PHP-%E7%9A%84-CURL-%E6%8F%92%E4%BB%B6-%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE-JSONRPC-%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">用 PHP 的 CURL 插件 直接访问 JSONRPC 服务</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-10-08 12:53:00" itemprop="dateCreated datePublished" datetime="2014-10-08T12:53:00+08:00">2014-10-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">用 PHP 的 CURL 插件 直接访问 JSONRPC 服务</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line"><span class="variable">$url</span> = <span class="string">&#x27;http://localhost/jsonrpc?tm=&#x27;</span>.<span class="title function_ invoke__">time</span>().<span class="title function_ invoke__">mt_rand</span> (<span class="number">100</span>,<span class="number">999</span>); <span class="comment">//参数是为了防止缓存</span></span><br><span class="line"><span class="variable">$options</span> = <span class="keyword">array</span>(</span><br><span class="line">    CURLOPT_URL =&gt; <span class="variable">$url</span>,</span><br><span class="line">    CURLOPT_USERAGENT =&gt; <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; rv:12.0) Gecko/20100101 Firefox/12.0&quot;</span>,</span><br><span class="line">    CURLOPT_RETURNTRANSFER =&gt; <span class="number">1</span>,  </span><br><span class="line">    );</span><br><span class="line"><span class="title function_ invoke__">curl_setopt_array</span>(<span class="variable">$ch</span>, <span class="variable">$options</span>);</span><br><span class="line"><span class="comment">#JSON 示例数据</span></span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_POSTFIELDS, <span class="string">&#x27;&#123;&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;getOpt&quot;,&quot;id&quot;:1&#125;&#x27;</span>); </span><br><span class="line"></span><br><span class="line"><span class="variable">$html</span>=<span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line"><span class="variable">$info</span> = <span class="title function_ invoke__">curl_getinfo</span>(<span class="variable">$ch</span>);            <span class="comment">#获取请求的详细信息 用于调试</span></span><br><span class="line"><span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>); </span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$html</span>);</span><br></pre></td></tr></table></figure>
+<p>注意 CURLOPT_POSTFIELDS 是不能 http_build_query 的，注意这点和普通的 POST 数据不一样，这里类似文件上传。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/10/05/%E4%BF%AE%E6%94%B9%E8%99%9A%E6%8B%9F%E6%9C%BA-CentOS-%E7%9A%84-IP-%E5%9C%B0%E5%9D%80%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -596,77 +655,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/30/QQ-%E7%BE%A4%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA-mht-%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/30/QQ-%E7%BE%A4%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA-mht-%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2/" class="post-title-link" itemprop="url">QQ 群聊天记录导出 mht 文件的分割</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-30 21:50:00" itemprop="dateCreated datePublished" datetime="2014-03-30T21:50:00+08:00">2014-03-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>如题 是个蛋疼物。目前QQ的聊天记录导出功能三种聊天记录格式的导出 很让人郁闷</p>
-<ol>
-<li>TXT   没图</li>
-<li>BAK  只能再导入QQ使用</li>
-<li>MHT 有图有字，缺点是一旦聊天记录很多，文件体积就会很大，几乎所有的工具都不能正常打开</li>
-</ol>
-<p><b>单纯的把MHT转换成HTML也不行，因为HTML也很大，加上图片之类的资源 也会卡死<br>于是只能切开显示，处理思路很简单，就是超大的文本文件，按行顺序处理，把图片解码存入文件，然后分割HTML内容<br>代码如下 只支持单个QQ群导出记录</b></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&#x27;pcre.backtrack_limit&#x27;</span>,<span class="number">1000000</span>);</span><br><span class="line"><span class="variable">$is_table_end</span> = <span class="literal">false</span> ; <span class="variable">$page</span> = <span class="number">0</span> ;<span class="variable">$contents</span> = <span class="string">&#x27;&#x27;</span>; <span class="variable">$output_zip</span> = <span class="string">&#x27;./test.zip&#x27;</span>;</span><br><span class="line"><span class="comment">#判断输入文件</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">file_exists</span>(<span class="variable">$argv</span>[<span class="number">1</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;There isn\&#x27;t have this file.&#x27;</span>;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#建立归档文件 默认为</span></span><br><span class="line"><span class="title function_ invoke__">make_output_target</span>(<span class="variable">$output_zip</span>);</span><br><span class="line"><span class="variable">$handle</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$argv</span>[<span class="number">1</span>], <span class="string">&quot;rb&quot;</span>);</span><br><span class="line"><span class="comment">#分段处理</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$contents</span> .=<span class="title function_ invoke__">fread</span>(<span class="variable">$handle</span>,<span class="number">124416</span>);<span class="comment">#wtf</span></span><br><span class="line">    <span class="variable">$contents</span> = <span class="title function_ invoke__">mht_process</span>(<span class="variable">$contents</span>,<span class="variable">$output_zip</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (!<span class="title function_ invoke__">feof</span>(<span class="variable">$handle</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#主体数据处理</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mht_process</span>(<span class="params"><span class="variable">$contents</span>,<span class="variable">$output_zip</span></span>)</span>&#123;</span><br><span class="line">    Global <span class="variable">$is_table_end</span>;</span><br><span class="line">    Global <span class="variable">$page</span>;</span><br><span class="line">    <span class="variable">$zip</span> = <span class="keyword">new</span> <span class="title class_">ZipArchive</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">open</span>(<span class="variable">$output_zip</span>,ZIPARCHIVE::<span class="variable constant_">CREATE</span>) !== <span class="literal">TRUE</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;create image failed&#x27;</span>;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">#判断非图片消息部分是否处理完毕</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">false</span> === <span class="variable">$is_table_end</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$html_head</span> = <span class="string">&#x27;&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;&lt;title&gt;QQ Message&lt;/title&gt;&lt;style type=&quot;text/css&quot;&gt;body&#123;font-size:12px; line-height:22px; margin:2px;&#125;td&#123;font-size:12px; line-height:22px;&#125;&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;table width=100% cellspacing=0&gt;&#x27;</span>;</span><br><span class="line">        <span class="variable">$html_foot</span> = <span class="string">&#x27;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;&#x27;</span>;</span><br><span class="line">        <span class="comment">#判断消息部分是否完毕 只处理图片部分</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">false</span> !== <span class="title function_ invoke__">strpos</span>(<span class="variable">$contents</span>,<span class="variable">$html_foot</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$is_table_end</span> = <span class="literal">true</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$r</span> = <span class="title function_ invoke__">preg_match_all</span> (<span class="string">&#x27;|&lt;tr.*?\&lt;/tr\&gt;|ims&#x27;</span>,  <span class="variable">$contents</span> , <span class="variable">$matches</span> ,PREG_OFFSET_CAPTURE);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$r</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$matches</span> = <span class="title function_ invoke__">array_chunk</span>(<span class="variable">$matches</span>[<span class="number">0</span>],<span class="number">200</span>);</span><br><span class="line">            <span class="keyword">foreach</span>(<span class="variable">$matches</span> <span class="keyword">as</span> <span class="variable">$key</span>=&gt;<span class="variable">$val</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="variable">$arr</span> = <span class="title function_ invoke__">array_column</span>(<span class="variable">$val</span>,<span class="number">0</span>);</span><br><span class="line">                <span class="title function_ invoke__">array_walk</span>( <span class="variable">$arr</span> , function(&amp;<span class="variable">$v</span>, <span class="variable">$k</span>) <span class="keyword">use</span> ($<span class="title">zip</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    $<span class="title">v</span> = <span class="title">preg_replace</span>(&#x27;|&lt;<span class="title">IMG</span> <span class="title">src</span>=&quot;&#123;(\<span class="title">S</span>)(\<span class="title">S</span>)(\<span class="title">S</span>+).<span class="title">dat</span>|<span class="title">ims</span>&#x27;,&#x27;&lt;<span class="title">IMG</span> <span class="title">src</span>=&quot;../<span class="title">images</span>/$1/$2/&#123;$1$2$3.<span class="title">dat</span>&#x27;,$<span class="title">v</span>);</span><br><span class="line">                &#125;);</span><br><span class="line">                <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">addFromString</span>(<span class="string">&#x27;messages/&#x27;</span>.<span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;%08d&quot;</span>, <span class="variable">$page</span>+<span class="variable">$key</span>).<span class="string">&#x27;.html&#x27;</span> ,<span class="variable">$html_head</span> . <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;&#x27;</span>,<span class="variable">$arr</span>).<span class="string">&#x27;&lt;td&gt; &lt;H1&gt;&lt;a href=&quot;./&#x27;</span>.<span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;%08d&quot;</span>, <span class="variable">$page</span>+<span class="variable">$key</span>-<span class="number">1</span>).<span class="string">&#x27;.html&quot;&gt;Prev page&lt;/a&gt;&lt;/h1&gt; &lt;H1&gt;&lt;a href=&quot;./&#x27;</span>.<span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;%08d&quot;</span>, <span class="variable">$page</span>+<span class="variable">$key</span>+<span class="number">1</span>).<span class="string">&#x27;.html&quot;&gt;Next page&lt;/a&gt;&lt;/h1&gt;&lt;/td&gt;&#x27;</span>.<span class="variable">$html_foot</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable">$page</span> += <span class="variable">$key</span>; </span><br><span class="line">            <span class="variable">$pos</span> = <span class="title function_ invoke__">end</span>(<span class="variable">$val</span>);</span><br><span class="line">            <span class="variable">$contents</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$contents</span>,<span class="title function_ invoke__">bcadd</span>(<span class="variable">$pos</span>[<span class="number">1</span>],<span class="title function_ invoke__">strlen</span>(<span class="variable">$pos</span>[<span class="number">0</span>]),<span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$contents</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">#处理图片部分</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">true</span> === <span class="variable">$is_table_end</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">#图片数据匹配</span></span><br><span class="line">        <span class="variable">$r</span> = <span class="title function_ invoke__">preg_match_all</span> (<span class="string">&#x27;|Content-Type:image.*?:base64.*?Content-Location:(.*?)\.dat(.*?)(?:------=_)|ims&#x27;</span>,  <span class="variable">$contents</span> , <span class="variable">$matches</span> ,PREG_OFFSET_CAPTURE | PREG_SET_ORDER);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$r</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//$matches = array_chunk($matches[0],200);</span></span><br><span class="line">            <span class="variable">$result</span> = <span class="keyword">array</span>();</span><br><span class="line">            <span class="keyword">foreach</span>(<span class="variable">$matches</span> <span class="keyword">as</span> <span class="variable">$key</span>=&gt;<span class="variable">$val</span>)&#123;</span><br><span class="line">                <span class="variable">$result</span> = <span class="keyword">array</span>(<span class="string">&#x27;name&#x27;</span>=&gt;<span class="variable">$val</span>[<span class="number">1</span>][<span class="number">0</span>],<span class="string">&#x27;contents&#x27;</span>=&gt;<span class="variable">$val</span>[<span class="number">2</span>][<span class="number">0</span>]);</span><br><span class="line">                <span class="variable">$dir</span> = <span class="string">&#x27;images/&#x27;</span>. <span class="title function_ invoke__">substr</span>(<span class="variable">$result</span>[<span class="string">&#x27;name&#x27;</span>],<span class="number">1</span>,<span class="number">1</span>) .<span class="string">&#x27;/&#x27;</span> . <span class="title function_ invoke__">substr</span>(<span class="variable">$result</span>[<span class="string">&#x27;name&#x27;</span>],<span class="number">2</span>,<span class="number">1</span>) .<span class="string">&#x27;/&#x27;</span>.<span class="variable">$result</span>[<span class="string">&#x27;name&#x27;</span>] . <span class="string">&#x27;.dat&#x27;</span>;</span><br><span class="line">                <span class="comment">#写入图片表情文件到硬盘</span></span><br><span class="line">                <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">addFromString</span>(<span class="variable">$dir</span>,<span class="title function_ invoke__">base64_decode</span>(<span class="title function_ invoke__">trim</span>(<span class="variable">$result</span>[<span class="string">&#x27;contents&#x27;</span>])));</span><br><span class="line">                <span class="variable">$result</span> = <span class="keyword">array</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable">$result</span> = <span class="keyword">array</span>();</span><br><span class="line">            <span class="variable">$contents</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$contents</span>,<span class="variable">$val</span>[<span class="number">0</span>][<span class="number">1</span>]); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="variable">$contents</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line">    <span class="comment">#剩余部分返回 下一次处理拼接数据</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$contents</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#建立保存目标</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">make_output_target</span>(<span class="params"><span class="variable">$output</span>=<span class="string">&#x27;./test.zip&#x27;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$zip</span> = <span class="keyword">new</span> <span class="title class_">ZipArchive</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">open</span>(<span class="variable">$output</span>,ZIPARCHIVE::<span class="variable constant_">CREATE</span>) !== <span class="literal">TRUE</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;create images directory failed&#x27;</span>;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">addEmptyDir</span>(<span class="string">&#x27;images&#x27;</span>);</span><br><span class="line">    <span class="variable">$tmp</span> = <span class="keyword">array</span>(<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;3&#x27;</span>,<span class="string">&#x27;4&#x27;</span>,<span class="string">&#x27;5&#x27;</span>,<span class="string">&#x27;6&#x27;</span>,<span class="string">&#x27;7&#x27;</span>,<span class="string">&#x27;8&#x27;</span>,<span class="string">&#x27;9&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="string">&#x27;G&#x27;</span>,<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;I&#x27;</span>,<span class="string">&#x27;J&#x27;</span>,<span class="string">&#x27;K&#x27;</span>,<span class="string">&#x27;L&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="string">&#x27;N&#x27;</span>,<span class="string">&#x27;O&#x27;</span>,<span class="string">&#x27;P&#x27;</span>,<span class="string">&#x27;Q&#x27;</span>,<span class="string">&#x27;R&#x27;</span>,<span class="string">&#x27;S&#x27;</span>,<span class="string">&#x27;T&#x27;</span>,<span class="string">&#x27;U&#x27;</span>,<span class="string">&#x27;V&#x27;</span>,<span class="string">&#x27;W&#x27;</span>,<span class="string">&#x27;X&#x27;</span>,<span class="string">&#x27;Y&#x27;</span>,<span class="string">&#x27;Z&#x27;</span>);</span><br><span class="line">    <span class="title function_ invoke__">array_walk</span>(<span class="variable">$tmp</span>,function(<span class="variable">$val</span>,<span class="variable">$key</span>) <span class="keyword">use</span> ($<span class="title">tmp</span>,$<span class="title">zip</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        $<span class="title">base_path</span> = &#x27;<span class="title">images</span>/&#x27;.$<span class="title">val</span>;</span><br><span class="line">        <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">addEmptyDir</span>(<span class="variable">$base_path</span>);</span><br><span class="line">        <span class="title function_ invoke__">array_walk</span>(<span class="variable">$tmp</span>,function(<span class="variable">$val</span>,<span class="variable">$key</span>) <span class="keyword">use</span> ($<span class="title">tmp</span>,$<span class="title">zip</span>,$<span class="title">base_path</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            $<span class="title">zip</span>-&gt;<span class="title">addEmptyDir</span>($<span class="title">base_path</span>.&#x27;/&#x27;.$<span class="title">val</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">addEmptyDir</span>(<span class="string">&#x27;messages&#x27;</span>);</span><br><span class="line">    <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;php.exe&quot; cli.php input.mht &gt; log.txt</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
-<p><a href="/2014/03/30/QQ-%E7%BE%A4%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA-mht-%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E5%89%B2/pack.7z">打包环境+代码</a><br>生成 ZIP 文件之后 可以用 winmount 来挂载查看 无需解压很方便</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -732,14 +724,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-count">87</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

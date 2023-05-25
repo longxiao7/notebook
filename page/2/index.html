@@ -378,6 +378,63 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/05/09/PHP-%E6%9B%B4%E6%96%B0%E6%9C%AC%E5%9C%B0%E5%85%AC%E7%BD%91IP%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%EF%BC%8C%E5%AE%9E%E7%8E%B0-DDNS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/09/PHP-%E6%9B%B4%E6%96%B0%E6%9C%AC%E5%9C%B0%E5%85%AC%E7%BD%91IP%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%EF%BC%8C%E5%AE%9E%E7%8E%B0-DDNS/" class="post-title-link" itemprop="url">PHP 更新本地公网IP到阿里云域名解析，实现 DDNS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-09 16:58:00" itemprop="dateCreated datePublished" datetime="2019-05-09T16:58:00+08:00">2019-05-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">#需要配置的项</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;ACCESSKEYID&#x27;</span>,<span class="string">&#x27;AAAAAAAAAAAAAAAA&#x27;</span>);                  <span class="comment">#阿里云用户密钥ID 获取方法 https://help.aliyun.com/knowledge_detail/38738.html</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;ACCESSKEYSECRET&#x27;</span>,<span class="string">&#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#x27;</span>);<span class="comment">#阿里云用户密钥</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;RR&#x27;</span>,<span class="string">&#x27;myhome&#x27;</span>);                                     <span class="comment">#二级域名的记录名 如果是一级 请用@</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;DOMAIN&#x27;</span>,<span class="string">&#x27;myhome.baidu.com&#x27;</span>);                       <span class="comment">#完整域名  </span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;RECORDID&#x27;</span>,<span class="string">&#x27;11111111111111111&#x27;</span>);                    <span class="comment">#解析记录ID</span></span><br><span class="line"><span class="comment">/*关键如何获取解析记录ID ，需要在下面这个地址中</span></span><br><span class="line"><span class="comment">https://api.aliyun.com/?spm=a2c4g.11186623.2.26.79ae2846d9RBBa#/?product=Alidns&amp;api=AddDomainRecord&amp;params=&#123;&#125;&amp;tab=DEMO&amp;lang=JAVA</span></span><br><span class="line"><span class="comment">先设置一个记录（二级域名） 然后返回结果中获取这个ID 添加记录所需的参数文档在下面这里查看</span></span><br><span class="line"><span class="comment">https://help.aliyun.com/document_detail/29772.html?spm=a2c4g.11186623.4.3.392b5eb4SAeph9</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment"># 获取自己公网 IP 的接口</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;GET_IP_URL&#x27;</span>,<span class="string">&#x27;myip.fireflysoft.net&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;IP_FILE&#x27;</span>,<span class="keyword">__DIR__</span>. DIRECTORY_SEPARATOR .<span class="string">&#x27;ip.txt&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 获取<span class="title">HTTP</span>(<span class="params"><span class="variable">$url</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$curl_samples</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line">    <span class="variable">$options</span> = [CURLOPT_URL =&gt; <span class="variable">$url</span>,CURLOPT_RETURNTRANSFER =&gt; <span class="number">1</span>,CURLOPT_FOLLOWLOCATION =&gt; <span class="number">1</span>,CURLOPT_SSL_VERIFYPEER =&gt; <span class="number">0</span>];</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt_array</span>(<span class="variable">$curl_samples</span>, <span class="variable">$options</span>);                </span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$curl_samples</span>, CURLOPT_CUSTOMREQUEST, <span class="string">&#x27;GET&#x27;</span>);  </span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">curl_exec</span>(<span class="variable">$curl_samples</span>);                            </span><br><span class="line">    <span class="variable">$info</span> = <span class="title function_ invoke__">curl_getinfo</span>(<span class="variable">$curl_samples</span>); </span><br><span class="line">    <span class="variable">$curl_err</span> = <span class="title function_ invoke__">curl_errno</span>(<span class="variable">$curl_samples</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_close</span>(<span class="variable">$curl_samples</span>);                                 </span><br><span class="line">    <span class="keyword">if</span>( <span class="number">0</span> != <span class="variable">$curl_err</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;getip error:&quot;</span>.<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y-m-d H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$info</span>);</span><br><span class="line">        <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line">        <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$curl_err</span>;</span><br><span class="line">        <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> 编码字符(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">urlencode</span>(<span class="variable">$string</span>);</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">str_replace</span>([<span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;*&#x27;</span>], [<span class="string">&#x27;%20&#x27;</span>, <span class="string">&#x27;%2A&#x27;</span>], <span class="variable">$result</span>);</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/%7E/&#x27;</span>, <span class="string">&#x27;~&#x27;</span>, <span class="variable">$result</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 排序参数计算签名(<span class="params"><span class="variable">$parameters</span>,<span class="variable">$method</span>=<span class="string">&quot;GET&quot;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">ksort</span>(<span class="variable">$parameters</span>);</span><br><span class="line">    <span class="variable">$canonicalizedQuery</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$parameters</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$value</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$canonicalizedQuery</span> .= <span class="string">&#x27;&amp;&#x27;</span> . 编码字符(<span class="variable">$key</span>) . <span class="string">&#x27;=&#x27;</span> . 编码字符(<span class="variable">$value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="variable">$stringToBeSigned</span> = <span class="variable">$method</span>. <span class="string">&#x27;&amp;%2F&amp;&#x27;</span>. 编码字符(<span class="title function_ invoke__">substr</span>(<span class="variable">$canonicalizedQuery</span>, <span class="number">1</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">base64_encode</span>(<span class="title function_ invoke__">hash_hmac</span>(<span class="string">&#x27;sha1&#x27;</span>, <span class="variable">$stringToBeSigned</span>, ACCESSKEYSECRET . <span class="string">&#x27;&amp;&#x27;</span>, <span class="literal">true</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 获取当前的解析记录值(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">#请求dns的API重新做解析</span></span><br><span class="line">    <span class="variable">$api_url</span> = <span class="string">&#x27;https://alidns.aliyuncs.com/?&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span> = [];</span><br><span class="line">    <span class="comment">#公共参数</span></span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Format&#x27;</span>]          = <span class="string">&#x27;json&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Version&#x27;</span>]         = <span class="string">&#x27;2015-01-09&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;SignatureMethod&#x27;</span>] = <span class="string">&#x27;HMAC-SHA1&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;SignatureNonce&#x27;</span>]  = <span class="title function_ invoke__">uniqid</span>();</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;SignatureVersion&#x27;</span>]= <span class="string">&#x27;1.0&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;AccessKeyId&#x27;</span>]     = ACCESSKEYID; </span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Timestamp&#x27;</span>]       = <span class="title function_ invoke__">gmdate</span>(<span class="string">&quot;Y-m-d\TH:i:s\Z&quot;</span>);</span><br><span class="line">    <span class="comment">#专用参数</span></span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Action&#x27;</span>]     = <span class="string">&#x27;DescribeDomainRecordInfo&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;RecordId&#x27;</span>]   = RECORDID; <span class="comment">#解析记录的ID，此参数在添加解析时会返回，在获取域名解析列表时会返回</span></span><br><span class="line">    <span class="comment">#签名</span></span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Signature&#x27;</span>]  = 排序参数计算签名(<span class="variable">$data</span>);</span><br><span class="line">    <span class="comment">#请求接口</span></span><br><span class="line">    <span class="variable">$json</span> = 获取<span class="title function_ invoke__">HTTP</span>(<span class="variable">$api_url</span> . <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$data</span>));</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$json</span>,<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>[<span class="string">&#x27;Value&#x27;</span>];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 主函数(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="comment">#获取现在网络的IP</span></span><br><span class="line">    <span class="variable">$ip</span> = 获取<span class="title function_ invoke__">HTTP</span>(GET_IP_URL);</span><br><span class="line">    <span class="comment">#获取现在域名的解析结果 也就是旧的IP</span></span><br><span class="line">    $旧IP = 获取当前的解析记录值();</span><br><span class="line">    <span class="comment">#对比新旧IP是否一样</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">isset</span>($旧IP) || $旧IP !== <span class="variable">$ip</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">#请求dns的API重新做解析</span></span><br><span class="line">        <span class="variable">$api_url</span> = <span class="string">&#x27;https://alidns.aliyuncs.com/?&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span> = [];</span><br><span class="line">        <span class="comment">#公共参数</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Format&#x27;</span>]          = <span class="string">&#x27;json&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Version&#x27;</span>]         = <span class="string">&#x27;2015-01-09&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;SignatureMethod&#x27;</span>] = <span class="string">&#x27;HMAC-SHA1&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;SignatureNonce&#x27;</span>]  = <span class="title function_ invoke__">uniqid</span>();</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;SignatureVersion&#x27;</span>]= <span class="string">&#x27;1.0&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;AccessKeyId&#x27;</span>]     = ACCESSKEYID; </span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Timestamp&#x27;</span>]       = <span class="title function_ invoke__">gmdate</span>(<span class="string">&quot;Y-m-d\TH:i:s\Z&quot;</span>);</span><br><span class="line">        <span class="comment">#专用参数</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Action&#x27;</span>]     = <span class="string">&#x27;UpdateDomainRecord&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;RecordId&#x27;</span>]   = RECORDID; <span class="comment">#解析记录的ID，此参数在添加解析时会返回，在获取域名解析列表时会返回</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;RR&#x27;</span>]         = RR; <span class="comment">#主机记录</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Type&#x27;</span>]       = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Value&#x27;</span>]      = <span class="variable">$ip</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;TTL&#x27;</span>]        = <span class="number">600</span>;</span><br><span class="line">        <span class="comment">#$data[&#x27;Priority&#x27;]   = 10; #MX记录的优先级，取值范围[1,10]，记录类型为MX记录时，此参数必须</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Line&#x27;</span>]       = <span class="string">&#x27;default&#x27;</span>;</span><br><span class="line">        <span class="comment">#签名</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Signature&#x27;</span>]  = 排序参数计算签名(<span class="variable">$data</span>);</span><br><span class="line">        <span class="comment">#请求接口</span></span><br><span class="line">        <span class="variable">$json</span> = 获取<span class="title function_ invoke__">HTTP</span>(<span class="variable">$api_url</span> . <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$data</span>));</span><br><span class="line">        <span class="variable">$result</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$json</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#完成以后</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$result</span>-&gt;RecordId))&#123;</span><br><span class="line">            <span class="title function_ invoke__">file_put_contents</span>(IP_FILE,<span class="variable">$ip</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;error&#x27;</span>;</span><br><span class="line">            <span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;IP没有发生变化，不需要修改解析记录&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">主函数();</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -445,76 +502,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/" class="post-title-link" itemprop="url">PHP 处理表单数据的一个安全回顾（记录教训）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-29 10:32:00" itemprop="dateCreated datePublished" datetime="2019-03-29T10:32:00+08:00">2019-03-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>曾经看过一个讲 PHP 代码安全的文章中写过这么一条</p>
-<p>表单输入数据要做 htmlspecialchars_decode 处理</p>
-<p>表单输出数据要做 htmlspecialchars 处理</p>
-<p>当时还不是很理解为什么，自己也没遇到问题，所以就没做</p>
-<p>然而不是不报 时候未到 今天终于遇到了这个坑</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input  type=&quot;text&quot; value=&quot;&lt;?php echo $value; ?&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>当采用上面代码输出的时候</p>
-<p>假如 $value 里面有 “ 双引号 那么value这个键将会被提前闭合，造成表单数据显示不完全，而且会多出来其他内容被识别为键的情况</p>
-<p>这下就惨了 所有这么输出的地方都要处理了，暂时也只能头痛医头，脚痛医脚了，先做转义好了</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -580,14 +571,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-count">87</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

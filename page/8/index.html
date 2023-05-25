@@ -155,6 +155,69 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/09/22/%E5%85%B3%E4%BA%8E%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81%E4%B8%AD-DOCTYPE-%E7%9A%84%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/09/22/%E5%85%B3%E4%BA%8E%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81%E4%B8%AD-DOCTYPE-%E7%9A%84%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">关于网页源码中 DOCTYPE 的笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-09-22 15:05:00" itemprop="dateCreated datePublished" datetime="2015-09-22T15:05:00+08:00">2015-09-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>平时用HTML5 所以都直接简写 doctype</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个东西完整写法是</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>除了上面这种 其实还有几种声明方式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* 过渡的(Transitional)：要求非常宽松的DTD，它允许你继续使用HTML4.01的标识(但是要符合xhtml的写法)，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 严格的(Strict)：要求严格的DTD，你不能使用任何表现层的标识和属性，例如<span class="tag">&lt;<span class="name">br</span>&gt;</span>，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 框架的(Frameset)：专门针对框架页面设计使用的DTD，如果你的页面中包含有框架，需要采用这种DTD，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Frameset//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/09/14/Yii1-%E6%8E%A7%E5%88%B6%E5%89%8D%E7%AB%AF%E8%BD%BD%E5%85%A5%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -391,85 +454,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/05/04/MySQL-%E6%8F%92%E5%85%A5%E4%B8%8E%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E5%80%BC%E7%9B%B8%E7%AD%89%E7%9A%84%E5%AD%97%E6%AE%B5%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%87%86%E7%A1%AE%E7%9A%84%E5%AE%9E%E9%AA%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/05/04/MySQL-%E6%8F%92%E5%85%A5%E4%B8%8E%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E5%80%BC%E7%9B%B8%E7%AD%89%E7%9A%84%E5%AD%97%E6%AE%B5%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%87%86%E7%A1%AE%E7%9A%84%E5%AE%9E%E9%AA%8C/" class="post-title-link" itemprop="url">MySQL 插入与自增主键值相等的字段与高并发下保证数据准确的实验</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-05-04 06:36:00" itemprop="dateCreated datePublished" datetime="2015-05-04T06:36:00+08:00">2015-05-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>场景描述： 表t2 中 有 自增主键 id  和 字段v  当插入记录的时候 要求 v 与 id 的值相等（按理来说这样的字段是需要拆表的，但是业务场景是 只有某些行相等 ）</p>
-</blockquote>
-<p>在网上搜的一种办法是 先获取自增ID </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(id)<span class="operator">+</span><span class="number">1</span> <span class="keyword">from</span> t2;</span><br></pre></td></tr></table></figure>
-<p>然后给 v 字段插入获取到的值；但是这样的做法在有删除行同时调整过自增值的表中是不准确的</p>
-<p>于是换个思路 从 information_schema 下手 读取表的信息</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `t2`</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">    (</span><br><span class="line">        <span class="keyword">NULL</span>,</span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">SELECT</span></span><br><span class="line">                `AUTO_INCREMENT`</span><br><span class="line">            <span class="keyword">FROM</span></span><br><span class="line">                `information_schema`.`TABLES`</span><br><span class="line">            <span class="keyword">WHERE</span></span><br><span class="line">                `TABLE_SCHEMA` <span class="operator">=</span> <span class="string">&#x27;test&#x27;</span></span><br><span class="line">            <span class="keyword">AND</span> `TABLE_NAME` <span class="operator">=</span> <span class="string">&#x27;t2&#x27;</span></span><br><span class="line">        )</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
-<p>功能是实现了 但是真的安全么？</p>
-<p>于是写个PHP文件验证一下</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sql</span>  = <span class="string">&quot;INSERT INTO `t2` VALUES(NULL ,(SELECT `AUTO_INCREMENT` FROM `information_schema`.`TABLES` WHERE `TABLE_SCHEMA` = &#x27;test&#x27; AND `TABLE_NAME`=&#x27;t2&#x27;));&quot;</span>;</span><br><span class="line"><span class="variable">$link</span> = <span class="title function_ invoke__">mysql_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;Could not connect: &quot;</span> . <span class="title function_ invoke__">mysql_error</span>());</span><br><span class="line"><span class="title function_ invoke__">mysql_select_db</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">mysql_query</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="title function_ invoke__">mysql_close</span>(<span class="variable">$link</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>用 ApacheBench 工具测试</p>
-<p><code>ab -n 50000 -c 20 http://localhost/test.php</code></p>
-<p><b style="color:red">查询结果（select * from t2 where  id !&#x3D; v;）大量的行出现了 v 和 id 不相等的情况</b></p>
-<p>改写下 PHP</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sql</span>  = <span class="string">&quot;INSERT INTO `t2` VALUES(NULL ,(SELECT `AUTO_INCREMENT` FROM `information_schema`.`TABLES` WHERE `TABLE_SCHEMA` = &#x27;test&#x27; AND `TABLE_NAME`=&#x27;t2&#x27;));&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$link</span> = <span class="title function_ invoke__">mysql_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;Could not connect: &quot;</span> . <span class="title function_ invoke__">mysql_error</span>());</span><br><span class="line"><span class="title function_ invoke__">mysql_select_db</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">mysql_query</span>(<span class="string">&#x27;START TRANSACTION&#x27;</span>); <span class="comment">#开始事务</span></span><br><span class="line"><span class="title function_ invoke__">mysql_query</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="variable">$id</span> = <span class="title function_ invoke__">mysql_insert_id</span>();</span><br><span class="line"><span class="variable">$res</span> = <span class="title function_ invoke__">mysql_query</span>(<span class="string">&quot;SELECT `v` FROM  `t2` WHERE id= &quot;</span>.<span class="variable">$id</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$res</span>) &#123;</span><br><span class="line">    <span class="title function_ invoke__">mysql_close</span>(<span class="variable">$link</span>);</span><br><span class="line">    <span class="keyword">die</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$row</span> = <span class="title function_ invoke__">mysql_fetch_assoc</span>(<span class="variable">$res</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$row</span>[<span class="string">&#x27;v&#x27;</span>] != <span class="variable">$id</span>)&#123;</span><br><span class="line">    <span class="title function_ invoke__">mysql_query</span>(<span class="string">&#x27; ROLLBACK &#x27;</span>); <span class="comment">#回滚事务</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysql_query</span>(<span class="string">&#x27;COMMIT&#x27;</span>); <span class="comment">#提交事务</span></span><br><span class="line"><span class="title function_ invoke__">mysql_close</span>(<span class="variable">$link</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>再使用 ApacheBench 测试，这次速度变慢了 但是结果是都是正确的。说明整个过程需要开启事务，才能保证准确。
- </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -535,14 +523,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-count">87</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

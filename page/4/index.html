@@ -155,6 +155,74 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/03/linux-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/03/linux-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/" class="post-title-link" itemprop="url">linux 磁盘扩容</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-03 18:23:00" itemprop="dateCreated datePublished" datetime="2019-01-03T18:23:00+08:00">2019-01-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>记录一下云主机的扩容</p>
+<p>假如是设备 &#x2F;dev&#x2F;vdb 挂载在 &#x2F;data 目录</p>
+<ol>
+<li>卸载</li>
+<li>检查磁盘</li>
+<li>调整分区大小</li>
+<li>挂载<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//针对ext4文件格式的操作系统（如CentOS6）：</span><br><span class="line">umount /dev/vdb</span><br><span class="line">e2fsck -f /dev/vdb</span><br><span class="line">resize2fs /dev/vdb</span><br><span class="line">mount /dev/vdb /data</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//针对xfs文件格式的操作系统（如CentOS7）</span><br><span class="line">umount /dev/vdb</span><br><span class="line">xfs_repair /dev/vdb</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line">xfs_growfs /data</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>上面的情况仅限于 2TB 以内的 MBR 分区。<br>如果是扩容到 2TB 以上的，从 MBR 转移 GPT 分区，需要先转移文件 然后重新分区。不要在没有备份的情况下轻易尝试直接转换。</p>
+<p>参考资料：<br><a target="_blank" rel="noopener" href="https://docs.ucloud.cn/udisk/userguide/extend/linux_raw">https://docs.ucloud.cn/udisk/userguide/extend/linux_raw</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -435,80 +503,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/02/28/linux%E9%80%92%E5%BD%92%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E5%B9%B6%E6%9B%BF%E6%8D%A2-sed-%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/28/linux%E9%80%92%E5%BD%92%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E5%B9%B6%E6%9B%BF%E6%8D%A2-sed-%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">linux递归查找文件内容并替换 sed 命令的使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-28 14:10:00" itemprop="dateCreated datePublished" datetime="2018-02-28T14:10:00+08:00">2018-02-28</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/原字符串/替换后字符串/g&#x27; `grep &#x27;搜索关键字&#x27; -rl /data/目标目录/ --include &quot;*.html&quot;`</span><br></pre></td></tr></table></figure>
-<p>上面是递归查找目录中所有的 html 文件（grep实现） 把包含符合关键字的文件用 sed 去做替换</p>
-<p>这里要注意如果sed要替换的字符串中如果有&#x2F; ^ ‘ 之类的需要用\做转义</p>
-<p>多个替换用;分割 例如 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/原字符串1/替换后字符串1/g;s/原字符串2/替换后字符串2/g&#x27;</span><br></pre></td></tr></table></figure>
-<p>替换整个行(c\)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/原字符串1/c\新行内容/&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>参考资料</p>
-<p><a target="_blank" rel="noopener" href="http://man.linuxde.net/grep">http://man.linuxde.net/grep</a></p>
-<p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_5fd841bf0101dt0r.html">http://blog.sina.com.cn/s/blog_5fd841bf0101dt0r.html</a></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/decisiveness/article/details/45602789">http://blog.csdn.net/decisiveness/article/details/45602789</a></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000008293993">https://segmentfault.com/q/1010000008293993</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -574,14 +572,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-count">87</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
