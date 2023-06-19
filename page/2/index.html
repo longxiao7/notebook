@@ -427,7 +427,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R 你的用户名所在组:你的用户名 你磁盘的挂载路径</span><br></pre></td></tr></table></figure>
 <p>否则没法创建文件，因为默认它是root的，而且权限不是777 ，所以没有写入权限</p>
 <h3 id="下一个大坑-文件共享"><a href="#下一个大坑-文件共享" class="headerlink" title="下一个大坑 文件共享"></a>下一个大坑 文件共享</h3><p>这玩意我在win下已经被坑的不要不要的了，各种设置细节，玄学现象搞不懂。希望deepin能简单点，你还别说 还真简单，右键文件夹属性菜单，在里面设置一下就行了。手机上用es文件浏览器添加网络位置，立刻就可以用了。接着我就卡在win10上了，资源管理器里面怎么弄也是打不开共享路径，我用的win10是 LSTC 2019 。后来发现一个问题</p>
-<p><img src="/1.jpg" alt="setting"></p>
+<p><img src="/2019/05/19/%E8%BF%99%E5%87%A0%E5%A4%A9%E6%8A%98%E8%85%BE-win10-%E8%AE%BF%E9%97%AE-deepin-%E5%85%B1%E4%BA%AB%E7%9A%84%E5%8E%86%E7%A8%8B/1.png" alt="setting"></p>
 <p>这个地方我本来是两个都开启了，但是当我关闭下面哪个的时候，竟然奇迹般的能用了，？？？！<br>昨天到这里已经深夜了，我就没管后面的问题，就直接睡觉了<br>今天早上起来继续尝试设置，然后我发现，只有系统盘的部分目录可以设置共享，我新添加的数据盘都不能共享？？？<br>在网上搜了半天，又看了百科，最后发现这么一页 <a target="_blank" rel="noopener" href="https://wiki.deepin.org/wiki/Samba%E6%9C%8D%E5%8A%A1">https://wiki.deepin.org/wiki/Samba%E6%9C%8D%E5%8A%A1</a><br>根据里面的内容配置好，发现数据盘也可以共享目录了，但是win10又打不开共享了 wtf ！！！<br>我测了一下手机，发现还是正常的，于是问题应该是出在 win10 上了，研究好几个小时没有结果，于是吃饭 太饿了，一边吃一边思考<br>共享是基于samba协议的，既然samba问题这么多，我或许可以放弃它，改用其他协议，因为以前折腾rsync的时候也是用了ssh协议来传输文件<br>估计ssh协议也可以用在这里，于是经过搜索发现还真有，一个叫win-sshfs的软件。</p>
 <p>首先要安装 Dokan 这是一个驱动，win-sshfs是基于这个驱动开发的，我经过不断的尝试发现，这个组合的版本号还是要求挺苛刻的<br>最后我用了 这么两个版本配合起来的 DokanSetup-1.0.5.1000 和 WinSSHFS-1.6.1.13-devel</p>
 <p>下载地址（记得挂代理）</p>
