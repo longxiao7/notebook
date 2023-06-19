@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"np.lvtoude.ltd","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="新手小白的流水账，希望可以帮助到后来者 最近产生了把家里的存储服务器系统换成deepin的想法，于是就开始了这两天的折腾 硬件：奔腾G5400 + B360 + 8G DDR4 +东芝128G M.2 NVME  安装系统因为没在实体机上装过 所以傻傻的就把 ISO 解压到U盘里面去安装了 （win10都这样弄的，看着好像也有EFI的启动） 然后安装就失败了，直接卡logo。我还以为是我电脑不兼容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="这几天折腾 win10 访问 deepin 共享的历程">
+<meta property="og:url" content="https://np.lvtoude.ltd/2019/05/19/%E8%BF%99%E5%87%A0%E5%A4%A9%E6%8A%98%E8%85%BE-win10-%E8%AE%BF%E9%97%AE-deepin-%E5%85%B1%E4%BA%AB%E7%9A%84%E5%8E%86%E7%A8%8B/index.html">
+<meta property="og:site_name" content="名字还没想好">
+<meta property="og:description" content="新手小白的流水账，希望可以帮助到后来者 最近产生了把家里的存储服务器系统换成deepin的想法，于是就开始了这两天的折腾 硬件：奔腾G5400 + B360 + 8G DDR4 +东芝128G M.2 NVME  安装系统因为没在实体机上装过 所以傻傻的就把 ISO 解压到U盘里面去安装了 （win10都这样弄的，看着好像也有EFI的启动） 然后安装就失败了，直接卡logo。我还以为是我电脑不兼容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://np.lvtoude.ltd/1.jpg">
+<meta property="article:published_time" content="2019-05-19T08:25:00.000Z">
+<meta property="article:modified_time" content="2023-06-19T06:45:28.824Z">
+<meta property="article:author" content="透明白">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="windows">
+<meta property="article:tag" content="smb">
+<meta property="article:tag" content="共享">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://np.lvtoude.ltd/1.jpg">
+
+<link rel="canonical" href="https://np.lvtoude.ltd/2019/05/19/%E8%BF%99%E5%87%A0%E5%A4%A9%E6%8A%98%E8%85%BE-win10-%E8%AE%BF%E9%97%AE-deepin-%E5%85%B1%E4%BA%AB%E7%9A%84%E5%8E%86%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>这几天折腾 win10 访问 deepin 共享的历程 | 名字还没想好</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">名字还没想好</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">等想好了在写</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/05/19/%E8%BF%99%E5%87%A0%E5%A4%A9%E6%8A%98%E8%85%BE-win10-%E8%AE%BF%E9%97%AE-deepin-%E5%85%B1%E4%BA%AB%E7%9A%84%E5%8E%86%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          这几天折腾 win10 访问 deepin 共享的历程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-19 16:25:00" itemprop="dateCreated datePublished" datetime="2019-05-19T16:25:00+08:00">2019-05-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>新手小白的流水账，希望可以帮助到后来者</p>
+<p>最近产生了把家里的存储服务器系统换成deepin的想法，于是就开始了这两天的折腾</p>
+<p>硬件：<br>奔腾G5400 + B360 + 8G DDR4 +东芝128G M.2 NVME </p>
+<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><p>因为没在实体机上装过 所以傻傻的就把 ISO 解压到U盘里面去安装了 （win10都这样弄的，看着好像也有EFI的启动）</p>
+<p>然后安装就失败了，直接卡logo。我还以为是我电脑不兼容，摸索了一下 发现是我U盘启动盘做的不对，必须要深度百科里面提供的安装器制作地址来制作启动盘<br><a target="_blank" rel="noopener" href="https://www.deepin.org/original/deepin-boot-maker/">安装器下载</a></p>
+<p>安装设置好以后第一次进系统，就给了我一个大惊喜 半透明毛玻璃特效的BUG，只能看见毛玻璃，上面所有的图标都看不见，右键菜单也是。难道是因为我是用核显的缘故？搜了半天发现可以用快捷键 shift+win+tab 来关闭特效，总算是可以正常显示了。</p>
+<h3 id="折腾硬盘"><a href="#折腾硬盘" class="headerlink" title="折腾硬盘"></a>折腾硬盘</h3><p>把之前的盘插上发现不识别，但是搜索发现deepin是支持ntfs自动挂载的，难道是我盘有问题？</p>
+<p>拿到另一台电脑上重新用 DiskGenius4.7 格式化选项一切默认总算识别出来了。<br>我琢磨着其他数据盘都用ext4 ，留一个 NTFS 当中转空间，这样网络不能用的时候可以用这个移动硬盘来转移文件。<br>添加硬盘分区之类的都没什么好说的一切正常 只不过添加好以后需要 在终端里面执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R 你的用户名所在组:你的用户名 你磁盘的挂载路径</span><br></pre></td></tr></table></figure>
+<p>否则没法创建文件，因为默认它是root的，而且权限不是777 ，所以没有写入权限</p>
+<h3 id="下一个大坑-文件共享"><a href="#下一个大坑-文件共享" class="headerlink" title="下一个大坑 文件共享"></a>下一个大坑 文件共享</h3><p>这玩意我在win下已经被坑的不要不要的了，各种设置细节，玄学现象搞不懂。希望deepin能简单点，你还别说 还真简单，右键文件夹属性菜单，在里面设置一下就行了。手机上用es文件浏览器添加网络位置，立刻就可以用了。接着我就卡在win10上了，资源管理器里面怎么弄也是打不开共享路径，我用的win10是 LSTC 2019 。后来发现一个问题</p>
+<p><img src="/1.jpg" alt="setting"></p>
+<p>这个地方我本来是两个都开启了，但是当我关闭下面哪个的时候，竟然奇迹般的能用了，？？？！<br>昨天到这里已经深夜了，我就没管后面的问题，就直接睡觉了<br>今天早上起来继续尝试设置，然后我发现，只有系统盘的部分目录可以设置共享，我新添加的数据盘都不能共享？？？<br>在网上搜了半天，又看了百科，最后发现这么一页 <a target="_blank" rel="noopener" href="https://wiki.deepin.org/wiki/Samba%E6%9C%8D%E5%8A%A1">https://wiki.deepin.org/wiki/Samba%E6%9C%8D%E5%8A%A1</a><br>根据里面的内容配置好，发现数据盘也可以共享目录了，但是win10又打不开共享了 wtf ！！！<br>我测了一下手机，发现还是正常的，于是问题应该是出在 win10 上了，研究好几个小时没有结果，于是吃饭 太饿了，一边吃一边思考<br>共享是基于samba协议的，既然samba问题这么多，我或许可以放弃它，改用其他协议，因为以前折腾rsync的时候也是用了ssh协议来传输文件<br>估计ssh协议也可以用在这里，于是经过搜索发现还真有，一个叫win-sshfs的软件。</p>
+<p>首先要安装 Dokan 这是一个驱动，win-sshfs是基于这个驱动开发的，我经过不断的尝试发现，这个组合的版本号还是要求挺苛刻的<br>最后我用了 这么两个版本配合起来的 DokanSetup-1.0.5.1000 和 WinSSHFS-1.6.1.13-devel</p>
+<p>下载地址（记得挂代理）</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/dokan-dev/dokany/releases/tag/v1.0.5">https://github.com/dokan-dev/dokany/releases/tag/v1.0.5</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/feo-cz/win-sshfs/releases/tag/1.6.1">https://github.com/feo-cz/win-sshfs/releases/tag/1.6.1</a></p>
+</blockquote>
+<p>顺便一提 Dokan如果卸载以后发现再安装的时候装不上了 记得重启电脑 手动删除 system32&#x2F;drivers 目录下面的 dokan.sys 被这个问题坑了半天。</p>
+<p>安装好Dokan ，再执行WinSSHFS，配置SSH的用户名和密码。挂载开始！ 然后华丽的失败了</p>
+<p>我用其他 ssh 软件实验了一下，发现桌面版本的 deepin 并不能用 ssh 远程登录<br>需要单独配置一下 打开deepin终端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server.</span><br><span class="line">sudo /etc/init.d/ssh start 或者 service ssh start</span><br></pre></td></tr></table></figure>
+<p>然后用 <code>netstat -an | grep 22 </code>看看端口是不是正常了。<br>再回到windows去挂载到盘符，目录选择&#x2F;media&#x2F;用户名&#x2F; 至此，总算可以暂时凑合用一下了。<br>至于为什么samba不能访问网络位置（提示权限不对）已经没力气去折腾了，希望能有明白人来指导一下</p>
+<p>后话：XFS 用中文文件名会乱码，需要把 win10 改成 unicode 字符集才能正常（千万不要动这里，否则可能就要重装系统了），这样部分老程序就乱码， sshfs大文件传输性能太低，而且容易断。于是还得折腾samba，无奈研究了几天还是搞不定deepin的samba配置，smb.conf简直就像没有用一样，怎么改都不行</p>
+<p>最后无奈换了debian（裸机装还没网卡驱动 乖乖 用 win10+vmware15装的，然后挂载物理磁盘做共享）<br>后来因为觉得不好用，又换回了win10 + NTFS</p>
+<h3 id="折腾的时候参考的一些资料"><a href="#折腾的时候参考的一些资料" class="headerlink" title="折腾的时候参考的一些资料"></a>折腾的时候参考的一些资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xycoin/p/6095688.html">Debian下配置Samba服务器</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yinqingwang/article/details/80161453">Win10 1709 无法访问局域网共享问题及解决</a> </li>
+<li><a href="samba%E5%A4%87%E4%BB%BD.rar">防止内容失效上面两个页面存个备份</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/windows/" rel="tag"># windows</a>
+              <a href="/tags/smb/" rel="tag"># smb</a>
+              <a href="/tags/%E5%85%B1%E4%BA%AB/" rel="tag"># 共享</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/09/PHP-%E6%9B%B4%E6%96%B0%E6%9C%AC%E5%9C%B0%E5%85%AC%E7%BD%91IP%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%EF%BC%8C%E5%AE%9E%E7%8E%B0-DDNS/" rel="prev" title="PHP 更新本地公网IP到阿里云域名解析，实现 DDNS">
+      <i class="fa fa-chevron-left"></i> PHP 更新本地公网IP到阿里云域名解析，实现 DDNS
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/10/FFmpeg-%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" rel="next" title="ffmpeg 命令笔记">
+      ffmpeg 命令笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">安装系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%98%E8%85%BE%E7%A1%AC%E7%9B%98"><span class="nav-number">2.</span> <span class="nav-text">折腾硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%A4%A7%E5%9D%91-%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB"><span class="nav-number">3.</span> <span class="nav-text">下一个大坑 文件共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%98%E8%85%BE%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%82%E8%80%83%E7%9A%84%E4%B8%80%E4%BA%9B%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">折腾的时候参考的一些资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">透明白</p>
+  <div class="site-description" itemprop="description">凑字数</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">透明白</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

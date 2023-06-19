@@ -155,6 +155,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/21/Linux-%E4%B8%8B%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7-rinetd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/21/Linux-%E4%B8%8B%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7-rinetd/" class="post-title-link" itemprop="url">Linux 下端口映射工具 rinetd</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-21 11:28:00" itemprop="dateCreated datePublished" datetime="2019-01-21T11:28:00+08:00">2019-01-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Linux下简单好用的工具rinetd，实现端口映射&#x2F;转发&#x2F;重定向</p>
+<p>官网地址<a target="_blank" rel="noopener" href="http://www.boutell.com/rinetd">http://www.boutell.com/rinetd</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#软件下载</span></span><br><span class="line">wget http://www.boutell.com/rinetd/http/rinetd.tar.gz</span><br><span class="line"><span class="comment">#解压安装</span></span><br><span class="line">tar zxvf rinetd.tar.gz</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment">#编辑配置</span></span><br><span class="line">vi /etc/rinetd.conf</span><br><span class="line">0.0.0.0 8080   172.19.94.3 8080</span><br><span class="line">0.0.0.0 2222   192.168.0.103 3389</span><br><span class="line">1.2.3.4 80     192.168.0.10 80</span><br></pre></td></tr></table></figure>
+
+<h3 id="说明一下"><a href="#说明一下" class="headerlink" title="说明一下"></a>说明一下</h3><ul>
+<li>0.0.0.0表示本机绑定所有可用地址</li>
+<li>将所有发往本机 8080 端口的请求转发到 172.19.94.3 的 8080 端口</li>
+<li>将所有发往本机 2222 端口的请求转发到 192.168.0.103的 3389 端口</li>
+<li>将所有发往 1.2.3.4 的 80 端口请求转发到 192.168.0.10 的 80 端口</li>
+</ul>
+<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><p>bindaddress bindport connectaddress connectport</p>
+<p>绑定的地址  绑定的端口  连接的地址  连接的端口</p>
+<p>或</p>
+<p>[Source Address] [Source Port] [Destination Address] [Destination Port]</p>
+<p>源地址  源端口   目的地址  目的端口</p>
+<p>###启动程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pkill rinetd  ##关闭进程</span><br><span class="line">rinetd -c /etc/rinetd.conf  ##启动转发</span><br></pre></td></tr></table></figure>
+<p>把这条命令加到 &#x2F;etc&#x2F;rc.local 里面开机自动运行(可能情况不同，具体看如何实现开机启动的)</p>
+<h3 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h3><p>netstat -antup</p>
+<h3 id="需要注意"><a href="#需要注意" class="headerlink" title="需要注意"></a>需要注意</h3><ol>
+<li>rinetd.conf 中绑定的本机端口必须没有被其它程序占用</li>
+<li>运行 rinetd 的系统防火墙应该打开绑定的本机端口</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/03/linux-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -436,73 +516,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/05/06/PHP-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%BA%93-iconv-%E7%9A%84%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82%E9%94%99%E8%AF%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/06/PHP-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%BA%93-iconv-%E7%9A%84%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">PHP 字符编码转换库 iconv 的一个细节错误</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-06 15:19:00" itemprop="dateCreated datePublished" datetime="2018-05-06T15:19:00+08:00">2018-05-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>先来看代码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$charset</span> = <span class="string">&#x27;GBK&#x27;</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;中华人民共和国中华人民共和国中华人民共和国中华人民共和国&#x27;</span>;</span><br><span class="line"><span class="variable">$size</span> = <span class="number">17</span>;</span><br><span class="line"><span class="comment">//先创造一个 GBK 编码的字符串</span></span><br><span class="line"><span class="variable">$str2</span> = <span class="title function_ invoke__">iconv</span>(<span class="string">&#x27;UTF-8&#x27;</span>, <span class="variable">$charset</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="variable">$str3</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$str2</span>, <span class="number">0</span>, <span class="variable">$size</span>);<span class="comment">//.$str2;</span></span><br><span class="line"><span class="variable">$s</span> = <span class="title function_ invoke__">iconv</span>(<span class="variable">$charset</span>, <span class="string">&#x27;UTF-8//IGNORE&#x27;</span>, <span class="variable">$str3</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$s</span>);</span><br></pre></td></tr></table></figure>
-<p>这里GBK因为一个汉字字符算2个英文字符 所以当长度为17的时候 会有字符破损</p>
-<p>经过转换 UTF-8 并且忽略不合法字符的时候，结果竟然是 false 和文档中说的忽略字符返回值达不到预期效果，经过测试发现这种情况仅出现在末尾字符不合法的时候<br>当拼接其他字符的时候（注释掉的部分）返回是达到预期的</p>
-<p>这个问题在 iconv 原版是不会出现的，也就是说这是 PHP 版本独有的问题</p>
-<p>在命令行下测试iconv工具</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -c -f gbk -t utf-8 input</span><br></pre></td></tr></table></figure>
-<p>input为 17长度的$str3输出的内容</p>
-<p>结果iconv的输出是忽略了最后那半个破损的字符</p>
-<p>以下为无证大师原话</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c的iconv即使加//ignore也会返回错误码</span><br><span class="line">处理不处理要调用方决定</span><br><span class="line">但php没做</span><br><span class="line">因此,php巨烂</span><br><span class="line">等人喷</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -572,14 +585,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

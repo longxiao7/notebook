@@ -155,6 +155,74 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/04/PHP-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%BF%84%E6%96%87%E5%AD%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/04/PHP-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%BF%84%E6%96%87%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">PHP 正则表达式匹配俄文字符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-04 11:37:00" itemprop="dateCreated datePublished" datetime="2018-01-04T11:37:00+08:00">2018-01-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>之前弄过匹配中文的 这次匹配一下俄文的</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//俄文 西里尔字母</span></span><br><span class="line"><span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/([\x&#123;0400&#125;-\x&#123;04FF&#125;]|[\x&#123;0500&#125;-\x&#123;052F&#125;]|[\x&#123;2DE0&#125;-\x&#123;2DFF&#125;]|[\x&#123;A640&#125;-\x&#123;A69F&#125;]|[\x&#123;1C80&#125;-\x&#123;1C8F&#125;])/u&quot;</span>, <span class="variable">$input</span>, <span class="variable">$match</span>);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A5%BF%E9%87%8C%E5%B0%94%E5%AD%97%E6%AF%8D">参考资料</a><br>正则包含了 </p>
+<ul>
+<li>西里尔字母</li>
+<li>西里尔字母补充</li>
+<li>西里尔字母扩展A</li>
+<li>西里尔字母扩展B</li>
+<li>西里尔字母扩展C</li>
+</ul>
+<p>仅适用于UTF-8环境，其他编码下也有对应俄文字母的字符 所以并不适用所有编码</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2017/12/30/windows-%E4%B8%8B-php-7-1-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%A7%E8%A1%8C%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84-PHP-%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -432,68 +500,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/" class="post-title-link" itemprop="url">Apache 2.4 针对某个文件限速</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-10-11 14:47:00" itemprop="dateCreated datePublished" datetime="2016-10-11T14:47:00+08:00">2016-10-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>例如限 mp4 文件的下载速度</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Location</span> &quot;/<span class="attr">downloads</span>/*<span class="attr">.mp4</span>&quot;&gt;</span></span><br><span class="line">    SetOutputFilter RATE_LIMIT</span><br><span class="line">    SetEnv rate-limit 400 </span><br><span class="line"><span class="tag">&lt;/<span class="name">Location</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>单位是kb&#x2F;s</p>
-<p>这个只能限制单线程 多线程无用。多线程下载需要用到第三方 mod 建议静态文件直接改用 Nginx </p>
-<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ratelimit.html">官方文档</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -563,14 +569,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

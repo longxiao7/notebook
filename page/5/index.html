@@ -155,6 +155,73 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/05/06/PHP-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%BA%93-iconv-%E7%9A%84%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82%E9%94%99%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/06/PHP-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%BA%93-iconv-%E7%9A%84%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">PHP 字符编码转换库 iconv 的一个细节错误</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-06 15:19:00" itemprop="dateCreated datePublished" datetime="2018-05-06T15:19:00+08:00">2018-05-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先来看代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$charset</span> = <span class="string">&#x27;GBK&#x27;</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;中华人民共和国中华人民共和国中华人民共和国中华人民共和国&#x27;</span>;</span><br><span class="line"><span class="variable">$size</span> = <span class="number">17</span>;</span><br><span class="line"><span class="comment">//先创造一个 GBK 编码的字符串</span></span><br><span class="line"><span class="variable">$str2</span> = <span class="title function_ invoke__">iconv</span>(<span class="string">&#x27;UTF-8&#x27;</span>, <span class="variable">$charset</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="variable">$str3</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$str2</span>, <span class="number">0</span>, <span class="variable">$size</span>);<span class="comment">//.$str2;</span></span><br><span class="line"><span class="variable">$s</span> = <span class="title function_ invoke__">iconv</span>(<span class="variable">$charset</span>, <span class="string">&#x27;UTF-8//IGNORE&#x27;</span>, <span class="variable">$str3</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$s</span>);</span><br></pre></td></tr></table></figure>
+<p>这里GBK因为一个汉字字符算2个英文字符 所以当长度为17的时候 会有字符破损</p>
+<p>经过转换 UTF-8 并且忽略不合法字符的时候，结果竟然是 false 和文档中说的忽略字符返回值达不到预期效果，经过测试发现这种情况仅出现在末尾字符不合法的时候<br>当拼接其他字符的时候（注释掉的部分）返回是达到预期的</p>
+<p>这个问题在 iconv 原版是不会出现的，也就是说这是 PHP 版本独有的问题</p>
+<p>在命令行下测试iconv工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -c -f gbk -t utf-8 input</span><br></pre></td></tr></table></figure>
+<p>input为 17长度的$str3输出的内容</p>
+<p>结果iconv的输出是忽略了最后那半个破损的字符</p>
+<p>以下为无证大师原话</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c的iconv即使加//ignore也会返回错误码</span><br><span class="line">处理不处理要调用方决定</span><br><span class="line">但php没做</span><br><span class="line">因此,php巨烂</span><br><span class="line">等人喷</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/02/28/linux%E9%80%92%E5%BD%92%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E5%B9%B6%E6%9B%BF%E6%8D%A2-sed-%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -414,74 +481,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/04/PHP-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%BF%84%E6%96%87%E5%AD%97%E7%AC%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/04/PHP-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%BF%84%E6%96%87%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">PHP 正则表达式匹配俄文字符</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-04 11:37:00" itemprop="dateCreated datePublished" datetime="2018-01-04T11:37:00+08:00">2018-01-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>之前弄过匹配中文的 这次匹配一下俄文的</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//俄文 西里尔字母</span></span><br><span class="line"><span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/([\x&#123;0400&#125;-\x&#123;04FF&#125;]|[\x&#123;0500&#125;-\x&#123;052F&#125;]|[\x&#123;2DE0&#125;-\x&#123;2DFF&#125;]|[\x&#123;A640&#125;-\x&#123;A69F&#125;]|[\x&#123;1C80&#125;-\x&#123;1C8F&#125;])/u&quot;</span>, <span class="variable">$input</span>, <span class="variable">$match</span>);</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A5%BF%E9%87%8C%E5%B0%94%E5%AD%97%E6%AF%8D">参考资料</a><br>正则包含了 </p>
-<ul>
-<li>西里尔字母</li>
-<li>西里尔字母补充</li>
-<li>西里尔字母扩展A</li>
-<li>西里尔字母扩展B</li>
-<li>西里尔字母扩展C</li>
-</ul>
-<p>仅适用于UTF-8环境，其他编码下也有对应俄文字母的字符 所以并不适用所有编码</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -551,14 +550,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
