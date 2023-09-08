@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/05/19/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C-%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/08/centos-xampp%E5%AE%89%E8%A3%85-PHP-GMP%E6%89%A9%E5%B1%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/05/19/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C-%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Yii1 数据库操作 笔记</a>
+            <a href="/2018/01/08/centos-xampp%E5%AE%89%E8%A3%85-PHP-GMP%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">centos xampp安装 PHP_GMP扩展</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-05-19 09:58:00" itemprop="dateCreated datePublished" datetime="2015-05-19T09:58:00+08:00">2015-05-19</time>
+              <time title="创建时间：2018-01-08 18:35:00" itemprop="dateCreated datePublished" datetime="2018-01-08T18:35:00+08:00">2018-01-08</time>
             </span>
 
           
@@ -193,10 +193,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="获取最后插入数据的主键-id-以及数据绑定（防注入）更新表数据"><a href="#获取最后插入数据的主键-id-以及数据绑定（防注入）更新表数据" class="headerlink" title="获取最后插入数据的主键 id 以及数据绑定（防注入）更新表数据"></a>获取最后插入数据的主键 id 以及数据绑定（防注入）更新表数据</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$result</span> = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>=&gt;<span class="literal">null</span>,</span><br><span class="line">    <span class="string">&#x27;val&#x27;</span>=&gt;<span class="number">0</span></span><br><span class="line">);</span><br><span class="line"><span class="variable">$row1</span> = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db-&gt;<span class="title function_ invoke__">createCommand</span>()-&gt;<span class="title function_ invoke__">insert</span>(<span class="string">&#x27;test1&#x27;</span>, <span class="variable">$result</span>);</span><br><span class="line"><span class="variable">$id</span>   = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db-&gt;<span class="title function_ invoke__">getLastInsertID</span>();</span><br><span class="line"><span class="variable">$row2</span> = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db-&gt;<span class="title function_ invoke__">createCommand</span>()-&gt;<span class="title function_ invoke__">update</span>(<span class="string">&#x27;test1&#x27;</span>, <span class="keyword">array</span>(<span class="string">&#x27;val&#x27;</span>=&gt;<span class="variable">$id</span>) , <span class="string">&#x27;id=:id&#x27;</span>,<span class="keyword">array</span>(<span class="string">&#x27;:id&#x27;</span>=&gt;<span class="variable">$id</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$id</span>;</span><br><span class="line"><span class="keyword">exit</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">#1. 建立数据库连接 可以使用  try...catch 捕获可能抛出的异常</span></span><br><span class="line"><span class="comment">#$connection=new CDbConnection($dsn,$username,$password);</span></span><br><span class="line"><span class="comment">#   DSN格式</span></span><br><span class="line"><span class="comment">#   SQLite: sqlite:/path/to/dbfile</span></span><br><span class="line"><span class="comment">#   MySQL: mysql:host=localhost;dbname=testdb</span></span><br><span class="line"><span class="comment">#   PostgreSQL: pgsql:host=localhost;port=5432;dbname=testdb</span></span><br><span class="line"><span class="comment">#   SQL Server: mssql:host=localhost;dbname=testdb</span></span><br><span class="line"><span class="comment">#   Oracle: oci:dbname=//localhost:1521/testdb</span></span><br><span class="line"><span class="comment">#在配置文件里面修改别名</span></span><br><span class="line"><span class="comment">#array(</span></span><br><span class="line"><span class="comment">#    &#x27;components&#x27;=&gt;array(</span></span><br><span class="line"><span class="comment">#        &#x27;db&#x27;=&gt;array(</span></span><br><span class="line"><span class="comment">#            &#x27;class&#x27;=&gt;&#x27;CDbConnection&#x27;,</span></span><br><span class="line"><span class="comment">#            &#x27;connectionString&#x27;=&gt;&#x27;mysql:host=localhost;dbname=testdb&#x27;,</span></span><br><span class="line"><span class="comment">#            &#x27;username&#x27;=&gt;&#x27;root&#x27;,</span></span><br><span class="line"><span class="comment">#            &#x27;password&#x27;=&gt;&#x27;password&#x27;,</span></span><br><span class="line"><span class="comment">#            &#x27;emulatePrepare&#x27;=&gt;true,  // needed by some MySQL installations</span></span><br><span class="line"><span class="comment">#        ),</span></span><br><span class="line"><span class="comment">#    ),</span></span><br><span class="line"><span class="comment">#)</span></span><br><span class="line"><span class="comment">#然后使用这种方式来建立连接</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#然后我们就可以通过 </span></span><br><span class="line"><span class="variable">$connection</span> = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db </span><br><span class="line"><span class="comment">#访问数据库连接了。它已经被自动激活了，除非我们特意配置了 </span></span><br><span class="line"><span class="comment">#CDbConnection::autoConnect 为 false。</span></span><br><span class="line"><span class="comment"># 通过这种方式，这个单独的DB连接就可以在我们代码中的很多地方共享。</span></span><br><span class="line"><span class="comment"># 如果没有，你可能需要显式建立一个连接：</span></span><br><span class="line"><span class="comment"># $connection=new CDbConnection($dsn,$username,$password);</span></span><br><span class="line"><span class="comment">#$connection-&gt;active=true;  # 建立链接之后active为true;</span></span><br><span class="line"><span class="variable">$connection</span>-&gt;active=<span class="literal">false</span>;  <span class="comment"># 关闭连接</span></span><br><span class="line"><span class="comment">#运行SQL</span></span><br><span class="line"><span class="variable">$command</span>=<span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="comment">#SQL修改</span></span><br><span class="line"><span class="variable">$command</span>-&gt;text = <span class="variable">$newSQL</span>;</span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line"><span class="comment">#execute()方法用来执行 INSERT, UPDATE 和 DELETE 。如果成功，它将返回此执行所影响的行数。</span></span><br><span class="line"><span class="comment">#query() 方法执行一条会返回若干行数据的 SQL 语句，例如 SELECT。</span></span><br><span class="line"><span class="comment">#如果成功，它将返回一个CDbDataReader 实例，通过此实例可以遍历数据的结果行。</span></span><br><span class="line"><span class="comment">#为简便起见， （Yii）还实现了一系列 queryXXX() 方法以直接返回查询结果</span></span><br><span class="line"><span class="comment">#如果SQL发生错误，将会抛出一个异常。.</span></span><br><span class="line"><span class="variable">$rowCount</span>   =    <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">execute</span>();                <span class="comment"># 执行无查询 SQL</span></span><br><span class="line"><span class="variable">$dataReader</span> =    <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">query</span>();                  <span class="comment"># 执行一个 SQL 查询</span></span><br><span class="line"><span class="variable">$rows</span>       =    <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">queryAll</span>();               <span class="comment"># 查询并返回结果中的所有行</span></span><br><span class="line"><span class="variable">$row</span>        =    <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">queryRow</span>();               <span class="comment"># 查询并返回结果中的第一行</span></span><br><span class="line"><span class="variable">$column</span>     =    <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">queryColumn</span>();            <span class="comment"># 查询并返回结果中的第一列</span></span><br><span class="line"><span class="variable">$value</span>      =    <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">queryScalar</span>();            <span class="comment"># 查询并返回结果中第一行的第一个字段</span></span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line"><span class="comment">#获取查询结果</span></span><br><span class="line"><span class="comment">#在生成 CDbDataReader后</span></span><br><span class="line"><span class="comment">#重复调用 CDbDataReader::read()</span></span><br><span class="line"><span class="comment">#也可以在 foreach 语言结构中使用 CDbDataReader</span></span><br><span class="line"></span><br><span class="line"><span class="comment">####例如####</span></span><br><span class="line"><span class="variable">$dataReader</span> = <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">query</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">#方法1 重复调用 read() 直到它返回 false</span></span><br><span class="line"><span class="keyword">while</span>( (<span class="variable">$row</span> = <span class="variable">$dataReader</span>-&gt;<span class="title function_ invoke__">read</span>()) !== <span class="literal">false</span>) &#123; ... &#125;</span><br><span class="line"><span class="comment">#方法2 使用 foreach 遍历数据中的每一行</span></span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$dataReader</span> <span class="keyword">as</span> <span class="variable">$row</span>) &#123; ... &#125;</span><br><span class="line"><span class="comment">#方法3 一次性提取所有行到一个数组</span></span><br><span class="line"><span class="variable">$rows</span> = <span class="variable">$dataReader</span>-&gt;<span class="title function_ invoke__">readAll</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">#注意: </span></span><br><span class="line"><span class="comment">#所有的 queryXXX() 方法会直接返回数据</span></span><br><span class="line"><span class="comment">#query()却不会，返回的是一个CDbDataReader 的实例</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用事务</span></span><br><span class="line"><span class="variable">$transaction</span>= <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">beginTransaction</span>();</span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql1</span>)-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line">    <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql2</span>)-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line">    <span class="comment">#其他</span></span><br><span class="line">    <span class="variable">$transaction</span>-&gt;<span class="title function_ invoke__">commit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>) <span class="comment"># 如果有一条查询失败，则会抛出异常</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$transaction</span>-&gt;<span class="title function_ invoke__">rollBack</span>(); <span class="comment">#回滚</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#预处理(参数绑定)  避免注入 提高重复执行的效率</span></span><br><span class="line"><span class="comment">#占位符可以是命名的 (表现为一个唯一的标记) 或未命名的 (表现为一个问号)。占位符将被替换为实际的参数。</span></span><br><span class="line"><span class="comment">#调用 CDbCommand::bindParam() 或 CDbCommand::bindValue() 以使用实际参数替换这些占位符。 </span></span><br><span class="line"><span class="comment">#这些参数不需要使用引号引起来：底层的数据库驱动会为你搞定这个参数绑定必须在 SQL 语句执行之前完成。</span></span><br><span class="line"><span class="comment">##例</span></span><br><span class="line"><span class="comment">#一条带有两个占位符 &quot;:username&quot; 和 &quot;:email&quot;的 SQL</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;INSERT INTO tbl_user (username, email) VALUES(:username,:email)&quot;</span>;</span><br><span class="line"><span class="variable">$command</span> = <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#用实际的用户名替换占位符 &quot;:username&quot; </span></span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:username&quot;</span>,<span class="variable">$username</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#用实际的 Email 替换占位符 &quot;:email&quot; </span></span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:email&quot;</span>,<span class="variable">$email</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">#重复执行同一个逻辑的时候</span></span><br><span class="line"><span class="comment">#使用新的参数集插入另一行</span></span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:username&quot;</span>,<span class="variable">$username2</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:email&quot;</span>,<span class="variable">$email2</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line"><span class="comment">#bindParam() 和 bindValue() 非常相似。</span></span><br><span class="line"><span class="comment">#唯一的区别就是前者使用一个 PHP 变量绑定参数， </span></span><br><span class="line"><span class="comment">#而后者使用一个值。对于那些内存中的大数据块参数，处于性能的考虑，应优先使用前者。</span></span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line"><span class="comment">#绑定列</span></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT username, email FROM tbl_user&quot;</span>;</span><br><span class="line"><span class="variable">$dataReader</span>=<span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql</span>)-&gt;<span class="title function_ invoke__">query</span>();</span><br><span class="line"><span class="comment">#使用 $username 变量绑定第一列 (username) </span></span><br><span class="line"><span class="variable">$dataReader</span>-&gt;<span class="title function_ invoke__">bindColumn</span>(<span class="number">1</span>,<span class="variable">$username</span>);</span><br><span class="line"><span class="comment">#使用 $email 变量绑定第二列 (email) </span></span><br><span class="line"><span class="variable">$dataReader</span>-&gt;<span class="title function_ invoke__">bindColumn</span>(<span class="number">2</span>,<span class="variable">$email</span>);</span><br><span class="line"><span class="keyword">while</span>(<span class="variable">$dataReader</span>-&gt;<span class="title function_ invoke__">read</span>()!==<span class="literal">false</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">#$username 和 $email 含有当前行中的 username 和 email </span></span><br><span class="line">    <span class="comment">#这里就不用每次都给两个变量赋值了</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line"><span class="comment">#使用表前缀</span></span><br><span class="line"><span class="comment">#配置 CDbConnection::tablePrefix 属性为所希望的表前缀。 </span></span><br><span class="line"><span class="comment">#array(</span></span><br><span class="line"><span class="comment">#    &#x27;components&#x27;=&gt;array(</span></span><br><span class="line"><span class="comment">#        &#x27;db&#x27;=&gt;array(</span></span><br><span class="line"><span class="comment">#            &#x27;class&#x27;=&gt;&#x27;CDbConnection&#x27;,</span></span><br><span class="line"><span class="comment">#            &#x27;connectionString&#x27;=&gt;&#x27;mysql:host=localhost;dbname=testdb&#x27;,</span></span><br><span class="line"><span class="comment">#            &#x27;username&#x27;=&gt;&#x27;root&#x27;,</span></span><br><span class="line"><span class="comment">#            &#x27;password&#x27;=&gt;&#x27;password&#x27;,</span></span><br><span class="line"><span class="comment">#            &#x27;emulatePrepare&#x27;=&gt;true,  // needed by some MySQL installations</span></span><br><span class="line"><span class="comment">#            &#x27;tablePrefix&#x27;=&gt;&quot;表前缀_&quot;</span></span><br><span class="line"><span class="comment">#        ),</span></span><br><span class="line"><span class="comment">#    ),</span></span><br><span class="line"><span class="comment">#)</span></span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&#x27;SELECT * FROM &#123;&#123;user&#125;&#125;&#x27;</span>;</span><br><span class="line"><span class="variable">$users</span>=<span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql</span>)-&gt;<span class="title function_ invoke__">queryAll</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">######################</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$user</span> = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db-&gt;<span class="title function_ invoke__">createCommand</span>()</span><br><span class="line">        -&gt;<span class="title function_ invoke__">select</span>(<span class="string">&#x27;username, password&#x27;</span>)</span><br><span class="line">        -&gt;<span class="keyword">from</span>(<span class="string">&#x27;tbl_user&#x27;</span>)</span><br><span class="line">        -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id=:id&#x27;</span>, <span class="keyword">array</span>(<span class="string">&#x27;:id&#x27;</span>=&gt;<span class="number">1</span>))</span><br><span class="line">        -&gt;<span class="title function_ invoke__">queryRow</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <p>环境</p>
+<ul>
+<li>CentOS 6.4</li>
+<li>Xampp 7.1.12</li>
+</ul>
+<p>首先下载 PHP7.1.12 的源码包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install gmp-devel</span><br><span class="line">yum install m4</span><br><span class="line">tar -xvf php-7.1.12.tar.xz </span><br><span class="line">cd /root/php-7.1.12/ext/gmp</span><br><span class="line">/opt/lampp/bin/phpize</span><br><span class="line">./configure  --with-php-config=/opt/lampp/bin/php-config</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">/opt/lampp/bin/php -m | grep gmp</span><br><span class="line">/opt/lampp/lampp reloadapache</span><br></pre></td></tr></table></figure>
+<p>reload apache 之前 记得在 php.ini里面 写extension&#x3D;”&#x2F;opt&#x2F;lampp&#x2F;lib&#x2F;php&#x2F;extensions&#x2F;no-debug-non-zts-20160303&#x2F;gmp.so”</p>
 
-<figure class="highlight plaintext"><figcaption><span>方法 （可用自 v1.1.6）</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public CDbCommand where(mixed $conditions, array $params=array ( ))</span><br><span class="line">    $conditions    mixed         放在WHERE部分的条件。</span><br><span class="line">    $params        array         绑定到此查询的参数 (name=&gt;value)</span><br><span class="line">    &#123;return&#125;       CDbCommand    返回此命令对象本身</span><br><span class="line">设置查询的 WHERE。 </span><br><span class="line">这个方法要求一个 $conditions 参数和一个 $params 参数， 指定值绑定到查询。 </span><br><span class="line">$conditions 参数可以是一个字符串(例如 &#x27;id=1&#x27;)或一个数组。 如果是后者，它必须是这种格式 array(operator, operand1, operand2, ...), 操作符可以是下面当中的一个，可能的操作数依赖于相应的操作符 :</span><br><span class="line">and: 操作数应该使用AND连接起来。例如， array(&#x27;and&#x27;, &#x27;id=1&#x27;, &#x27;id=2&#x27;) 将生成 &#x27;id=1 AND id=2&#x27;。如果一个操作数是一个数组， 它将被使用这里描述的相同规则转换成一个字符串。例如， array(&#x27;and&#x27;, &#x27;type=1&#x27;, array(&#x27;or&#x27;, &#x27;id=1&#x27;, &#x27;id=2&#x27;)) 将生成 &#x27;type=1 AND (id=1 OR id=2)&#x27;。 该方法将不做任何引用或转义。</span><br><span class="line">or: 和 and 操作符相似，除了操作数是使用OR连接起来。</span><br><span class="line">in: 操作数1应该是一列或DB表达式，操作数2应该是一个数组， 表示相应的列的值或DB表达式应该在的范围。例如， array(&#x27;in&#x27;, &#x27;id&#x27;, array(1,2,3)) 将生成 &#x27;id IN (1,2,3)&#x27;. 这个方法将正确的引用列名和范围中的转义值。</span><br><span class="line">not in: 和 in 相似，除了在生成条件时把IN替换成NOT IN.</span><br><span class="line">like: 操作数1应该是一列或一个DB表达式，操作数２是一个字符串或一个数组 表示列或DB表达式应该like的值。 例如， array(&#x27;like&#x27;, &#x27;name&#x27;, &#x27;%tester%&#x27;) 将生成 &quot;name LIKE &#x27;%tester%&#x27;&quot;. 当值范围被给定为一个数组，多个LIKE谓语将被生成并使用AND连接起来。 例如， array(&#x27;like&#x27;, &#x27;name&#x27;, array(&#x27;%test%&#x27;, &#x27;%sample%&#x27;)) 将生成 &quot;name LIKE &#x27;%test%&#x27; AND name LIKE &#x27;%sample%&#x27;&quot;. 这个方法将正确的引用列名和范围中的转义值。</span><br><span class="line">not like: 和 like相似，除了在生成条件时使用NOT LIKE替换LIKE。</span><br><span class="line">or like: 和 like相似，除了OR被用作把LIKE谓语连接起来。</span><br><span class="line">or not like: 和 not like相似，除了OR被用作把NOT LIKE谓语连接起来。</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -215,7 +220,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/05/04/MySQL-%E6%8F%92%E5%85%A5%E4%B8%8E%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E5%80%BC%E7%9B%B8%E7%AD%89%E7%9A%84%E5%AD%97%E6%AE%B5%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%87%86%E7%A1%AE%E7%9A%84%E5%AE%9E%E9%AA%8C/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/05/Yii2-%E8%BE%93%E5%87%BA%E5%9B%BE%E7%89%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -229,7 +234,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/05/04/MySQL-%E6%8F%92%E5%85%A5%E4%B8%8E%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E5%80%BC%E7%9B%B8%E7%AD%89%E7%9A%84%E5%AD%97%E6%AE%B5%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%87%86%E7%A1%AE%E7%9A%84%E5%AE%9E%E9%AA%8C/" class="post-title-link" itemprop="url">MySQL 插入与自增主键值相等的字段与高并发下保证数据准确的实验</a>
+            <a href="/2018/01/05/Yii2-%E8%BE%93%E5%87%BA%E5%9B%BE%E7%89%87/" class="post-title-link" itemprop="url">Yii2 输出图片</a>
         </h2>
 
         <div class="post-meta">
@@ -239,7 +244,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-05-04 06:36:00" itemprop="dateCreated datePublished" datetime="2015-05-04T06:36:00+08:00">2015-05-04</time>
+              <time title="创建时间：2018-01-05 17:53:00" itemprop="dateCreated datePublished" datetime="2018-01-05T17:53:00+08:00">2018-01-05</time>
             </span>
 
           
@@ -253,24 +258,158 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>场景描述： 表t2 中 有 自增主键 id  和 字段v  当插入记录的时候 要求 v 与 id 的值相等（按理来说这样的字段是需要拆表的，但是业务场景是 只有某些行相等 ）</p>
+          <p><a target="_blank" rel="noopener" href="http://www.yiichina.com/doc/api/2.0/yii-web-response#$format-detail">http://www.yiichina.com/doc/api/2.0/yii-web-response#$format-detail</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000002467587/a-1020000002468415">https://segmentfault.com/q/1010000002467587/a-1020000002468415</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">通过以下文档的各种属性，可以看到如何实现你说的例子一样的功能</span><br><span class="line">http://www.yiiframework.com/doc-2.0/yii-web-response.html</span><br><span class="line">首先是 $acceptMimeType 属性，就是设置header</span><br><span class="line">或者通过</span><br><span class="line">$headers 属性，批量设置 header</span><br><span class="line">然后你需要把图片发出去，意味着数据需要使用二进制流的形式发出去。</span><br><span class="line">那么就可以通过设置</span><br><span class="line">$data 属性来做到。因为他是 mixed 类型</span><br><span class="line">$content 属性就不行。因为他是 string 类型</span><br><span class="line">并且</span><br><span class="line">$content 的属性也说明了，仅在 $data 属性没有设置的情况下才会使用</span><br><span class="line">最后发现了一个属性</span><br><span class="line">$format</span><br><span class="line">根据文档的解释为：response的数据格式，用于转换$data或者$content的数据格式。</span><br><span class="line">下面有一些选项。</span><br><span class="line">通常要直接显示为图片都是使用 RAW 格式，即“未经加工”过的数据。</span><br><span class="line">那么通过上面这些属性就能达到你的目的。</span><br><span class="line"></span><br><span class="line">最后说一句，如果你要的是使用简单便捷，那么使用这种方案会让你痛苦。但是如果你想要的是管理简单便捷。那么使用框架的属性、方法去做到这些，当然是更加的舒服。</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://www.yiiframework.com/doc-2.0/yii-web-response.html">http://www.yiiframework.com/doc-2.0/yii-web-response.html</a></p>
+<p>不光是输出MIME 这里还可以改各种header信息。略麻烦 不过也还好</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/04/PHP-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%BF%84%E6%96%87%E5%AD%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/04/PHP-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%BF%84%E6%96%87%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">PHP 正则表达式匹配俄文字符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-04 11:37:00" itemprop="dateCreated datePublished" datetime="2018-01-04T11:37:00+08:00">2018-01-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>之前弄过匹配中文的 这次匹配一下俄文的</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//俄文 西里尔字母</span></span><br><span class="line"><span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/([\x&#123;0400&#125;-\x&#123;04FF&#125;]|[\x&#123;0500&#125;-\x&#123;052F&#125;]|[\x&#123;2DE0&#125;-\x&#123;2DFF&#125;]|[\x&#123;A640&#125;-\x&#123;A69F&#125;]|[\x&#123;1C80&#125;-\x&#123;1C8F&#125;])/u&quot;</span>, <span class="variable">$input</span>, <span class="variable">$match</span>);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A5%BF%E9%87%8C%E5%B0%94%E5%AD%97%E6%AF%8D">参考资料</a><br>正则包含了 </p>
+<ul>
+<li>西里尔字母</li>
+<li>西里尔字母补充</li>
+<li>西里尔字母扩展A</li>
+<li>西里尔字母扩展B</li>
+<li>西里尔字母扩展C</li>
+</ul>
+<p>仅适用于UTF-8环境，其他编码下也有对应俄文字母的字符 所以并不适用所有编码</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2017/12/30/windows-%E4%B8%8B-php-7-1-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%A7%E8%A1%8C%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84-PHP-%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/12/30/windows-%E4%B8%8B-php-7-1-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%A7%E8%A1%8C%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84-PHP-%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">windows 下 php 7.1 命令行执行中文文件名的 PHP 文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-30 09:27:00" itemprop="dateCreated datePublished" datetime="2017-12-30T09:27:00+08:00">2017-12-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在PHP5.6时代直接执行 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php.exe  文件.php </span><br></pre></td></tr></table></figure>
+<p>是没有问题的。</p>
+<p>在win的命令行中 活动代码页命令<br><code>chcp</code><br>修改活动代码页</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chcp 936  //gbk</span><br><span class="line">chcp 65001 //utf-8</span><br></pre></td></tr></table></figure>
+
+<p>但是在php 7.1下 执行 php.exe 首先会修改命令行的活动代码页</p>
+<p>这是一个自动行为 程序会自带一个 chcp 65001 然后再执行 php 文件</p>
+<p>中文文件名作为参数传递的时候 程序内部就乱码找不到文件了。</p>
+<p>关于这个问题 在百度搜几乎无解 于是在 php 官网的 bug 反馈里面翻到这么一页</p>
+<p><a target="_blank" rel="noopener" href="https://bugs.php.net/bug.php?id=73716&edit=2">https://bugs.php.net/bug.php?id=73716&amp;edit=2</a></p>
+<p>大概在</p>
+<blockquote>
+<p>[2016-12-12 21:30 UTC] <a href="mailto:&#x61;&#98;&#x40;&#x70;&#104;&#112;&#x2e;&#x6e;&#x65;&#116;">&#x61;&#98;&#x40;&#x70;&#104;&#112;&#x2e;&#x6e;&#x65;&#116;</a> </p>
 </blockquote>
-<p>在网上搜的一种办法是 先获取自增ID </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">max</span>(id)<span class="operator">+</span><span class="number">1</span> <span class="keyword">from</span> t2;</span><br></pre></td></tr></table></figure>
-<p>然后给 v 字段插入获取到的值；但是这样的做法在有删除行同时调整过自增值的表中是不准确的</p>
-<p>于是换个思路 从 information_schema 下手 读取表的信息</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `t2`</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">    (</span><br><span class="line">        <span class="keyword">NULL</span>,</span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">SELECT</span></span><br><span class="line">                `AUTO_INCREMENT`</span><br><span class="line">            <span class="keyword">FROM</span></span><br><span class="line">                `information_schema`.`TABLES`</span><br><span class="line">            <span class="keyword">WHERE</span></span><br><span class="line">                `TABLE_SCHEMA` <span class="operator">=</span> <span class="string">&#x27;test&#x27;</span></span><br><span class="line">            <span class="keyword">AND</span> `TABLE_NAME` <span class="operator">=</span> <span class="string">&#x27;t2&#x27;</span></span><br><span class="line">        )</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
-<p>功能是实现了 但是真的安全么？</p>
-<p>于是写个PHP文件验证一下</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sql</span>  = <span class="string">&quot;INSERT INTO `t2` VALUES(NULL ,(SELECT `AUTO_INCREMENT` FROM `information_schema`.`TABLES` WHERE `TABLE_SCHEMA` = &#x27;test&#x27; AND `TABLE_NAME`=&#x27;t2&#x27;));&quot;</span>;</span><br><span class="line"><span class="variable">$link</span> = <span class="title function_ invoke__">mysql_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;Could not connect: &quot;</span> . <span class="title function_ invoke__">mysql_error</span>());</span><br><span class="line"><span class="title function_ invoke__">mysql_select_db</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">mysql_query</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="title function_ invoke__">mysql_close</span>(<span class="variable">$link</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>用 ApacheBench 工具测试</p>
-<p><code>ab -n 50000 -c 20 http://localhost/test.php</code></p>
-<p><b style="color:red">查询结果（select * from t2 where  id !&#x3D; v;）大量的行出现了 v 和 id 不相等的情况</b></p>
-<p>改写下 PHP</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sql</span>  = <span class="string">&quot;INSERT INTO `t2` VALUES(NULL ,(SELECT `AUTO_INCREMENT` FROM `information_schema`.`TABLES` WHERE `TABLE_SCHEMA` = &#x27;test&#x27; AND `TABLE_NAME`=&#x27;t2&#x27;));&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$link</span> = <span class="title function_ invoke__">mysql_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&quot;Could not connect: &quot;</span> . <span class="title function_ invoke__">mysql_error</span>());</span><br><span class="line"><span class="title function_ invoke__">mysql_select_db</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">mysql_query</span>(<span class="string">&#x27;START TRANSACTION&#x27;</span>); <span class="comment">#开始事务</span></span><br><span class="line"><span class="title function_ invoke__">mysql_query</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="variable">$id</span> = <span class="title function_ invoke__">mysql_insert_id</span>();</span><br><span class="line"><span class="variable">$res</span> = <span class="title function_ invoke__">mysql_query</span>(<span class="string">&quot;SELECT `v` FROM  `t2` WHERE id= &quot;</span>.<span class="variable">$id</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$res</span>) &#123;</span><br><span class="line">    <span class="title function_ invoke__">mysql_close</span>(<span class="variable">$link</span>);</span><br><span class="line">    <span class="keyword">die</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$row</span> = <span class="title function_ invoke__">mysql_fetch_assoc</span>(<span class="variable">$res</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$row</span>[<span class="string">&#x27;v&#x27;</span>] != <span class="variable">$id</span>)&#123;</span><br><span class="line">    <span class="title function_ invoke__">mysql_query</span>(<span class="string">&#x27; ROLLBACK &#x27;</span>); <span class="comment">#回滚事务</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysql_query</span>(<span class="string">&#x27;COMMIT&#x27;</span>); <span class="comment">#提交事务</span></span><br><span class="line"><span class="title function_ invoke__">mysql_close</span>(<span class="variable">$link</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>再使用 ApacheBench 测试，这次速度变慢了 但是结果是都是正确的。说明整个过程需要开启事务，才能保证准确。
- </p>
+<p>解决方案：</p>
+<p>打开php.ini 搜索 internal_encoding 然后改为 internal_encoding &#x3D; “cp936”</p>
+<p>default_charset&#x3D;”UTF-8”  这一项应该是默认的 如果没有就加上</p>
+<p>这样就对应了简体中文的 windows 环境 不过这个方案的缺点就是写的很死</p>
+<p>如果把 PHP 打包发布的话 大概是只能在简中的系统下执行</p>
+<p>改了这个以后,PHP文件还是用UTF-8编码来写</p>
+<p>不过输入路径作为参数 也就是argv变量里面的内容 记得转码成 UTF-8</p>
 
       
     </div>
@@ -290,7 +429,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/03/31/Yii1-%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%9A%84%E6%A8%A1%E5%9D%97%E5%90%8D-%E6%8E%A7%E5%88%B6%E5%99%A8%E5%90%8D-%E6%96%B9%E6%B3%95%E5%90%8D/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2017/02/18/Go-%E6%96%87%E4%BB%B6%E5%8F%B3%E9%94%AE%E7%BC%96%E8%AF%91-%EF%BC%88%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%AE%9E%E4%BE%8B%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -304,7 +443,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/03/31/Yii1-%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%9A%84%E6%A8%A1%E5%9D%97%E5%90%8D-%E6%8E%A7%E5%88%B6%E5%99%A8%E5%90%8D-%E6%96%B9%E6%B3%95%E5%90%8D/" class="post-title-link" itemprop="url">Yii1 获取当前的模块名 控制器名 方法名</a>
+            <a href="/2017/02/18/Go-%E6%96%87%E4%BB%B6%E5%8F%B3%E9%94%AE%E7%BC%96%E8%AF%91-%EF%BC%88%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%AE%9E%E4%BE%8B%EF%BC%89/" class="post-title-link" itemprop="url">Go 文件右键编译 （右键菜单添加命令实例）)</a>
         </h2>
 
         <div class="post-meta">
@@ -314,7 +453,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-03-31 15:16:00" itemprop="dateCreated datePublished" datetime="2015-03-31T15:16:00+08:00">2015-03-31</time>
+              <time title="创建时间：2017-02-18 12:39:00" itemprop="dateCreated datePublished" datetime="2017-02-18T12:39:00+08:00">2017-02-18</time>
             </span>
 
           
@@ -328,145 +467,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$this-&gt;module-&gt;id; #模块名</span><br><span class="line">$this-&gt;action-&gt;id; #方法名</span><br><span class="line">$this-&gt;uniqueId; #控制器名称</span><br></pre></td></tr></table></figure>
+          <p>辛辛苦苦写好了.go文件 发现编译还得敲命令才行，或许配置一个好用点的IDE环境可以解决</p>
+<p>但是有时候实在不想开IDE 于是在右键添加了一个编译功能</p>
+<p>首先保证 go 相关的环境变量配置正确 （网上安装教程一大堆）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 Windows Registry Editor Version 5.00</span><br><span class="line">2 </span><br><span class="line">3 [HKEY_CLASSES_ROOT\*\shell\Build With Go\command]</span><br><span class="line">4 @=&quot;cmd.exe /k \&quot;go build %1 &amp;&amp; echo ok\&quot;&quot;</span><br></pre></td></tr></table></figure>
 
-<ol>
-<li>获取控制器名</li>
-</ol>
-<h3 id="控制器中获取控制器名"><a href="#控制器中获取控制器名" class="headerlink" title="控制器中获取控制器名:"></a>控制器中获取控制器名:</h3><p><code>$name = $this-&gt;getId();</code></p>
-<h3 id="在视图中获取控制器名"><a href="#在视图中获取控制器名" class="headerlink" title="在视图中获取控制器名:"></a>在视图中获取控制器名:</h3><p><code>$name = Yii::app()-&gt;controller-&gt;id;</code></p>
-<ol start="2">
-<li>获取动作名</li>
-</ol>
-<h3 id="在控制器beforeAction-回调函数中获取动作名"><a href="#在控制器beforeAction-回调函数中获取动作名" class="headerlink" title="在控制器beforeAction()回调函数中获取动作名:"></a>在控制器beforeAction()回调函数中获取动作名:</h3><p><code>$name = $action-&gt;id;</code></p>
-<h3 id="在其他地方获取动作名"><a href="#在其他地方获取动作名" class="headerlink" title="在其他地方获取动作名:"></a>在其他地方获取动作名:</h3><p><code> $name = $this-&gt;getAction()-&gt;getId();</code></p>
-<ol start="3">
-<li>视图中获取当前模块ID</li>
-</ol>
-<p><code>$this-&gt;module-&gt;id;</code></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/03/19/Yii1-URL%E4%B8%A4%E4%B8%AA%E7%AC%94%E8%AE%B0-%E5%90%8C%E6%97%B6%E6%94%AF%E6%8C%81PATH%E4%BA%8EGET%E8%B7%AF%E7%94%B1%E5%92%8C%E9%9A%90%E8%97%8F-index-php/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/03/19/Yii1-URL%E4%B8%A4%E4%B8%AA%E7%AC%94%E8%AE%B0-%E5%90%8C%E6%97%B6%E6%94%AF%E6%8C%81PATH%E4%BA%8EGET%E8%B7%AF%E7%94%B1%E5%92%8C%E9%9A%90%E8%97%8F-index-php/" class="post-title-link" itemprop="url">Yii1 URL两个笔记 同时支持PATH于GET路由和隐藏 index.php</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-03-19 15:13:00" itemprop="dateCreated datePublished" datetime="2015-03-19T15:13:00+08:00">2015-03-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="同时支持PATH于GET格式路由（修改框架文件-简直坑）"><a href="#同时支持PATH于GET格式路由（修改框架文件-简直坑）" class="headerlink" title="同时支持PATH于GET格式路由（修改框架文件 简直坑）"></a>同时支持PATH于GET格式路由（修改框架文件 简直坑）</h2><p><code>framework/web/CUrlManager.php</code></p>
-<figure class="highlight plaintext"><figcaption><span>方法 , 第一行判断修改成</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```PHP</span><br><span class="line">if($this-&gt;getUrlFormat()===self::PATH_FORMAT &amp;&amp; !isset($_GET[$this-&gt;routeVar]) &amp;&amp; !isset($_POST[$this-&gt;routeVar]))</span><br></pre></td></tr></table></figure>
-<h2 id="隐藏index-php"><a href="#隐藏index-php" class="headerlink" title="隐藏index.php"></a>隐藏index.php</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```PHP</span><br><span class="line">&#x27;urlManager&#x27;=&gt;array(</span><br><span class="line">    &#x27;urlFormat&#x27;=&gt;&#x27;path&#x27;,</span><br><span class="line">    &#x27;showScriptName&#x27;=&gt;false,</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/01/29/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B-JavaScript-%E6%AD%A3%E5%88%99%E7%9A%84%E5%9D%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/01/29/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B-JavaScript-%E6%AD%A3%E5%88%99%E7%9A%84%E5%9D%91/" class="post-title-link" itemprop="url">记录一下 JavaScript 正则的坑</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-01-29 06:02:00" itemprop="dateCreated datePublished" datetime="2015-01-29T06:02:00+08:00">2015-01-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="坑1"><a href="#坑1" class="headerlink" title="坑1"></a>坑1</h2><p>JS正则的单行模式有点问题  . 符号匹配换行符号会有问题</p>
-<p>暂时的解决方案是 先去掉换行</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html = html.<span class="title function_">replace</span>(<span class="regexp">/[\r\n]/g</span>,<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="坑2"><a href="#坑2" class="headerlink" title="坑2"></a>坑2</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html = html.<span class="title function_">replace</span>(<span class="regexp">/\s&#123;2,&#125;/g</span>,<span class="string">&quot; &quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>清理多余空格（注意 可能会误伤正文内容 最好对标签内容进行局部处理）</p>
-
+<p>然后保存代码到 reg 文件 然后执行 合并到注册表</p>
+<p>这样<B>所有文件</B>的右键将会多出一个 go build 菜单命令</p>
+<p>单独给 .go 文件增加菜单</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\go_auto_file\shell\Build With Go ]</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\go_auto_file\shell\Build With Go \command]</span><br><span class="line">@=&quot;cmd.exe /k \&quot;go build %1 &amp;&amp; echo ok\&quot;&quot;</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\go_auto_file\shell\Build With Go \ddeexec]</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -484,7 +493,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -550,14 +559,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-count">124</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

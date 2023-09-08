@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/03/10/FFmpeg-%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/" class="post-title-link" itemprop="url">PHP.ini 能不能加载子配置文件 ？</a>
+            <a href="/2020/03/10/FFmpeg-%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">ffmpeg 命令笔记</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-04-30 11:15:00" itemprop="dateCreated datePublished" datetime="2019-04-30T11:15:00+08:00">2019-04-30</time>
+              <time title="创建时间：2020-03-10 16:01:00" itemprop="dateCreated datePublished" datetime="2020-03-10T16:01:00+08:00">2020-03-10</time>
             </span>
 
           
@@ -193,229 +193,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>配置 nginx 的时候，在配置文件中可以方便的使用 include 指令来把配置文件内容分割，从而达到方便管理的目的。<br>但是在使用 php 的时候也希望有这样的功能，这样在升级或者重装环境的时候就知道自己曾经改过哪些配置了。<br>但是 php.ini 里面并不能直接载入其他文件，但是在官方文档中给出了<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">解决方案</a> 。</p>
-<p>首先明确一点，php在加载配置文件的时候分为主配置文件和附加配置文件。<br>主配置文件这里不讨论，因为不同操作系统下位置不同，搜索机制也不同。具体参见文档中的说明。</p>
-<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><p>这里我们只看在主配置文件 php.ini 加载完成以后如何补充加载从配置文件。<br>它有以下两个方法</p>
-<ol>
-<li>编译 php 的时候，使用参数 –with-config-file-scan-dir 指定目录 php在加载主配置文件之后再加载在这个目录里面 ini 文件</li>
-<li>设置环境变量 PHP_INI_SCAN_DIR 的值为子配置文件的目录</li>
-</ol>
-<p>方法1 适合自己有编译环境或者很方便编译的系统，例如 linux 下经常自己编译 php 。<br>方法2 适合下载别人编译好的版本。</p>
-<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ul>
-<li>无论 1 还是 2 都可以按顺序指定多个目录，加载顺序也会根据目录顺序，每个目录里面 ini 文件文件名排序按顺序加载。</li>
-<li>多个目录设置分隔符根据操作系统不同而不同，具体可以用PHP打印 PATH_SEPARATOR 常量查看，windows是分号，linux 是冒号</li>
-<li>环境变量并不是只有操作系统才有，Apache 运行 或者 IIS 运行也有专门的环境变量设置，在鼓捣的时候不要弄混了去设置成系统环境变量，如果是命令行执行，可以使用 export 或者 set 命令来分别给 linux 和 windows 添加临时环境变量</li>
-</ul>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>可以使用phpinfo();查看<br>代码验证相关函数 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">php_ini_scanned_files</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/" class="post-title-link" itemprop="url">PHP 处理表单数据的一个安全回顾（记录教训）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-29 10:32:00" itemprop="dateCreated datePublished" datetime="2019-03-29T10:32:00+08:00">2019-03-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>曾经看过一个讲 PHP 代码安全的文章中写过这么一条</p>
-<p>表单输入数据要做 htmlspecialchars_decode 处理</p>
-<p>表单输出数据要做 htmlspecialchars 处理</p>
-<p>当时还不是很理解为什么，自己也没遇到问题，所以就没做</p>
-<p>然而不是不报 时候未到 今天终于遇到了这个坑</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input  type=&quot;text&quot; value=&quot;&lt;?php echo $value; ?&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>当采用上面代码输出的时候</p>
-<p>假如 $value 里面有 “ 双引号 那么value这个键将会被提前闭合，造成表单数据显示不完全，而且会多出来其他内容被识别为键的情况</p>
-<p>这下就惨了 所有这么输出的地方都要处理了，暂时也只能头痛医头，脚痛医脚了，先做转义好了</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/02/24/%E4%B8%8D%E7%94%A8U%E7%9B%98%EF%BC%8C%E7%94%A8%E4%B8%80%E5%8F%B0%E5%A5%BD%E7%94%B5%E8%84%91%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85-windows10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/02/24/%E4%B8%8D%E7%94%A8U%E7%9B%98%EF%BC%8C%E7%94%A8%E4%B8%80%E5%8F%B0%E5%A5%BD%E7%94%B5%E8%84%91%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85-windows10/" class="post-title-link" itemprop="url">不用U盘，用一台好电脑给另一个电脑重装 windows10</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-02-24 19:34:00" itemprop="dateCreated datePublished" datetime="2019-02-24T19:34:00+08:00">2019-02-24</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>先把坏电脑硬盘拆下来，然后挂到好电脑上</p>
-</li>
-<li><p>把这块盘用磁盘管理工具改成GPT分区表格式，然后整盘分区（NTFS）。</p>
-</li>
-<li><p>这个分区进行压缩卷操作，分出第二个区（FAT32 格式 大小大于5G 我这里用了6G）</p>
-</li>
-<li><p>把 win10 的 iso 解压到第二个 FAT32 分区，在磁盘管理里面删掉前面那个 NTFS 的分区，这样磁盘就变成了开头一大片未分区的空间，末尾有一个 FAT32 分区, 里面是系统镜像解压后的安装文件</p>
-</li>
-<li><p>拆掉硬盘装回坏电脑上去。</p>
-</li>
-<li><p>在 bios 中设置启动（一般新主板会不需要设置，自己会主动找到启动分区） </p>
-</li>
-<li><p>正常按照安装 win10 的步骤继续即可</p>
-</li>
-</ol>
-<p>此方法需要支持GPT+UEFI启动的环境，太老的电脑不支持 UEFI 的无法使用此方法。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/28/%E7%9C%81%E5%BF%83%E7%9A%84%E8%AE%BF%E9%97%AE%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/28/%E7%9C%81%E5%BF%83%E7%9A%84%E8%AE%BF%E9%97%AE%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">省心的网络代理配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-28 12:09:00" itemprop="dateCreated datePublished" datetime="2019-01-28T12:09:00+08:00">2019-01-28</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>先装插件 推荐用 <a target="_blank" rel="noopener" href="https://www.switchyomega.com/download/">SwitchyOmega</a></p>
-</li>
-<li><p>配置好 sock5 代理(例如 v2 之类的) 具体这里不讨论 然后提供一个本地端口 127.0.0.1:6666</p>
-</li>
-<li><p>配置 cow ，作用是 sock5 转 http 代理 配置成 127.0.0.1:7777</p>
-</li>
-<li><p>在第1步的插件里面配置所有地址走 7777 端口 模式是pac 路径是 <a target="_blank" rel="noopener" href="http://127.0.0.1:7777/pac">http://127.0.0.1:7777/pac</a> 更新频率1小时1次</p>
-</li>
-</ol>
+          <blockquote>
+<p>个人常用命令笔记，非公开教程</p>
+</blockquote>
+<h2 id="旋转视频"><a href="#旋转视频" class="headerlink" title="旋转视频"></a>旋转视频</h2><h3 id="直接复制流"><a href="#直接复制流" class="headerlink" title="直接复制流"></a>直接复制流</h3><p><code>ffmpeg -i &quot;输入文件&quot; -c copy -metadata:s:v:0 rotate=90 &quot;输出文件&quot;</code></p>
 <blockquote>
-<p>cow会检测访问是否成功，记录次数 然后不断改进pac结果，所以一开始用会很慢 多刷新几次，越用越流畅</p>
+<p>rotate&#x3D;90表示旋转90度 也可写入180或270的值</p>
+</blockquote>
+<h3 id="重新编码流"><a href="#重新编码流" class="headerlink" title="重新编码流"></a>重新编码流</h3><p><code>ffmpeg.exe -i &quot;1.mp4&quot; -c:v libx264 -preset veryslow -crf 24 -x264opts ref=6:deblock=1:1:1keyint=30:min-keyint=10 -vf &quot;transpose=2&quot; -c:a copy &quot;output.mkv&quot;</code></p>
+<blockquote>
+<p>编码参数为个人常用参数 非默认参数</p>
+</blockquote>
+<hr>
+<h2 id="重新编码视频和音频并且设置参数-缩放画面分辨率"><a href="#重新编码视频和音频并且设置参数-缩放画面分辨率" class="headerlink" title="重新编码视频和音频并且设置参数 + 缩放画面分辨率"></a>重新编码视频和音频并且设置参数 + 缩放画面分辨率</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe -y -i <span class="string">&quot;输入.mkv&quot;</span> -f wav - | nae.exe -he -br 64000 -ignorelength -<span class="keyword">if</span> - -of <span class="string">&quot;temp.m4a&quot;</span></span><br><span class="line">ffmpeg.exe -y -i <span class="string">&quot;输入.mkv&quot;</span> -c:v libx264 -preset veryslow -crf 24 -bf 6 -refs 6 -qcomp 0.5 -aq-mode 2 -aq-strength 0.8 -psy-rd 0.3:0 -deblock 1:1 -x264opts min-keyint=1 -vf <span class="string">&quot;scale=1280:720&quot;</span> -an <span class="string">&quot;temp.m4v&quot;</span></span><br><span class="line">ffmpeg.exe -y -i temp.m4v -i temp.m4a -map_chapters -1 -c copy <span class="string">&quot;输出.mp4&quot;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>nae.exe 是neroAAC编码器 ffmpeg 因为协议问题不能自带这个 所以只能外置</p>
+</blockquote>
+<hr>
+<h2 id="ffmpeg-（ffprobe）分析文件关键帧时间点"><a href="#ffmpeg-（ffprobe）分析文件关键帧时间点" class="headerlink" title="ffmpeg （ffprobe）分析文件关键帧时间点"></a>ffmpeg （ffprobe）分析文件关键帧时间点</h2><p><code>ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 &quot;input.mp4&quot;</code></p>
+<hr>
+<h2 id="简化输出信息"><a href="#简化输出信息" class="headerlink" title="简化输出信息"></a>简化输出信息</h2><p><code>ffmpeg.exe -hide_banner </code></p>
+<blockquote>
+<p>加上这个参数以后 输出会清爽很多</p>
 </blockquote>
 
       
@@ -436,7 +235,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/27/virtualbox-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/03/04/%E5%85%B3%E4%BA%8E%E5%8D%87%E7%BA%A7-acme-sh%EF%BC%8C%E6%9B%B4%E6%96%B0-Let-s-Encrypt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -450,7 +249,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/27/virtualbox-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="post-title-link" itemprop="url">virtualbox 命令行启动虚拟机和关闭虚拟机</a>
+            <a href="/2020/03/04/%E5%85%B3%E4%BA%8E%E5%8D%87%E7%BA%A7-acme-sh%EF%BC%8C%E6%9B%B4%E6%96%B0-Let-s-Encrypt/" class="post-title-link" itemprop="url">关于升级 acme.sh，更新 Let's Encrypt</a>
         </h2>
 
         <div class="post-meta">
@@ -460,7 +259,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-27 21:19:00" itemprop="dateCreated datePublished" datetime="2019-01-27T21:19:00+08:00">2019-01-27</time>
+              <time title="创建时间：2020-03-04 17:37:00" itemprop="dateCreated datePublished" datetime="2020-03-04T17:37:00+08:00">2020-03-04</time>
             </span>
 
           
@@ -474,9 +273,196 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="开机（后台运行）"><a href="#开机（后台运行）" class="headerlink" title="开机（后台运行）"></a>开机（后台运行）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxManage.exe startvm 虚拟机名字 --type headless</span><br></pre></td></tr></table></figure>
+          <p>acme.sh该升级了，但是github上的包下不回来</p>
+<p>先准备一个http代理，例如127.0.0.1 端口10800</p>
+<p>export ALL_PROXY&#x3D;<a target="_blank" rel="noopener" href="http://127.0.0.1:10800/">http://127.0.0.1:10800</a></p>
+<p>acme.sh –upgrade</p>
+<p>然后关掉代理软件</p>
 
-<h3 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxManage.exe controlvm 虚拟机名字  acpipowerbutton</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/01/29/Nginx-%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%20IP%20%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/29/Nginx-%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%20IP%20%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">Nginx 快速建立IP查询接口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-29 16:21:00" itemprop="dateCreated datePublished" datetime="2020-01-29T16:21:00+08:00">2020-01-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location /ip &#123;</span><br><span class="line">    default_type text/plain;</span><br><span class="line">    return 200 $remote_addr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location /json_ip &#123;</span><br><span class="line">    default_type application/json;</span><br><span class="line">    return 200 &quot;&#123;\&quot;ip\&quot;:\&quot;$remote_addr\&quot;&#125;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/01/15/%E7%A6%81%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-WebAssembly-%E6%94%AF%E6%8C%81%E3%80%82%E5%85%B3%E9%97%AD-WebAssembly/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/15/%E7%A6%81%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-WebAssembly-%E6%94%AF%E6%8C%81%E3%80%82%E5%85%B3%E9%97%AD-WebAssembly/" class="post-title-link" itemprop="url">禁用浏览器的 WebAssembly 支持。关闭 WebAssembly</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-15 15:55:00" itemprop="dateCreated datePublished" datetime="2020-01-15T15:55:00+08:00">2020-01-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>出于安全性方便的考虑，需要禁用浏览器对WebAssembly的支持。具体如下</p>
+<h3 id="FireFox"><a href="#FireFox" class="headerlink" title="FireFox"></a>FireFox</h3><ol>
+<li>打开新标签页输入地址 about:config 回车</li>
+<li>在搜索框中输入 javascript.options.wasm 修改成 false</li>
+</ol>
+<h3 id="Chrome-x2F-Chromium"><a href="#Chrome-x2F-Chromium" class="headerlink" title="Chrome&#x2F;Chromium"></a>Chrome&#x2F;Chromium</h3><p>添加启动参数</p>
+<p><code>chrome.exe --js-flags=--noexpose_wasm</code></p>
+<p>macOS系统下参数需要这么写</p>
+<p><code>open /Applications/Google/Chrome.app --args --js-flags=--noexpose_wasm</code></p>
+<p>windows 系统可以在下面的注册表项关闭写入权限，以便应对chrome的自动更新带来的重置 由于我使用绿色版 chrome，所以暂时忽略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HKEY_CLASSES_ROOT\ChromeHTML\shell\open\command</span><br><span class="line">HKEY_CLASSES_ROOT\http\shell\open\command</span><br><span class="line">HKEY_CLASSES_ROOT\https\shell\open\command</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/01/09/Epic-%E5%B9%B3%E5%8F%B0-The-Messenger-%E4%BF%A1%E4%BD%BF-%E6%B8%B8%E6%88%8F%E9%94%AE%E4%BD%8D%E9%87%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/09/Epic-%E5%B9%B3%E5%8F%B0-The-Messenger-%E4%BF%A1%E4%BD%BF-%E6%B8%B8%E6%88%8F%E9%94%AE%E4%BD%8D%E9%87%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Epic 平台 The Messenger 信使 游戏键位重置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-09 10:31:00" itemprop="dateCreated datePublished" datetime="2020-01-09T10:31:00+08:00">2020-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>垃圾游戏，旧版不能改键位</p>
+<p>新版改错了键位没法重置，网上搜的方法都不好使，经过仔细对比，发现不是配置文件而是注册表存储的</p>
+<p>关闭游戏</p>
+<p>打开注册表 删除 计算机\HKEY_CURRENT_USER\Software\Sabotage Studio\The Messenger 这个下面所有的项，重新启动游戏</p>
 
       
     </div>
@@ -495,7 +481,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -561,14 +547,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-count">124</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
