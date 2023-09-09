@@ -155,6 +155,274 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/05/09/PHP-%E6%9B%B4%E6%96%B0%E6%9C%AC%E5%9C%B0%E5%85%AC%E7%BD%91IP%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%EF%BC%8C%E5%AE%9E%E7%8E%B0-DDNS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/09/PHP-%E6%9B%B4%E6%96%B0%E6%9C%AC%E5%9C%B0%E5%85%AC%E7%BD%91IP%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%EF%BC%8C%E5%AE%9E%E7%8E%B0-DDNS/" class="post-title-link" itemprop="url">PHP 更新本地公网IP到阿里云域名解析，实现 DDNS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-09 16:58:00" itemprop="dateCreated datePublished" datetime="2019-05-09T16:58:00+08:00">2019-05-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">#需要配置的项</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;ACCESSKEYID&#x27;</span>,<span class="string">&#x27;AAAAAAAAAAAAAAAA&#x27;</span>);                  <span class="comment">#阿里云用户密钥ID 获取方法 https://help.aliyun.com/knowledge_detail/38738.html</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;ACCESSKEYSECRET&#x27;</span>,<span class="string">&#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#x27;</span>);<span class="comment">#阿里云用户密钥</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;RR&#x27;</span>,<span class="string">&#x27;myhome&#x27;</span>);                                     <span class="comment">#二级域名的记录名 如果是一级 请用@</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;DOMAIN&#x27;</span>,<span class="string">&#x27;myhome.baidu.com&#x27;</span>);                       <span class="comment">#完整域名  </span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;RECORDID&#x27;</span>,<span class="string">&#x27;11111111111111111&#x27;</span>);                    <span class="comment">#解析记录ID</span></span><br><span class="line"><span class="comment">/*关键如何获取解析记录ID ，需要在下面这个地址中</span></span><br><span class="line"><span class="comment">https://api.aliyun.com/?spm=a2c4g.11186623.2.26.79ae2846d9RBBa#/?product=Alidns&amp;api=AddDomainRecord&amp;params=&#123;&#125;&amp;tab=DEMO&amp;lang=JAVA</span></span><br><span class="line"><span class="comment">先设置一个记录（二级域名） 然后返回结果中获取这个ID 添加记录所需的参数文档在下面这里查看</span></span><br><span class="line"><span class="comment">https://help.aliyun.com/document_detail/29772.html?spm=a2c4g.11186623.4.3.392b5eb4SAeph9</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment"># 获取自己公网 IP 的接口</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;GET_IP_URL&#x27;</span>,<span class="string">&#x27;myip.fireflysoft.net&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;IP_FILE&#x27;</span>,<span class="keyword">__DIR__</span>. DIRECTORY_SEPARATOR .<span class="string">&#x27;ip.txt&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 获取<span class="title">HTTP</span>(<span class="params"><span class="variable">$url</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$curl_samples</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line">    <span class="variable">$options</span> = [CURLOPT_URL =&gt; <span class="variable">$url</span>,CURLOPT_RETURNTRANSFER =&gt; <span class="number">1</span>,CURLOPT_FOLLOWLOCATION =&gt; <span class="number">1</span>,CURLOPT_SSL_VERIFYPEER =&gt; <span class="number">0</span>];</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt_array</span>(<span class="variable">$curl_samples</span>, <span class="variable">$options</span>);                </span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$curl_samples</span>, CURLOPT_CUSTOMREQUEST, <span class="string">&#x27;GET&#x27;</span>);  </span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">curl_exec</span>(<span class="variable">$curl_samples</span>);                            </span><br><span class="line">    <span class="variable">$info</span> = <span class="title function_ invoke__">curl_getinfo</span>(<span class="variable">$curl_samples</span>); </span><br><span class="line">    <span class="variable">$curl_err</span> = <span class="title function_ invoke__">curl_errno</span>(<span class="variable">$curl_samples</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_close</span>(<span class="variable">$curl_samples</span>);                                 </span><br><span class="line">    <span class="keyword">if</span>( <span class="number">0</span> != <span class="variable">$curl_err</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;getip error:&quot;</span>.<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y-m-d H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$info</span>);</span><br><span class="line">        <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line">        <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$curl_err</span>;</span><br><span class="line">        <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> 编码字符(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">urlencode</span>(<span class="variable">$string</span>);</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">str_replace</span>([<span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;*&#x27;</span>], [<span class="string">&#x27;%20&#x27;</span>, <span class="string">&#x27;%2A&#x27;</span>], <span class="variable">$result</span>);</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/%7E/&#x27;</span>, <span class="string">&#x27;~&#x27;</span>, <span class="variable">$result</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 排序参数计算签名(<span class="params"><span class="variable">$parameters</span>,<span class="variable">$method</span>=<span class="string">&quot;GET&quot;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">ksort</span>(<span class="variable">$parameters</span>);</span><br><span class="line">    <span class="variable">$canonicalizedQuery</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$parameters</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$value</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$canonicalizedQuery</span> .= <span class="string">&#x27;&amp;&#x27;</span> . 编码字符(<span class="variable">$key</span>) . <span class="string">&#x27;=&#x27;</span> . 编码字符(<span class="variable">$value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="variable">$stringToBeSigned</span> = <span class="variable">$method</span>. <span class="string">&#x27;&amp;%2F&amp;&#x27;</span>. 编码字符(<span class="title function_ invoke__">substr</span>(<span class="variable">$canonicalizedQuery</span>, <span class="number">1</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">base64_encode</span>(<span class="title function_ invoke__">hash_hmac</span>(<span class="string">&#x27;sha1&#x27;</span>, <span class="variable">$stringToBeSigned</span>, ACCESSKEYSECRET . <span class="string">&#x27;&amp;&#x27;</span>, <span class="literal">true</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 获取当前的解析记录值(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">#请求dns的API重新做解析</span></span><br><span class="line">    <span class="variable">$api_url</span> = <span class="string">&#x27;https://alidns.aliyuncs.com/?&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span> = [];</span><br><span class="line">    <span class="comment">#公共参数</span></span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Format&#x27;</span>]          = <span class="string">&#x27;json&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Version&#x27;</span>]         = <span class="string">&#x27;2015-01-09&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;SignatureMethod&#x27;</span>] = <span class="string">&#x27;HMAC-SHA1&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;SignatureNonce&#x27;</span>]  = <span class="title function_ invoke__">uniqid</span>();</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;SignatureVersion&#x27;</span>]= <span class="string">&#x27;1.0&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;AccessKeyId&#x27;</span>]     = ACCESSKEYID; </span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Timestamp&#x27;</span>]       = <span class="title function_ invoke__">gmdate</span>(<span class="string">&quot;Y-m-d\TH:i:s\Z&quot;</span>);</span><br><span class="line">    <span class="comment">#专用参数</span></span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Action&#x27;</span>]     = <span class="string">&#x27;DescribeDomainRecordInfo&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;RecordId&#x27;</span>]   = RECORDID; <span class="comment">#解析记录的ID，此参数在添加解析时会返回，在获取域名解析列表时会返回</span></span><br><span class="line">    <span class="comment">#签名</span></span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Signature&#x27;</span>]  = 排序参数计算签名(<span class="variable">$data</span>);</span><br><span class="line">    <span class="comment">#请求接口</span></span><br><span class="line">    <span class="variable">$json</span> = 获取<span class="title function_ invoke__">HTTP</span>(<span class="variable">$api_url</span> . <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$data</span>));</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$json</span>,<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>[<span class="string">&#x27;Value&#x27;</span>];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 主函数(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="comment">#获取现在网络的IP</span></span><br><span class="line">    <span class="variable">$ip</span> = 获取<span class="title function_ invoke__">HTTP</span>(GET_IP_URL);</span><br><span class="line">    <span class="comment">#获取现在域名的解析结果 也就是旧的IP</span></span><br><span class="line">    $旧IP = 获取当前的解析记录值();</span><br><span class="line">    <span class="comment">#对比新旧IP是否一样</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">isset</span>($旧IP) || $旧IP !== <span class="variable">$ip</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">#请求dns的API重新做解析</span></span><br><span class="line">        <span class="variable">$api_url</span> = <span class="string">&#x27;https://alidns.aliyuncs.com/?&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span> = [];</span><br><span class="line">        <span class="comment">#公共参数</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Format&#x27;</span>]          = <span class="string">&#x27;json&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Version&#x27;</span>]         = <span class="string">&#x27;2015-01-09&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;SignatureMethod&#x27;</span>] = <span class="string">&#x27;HMAC-SHA1&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;SignatureNonce&#x27;</span>]  = <span class="title function_ invoke__">uniqid</span>();</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;SignatureVersion&#x27;</span>]= <span class="string">&#x27;1.0&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;AccessKeyId&#x27;</span>]     = ACCESSKEYID; </span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Timestamp&#x27;</span>]       = <span class="title function_ invoke__">gmdate</span>(<span class="string">&quot;Y-m-d\TH:i:s\Z&quot;</span>);</span><br><span class="line">        <span class="comment">#专用参数</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Action&#x27;</span>]     = <span class="string">&#x27;UpdateDomainRecord&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;RecordId&#x27;</span>]   = RECORDID; <span class="comment">#解析记录的ID，此参数在添加解析时会返回，在获取域名解析列表时会返回</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;RR&#x27;</span>]         = RR; <span class="comment">#主机记录</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Type&#x27;</span>]       = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Value&#x27;</span>]      = <span class="variable">$ip</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;TTL&#x27;</span>]        = <span class="number">600</span>;</span><br><span class="line">        <span class="comment">#$data[&#x27;Priority&#x27;]   = 10; #MX记录的优先级，取值范围[1,10]，记录类型为MX记录时，此参数必须</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Line&#x27;</span>]       = <span class="string">&#x27;default&#x27;</span>;</span><br><span class="line">        <span class="comment">#签名</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Signature&#x27;</span>]  = 排序参数计算签名(<span class="variable">$data</span>);</span><br><span class="line">        <span class="comment">#请求接口</span></span><br><span class="line">        <span class="variable">$json</span> = 获取<span class="title function_ invoke__">HTTP</span>(<span class="variable">$api_url</span> . <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$data</span>));</span><br><span class="line">        <span class="variable">$result</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$json</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#完成以后</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$result</span>-&gt;RecordId))&#123;</span><br><span class="line">            <span class="title function_ invoke__">file_put_contents</span>(IP_FILE,<span class="variable">$ip</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;error&#x27;</span>;</span><br><span class="line">            <span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;IP没有发生变化，不需要修改解析记录&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">主函数();</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/" class="post-title-link" itemprop="url">PHP.ini 能不能加载子配置文件 ？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-30 11:15:00" itemprop="dateCreated datePublished" datetime="2019-04-30T11:15:00+08:00">2019-04-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>配置 nginx 的时候，在配置文件中可以方便的使用 include 指令来把配置文件内容分割，从而达到方便管理的目的。<br>但是在使用 php 的时候也希望有这样的功能，这样在升级或者重装环境的时候就知道自己曾经改过哪些配置了。<br>但是 php.ini 里面并不能直接载入其他文件，但是在官方文档中给出了<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">解决方案</a> 。</p>
+<p>首先明确一点，php在加载配置文件的时候分为主配置文件和附加配置文件。<br>主配置文件这里不讨论，因为不同操作系统下位置不同，搜索机制也不同。具体参见文档中的说明。</p>
+<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><p>这里我们只看在主配置文件 php.ini 加载完成以后如何补充加载从配置文件。<br>它有以下两个方法</p>
+<ol>
+<li>编译 php 的时候，使用参数 –with-config-file-scan-dir 指定目录 php在加载主配置文件之后再加载在这个目录里面 ini 文件</li>
+<li>设置环境变量 PHP_INI_SCAN_DIR 的值为子配置文件的目录</li>
+</ol>
+<p>方法1 适合自己有编译环境或者很方便编译的系统，例如 linux 下经常自己编译 php 。<br>方法2 适合下载别人编译好的版本。</p>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ul>
+<li>无论 1 还是 2 都可以按顺序指定多个目录，加载顺序也会根据目录顺序，每个目录里面 ini 文件文件名排序按顺序加载。</li>
+<li>多个目录设置分隔符根据操作系统不同而不同，具体可以用PHP打印 PATH_SEPARATOR 常量查看，windows是分号，linux 是冒号</li>
+<li>环境变量并不是只有操作系统才有，Apache 运行 或者 IIS 运行也有专门的环境变量设置，在鼓捣的时候不要弄混了去设置成系统环境变量，如果是命令行执行，可以使用 export 或者 set 命令来分别给 linux 和 windows 添加临时环境变量</li>
+</ul>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>可以使用phpinfo();查看<br>代码验证相关函数 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">php_ini_scanned_files</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/" class="post-title-link" itemprop="url">PHP 处理表单数据的一个安全回顾（记录教训）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-29 10:32:00" itemprop="dateCreated datePublished" datetime="2019-03-29T10:32:00+08:00">2019-03-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>曾经看过一个讲 PHP 代码安全的文章中写过这么一条</p>
+<p>表单输入数据要做 htmlspecialchars_decode 处理</p>
+<p>表单输出数据要做 htmlspecialchars 处理</p>
+<p>当时还不是很理解为什么，自己也没遇到问题，所以就没做</p>
+<p>然而不是不报 时候未到 今天终于遇到了这个坑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input  type=&quot;text&quot; value=&quot;&lt;?php echo $value; ?&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>当采用上面代码输出的时候</p>
+<p>假如 $value 里面有 “ 双引号 那么value这个键将会被提前闭合，造成表单数据显示不完全，而且会多出来其他内容被识别为键的情况</p>
+<p>这下就惨了 所有这么输出的地方都要处理了，暂时也只能头痛医头，脚痛医脚了，先做转义好了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/02/24/%E4%B8%8D%E7%94%A8U%E7%9B%98%EF%BC%8C%E7%94%A8%E4%B8%80%E5%8F%B0%E5%A5%BD%E7%94%B5%E8%84%91%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85-windows10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/02/24/%E4%B8%8D%E7%94%A8U%E7%9B%98%EF%BC%8C%E7%94%A8%E4%B8%80%E5%8F%B0%E5%A5%BD%E7%94%B5%E8%84%91%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85-windows10/" class="post-title-link" itemprop="url">不用U盘，用一台好电脑给另一个电脑重装 windows10</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-24 19:34:00" itemprop="dateCreated datePublished" datetime="2019-02-24T19:34:00+08:00">2019-02-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>先把坏电脑硬盘拆下来，然后挂到好电脑上</p>
+</li>
+<li><p>把这块盘用磁盘管理工具改成GPT分区表格式，然后整盘分区（NTFS）。</p>
+</li>
+<li><p>这个分区进行压缩卷操作，分出第二个区（FAT32 格式 大小大于5G 我这里用了6G）</p>
+</li>
+<li><p>把 win10 的 iso 解压到第二个 FAT32 分区，在磁盘管理里面删掉前面那个 NTFS 的分区，这样磁盘就变成了开头一大片未分区的空间，末尾有一个 FAT32 分区, 里面是系统镜像解压后的安装文件</p>
+</li>
+<li><p>拆掉硬盘装回坏电脑上去。</p>
+</li>
+<li><p>在 bios 中设置启动（一般新主板会不需要设置，自己会主动找到启动分区） </p>
+</li>
+<li><p>正常按照安装 win10 的步骤继续即可</p>
+</li>
+</ol>
+<p>此方法需要支持GPT+UEFI启动的环境，太老的电脑不支持 UEFI 的无法使用此方法。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/28/%E7%9C%81%E5%BF%83%E7%9A%84%E8%AE%BF%E9%97%AE%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -221,312 +489,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/27/virtualbox-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E6%9C%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/27/virtualbox-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="post-title-link" itemprop="url">virtualbox 命令行启动虚拟机和关闭虚拟机</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-27 21:19:00" itemprop="dateCreated datePublished" datetime="2019-01-27T21:19:00+08:00">2019-01-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="开机（后台运行）"><a href="#开机（后台运行）" class="headerlink" title="开机（后台运行）"></a>开机（后台运行）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxManage.exe startvm 虚拟机名字 --type headless</span><br></pre></td></tr></table></figure>
-
-<h3 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxManage.exe controlvm 虚拟机名字  acpipowerbutton</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/21/Linux-%E4%B8%8B%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7-rinetd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/21/Linux-%E4%B8%8B%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7-rinetd/" class="post-title-link" itemprop="url">Linux 下端口映射工具 rinetd</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-21 11:28:00" itemprop="dateCreated datePublished" datetime="2019-01-21T11:28:00+08:00">2019-01-21</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Linux下简单好用的工具rinetd，实现端口映射&#x2F;转发&#x2F;重定向</p>
-<p>官网地址<a target="_blank" rel="noopener" href="http://www.boutell.com/rinetd">http://www.boutell.com/rinetd</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#软件下载</span></span><br><span class="line">wget http://www.boutell.com/rinetd/http/rinetd.tar.gz</span><br><span class="line"><span class="comment">#解压安装</span></span><br><span class="line">tar zxvf rinetd.tar.gz</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment">#编辑配置</span></span><br><span class="line">vi /etc/rinetd.conf</span><br><span class="line">0.0.0.0 8080   172.19.94.3 8080</span><br><span class="line">0.0.0.0 2222   192.168.0.103 3389</span><br><span class="line">1.2.3.4 80     192.168.0.10 80</span><br></pre></td></tr></table></figure>
-
-<h3 id="说明一下"><a href="#说明一下" class="headerlink" title="说明一下"></a>说明一下</h3><ul>
-<li>0.0.0.0表示本机绑定所有可用地址</li>
-<li>将所有发往本机 8080 端口的请求转发到 172.19.94.3 的 8080 端口</li>
-<li>将所有发往本机 2222 端口的请求转发到 192.168.0.103的 3389 端口</li>
-<li>将所有发往 1.2.3.4 的 80 端口请求转发到 192.168.0.10 的 80 端口</li>
-</ul>
-<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><p>bindaddress bindport connectaddress connectport</p>
-<p>绑定的地址  绑定的端口  连接的地址  连接的端口</p>
-<p>或</p>
-<p>[Source Address] [Source Port] [Destination Address] [Destination Port]</p>
-<p>源地址  源端口   目的地址  目的端口</p>
-<p>###启动程序</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pkill rinetd  ##关闭进程</span><br><span class="line">rinetd -c /etc/rinetd.conf  ##启动转发</span><br></pre></td></tr></table></figure>
-<p>把这条命令加到 &#x2F;etc&#x2F;rc.local 里面开机自动运行(可能情况不同，具体看如何实现开机启动的)</p>
-<h3 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h3><p>netstat -antup</p>
-<h3 id="需要注意"><a href="#需要注意" class="headerlink" title="需要注意"></a>需要注意</h3><ol>
-<li>rinetd.conf 中绑定的本机端口必须没有被其它程序占用</li>
-<li>运行 rinetd 的系统防火墙应该打开绑定的本机端口</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/03/linux-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/03/linux-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/" class="post-title-link" itemprop="url">linux 磁盘扩容</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-03 18:23:00" itemprop="dateCreated datePublished" datetime="2019-01-03T18:23:00+08:00">2019-01-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录一下云主机的扩容</p>
-<p>假如是设备 &#x2F;dev&#x2F;vdb 挂载在 &#x2F;data 目录</p>
-<ol>
-<li>卸载</li>
-<li>检查磁盘</li>
-<li>调整分区大小</li>
-<li>挂载<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//针对ext4文件格式的操作系统（如CentOS6）：</span><br><span class="line">umount /dev/vdb</span><br><span class="line">e2fsck -f /dev/vdb</span><br><span class="line">resize2fs /dev/vdb</span><br><span class="line">mount /dev/vdb /data</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//针对xfs文件格式的操作系统（如CentOS7）</span><br><span class="line">umount /dev/vdb</span><br><span class="line">xfs_repair /dev/vdb</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line">xfs_growfs /data</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>上面的情况仅限于 2TB 以内的 MBR 分区。<br>如果是扩容到 2TB 以上的，从 MBR 转移 GPT 分区，需要先转移文件 然后重新分区。不要在没有备份的情况下轻易尝试直接转换。</p>
-<p>参考资料：<br><a target="_blank" rel="noopener" href="https://docs.ucloud.cn/udisk/userguide/extend/linux_raw">https://docs.ucloud.cn/udisk/userguide/extend/linux_raw</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/" class="post-title-link" itemprop="url">实战重现隐藏在 A 标签 _blank 下的危险漏洞,简略说明 noopener 的作用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-24 16:56:00" itemprop="dateCreated datePublished" datetime="2018-12-24T16:56:00+08:00">2018-12-24</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前几日，在看阮一峰老师的博客<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/12/weekly-issue-36.html">文章</a>中，发现了这么<a target="_blank" rel="noopener" href="https://www.tutorialdocs.com/article/html-opener-blank.html">一篇</a> 。标题为 《target &#x3D; “_blank” 的危险性（英文）》。这篇文章同事看过之后因为不理解其中的危险之处，念念不忘。于是这里我们来重现一下这个漏洞。</p>
-<p>首先做点准备：</p>
-<p>准备两个域名 </p>
-<ul>
-<li>a.com </li>
-<li>b.com</li>
-</ul>
-<p>分别解析到 127.0.0.1<br>配置好两个域名对应的http服务</p>
-<p>安装好 chrome 浏览器<br>正式开始</p>
-<p>首先在a.com下 建立1.html 写入代码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">         </span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&quot;信用卡+密码表单&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://b.com/b.html&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span> &gt;</span>B站<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在代码中，我们建立了一个A标签，链接到B站点，地址为 <a target="_blank" rel="noopener" href="http://b.com/b.html">http://b.com/b.html</a> 打开方式为 新标签页打开 也就是target&#x3D;”_blank”</p>
-<p>将这个1.html文件复制一份到b站点的目录中并修改代码为</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&quot;信用卡+密码表单+钓鱼页面&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://b.com/b.html&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span> &gt;</span>B站<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>注意”钓鱼页面”部分，这里是为了区分第一个页面加的标记。准备好以后再建立一个 b.html 满足 A 标签的目标文件。</p>
-<p>b.html 代码为</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">function</span> <span class="title function_">dosth</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">window</span>.<span class="property">opener</span>.<span class="property">location</span> = <span class="string">&quot;http://b.com/1.html&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;OK&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>b.com<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;dosth();&quot;</span>&gt;</span>js<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>至此代码准备完毕，开始重现漏洞触发过程</p>
-<p>打开Chrome ，当前版本为 </p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/1.png" alt="1"></p>
-<p>输入a.com&#x2F;1.html 访问</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/2.png" alt="2"></p>
-<p>点击A标签 B站 此时弹出新页面</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/3.png" alt="3"></p>
-<p>点击那个JS按钮，执行一段神不知鬼不觉的JS</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/4.png" alt="4"></p>
-<p>此时浏览器返回去看上一个页面 已经神不知鬼不觉的变成了一个钓鱼页面</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/5.png" alt="5"></p>
-<p>至此，整个漏洞利用的攻击过程结束。用户以为自己回到了A 结果神不知鬼不觉的访问了 B （页面假装和A一样）<br>如果这个时候用户输入了敏感信息，那么这个信息就会被提交B网站</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>那么只要有A标签的地方，并且使用了_blank的方式打开，那么都会有这个被钓鱼的风险。怎么避免风险呢，</p>
-<p>如果你是一个普通用户，那么在输入敏感信息之前，一定一定一定要确认当前的url是不是正确的url，也就是防钓鱼的那一套。</p>
-<p>如果你是一个开发者，那么请在你的网站上面，所有类似的A标签上加入属性 rel&#x3D;”noopener” 来防止这个漏洞被利用</p>
-<p>但是这里要值得一提的是，noopener 并不是所有浏览器都支持的，它的支持程度如下图</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/6.png" alt="6"></p>
-<p>无脑一点的方案就是 rel&#x3D;”nofollow noopener noreferrer”  这样来阻止。</p>
-<p>到此本文最初的目的“最简单的实现一次这个漏洞攻击”已经达到了，还有一些细节没有补充，具体可以阅读原文</p>
-<p><a target="_blank" rel="noopener" href="https://www.tutorialdocs.com/article/html-opener-blank.html">https://www.tutorialdocs.com/article/html-opener-blank.html</a> 来了解更多详情。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -592,14 +558,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">124</span>
+        <span class="site-state-item-count">134</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

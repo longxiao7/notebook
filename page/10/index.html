@@ -155,6 +155,280 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/05/Yii2-%E8%BE%93%E5%87%BA%E5%9B%BE%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/05/Yii2-%E8%BE%93%E5%87%BA%E5%9B%BE%E7%89%87/" class="post-title-link" itemprop="url">Yii2 输出图片</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-05 17:53:00" itemprop="dateCreated datePublished" datetime="2018-01-05T17:53:00+08:00">2018-01-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://www.yiichina.com/doc/api/2.0/yii-web-response#$format-detail">http://www.yiichina.com/doc/api/2.0/yii-web-response#$format-detail</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000002467587/a-1020000002468415">https://segmentfault.com/q/1010000002467587/a-1020000002468415</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">通过以下文档的各种属性，可以看到如何实现你说的例子一样的功能</span><br><span class="line">http://www.yiiframework.com/doc-2.0/yii-web-response.html</span><br><span class="line">首先是 $acceptMimeType 属性，就是设置header</span><br><span class="line">或者通过</span><br><span class="line">$headers 属性，批量设置 header</span><br><span class="line">然后你需要把图片发出去，意味着数据需要使用二进制流的形式发出去。</span><br><span class="line">那么就可以通过设置</span><br><span class="line">$data 属性来做到。因为他是 mixed 类型</span><br><span class="line">$content 属性就不行。因为他是 string 类型</span><br><span class="line">并且</span><br><span class="line">$content 的属性也说明了，仅在 $data 属性没有设置的情况下才会使用</span><br><span class="line">最后发现了一个属性</span><br><span class="line">$format</span><br><span class="line">根据文档的解释为：response的数据格式，用于转换$data或者$content的数据格式。</span><br><span class="line">下面有一些选项。</span><br><span class="line">通常要直接显示为图片都是使用 RAW 格式，即“未经加工”过的数据。</span><br><span class="line">那么通过上面这些属性就能达到你的目的。</span><br><span class="line"></span><br><span class="line">最后说一句，如果你要的是使用简单便捷，那么使用这种方案会让你痛苦。但是如果你想要的是管理简单便捷。那么使用框架的属性、方法去做到这些，当然是更加的舒服。</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://www.yiiframework.com/doc-2.0/yii-web-response.html">http://www.yiiframework.com/doc-2.0/yii-web-response.html</a></p>
+<p>不光是输出MIME 这里还可以改各种header信息。略麻烦 不过也还好</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/04/PHP-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%BF%84%E6%96%87%E5%AD%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/04/PHP-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%BF%84%E6%96%87%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">PHP 正则表达式匹配俄文字符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-04 11:37:00" itemprop="dateCreated datePublished" datetime="2018-01-04T11:37:00+08:00">2018-01-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>之前弄过匹配中文的 这次匹配一下俄文的</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//俄文 西里尔字母</span></span><br><span class="line"><span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/([\x&#123;0400&#125;-\x&#123;04FF&#125;]|[\x&#123;0500&#125;-\x&#123;052F&#125;]|[\x&#123;2DE0&#125;-\x&#123;2DFF&#125;]|[\x&#123;A640&#125;-\x&#123;A69F&#125;]|[\x&#123;1C80&#125;-\x&#123;1C8F&#125;])/u&quot;</span>, <span class="variable">$input</span>, <span class="variable">$match</span>);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A5%BF%E9%87%8C%E5%B0%94%E5%AD%97%E6%AF%8D">参考资料</a><br>正则包含了 </p>
+<ul>
+<li>西里尔字母</li>
+<li>西里尔字母补充</li>
+<li>西里尔字母扩展A</li>
+<li>西里尔字母扩展B</li>
+<li>西里尔字母扩展C</li>
+</ul>
+<p>仅适用于UTF-8环境，其他编码下也有对应俄文字母的字符 所以并不适用所有编码</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2017/12/30/windows-%E4%B8%8B-php-7-1-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%A7%E8%A1%8C%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84-PHP-%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/12/30/windows-%E4%B8%8B-php-7-1-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%A7%E8%A1%8C%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84-PHP-%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">windows 下 php 7.1 命令行执行中文文件名的 PHP 文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-30 09:27:00" itemprop="dateCreated datePublished" datetime="2017-12-30T09:27:00+08:00">2017-12-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在PHP5.6时代直接执行 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php.exe  文件.php </span><br></pre></td></tr></table></figure>
+<p>是没有问题的。</p>
+<p>在win的命令行中 活动代码页命令<br><code>chcp</code><br>修改活动代码页</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chcp 936  //gbk</span><br><span class="line">chcp 65001 //utf-8</span><br></pre></td></tr></table></figure>
+
+<p>但是在php 7.1下 执行 php.exe 首先会修改命令行的活动代码页</p>
+<p>这是一个自动行为 程序会自带一个 chcp 65001 然后再执行 php 文件</p>
+<p>中文文件名作为参数传递的时候 程序内部就乱码找不到文件了。</p>
+<p>关于这个问题 在百度搜几乎无解 于是在 php 官网的 bug 反馈里面翻到这么一页</p>
+<p><a target="_blank" rel="noopener" href="https://bugs.php.net/bug.php?id=73716&edit=2">https://bugs.php.net/bug.php?id=73716&amp;edit=2</a></p>
+<p>大概在</p>
+<blockquote>
+<p>[2016-12-12 21:30 UTC] <a href="mailto:&#x61;&#98;&#x40;&#x70;&#104;&#112;&#x2e;&#x6e;&#x65;&#116;">&#x61;&#98;&#x40;&#x70;&#104;&#112;&#x2e;&#x6e;&#x65;&#116;</a> </p>
+</blockquote>
+<p>解决方案：</p>
+<p>打开php.ini 搜索 internal_encoding 然后改为 internal_encoding &#x3D; “cp936”</p>
+<p>default_charset&#x3D;”UTF-8”  这一项应该是默认的 如果没有就加上</p>
+<p>这样就对应了简体中文的 windows 环境 不过这个方案的缺点就是写的很死</p>
+<p>如果把 PHP 打包发布的话 大概是只能在简中的系统下执行</p>
+<p>改了这个以后,PHP文件还是用UTF-8编码来写</p>
+<p>不过输入路径作为参数 也就是argv变量里面的内容 记得转码成 UTF-8</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2017/02/18/Go-%E6%96%87%E4%BB%B6%E5%8F%B3%E9%94%AE%E7%BC%96%E8%AF%91-%EF%BC%88%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%AE%9E%E4%BE%8B%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/02/18/Go-%E6%96%87%E4%BB%B6%E5%8F%B3%E9%94%AE%E7%BC%96%E8%AF%91-%EF%BC%88%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E6%B7%BB%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%AE%9E%E4%BE%8B%EF%BC%89/" class="post-title-link" itemprop="url">Go 文件右键编译 （右键菜单添加命令实例）)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-02-18 12:39:00" itemprop="dateCreated datePublished" datetime="2017-02-18T12:39:00+08:00">2017-02-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>辛辛苦苦写好了.go文件 发现编译还得敲命令才行，或许配置一个好用点的IDE环境可以解决</p>
+<p>但是有时候实在不想开IDE 于是在右键添加了一个编译功能</p>
+<p>首先保证 go 相关的环境变量配置正确 （网上安装教程一大堆）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 Windows Registry Editor Version 5.00</span><br><span class="line">2 </span><br><span class="line">3 [HKEY_CLASSES_ROOT\*\shell\Build With Go\command]</span><br><span class="line">4 @=&quot;cmd.exe /k \&quot;go build %1 &amp;&amp; echo ok\&quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后保存代码到 reg 文件 然后执行 合并到注册表</p>
+<p>这样<B>所有文件</B>的右键将会多出一个 go build 菜单命令</p>
+<p>单独给 .go 文件增加菜单</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\go_auto_file\shell\Build With Go ]</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\go_auto_file\shell\Build With Go \command]</span><br><span class="line">@=&quot;cmd.exe /k \&quot;go build %1 &amp;&amp; echo ok\&quot;&quot;</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\go_auto_file\shell\Build With Go \ddeexec]</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2017/02/01/Oracle-VM-VirtualBox-%E6%97%A0%E6%B3%95%E5%8D%B8%E8%BD%BD-%E6%9B%B4%E6%96%B0-%E5%92%8C%E4%BF%AE%E5%A4%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -216,267 +490,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/10/23/Redis-%E6%89%B9%E9%87%8F%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/10/23/Redis-%E6%89%B9%E9%87%8F%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">Redis 批量导入数据</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-10-23 14:43:00" itemprop="dateCreated datePublished" datetime="2016-10-23T14:43:00+08:00">2016-10-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="准备数据文件-格式为"><a href="#准备数据文件-格式为" class="headerlink" title="准备数据文件 格式为"></a>准备数据文件 格式为</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SET Key0 Value0</span><br><span class="line">SET Key1 Value1</span><br><span class="line">...</span><br><span class="line">SET KeyN ValueN</span><br></pre></td></tr></table></figure>
-
-<h3 id="利用-shell-转换数据"><a href="#利用-shell-转换数据" class="headerlink" title="利用 shell 转换数据"></a>利用 shell 转换数据</h3><p>转换脚本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> CMD; <span class="keyword">do</span></span><br><span class="line">  <span class="comment"># each command begins with *&#123;number arguments in command&#125;\r\n</span></span><br><span class="line">  XS=(<span class="variable">$CMD</span>); <span class="built_in">printf</span> <span class="string">&quot;*<span class="variable">$&#123;#XS[@]&#125;</span>\r\n&quot;</span></span><br><span class="line">  <span class="comment"># for each argument, we append $&#123;length&#125;\r\n&#123;argument&#125;\r\n</span></span><br><span class="line">  <span class="keyword">for</span> X <span class="keyword">in</span> <span class="variable">$CMD</span>; <span class="keyword">do</span> <span class="built_in">printf</span> <span class="string">&quot;\$<span class="variable">$&#123;#X&#125;</span>\r\n<span class="variable">$X</span>\r\n&quot;</span>; <span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<p>转换命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tool.sh input.data &gt; output.data</span><br></pre></td></tr></table></figure>
-<p>导入redis</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat output.data  | redis-cli --pipe</span><br></pre></td></tr></table></figure>
-
-<p>如果只能在win服务器上连接内网的redis服务器 可以使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type outpuf.data | redis-cli.exe -h &quot;127.0.0.1&quot; -p 6379 -a password  --pipe</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>本文使用的方法可能会因为 redis 版本升级失效。在此仅作历史记录，当初版本是 Redis 3.x</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/" class="post-title-link" itemprop="url">Apache 2.4 针对某个文件限速</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-10-11 14:47:00" itemprop="dateCreated datePublished" datetime="2016-10-11T14:47:00+08:00">2016-10-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>例如限 mp4 文件的下载速度</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Location</span> &quot;/<span class="attr">downloads</span>/*<span class="attr">.mp4</span>&quot;&gt;</span></span><br><span class="line">    SetOutputFilter RATE_LIMIT</span><br><span class="line">    SetEnv rate-limit 400 </span><br><span class="line"><span class="tag">&lt;/<span class="name">Location</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>单位是kb&#x2F;s</p>
-<p>这个只能限制单线程 多线程无用。多线程下载需要用到第三方 mod 建议静态文件直接改用 Nginx </p>
-<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ratelimit.html">官方文档</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">Yii1 数据库 DAO 绑定参数实例</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-06-01 17:30:00" itemprop="dateCreated datePublished" datetime="2016-06-01T17:30:00+08:00">2016-06-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>绑定参数预处理 SQL 可以有效的防 SQL 注入攻击; Yii1 框架的 ActiveRecord 操作数据库默认就可以防止注入 ，但是复杂业务下 使用 DAO 操作数据库就需要小心了</p>
-</blockquote>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM admin_user WHERE user_name=:uname AND password LIKE :c&quot;</span>;</span><br><span class="line"><span class="variable">$command</span> = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;admin1&#x27;</span>;</span><br><span class="line"><span class="variable">$c</span> = <span class="string">&#x27;%mkjymji%&#x27;</span>;</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:uname&quot;</span>,<span class="variable">$a</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:c&quot;</span>,<span class="variable">$c</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$r</span> = <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">queryAll</span>();</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$r</span>);<span class="keyword">exit</span>;</span><br></pre></td></tr></table></figure>
-
-<p>绑定参数的时候 如果是PDO::PARAM_STR类型的参数 是不需要在SQL里面再写引号的  </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/05/25/%E9%9A%90%E8%97%8F-Apache-NGINX-PHP-%E7%89%88%E6%9C%AC%E5%8F%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/05/25/%E9%9A%90%E8%97%8F-Apache-NGINX-PHP-%E7%89%88%E6%9C%AC%E5%8F%B7/" class="post-title-link" itemprop="url">隐藏 Apache NGINX PHP 版本号</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-05-25 17:36:00" itemprop="dateCreated datePublished" datetime="2016-05-25T17:36:00+08:00">2016-05-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 httpd-default.conf</span><br><span class="line">ServerTokens Prod</span><br><span class="line">ServerSignature Off</span><br></pre></td></tr></table></figure></h2><h2 id="NGINX"><a href="#NGINX" class="headerlink" title="NGINX"></a>NGINX<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 nginx.conf</span><br><span class="line">server_tokens off;</span><br><span class="line">这个可以加在 http 段，也可以加在 server 段</span><br></pre></td></tr></table></figure></h2><p>PHP</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 php.ini</span><br><span class="line">expose_php Off</span><br></pre></td></tr></table></figure>
-<p>　　</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -542,14 +559,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">124</span>
+        <span class="site-state-item-count">134</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

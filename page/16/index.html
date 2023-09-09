@@ -155,6 +155,276 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/25/MySQL-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/25/MySQL-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" class="post-title-link" itemprop="url">MySQL 数据备份与恢复</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-25 22:52:00" itemprop="dateCreated datePublished" datetime="2014-03-25T22:52:00+08:00">2014-03-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h1><p>备份</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">INTO</span> OUTFILE &quot;D:\\1.sql&quot; <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<p>恢复</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOAD DATA INFILE &quot;D:\\1.sql&quot; <span class="keyword">INTO</span> <span class="keyword">TABLE</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<p>补充几个设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FIELDS TERMINATED BY &#x27;,&#x27; #字段间隔符</span><br><span class="line">OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27; #字符串类型字段包围符</span><br><span class="line">LINES TERMINATED BY &#x27;\n&#x27; #换行符</span><br></pre></td></tr></table></figure>
+<p>于是备份命令改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    * INTO OUTFILE &quot;D:\\1.sql&quot; FIELDS TERMINATED BY &#x27;,&#x27;</span><br><span class="line">    *  OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27; LINES TERMINATED BY &#x27;\n&#x27;</span><br><span class="line">FROM</span><br><span class="line">    表名;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>恢复数据改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LOAD DATA INFILE &quot;D:\\1.sql&quot; </span><br><span class="line">    INTO TABLE 表名 </span><br><span class="line">    FIELDS TERMINATED BY &#x27;,&#x27; OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27; LINES TERMINATED BY &#x27;\n&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>要有文件目录的读写权限 特别是在linux下</p>
+<p>此方法不能备份表结构。 需要用 <code>SHOW CREATE TABLE</code> 表名来获取结构并备份;</p>
+<hr>
+<h1 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h1><h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>uroot <span class="operator">-</span>p密码 数据库名 <span class="operator">-</span>l <span class="operator">-</span>F <span class="operator">&gt;</span> <span class="string">&#x27;/usr/data.sql&#x27;</span></span><br><span class="line"></span><br><span class="line">#在mysql5<span class="number">.6</span>中失效原因是不能在命令行中出现密码   需要在etc下的my.cnf中写入</span><br><span class="line"></span><br><span class="line">[mysqldump]</span><br><span class="line"><span class="keyword">user</span><span class="operator">=</span>备份用户名</span><br><span class="line">password<span class="operator">=</span>备份用户密码</span><br><span class="line">#然后执行</span><br><span class="line">mysqldump 数据库名 <span class="operator">-</span>l <span class="operator">-</span>F <span class="operator">&gt;</span> <span class="string">&#x27;/usr/data.sql&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 恢复的时候可能会因为数据过大造成失败 先运行</span><br><span class="line">set global wait_timeout=60000;</span><br><span class="line">set global max_allowed_packet = 64*1024*1024</span><br><span class="line">mysql -uroot -p123456 数据库名 -v -f&lt;/usr/data.sql</span><br><span class="line">#-v 查看详细信息</span><br><span class="line">#-f 当中间遇到错误 可以跳过 忽略错误</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法3-恢复-binlog-数据"><a href="#方法3-恢复-binlog-数据" class="headerlink" title="方法3 恢复 binlog 数据"></a>方法3 恢复 binlog 数据</h1><blockquote>
+<p>（不详细 仅作记录 具体可以参考 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/83372804">https://zhuanlan.zhihu.com/p/83372804</a> ）</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#恢复全部数据</span><br><span class="line">mysqlbinlog --no-defaults mysql.000001 |mysql -uroot -p123456 数据库名</span><br><span class="line"></span><br><span class="line">#恢复部分数据</span><br><span class="line">#根据pos位置193到280之间 恢复数据</span><br><span class="line">mysqlbinlog --no-defaults mysqlbinlog.00001 --start-position=&quot;193&quot; --stop-position=&quot;280&quot;  |mysql -uroot -p123456 数据库名</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/20/ssh-%E6%8E%89%E7%BA%BF%E6%95%91%E6%98%9F-screen-%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/20/ssh-%E6%8E%89%E7%BA%BF%E6%95%91%E6%98%9F-screen-%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">ssh 掉线救星 screen 的简单使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-20 23:37:00" itemprop="dateCreated datePublished" datetime="2014-03-20T23:37:00+08:00">2014-03-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>在远程 ssh 命令行下某些长时间的操作，一旦网络出现故障，后果可能会很严重，在这种情况下可以使用 screen 命令来解决。 screen 可以创建一个session，在不小心断开以后还可以继续恢复 session 保存的状态.</p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RedHat or CentOS</span></span><br><span class="line">yum install epel-release</span><br><span class="line">yum install screen</span><br><span class="line"><span class="comment"># Debian</span></span><br><span class="line">apt-get install screen</span><br><span class="line"><span class="comment"># 编译：rocky linux9 yum 没安装成功 所以只能从源码装了</span></span><br><span class="line">yum install ncurses-devel autoconf automake tar gcc wget -y</span><br><span class="line">wget https://ftp.gnu.org/gnu/screen/screen-4.9.0.tar.gz</span><br><span class="line">tar -zxvf screen-4.9.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> screen-4.9.0</span><br><span class="line">sh autogen.sh</span><br><span class="line">sh configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建session</span></span><br><span class="line">screen -S newsession</span><br><span class="line"><span class="comment"># 恢复一个session</span></span><br><span class="line">screen -r newsession</span><br><span class="line"><span class="comment"># 查看所有的session</span></span><br><span class="line">screen -<span class="built_in">ls</span></span><br><span class="line"><span class="comment"># 退出session</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"><span class="comment"># 演示屏幕</span></span><br><span class="line"><span class="comment"># 观众可以登录到远程服务器使用</span></span><br><span class="line">screen -x newsession </span><br><span class="line"><span class="comment"># 和操作者同步屏幕内容</span></span><br><span class="line"><span class="comment"># 暂离</span></span><br><span class="line"><span class="comment"># 按住Ctrl，再按a,d</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 有时候使用screen的时候，离开当前session时，想要用screen -r name重新连接该session时发现连不上</span></span><br><span class="line"><span class="comment"># 提示There is no screen to be resumed matching xxx。</span></span><br><span class="line"><span class="comment"># 输入screen -ls命令，发现有session处于Attached状态：</span></span><br><span class="line"><span class="comment"># 如果想重新连接speaker这个session的话，如下：</span></span><br><span class="line"><span class="comment"># 提示：There is no screen to be resumed matching speaker.</span></span><br><span class="line"><span class="comment"># 解决办法：</span></span><br><span class="line"><span class="comment"># 利用</span></span><br><span class="line">screen -d 你的session名字</span><br><span class="line"><span class="comment"># 远程detach某个session</span></span><br><span class="line"><span class="comment"># 之后，这个session的状态就会变成Detached：</span></span><br><span class="line"><span class="comment"># 这时候再用 screen -r 你的session名字，就可以进入这个session了。</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/xdebug-%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/12/xdebug-%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">xdebug 初步使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-12 19:32:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:32:00+08:00">2014-03-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">;加载xdebug模块。 根据PHP版本来选择是zend_extension还是zend_extension_ts  ts代表线程安全  被坑过1次</span></span><br><span class="line"><span class="attr">zend_extension</span>=<span class="string">&quot;\web\xampp\php\ext\php_xdebug.dll&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;自动打开“监测函数调用过程”的功模。该功能可以在你指定的目录中将函数调用的监测信息以文件的形式输出。此配置项的默认值为off。</span></span><br><span class="line"><span class="attr">xdebug.auto_trace</span>=<span class="literal">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;打开收集“函数参数”的功能。将函数调用的参数值列入函数过程调用的监测信息中。此配置项的默认值为off。</span></span><br><span class="line"><span class="attr">xdebug.collect_params</span>=<span class="literal">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;打开收集“函数返回值”的功能。将函数的返回值列入函数过程调用的监测信息中。此配置项的默认值为off。</span></span><br><span class="line"><span class="attr">xdebug.collect_return</span>=<span class="literal">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;设定函数调用监测信息的输出文件的路径。</span></span><br><span class="line"><span class="attr">xdebug.trace_output_dir</span>=<span class="string">&quot;\web\xampp\tmp&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;打开效能监测器。</span></span><br><span class="line"><span class="attr">xdebug.profiler_enable</span>=<span class="literal">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;设定效能监测信息输出文件的路径。</span></span><br><span class="line"><span class="attr">xdebug.profiler_output_dir</span>=<span class="string">&quot;\web\xampp\tmp&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">;当此项打开时分析器文件会采用同名（xdebug.profiler_output_name设置名称）追加方式写入而不是覆盖文件</span></span><br><span class="line"><span class="attr">xdebug.profiler_append</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;当此选项设置为1,通过使用XDEBUG_PROFILE作为GET/POST参数,或者以XDEBUG_PROFILE作为名称来设置一个cookie</span></span><br><span class="line"><span class="comment">;你可以触发生成效能分析文件。 这样，效能数据将会被写入defined directory目录. 如果不想为每一个请求都生成效能分析文件</span></span><br><span class="line"><span class="comment">;你需要将 xdebug.profiler_enable设置为0.</span></span><br><span class="line"><span class="comment">;xdebug.profiler_enable_trigger = 0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">;这项设置决定被用来转存效能信息文件的名称。</span></span><br><span class="line"><span class="attr">xdebug.profiler_output_name</span> = <span class="string">&quot;cachegrind.out.%t-%s&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;该设置控制Xdebug是否应该尝试连接一个调试客户端</span></span><br><span class="line"><span class="comment">;该调试客户端监听的主机和端口通过 xdebug.remote_host和 xdebug.remote_port配置项来设置</span></span><br><span class="line"><span class="comment">;如果不能建立到调试客户端的连接，脚本将继续执行，就像该设置被设置为0一样.</span></span><br><span class="line"><span class="comment">;xdebug.remote_enable = 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;固定项。输出风格</span></span><br><span class="line"><span class="comment">;xdebug.remote_handler = &quot;dbgp&quot;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/%E6%9C%AC%E5%9C%B0%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/03/12/%E6%9C%AC%E5%9C%B0%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">本地虚拟机挂载 windows 共享目录搭建开发环境</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-03-12 19:30:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:30:00+08:00">2014-03-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="windows-宿主机-（192-168-1-216）"><a href="#windows-宿主机-（192-168-1-216）" class="headerlink" title="windows 宿主机 （192.168.1.216）"></a>windows 宿主机 （192.168.1.216）</h2><p>设置目录共享 ，建立一个有密码帐号 可以访问共享文件夹 假设为 htdocs<br>假设 用户名是 admin  密码是 123456 然后切换账户登录访问测试</p>
+<h2 id="虚拟机下的linux"><a href="#虚拟机下的linux" class="headerlink" title="虚拟机下的linux"></a>虚拟机下的linux</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭防火墙(本地环境 直接关掉即可)</span></span><br><span class="line"></span><br><span class="line">service iptables stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查是否安装了需要的samba软件包</span></span><br><span class="line">rpm –q samba</span><br><span class="line"><span class="comment"># 如果没安装</span></span><br><span class="line">yum install samba system-config-samba samba-client samba-common</span><br><span class="line"><span class="comment"># linux挂载</span></span><br><span class="line">mount -t cifs -o username=admin,password=123456 //192.168.1.216/htdocs /usr/wwwroot</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最后在win系统下用PSTrayFactory把虚拟机窗口缩到任务栏托盘</p>
+<h2 id="开机启动-1"><a href="#开机启动-1" class="headerlink" title="开机启动 (1)"></a>开机启动 (1)</h2><p>编辑 &#x2F;etc&#x2F;init.d&#x2F;rc.local （有些系统已经失效了，这个只适合旧版本的centos）</p>
+<p>vi &#x2F;etc&#x2F;init.d&#x2F;rc.local<br>写入挂载命令</p>
+<p>同时使用ls -l shared会发现shared目录所有者和用户组均是root，即使使用sudo chmod和sudo chown修改权限也提示权限不够。不过可以添加两个参数即可达到我们所要的效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t smbfs -o username=&quot;***&quot;,password=&quot;***&quot;,gid=&quot;***&quot;,uid=&quot;****&quot; //WindowsHost/sharefolder  /home/xxx/shared</span><br></pre></td></tr></table></figure>
+<h2 id="开机启动-2"><a href="#开机启动-2" class="headerlink" title="开机启动 (2)"></a>开机启动 (2)</h2><p>vi &#x2F;etc&#x2F;fstab 最后加入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//WindowsHost/sharefolder /home/xxx/shared cifs defaults,auto,username=&quot;xxxx&quot;,password=&quot;***&quot;,gid=&quot;1000&quot;,uid=&quot;1000&quot; 0 0</span><br></pre></td></tr></table></figure>
+<p>属性中的gid、uid，是你想要让挂载属于哪个用户的gid和uid。至于这个gid和uid，你可以使用id username来获得，比如说我的xxx，用户获得的gid和uid就是1000。<br>同时上述命令中的username和password是访问用来WindowsHost的。</p>
+<h2 id="卸载挂载目录："><a href="#卸载挂载目录：" class="headerlink" title="卸载挂载目录："></a>卸载挂载目录：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo umount shared</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/MySQL-5-6-%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF-command-line-interface-can-be-insecure-%E4%BF%AE%E5%A4%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -217,231 +487,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/PHP%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%91%A8%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/12/PHP%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%91%A8%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4/" class="post-title-link" itemprop="url">PHP获取本周开始时间</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-12 19:05:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:05:00+08:00">2014-03-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/*先设置时区*/</span></span><br><span class="line"><span class="title function_ invoke__">date_default_timezone_set</span>(<span class="string">&#x27;PRC&#x27;</span>);</span><br><span class="line"><span class="comment">/*网上的写法：总觉得这周跨年或者跨月的时候会悲剧 未验证*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">mktime</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="title function_ invoke__">date</span>(<span class="string">&#x27;m&#x27;</span>),<span class="title function_ invoke__">date</span>(<span class="string">&#x27;d&#x27;</span>)-<span class="title function_ invoke__">date</span>(<span class="string">&#x27;w&#x27;</span>),<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">/*同事的写法：当本日为周日的时候 就坑了*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last sunday&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*自己的写法: 目前还没发现问题*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$now</span> = <span class="title function_ invoke__">time</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$now</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;w&#x27;</span>,<span class="variable">$now</span>) )*<span class="number">86400</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;H&#x27;</span>,<span class="variable">$now</span>) )*<span class="number">3600</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;i&#x27;</span>,<span class="variable">$now</span>) ) *<span class="number">60</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;s&#x27;</span>,<span class="variable">$now</span>) );</span><br><span class="line"></span><br><span class="line"><span class="comment">/*过后的思考*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last saturday&#x27;</span>)+<span class="number">86400</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*如果获取的不是0点 而是当前时间*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$t</span> = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last saturday &#x27;</span>.<span class="variable">$t</span>);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/11/Typecho%E9%9B%86%E6%88%90ueditor%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/11/Typecho%E9%9B%86%E6%88%90ueditor%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Typecho集成ueditor笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-11 00:21:00" itemprop="dateCreated datePublished" datetime="2014-03-11T00:21:00+08:00">2014-03-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>前言：萝卜青菜各有所爱，因为个人需求所以需要在博客中集成ueditor，并非是我不喜欢md语法 其实本篇的笔记的书写最早也是在本地的md编辑器上完成的</p>
-</blockquote>
-<p>首先下载 ueditor 编辑器，然后重命名文件为 ueditor，将文件夹复制到 admin 目录,打开 admin 目录的 editor-js.php 文件 在文件末尾处</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;?php endif;?&gt;</span><br></pre></td></tr></table></figure>
-<p>之间插入以下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php else:?&gt;</span><br><span class="line">&lt;!--不开启markdown时使用ueditor--&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 配置文件 --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./ueditor/ueditor.config.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 编辑器源码文件 --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./ueditor/ueditor.all.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 语言包文件(建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败) --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./ueditor/lang/zh-cn/zh-cn.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	var editor = UE.getEditor(&#x27;text&#x27;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>打开 var\Typecho\Common\Paragraph.php 文件注释掉152行的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$text = Typecho_Common::lockHTML($text);</span><br></pre></td></tr></table></figure>
-<p>此处是否会对原有功能产生bug未知,如果不注释掉 会对 ueditor 编辑器的部分代码高亮功能产生显示 bug<br>打开模版文件夹的 footer.php 这里我使用的是默认模版 所以路径是 \usr\themes\default 在 <?php $this->footer(); ?> 的下面插入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;&lt;?php $this-&gt;options-&gt;siteUrl(); ?&gt;admin/ueditor/third-party/SyntaxHighlighter/shCore.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;&lt;?php $this-&gt;options-&gt;siteUrl(); ?&gt;admin/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css&quot; type=&quot;text/css&quot; /&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">SyntaxHighlighter.all() //执行代码高亮</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>在 \ueditor\third-party\SyntaxHighlighter 下的shCore.js中搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textarea.appendChild(document.createTextNode(code));</span><br></pre></td></tr></table></figure>
-<p>在后面添加一句 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textarea.style.height = &quot;100%&quot;; </span><br></pre></td></tr></table></figure>
-<p>此处是为了修正代码高亮时 双击代码全选出错的BUG，新版的 SyntaxHighlighter 插件中已经默认双击代码全选，去掉了以前的flash复制功能</p>
-<p>保存所有文件并关闭，并在个人设置页面关闭 markdown 语法编辑选项。目前还没仔细测试是否有 BUG ，也没去调整图片上传的功能。 所以对于本文的修改内容请慎重使用。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/11/CentOS-5-5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85MariaDB-5-5-35/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/11/CentOS-5-5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85MariaDB-5-5-35/" class="post-title-link" itemprop="url">CentOS 5.5 快速安装MariaDB-5.5.35</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-11 00:15:00" itemprop="dateCreated datePublished" datetime="2014-03-11T00:15:00+08:00">2014-03-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>CentOS 5.5下不升级yum的情况下想快速安装还真有点费劲 至于源码编译安装坑貌似更多 而且在小内存的VPS上编译实在费力。我们采用二进制方式安装，下载地址 <a target="_blank" rel="noopener" href="http://yum.mariadb.org/5.5/">http://yum.mariadb.org/5.5/</a> 因为系统是32位的 所以这里选择x86的目录下载</p>
-</blockquote>
-<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install perl-DBI</span><br><span class="line">sudo rpm -ivh MariaDB-5.5.35-centos5-i686-common.rpm </span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>PERL-DBI不联网的安装 需要先下载源码的rpm包 然后创建源码目录 再安装rpm 最后编译安装 这里不再赘述</p>
-</blockquote>
-<h1 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /var/lib/mysql</span><br><span class="line">sudo rpm -ivh MariaDB-5.5.35-centos5-i686-server.rpm </span><br></pre></td></tr></table></figure>
-
-<h1 id="启动并初始化密码"><a href="#启动并初始化密码" class="headerlink" title="启动并初始化密码"></a>启动并初始化密码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br><span class="line">/usr/bin/mysqladmin -u root password &#x27;123456&#x27;</span><br></pre></td></tr></table></figure>
-
-<h1 id="登入测试"><a href="#登入测试" class="headerlink" title="登入测试"></a>登入测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p123456</span><br><span class="line"># CTRL+D 退出</span><br></pre></td></tr></table></figure>
-
-<h1 id="修改数据存放目录"><a href="#修改数据存放目录" class="headerlink" title="修改数据存放目录"></a>修改数据存放目录</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># mysql, MariaDB 的默认数据存放在 /var/lib/mysql/ </span><br><span class="line"># 停止数据库  </span><br><span class="line">service mysql stop  </span><br><span class="line"># 创建新目录</span><br><span class="line">mkdir /usr/local/mysql_data</span><br><span class="line"></span><br><span class="line"># 拷贝默认数据库到新的位置  </span><br><span class="line">cp -a /var/lib/mysql /usr/local/ieternal/mysql_data  </span><br><span class="line"></span><br><span class="line"># 备份原来的配置文件</span><br><span class="line">cp -a /etc/my.cnf /etc/my.cnf_original  </span><br><span class="line"></span><br><span class="line"># 其实查看 /etc/my.cnf 文件可以发现  </span><br><span class="line"># MariaDB 的此文件之中只有一个包含语句  !includedir /etc/my.cnf.d</span><br><span class="line"># 所以需要修改的配置文件为 /etc/my.cnf.d/server.cnf  </span><br><span class="line">cp /etc/my.cnf.d/server.cnf /etc/my.cnf.d/server.cnf_original  </span><br><span class="line">vim /etc/my.cnf.d/server.cnf  </span><br><span class="line"></span><br><span class="line"># 在文件的 mysqld 节下添加内容  </span><br><span class="line">[mysqld]  </span><br><span class="line">datadir=/usr/local/mysql_data</span><br><span class="line">socket=/usr/local/mysql_data/mysql.sock  </span><br><span class="line">#default-character-set=utf8  #mysql的配置</span><br><span class="line">character_set_server=utf8   # mariadb5.5 的配置</span><br><span class="line">slow_query_log=on  </span><br><span class="line">slow_query_log_file=/usr/local/mysql_data/mysql_data/slow_query_log.log  </span><br><span class="line">long_query_time=2  </span><br><span class="line">[client]</span><br><span class="line">socket=/usr/local/mysql_data/mysql.sock  </span><br><span class="line"></span><br><span class="line"># 保存文件后修改新文件的权限</span><br><span class="line">chown -R mysql:mysql  /usr/local/mysql_data/</span><br><span class="line">cd /usr/local/mysql_data/</span><br><span class="line">chown -R mysql:mysql *</span><br><span class="line"># 重新初始化密码（存疑</span><br><span class="line">/usr/bin/mysqladmin -u root password &#x27;123456&#x27;</span><br><span class="line">service mysql start </span><br></pre></td></tr></table></figure>
-
-<h1 id="常见操作"><a href="#常见操作" class="headerlink" title="常见操作"></a>常见操作</h1><h2 id="查看mysql状态"><a href="#查看mysql状态" class="headerlink" title="查看mysql状态"></a>查看mysql状态</h2><blockquote>
-<p>service mysql status</p>
-</blockquote>
-<h2 id="关闭数据库"><a href="#关闭数据库" class="headerlink" title="关闭数据库"></a>关闭数据库</h2><blockquote>
-<p>service mysql stop</p>
-</blockquote>
-<h2 id="启动数据库"><a href="#启动数据库" class="headerlink" title="启动数据库"></a>启动数据库</h2><blockquote>
-<p>service mysql start</p>
-</blockquote>
-<h2 id="授权root远程登录权限（慎用-可能会带来安全隐患）"><a href="#授权root远程登录权限（慎用-可能会带来安全隐患）" class="headerlink" title="授权root远程登录权限（慎用 可能会带来安全隐患）"></a>授权root远程登录权限（慎用 可能会带来安全隐患）</h2><blockquote>
-<p>执行以下SQL</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON *.* to root@&#x27;%&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>上面的命令创建的root用户没有办法给其他用户授权，但可以正常使用。解决这个问题需要在授权语句后面加WITH GRANT OPTION</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON *.* to &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;123456&#x27; WITH GRANT OPTION;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -507,14 +556,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">124</span>
+        <span class="site-state-item-count">134</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
