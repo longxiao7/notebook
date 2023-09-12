@@ -225,7 +225,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/04/16/iMac-%E6%8D%A2-SSD-%E5%90%8E%E7%A1%AC%E7%9B%98%E5%BC%80%E5%90%AF-trim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -239,7 +239,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">ffmpeg 使用 nvenc 编码的结论记录</a>
+            <a href="/2021/04/16/iMac-%E6%8D%A2-SSD-%E5%90%8E%E7%A1%AC%E7%9B%98%E5%BC%80%E5%90%AF-trim/" class="post-title-link" itemprop="url">iMac 换 SSD 后硬盘开启 trim</a>
         </h2>
 
         <div class="post-meta">
@@ -249,7 +249,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-14 20:53:00" itemprop="dateCreated datePublished" datetime="2020-12-14T20:53:00+08:00">2020-12-14</time>
+              <time title="创建时间：2021-04-16 19:09:00" itemprop="dateCreated datePublished" datetime="2021-04-16T19:09:00+08:00">2021-04-16</time>
             </span>
 
           
@@ -263,22 +263,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
-<li><p>同码率下 速度比x264快很多，但是质量比不过，从字幕边缘可以看出来</p>
-</li>
-<li><p>涉及到 -vf “ass&#x3D;1.ass” 做字幕内嵌，连编码速度的优势也没了</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe -y -i &quot;demo.mp4&quot; -c:v h264_nvenc -preset llhq -bf 4 -b:v 400k -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
-
-<p>于是内嵌字幕请直接使用x264</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe  -y -i &quot;demo.mp4&quot; -c:v libx264 -preset veryslow -crf 24 -bf 6 -refs 6 -qcomp 0.5 -aq-mode 2 -aq-strength 0.8 -psy-rd 0.3:0 -deblock 1:1 -x264opts min-keyint=1 -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意这个ass&#x3D;1.ass 在windows下，路径会有编码问题，最好把字幕和ffmpeg放在一起 避免输入路径，文件名也要用简单的。</p>
-</blockquote>
-<ol start="3">
-<li>要速度不要质量的时候，可以批量处理提高处理速度</li>
-</ol>
+          <p>开启trim，可以给SSD写入提速的一种模式，打开 关于本机→系统报告→sata（查看trim状态）显示否的话就继续往下操作开启trim，<br>打开终端输入</p>
+<p>sudo trimforce enable</p>
+<p>回车，输入密码 回车<br>接着输入Y回车<br>等待提示成功自动重启电脑，如果没有重启就手动重启一下再去查看trim状态，显示 是 即为成功开启trim模式</p>
 
       
     </div>
@@ -298,7 +285,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/09/10/PHP%E5%85%B3%E4%BA%8E-pack-unpack-%E8%BF%98%E6%9C%89%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF%E5%BA%8F-%E5%B0%8F%E7%AB%AF%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/04/12/%E8%8B%B9%E6%9E%9C%E7%94%B5%E8%84%91-os-x-10-9-5-%E6%9B%B4%E6%96%B0%E4%B8%8D%E4%BA%86%E7%89%88%E6%9C%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -312,7 +299,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/10/PHP%E5%85%B3%E4%BA%8E-pack-unpack-%E8%BF%98%E6%9C%89%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF%E5%BA%8F-%E5%B0%8F%E7%AB%AF%E5%BA%8F/" class="post-title-link" itemprop="url">PHP 关于 pack unpack 还有字节序 大端序  小端序</a>
+            <a href="/2021/04/12/%E8%8B%B9%E6%9E%9C%E7%94%B5%E8%84%91-os-x-10-9-5-%E6%9B%B4%E6%96%B0%E4%B8%8D%E4%BA%86%E7%89%88%E6%9C%AC/" class="post-title-link" itemprop="url">苹果电脑 os x 10.9.5 更新不了版本</a>
         </h2>
 
         <div class="post-meta">
@@ -322,7 +309,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-10 01:01:00" itemprop="dateCreated datePublished" datetime="2020-09-10T01:01:00+08:00">2020-09-10</time>
+              <time title="创建时间：2021-04-12 14:56:00" itemprop="dateCreated datePublished" datetime="2021-04-12T14:56:00+08:00">2021-04-12</time>
             </span>
 
           
@@ -336,11 +323,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>偶然在网上看到了三篇写的不错的文章，这里留个记录</p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/goal/blog/195749">PHP: 深入pack&#x2F;unpack</a></p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/goal/blog/202378">PHP: chr和pack、unpack那些事</a></p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/goal/blog/202381">PHP: pack&#x2F;unpack补遗</a></p>
-<p><a href="/2020/09/10/PHP%E5%85%B3%E4%BA%8E-pack-unpack-%E8%BF%98%E6%9C%89%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF%E5%BA%8F-%E5%B0%8F%E7%AB%AF%E5%BA%8F/PHP%E5%AD%97%E8%8A%82%E5%BA%8F.rar">页面防丢备份</a></p>
+          <p>Mac 上的软件更新不能查找跨版本更新，需要一个中间步骤。</p>
+<p>另外，因为 OS X Mavericks 10.9 和目前的 macOS High Sierra 10.13 跨越了太多的版本，所以需要分成两个步骤更新：先更新到 OS X El Capitan 10.11，再更新到 macOS High Sierra 10.13。</p>
+<p>首先，更新到 OS X El Capitan 10.11。10.11 已经无法自行在 App Store 搜索到了，所以需要按照这里的方法用专用的链接下载：<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT206886">如何下载 OS X EL CAPITAN - APPLE 支持</a>；</p>
+<p>然后，再更新到 macOS High Sierra 10.13：<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT201475">如何下载 macOS High Sierra - Apple 支持</a>。</p>
 
       
     </div>
@@ -360,7 +346,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/09/05/%E4%BF%AE%E5%A4%8D-EXT2FSD-%E5%9C%A8-win10-%E4%B8%8B%E6%8C%82%E8%BD%BD-ext4-%EF%BC%88%E8%AF%86%E5%88%AB%E6%88%90ext3%EF%BC%89%E9%80%A0%E6%88%90%E7%9A%84%E5%88%86%E5%8C%BA%E6%8D%9F%E5%9D%8F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/03/15/lnmp-%E7%8E%AF%E5%A2%83%E4%B8%8B%E4%BD%BF%E7%94%A8-acme-sh-%E7%AD%BE%E5%8F%91Let-s-Encrypt-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -374,7 +360,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/05/%E4%BF%AE%E5%A4%8D-EXT2FSD-%E5%9C%A8-win10-%E4%B8%8B%E6%8C%82%E8%BD%BD-ext4-%EF%BC%88%E8%AF%86%E5%88%AB%E6%88%90ext3%EF%BC%89%E9%80%A0%E6%88%90%E7%9A%84%E5%88%86%E5%8C%BA%E6%8D%9F%E5%9D%8F/" class="post-title-link" itemprop="url">修复 EXT2FSD 在 win10 下挂载 ext4 （识别成ext3）造成的分区损坏</a>
+            <a href="/2021/03/15/lnmp-%E7%8E%AF%E5%A2%83%E4%B8%8B%E4%BD%BF%E7%94%A8-acme-sh-%E7%AD%BE%E5%8F%91Let-s-Encrypt-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">lnmp 环境下使用 acme.sh 签发Let's Encrypt 出现错误解决记录</a>
         </h2>
 
         <div class="post-meta">
@@ -384,7 +370,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-05 22:42:00" itemprop="dateCreated datePublished" datetime="2020-09-05T22:42:00+08:00">2020-09-05</time>
+              <time title="创建时间：2021-03-15 14:18:00" itemprop="dateCreated datePublished" datetime="2021-03-15T14:18:00+08:00">2021-03-15</time>
             </span>
 
           
@@ -398,13 +384,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>从这里看到的</p>
-<p><a target="_blank" rel="noopener" href="https://morningd.github.io/2017/07/18/use-ext2fsd-mount-ext4-partition-cause-a-superblock-error/">https://morningd.github.io/2017/07/18/use-ext2fsd-mount-ext4-partition-cause-a-superblock-error/</a></p>
-<p>网址失效，保存了一个截图</p>
-<p><img src="/2020/09/05/%E4%BF%AE%E5%A4%8D-EXT2FSD-%E5%9C%A8-win10-%E4%B8%8B%E6%8C%82%E8%BD%BD-ext4-%EF%BC%88%E8%AF%86%E5%88%AB%E6%88%90ext3%EF%BC%89%E9%80%A0%E6%88%90%E7%9A%84%E5%88%86%E5%8C%BA%E6%8D%9F%E5%9D%8F/ext4.png" alt="输入图片说明"></p>
-<p>知道设备名称 </p>
-<p>然后直接运行</p>
-<p>fsck -t ext4 &#x2F;dev&#x2F;sda2（假设这个&#x2F;dev&#x2F;sda2是要修复的设备）</p>
+          <p>最近在使用 lnmp脚本工具包 的时候 里面的acme.sh脚本签发 Let’s Encrypt证书报错</p>
+<p>Please refer to <a target="_blank" rel="noopener" href="https://curl.haxx.se/libcurl/c/libcurl-errors.html">https://curl.haxx.se/libcurl/c/libcurl-errors.html</a> for error code: 28</p>
+<p>根据网上搜索，说是参数换成强制wget就行了，经过测试发现一样不行，于是开始了折腾之路。</p>
+<p>经过反复测试发现，在境外的主机上操作都是正常的，但是境内就不行，难道是网络缘故？</p>
+<p>思来想去，还是把签发这个事放在境外吧。</p>
+<p>于是新建一台境外实例，部署好lnmp，修改 php-fpm的配置文件 用户名和用户组都改成root （避免权限问题）然后 lnmp stop php-fpm</p>
+<p>修改&#x2F;etc&#x2F;init.d&#x2F;php-fpm 这个文件给php-fpm 添加一个启动参数</p>
+<p>php_opts&#x3D;” -R –allow-to-run-as-root  –fpm-config $php_fpm_CONF –pid $php_fpm_PID”</p>
+<p>修改&#x2F;usr&#x2F;local&#x2F;php&#x2F;etc&#x2F;php.ini </p>
+<p>在disable_functions 里面去掉exec</p>
+<p>修改&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;fastcgi.conf</p>
+<p>fastcgi_param PHP_ADMIN_VALUE “open_basedir&#x3D;$document_root&#x2F;:&#x2F;tmp&#x2F;:&#x2F;proc&#x2F;:&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;ssl&#x2F;“;</p>
+<p>添加:&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;ssl&#x2F;</p>
+<p>准备工作就绪（lnmp php-fpm start &amp;&amp; lnmp nginx reload），假设这台机器的域名是 ca.com 解析放在阿里云</p>
+<p>在终端添加ssl虚拟主机，使用lnmp dns ali 然后根据lnmp的提示，添加好主机</p>
+<p>再添加要帮忙签的域名，使用 lnmp onlyssl ali ，例如这里添加 abc.com</p>
+<p>然后在&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;ssl&#x2F; 目录下可以找到对应域名的证书，我们只需要把文件复制到需要的服务器上就可以了，一般来说scp就行，但我采用了PHP更新的方案，所以这里要上代码了</p>
+<p>服务端，也就是ca.com服务器上部署</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>]) || !<span class="title function_ invoke__">is_valid_domain_name</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取域名的解析记录</span></span><br><span class="line"><span class="variable">$ip</span> = <span class="title function_ invoke__">dns_get_record</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>],DNS_A);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$ip</span>[<span class="number">0</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$ip</span>[<span class="number">0</span>][<span class="string">&#x27;ip&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$ip</span> = <span class="variable">$ip</span>[<span class="number">0</span>][<span class="string">&#x27;ip&#x27;</span>];</span><br><span class="line">&#125;<span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//判断访问来源和域名是否一致</span></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$ip</span> !== <span class="variable">$_SERVER</span>[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//验证通过后开始打包证书文件</span></span><br><span class="line"><span class="variable">$base</span> = <span class="string">&#x27;/usr/local/nginx/conf/ssl/&#x27;</span>;</span><br><span class="line"><span class="variable">$path</span> = <span class="variable">$base</span> . <span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>] . <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="variable">$path</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_ invoke__">exec</span>(<span class="string">&quot;cd &#x27;<span class="subst">&#123;$path&#125;</span>&#x27; &amp;&amp; tar -czf <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.tgz ca.cer fullchain.cer <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.cer <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.csr <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.csr.conf <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.key&quot;</span>);</span><br><span class="line">    <span class="comment">//计算hash</span></span><br><span class="line">    <span class="variable">$new_md5</span> = <span class="title function_ invoke__">md5_file</span>(<span class="variable">$path</span>.<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>].<span class="string">&#x27;.tgz&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$new_md5</span> !== <span class="variable">$_POST</span>[<span class="string">&#x27;md5&#x27;</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_ invoke__">send_file</span>(<span class="variable">$path</span>.<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>].<span class="string">&#x27;.tgz&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//验证域名合法性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">is_valid_domain_name</span>(<span class="params"><span class="variable">$domain_name</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">        <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//valid chars check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^.&#123;1,253&#125;$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//overall length check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^[^\.]&#123;1,63&#125;(\.[^\.]&#123;1,63&#125;)*$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//length of each label</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//发送文件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">send_file</span>(<span class="params"><span class="variable">$file</span></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$size</span> = <span class="title function_ invoke__">filesize</span>(<span class="variable">$file</span>); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-type: application/octet-stream&quot;</span>); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Accept-Ranges: bytes&quot;</span>); </span><br><span class="line">    <span class="variable">$begin</span> = <span class="number">0</span>; </span><br><span class="line">    <span class="variable">$end</span> = <span class="variable">$size</span> - <span class="number">1</span>; </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Length: &quot;</span> . (<span class="variable">$end</span> - <span class="variable">$begin</span> + <span class="number">1</span>)); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Disposition: attachment;filename=&quot;</span>.<span class="title function_ invoke__">basename</span>(<span class="variable">$file</span>)); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Range: bytes &quot;</span>.<span class="variable">$begin</span>.<span class="string">&quot;-&quot;</span>.<span class="variable">$end</span>.<span class="string">&quot;/&quot;</span>.<span class="variable">$size</span>); </span><br><span class="line">    <span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$file</span>); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>然后在abc.com这台机器上（前提是部署好了lnmp网站，创建了ssl配置，由于是基础这里不在赘述）创建 dnsca.php文件 内容如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$argv</span>[<span class="number">1</span>])) <span class="keyword">exit</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">is_valid_domain_name</span>(<span class="variable">$argv</span>[<span class="number">1</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$domain_name</span> = <span class="variable">$argv</span>[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//目录不在就新建</span></span><br><span class="line"><span class="variable">$path</span> = <span class="string">&#x27;/usr/local/nginx/conf/ssl/&#x27;</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;/&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">file_exists</span>(<span class="variable">$path</span>))</span><br><span class="line">&#123;</span><br><span class="line">    @<span class="title function_ invoke__">mkdir</span>(<span class="variable">$path</span>,<span class="number">0777</span>,<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//文件hash</span></span><br><span class="line"><span class="variable">$now_hash</span> = <span class="string">&quot;0&quot;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="variable">$path</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz&#x27;</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$now_hash</span> = <span class="title function_ invoke__">md5_file</span>(<span class="variable">$path</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$now_hash</span> = <span class="string">&quot;0&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">exec</span>(<span class="string">&#x27; cd \&#x27;&#x27;</span>.<span class="variable">$path</span>.<span class="string">&#x27;\&#x27; &amp;&amp; wget --post-data &quot;domain=&#x27;</span>.<span class="title function_ invoke__">urlencode</span>(<span class="variable">$domain_name</span>).<span class="string">&#x27;&amp;md5=&#x27;</span>.<span class="variable">$now_hash</span>.<span class="string">&#x27;&quot; --no-check-certificate -O &#x27;</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz https://ca.com/ca.php&#x27;</span>);</span><br><span class="line"><span class="variable">$size</span> = <span class="title function_ invoke__">filesize</span>(<span class="variable">$path</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz&#x27;</span>); </span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$size</span>&gt;<span class="number">1000</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_ invoke__">exec</span>(<span class="string">&#x27;cd \&#x27;&#x27;</span>.<span class="variable">$path</span>.<span class="string">&#x27;\&#x27; &amp;&amp; tar -xzf &#x27;</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz &amp;&amp; lnmp nginx reload&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//验证域名合法性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">is_valid_domain_name</span>(<span class="params"><span class="variable">$domain_name</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">        <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//valid chars check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^.&#123;1,253&#125;$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//overall length check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^[^\.]&#123;1,63&#125;(\.[^\.]&#123;1,63&#125;)*$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//length of each label</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置好文件可执行权限，然后执行</p>
+<p>&#x2F;usr&#x2F;bin&#x2F;php dnsca.php abc.com </p>
+<p>也可以设置成 crontab 任务 </p>
+<h2 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h2><p>这个方案太麻烦了，我后面不用了，就是做个记录，现在是在服务器上装7zip 用 shell 定期加密打包证书文件并且移动到 http 目录下，然后需要下载的服务器用 wget 下回来以后再解压到对应目录，全程使用 shell 和 crontab 。由于证书使用通配符签发，也就不需要验证域名了，出于安全考虑，把 http 目录设置了 IP 白名单。</p>
 
       
     </div>
@@ -424,7 +429,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/08/24/Yii-1-%E8%AE%B0%E5%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84-SQL/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/03/11/cer-%E8%BD%AC-pfx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -438,7 +443,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/24/Yii-1-%E8%AE%B0%E5%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84-SQL/" class="post-title-link" itemprop="url">Yii 1 记录执行的 SQL</a>
+            <a href="/2021/03/11/cer-%E8%BD%AC-pfx/" class="post-title-link" itemprop="url">cer 转 pfx</a>
         </h2>
 
         <div class="post-meta">
@@ -448,7 +453,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-24 13:00:00" itemprop="dateCreated datePublished" datetime="2020-08-24T13:00:00+08:00">2020-08-24</time>
+              <time title="创建时间：2021-03-11 10:07:00" itemprop="dateCreated datePublished" datetime="2021-03-11T10:07:00+08:00">2021-03-11</time>
             </span>
 
           
@@ -462,9 +467,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>官方文档 <a target="_blank" rel="noopener" href="https://www.yiiframework.com/extension/dbprofiler">https://www.yiiframework.com/extension/dbprofiler</a></p>
-<p>配置起来比较麻烦，不像其他框架那样有 last sql</p>
-
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -export -in fullchain.cer -inkey 域名.key -passout pass:&quot;key的密码&quot; -out fullchain.pfx</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -482,7 +485,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -548,14 +551,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">134</span>
+        <span class="site-state-item-count">156</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

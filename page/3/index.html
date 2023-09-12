@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/08/24/win10-%E6%81%A2%E5%A4%8D%E5%BC%80%E6%9C%BA-F8-%E8%BF%9B%E5%85%A5%E5%AE%89%E5%85%A8%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/02/13/golang-%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E4%B8%8B%E8%BD%BD%E5%8C%85%E5%87%BA%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/24/win10-%E6%81%A2%E5%A4%8D%E5%BC%80%E6%9C%BA-F8-%E8%BF%9B%E5%85%A5%E5%AE%89%E5%85%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">win10 恢复开机 F8 进入安全模式</a>
+            <a href="/2021/02/13/golang-%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E4%B8%8B%E8%BD%BD%E5%8C%85%E5%87%BA%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">golang 解决网络下载包出错的问题</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-24 12:53:00" itemprop="dateCreated datePublished" datetime="2020-08-24T12:53:00+08:00">2020-08-24</time>
+              <time title="创建时间：2021-02-13 16:51:00" itemprop="dateCreated datePublished" datetime="2021-02-13T16:51:00+08:00">2021-02-13</time>
             </span>
 
           
@@ -193,10 +193,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>管理员身份启动 cmd 输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdedit /set &#123;default&#125; bootmenupolicy legacy</span><br></pre></td></tr></table></figure>
-<p>回车后 重启测试 </p>
-<p>我看不懂这个命令，好像是把启动改成 legacy 这么搞不一定支持所有的 BIOS 设置或者笔记本电脑的 BIOS 兼容legacy 的启动，慎用。除非你真的明白 legacy 和 uefi 启动如何切换&#x2F;修复。</p>
+          <h3 id="需要使用的-Go-版本是-1-13-及以上"><a href="#需要使用的-Go-版本是-1-13-及以上" class="headerlink" title="需要使用的 Go 版本是 1.13 及以上"></a>需要使用的 Go 版本是 1.13 及以上</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE=on</span><br><span class="line">go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置不走-proxy-的私有仓库，多个用逗号相隔（可选）"><a href="#设置不走-proxy-的私有仓库，多个用逗号相隔（可选）" class="headerlink" title="设置不走 proxy 的私有仓库，多个用逗号相隔（可选）"></a>设置不走 proxy 的私有仓库，多个用逗号相隔（可选）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env -w GOPRIVATE=*.corp.example.com</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/01/09/%E4%BE%BF%E6%90%BA%E7%89%88-WinSCP-%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E5%90%8C%E6%AD%A5%E6%96%87%E4%BB%B6%E5%A4%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/%E4%BE%BF%E6%90%BA%E7%89%88-WinSCP-%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E5%90%8C%E6%AD%A5%E6%96%87%E4%BB%B6%E5%A4%B9/" class="post-title-link" itemprop="url">便携版 WinSCP 在命令行下同步文件夹</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-09 12:12:00" itemprop="dateCreated datePublished" datetime="2021-01-09T12:12:00+08:00">2021-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;D:\WinSCPPortable\App\WinSCP\WinSCP.exe&quot; /ini=&quot;D:\WinSCPPortable\Data\settings\winscp.ini&quot; /log=&quot;D:\WinSCPPortable\Data\settings\winscp.log&quot; /command &quot;open sftp://用户名@服务器地址:服务器SSH端口/ -hostkey=&quot;&quot;ssh-rsa 2048 一堆密钥=&quot;&quot; -privatekey=&quot;&quot;D:\新服务器密钥\private.ppk&quot;&quot;&quot; &quot;synchronize remote &quot;&quot;D:\同步的文件夹&quot;&quot; &quot;&quot;/home/data/同步&quot;&quot;&quot; &quot;exit&quot;</span><br></pre></td></tr></table></figure>
+<p>注意 remote 可以换成 both 或者是local 选择不同的同步方向</p>
+<p>整个命令可以用生成器，在 winscp 的菜单  会话 - 生成会话URL&#x2F;代码 - 脚本 -命令行 </p>
+<p>复制出来注意修改ini的路径和log路径</p>
+<p>至于同步命令的详细说明可以参照官方文档</p>
+<p><a target="_blank" rel="noopener" href="https://winscp.net/eng/docs/scriptcommand_synchronize">https://winscp.net/eng/docs/scriptcommand_synchronize</a></p>
+<p>整个命令是异步的，批处理中执行完立即会执行下一行，但同步过程还在继续，要注意。 </p>
 
       
     </div>
@@ -216,7 +278,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/06/02/%E8%AE%B0%E5%BD%95%E5%AE%B6%E9%87%8C%E7%9A%842-5G%E7%BD%91%E5%8D%A1%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/29/SQLite-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E6%88%96%E8%80%85%E8%A1%A8%E5%90%8E%EF%BC%8C%E5%9B%9E%E6%94%B6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -230,7 +292,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/02/%E8%AE%B0%E5%BD%95%E5%AE%B6%E9%87%8C%E7%9A%842-5G%E7%BD%91%E5%8D%A1%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">记录家里的2.5G网卡部署</a>
+            <a href="/2020/12/29/SQLite-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E6%88%96%E8%80%85%E8%A1%A8%E5%90%8E%EF%BC%8C%E5%9B%9E%E6%94%B6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F/" class="post-title-link" itemprop="url">SQLite 删除数据或者表后，回收数据库文件大小</a>
         </h2>
 
         <div class="post-meta">
@@ -240,7 +302,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-02 13:19:00" itemprop="dateCreated datePublished" datetime="2020-06-02T13:19:00+08:00">2020-06-02</time>
+              <time title="创建时间：2020-12-29 12:02:00" itemprop="dateCreated datePublished" datetime="2020-12-29T12:02:00+08:00">2020-12-29</time>
             </span>
 
           
@@ -254,14 +316,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>首先是硬件，TL-NG421 x2  86块钱一张 买了两张</p>
-<p><a href="/2020/06/02/%E8%AE%B0%E5%BD%95%E5%AE%B6%E9%87%8C%E7%9A%842-5G%E7%BD%91%E5%8D%A1%E9%83%A8%E7%BD%B2/TL-NG421_V1.0%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F20200327.rar">驱动下载</a></p>
-<p>装好以后记得换网线，这里因为不需要满速 所以用了六类线，实际能跑到1.7G左右</p>
-<p>然后设置好固定IP，就可以用了</p>
-<p>由于NAS那边是windows10 套了一层vmware 虚拟机，所以需要在vm的网络编辑里面把 网卡1桥接设置成板载网卡，再添加一个新的，然后桥接成2.5G这一张</p>
-<p>保存好 打开虚拟机，设置好虚拟机新网卡的IP 测试没问题了关机，退出VMWARE 然后记事本打开虚拟机的vmx文件，搜e1000 一般会有两个，或者多个，找到对应2.5那个 改成vmxnet3</p>
-<p>保存文件，重新开启虚拟机 测试速度已经达到1G以上。</p>
-<p>具体修改是从<a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/515669">https://yq.aliyun.com/articles/515669</a> 这里找到的</p>
+          <p>原因：<br>    sqlite采用的是变长纪录存储，当你从Sqlite删除数据后，未使用的磁盘空间被添加到一个内在的”空闲列表”中用于存储你下次插入的数据，用于提高效率，磁盘空间并没有丢失，但也不向操作系统返回磁盘空间，这就导致删除数据乃至清空整个数据库后，数据文件大小还是没有任何变化，还是很大</p>
+<p>解决办法：</p>
+<p>sqlite3 中执行 vacuum 命令即可。</p>
 
       
     </div>
@@ -281,7 +338,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/03/22/CentOS-6-9-LNMP-1-6-PHP-7-3-16-%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85-php-redis-%E6%89%A9%E5%B1%95-5-2-1/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/27/ubuntu-20-04-%E4%B8%8B-freeswitch-%E9%85%8D%E5%90%88-fail2ban-%E9%98%B2%E6%81%B6%E6%84%8F%E8%AE%BF%E9%97%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -295,7 +352,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/22/CentOS-6-9-LNMP-1-6-PHP-7-3-16-%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85-php-redis-%E6%89%A9%E5%B1%95-5-2-1/" class="post-title-link" itemprop="url">CentOS 6.9 LNMP 1.6 PHP 7.3.16 手动安装 php_redis 扩展 5.2.1</a>
+            <a href="/2020/12/27/ubuntu-20-04-%E4%B8%8B-freeswitch-%E9%85%8D%E5%90%88-fail2ban-%E9%98%B2%E6%81%B6%E6%84%8F%E8%AE%BF%E9%97%AE/" class="post-title-link" itemprop="url">ubuntu 20.04 下 freeswitch 配合 fail2ban 防恶意访问</a>
         </h2>
 
         <div class="post-meta">
@@ -305,7 +362,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-22 14:38:00" itemprop="dateCreated datePublished" datetime="2020-03-22T14:38:00+08:00">2020-03-22</time>
+              <time title="创建时间：2020-12-27 15:51:00" itemprop="dateCreated datePublished" datetime="2020-12-27T15:51:00+08:00">2020-12-27</time>
             </span>
 
           
@@ -319,8 +376,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>脚本自动安装失败了 于是尝试手动安装扩展(其实是应该更新系统了，但历史包袱没法甩掉只能先凑合一下)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/php/lib/php/extensions/no-debug-non-zts-20180731/</span><br><span class="line">wget http://pecl.php.net/get/redis-5.2.1.tgz</span><br><span class="line">tar -zxvf redis-5.2.1.tgz </span><br><span class="line"><span class="built_in">cd</span> redis-5.2.1</span><br><span class="line">/usr/local/php/bin/phpize</span><br><span class="line"></span><br><span class="line"><span class="comment">#发现autoconf报错，原因是版本太低</span></span><br><span class="line"><span class="comment">#centos自带的yum库里面的版本已经是最新了于是只能手动升级</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查询旧的版本号 并卸载旧的</span></span><br><span class="line">rpm -qf /usr/bin/autoconf</span><br><span class="line">rpm -e --nodeps autoconf-2.63</span><br><span class="line"><span class="comment">#下载源码包</span></span><br><span class="line">wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz</span><br><span class="line">tar -xzvf autoconf-2.69.tar.gz </span><br><span class="line"><span class="built_in">cd</span> autoconf-2.69</span><br><span class="line">./configure</span><br><span class="line">make </span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">/usr/local/php/bin/phpize</span><br><span class="line">./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line">make </span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment">#新建/usr/local/php/conf.d/007-redis.ini里面内容写</span></span><br><span class="line">extension = <span class="string">&quot;redis.so&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看是否安装成功</span></span><br><span class="line">php -m</span><br><span class="line"><span class="comment">#载入扩展</span></span><br><span class="line">lnmp php-fpm reload</span><br></pre></td></tr></table></figure>
+          <p>ubuntu 20.04 </p>
+<p>freeswitch 1.10.5</p>
+<p>fail2ban 0.11.1  <a target="_blank" rel="noopener" href="https://github.com/fail2ban/fail2ban">https://github.com/fail2ban/fail2ban</a></p>
+<h3 id="1-先要让恶意访问的警告内容写入freeswitch的日志"><a href="#1-先要让恶意访问的警告内容写入freeswitch的日志" class="headerlink" title="1,先要让恶意访问的警告内容写入freeswitch的日志"></a>1,先要让恶意访问的警告内容写入freeswitch的日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">修改 /usr/local/freeswitch/conf/sip_profiles/internal.xml</span><br><span class="line"></span><br><span class="line">&lt;param name=&quot;log-auth-failures&quot; value=&quot;true&quot;/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">修改 /usr/local/freeswitch/conf/autoload_configs/switch.conf.xml</span><br><span class="line"></span><br><span class="line">&lt;param name=&quot;threaded-system-exec&quot; value=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>改好以后保存，然后重启 freeswitch 或者 reloadxml </p>
+<h3 id="2，安装fail2ban-，如果之前安装过但是出错了-需要先卸载"><a href="#2，安装fail2ban-，如果之前安装过但是出错了-需要先卸载" class="headerlink" title="2，安装fail2ban ，如果之前安装过但是出错了 需要先卸载"></a>2，安装fail2ban ，如果之前安装过但是出错了 需要先卸载</h3><p>apt-get安装的 直接 sudo apt-get remove fail2ban</p>
+<p>源码安装的可以考虑先结束fail2ban的进程然后手动删除下面的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/fail2ban-*</span><br><span class="line">/usr/local/bin/fail2ban-*</span><br><span class="line">/usr/lib/python*/*/fail2ban</span><br><span class="line">/usr/local/lib/python*/*/fail2ban (例如 /usr/local/lib/python2.7/dist-packages/fail2ban/)</span><br><span class="line">/etc/fail2ban</span><br></pre></td></tr></table></figure>
+<p>然后重新安装 <code>apt-get install fail2ban</code></p>
+<p>再查看&#x2F;etc&#x2F;fail2ban目录下是否有配置文件，如果没有，需要从github上下载config文件夹下的配置文件 复制进来</p>
+<p>启动 systemctl start fail2ban</p>
+<p>查看状态 systemctl status fail2ban</p>
+<h3 id="3，配置"><a href="#3，配置" class="headerlink" title="3，配置"></a>3，配置</h3><p>修改 &#x2F;etc&#x2F;fail2ban&#x2F;jail.local 如果没有这个文件，那复制一个jail.conf 改名过来</p>
+<p>在里面搜 freeswitch，把对应端口补上，log文件地址改成 &#x2F;usr&#x2F;local&#x2F;freeswitch&#x2F;log&#x2F;freeswitch.log</p>
+<p>然后保存</p>
+<p>&#x2F;etc&#x2F;fail2ban&#x2F;jail.d&#x2F; 新建一个 freeswitch.local 文件</p>
+<p>内容写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[freeswitch]</span><br><span class="line">enabled = true</span><br><span class="line"></span><br><span class="line">maxretry = 4 ; for a total of five failures</span><br><span class="line">findtime = 3600 ; based on empirical testing</span><br><span class="line">bantime = 259200 ; ban for 3day (which lets us pick up repeat offenders)</span><br><span class="line"></span><br><span class="line"># We do not use 5061 and it is not open to the outside world, so act on 5060 only</span><br><span class="line">port = 5060,5061,5080,5081,7060</span><br><span class="line"></span><br><span class="line"># we do not want mail, so remove that action from standard jail.conf freeswitch config</span><br><span class="line">action = %(banaction)s[name=%(__name__)s-tcp, port=&quot;%(port)s&quot;, protocol=&quot;tcp&quot;, chain=&quot;%(chain)s&quot;, actname=%(banaction)s-tcp]</span><br><span class="line">%(banaction)s[name=%(__name__)s-udp, port=&quot;%(port)s&quot;, protocol=&quot;udp&quot;, chain=&quot;%(chain)s&quot;, actname=%(banaction)s-udp]</span><br><span class="line"></span><br><span class="line"># Add intrusion log, which contains special string for host (see freeswitch.local filter)</span><br><span class="line">logpath = /usr/local/freeswitch/log/freeswitch.log</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>保存 然后重新载入配置</p>
+<p>fail2ban-client reload 如果出错 尝试在命令前面加python3</p>
+<p>python3 fail2ban-client reload</p>
+<p>python3 fail2ban-client status freeswitch   #查看当前freeswitch 被禁止的服务器的状态</p>
+<p>python3 fail2ban-client set freeswitch unbanip 1.2.3.4      #设置freeswitch策略，解禁IP 1.2.3.4</p>
+
       
     </div>
 
@@ -339,7 +419,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/03/11/GreenChrome-6-6-6-%E6%9B%B4%E6%96%B0-Chrome-78-%E4%B9%8B%E5%90%8E%E9%A1%B5%E9%9D%A2%E5%B4%A9%E6%BA%83/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -353,7 +433,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/11/GreenChrome-6-6-6-%E6%9B%B4%E6%96%B0-Chrome-78-%E4%B9%8B%E5%90%8E%E9%A1%B5%E9%9D%A2%E5%B4%A9%E6%BA%83/" class="post-title-link" itemprop="url">GreenChrome 6.6.6 更新 Chrome 78 之后页面崩溃</a>
+            <a href="/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">ffmpeg 使用 nvenc 编码的结论记录</a>
         </h2>
 
         <div class="post-meta">
@@ -363,7 +443,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-11 16:23:00" itemprop="dateCreated datePublished" datetime="2020-03-11T16:23:00+08:00">2020-03-11</time>
+              <time title="创建时间：2020-12-14 20:53:00" itemprop="dateCreated datePublished" datetime="2020-12-14T20:53:00+08:00">2020-12-14</time>
             </span>
 
           
@@ -377,87 +457,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>打开GreenChrome.ini找到[追加参数]下面加入启动参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-features=RendererCodeIntegrity</span><br></pre></td></tr></table></figure>
-      
-    </div>
+          <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
+<li><p>同码率下 速度比x264快很多，但是质量比不过，从字幕边缘可以看出来</p>
+</li>
+<li><p>涉及到 -vf “ass&#x3D;1.ass” 做字幕内嵌，连编码速度的优势也没了</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe -y -i &quot;demo.mp4&quot; -c:v h264_nvenc -preset llhq -bf 4 -b:v 400k -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/03/10/FFmpeg-%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/10/FFmpeg-%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">ffmpeg 命令笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-10 16:01:00" itemprop="dateCreated datePublished" datetime="2020-03-10T16:01:00+08:00">2020-03-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>个人常用命令笔记，非公开教程</p>
-</blockquote>
-<h2 id="旋转视频"><a href="#旋转视频" class="headerlink" title="旋转视频"></a>旋转视频</h2><h3 id="直接复制流"><a href="#直接复制流" class="headerlink" title="直接复制流"></a>直接复制流</h3><p><code>ffmpeg -i &quot;输入文件&quot; -c copy -metadata:s:v:0 rotate=90 &quot;输出文件&quot;</code></p>
+<p>于是内嵌字幕请直接使用x264</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe  -y -i &quot;demo.mp4&quot; -c:v libx264 -preset veryslow -crf 24 -bf 6 -refs 6 -qcomp 0.5 -aq-mode 2 -aq-strength 0.8 -psy-rd 0.3:0 -deblock 1:1 -x264opts min-keyint=1 -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>rotate&#x3D;90表示旋转90度 也可写入180或270的值</p>
+<p>注意这个ass&#x3D;1.ass 在windows下，路径会有编码问题，最好把字幕和ffmpeg放在一起 避免输入路径，文件名也要用简单的。</p>
 </blockquote>
-<h3 id="重新编码流"><a href="#重新编码流" class="headerlink" title="重新编码流"></a>重新编码流</h3><p><code>ffmpeg.exe -i &quot;1.mp4&quot; -c:v libx264 -preset veryslow -crf 24 -x264opts ref=6:deblock=1:1:1keyint=30:min-keyint=10 -vf &quot;transpose=2&quot; -c:a copy &quot;output.mkv&quot;</code></p>
-<blockquote>
-<p>编码参数为个人常用参数 非默认参数</p>
-</blockquote>
-<hr>
-<h2 id="重新编码视频和音频并且设置参数-缩放画面分辨率"><a href="#重新编码视频和音频并且设置参数-缩放画面分辨率" class="headerlink" title="重新编码视频和音频并且设置参数 + 缩放画面分辨率"></a>重新编码视频和音频并且设置参数 + 缩放画面分辨率</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe -y -i <span class="string">&quot;输入.mkv&quot;</span> -f wav - | nae.exe -he -br 64000 -ignorelength -<span class="keyword">if</span> - -of <span class="string">&quot;temp.m4a&quot;</span></span><br><span class="line">ffmpeg.exe -y -i <span class="string">&quot;输入.mkv&quot;</span> -c:v libx264 -preset veryslow -crf 24 -bf 6 -refs 6 -qcomp 0.5 -aq-mode 2 -aq-strength 0.8 -psy-rd 0.3:0 -deblock 1:1 -x264opts min-keyint=1 -vf <span class="string">&quot;scale=1280:720&quot;</span> -an <span class="string">&quot;temp.m4v&quot;</span></span><br><span class="line">ffmpeg.exe -y -i temp.m4v -i temp.m4a -map_chapters -1 -c copy <span class="string">&quot;输出.mp4&quot;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>nae.exe 是neroAAC编码器 ffmpeg 因为协议问题不能自带这个 所以只能外置</p>
-</blockquote>
-<hr>
-<h2 id="ffmpeg-（ffprobe）分析文件关键帧时间点"><a href="#ffmpeg-（ffprobe）分析文件关键帧时间点" class="headerlink" title="ffmpeg （ffprobe）分析文件关键帧时间点"></a>ffmpeg （ffprobe）分析文件关键帧时间点</h2><p><code>ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 &quot;input.mp4&quot;</code></p>
-<hr>
-<h2 id="简化输出信息"><a href="#简化输出信息" class="headerlink" title="简化输出信息"></a>简化输出信息</h2><p><code>ffmpeg.exe -hide_banner </code></p>
-<blockquote>
-<p>加上这个参数以后 输出会清爽很多</p>
-</blockquote>
+<ol start="3">
+<li>要速度不要质量的时候，可以批量处理提高处理速度</li>
+</ol>
 
       
     </div>
@@ -476,7 +491,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -542,14 +557,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">134</span>
+        <span class="site-state-item-count">156</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
