@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/10/20/CentOS-8-%E5%AE%89%E8%A3%85Puppeteer-%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/08/30/JS-%E5%B1%8F%E5%B9%95%E6%90%9C%E7%B4%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0CTRL-F%E7%9A%84%E6%95%88%E6%9E%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/10/20/CentOS-8-%E5%AE%89%E8%A3%85Puppeteer-%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">CentOS 8 安装 Puppeteer 记录</a>
+            <a href="/2021/08/30/JS-%E5%B1%8F%E5%B9%95%E6%90%9C%E7%B4%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0CTRL-F%E7%9A%84%E6%95%88%E6%9E%9C/" class="post-title-link" itemprop="url">JS 屏幕搜索，实现CTRL + F的效果</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-10-20 11:40:00" itemprop="dateCreated datePublished" datetime="2020-10-20T11:40:00+08:00">2020-10-20</time>
+              <time title="创建时间：2021-08-30 09:59:00" itemprop="dateCreated datePublished" datetime="2021-08-30T09:59:00+08:00">2021-08-30</time>
             </span>
 
           
@@ -193,35 +193,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="先装node-js"><a href="#先装node-js" class="headerlink" title="先装node.js"></a>先装node.js</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nodejs</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
-
-<h3 id="然后是装-cnpm-（国外服务器不用这步）"><a href="#然后是装-cnpm-（国外服务器不用这步）" class="headerlink" title="然后是装 cnpm （国外服务器不用这步）"></a>然后是装 cnpm （国外服务器不用这步）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p>新建一个目录用来部署  例如  &#x2F;data&#x2F;js</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/js</span><br><span class="line"></span><br><span class="line"># 再执行</span><br><span class="line"></span><br><span class="line">yum install -y firefox</span><br><span class="line"></span><br><span class="line">cnpm install puppeteer </span><br><span class="line">#（国外服务器用npm装，具体看https://github.com/puppeteer/puppeteer）</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以了，但是现在没有中文字体 ，网页截图发现中文都是方块</p>
-<p>字体参考教程 <a target="_blank" rel="noopener" href="https://blog.csdn.net/wlwlwlwl015/article/details/51482065">https://blog.csdn.net/wlwlwlwl015/article/details/51482065</a></p>
-<h3 id="安装字体库"><a href="#安装字体库" class="headerlink" title="安装字体库"></a>安装字体库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install fontconfig</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加中文字体"><a href="#添加中文字体" class="headerlink" title="添加中文字体"></a>添加中文字体</h3><p>在 CentOS 中，字体库的存放位置是&#x2F;usr&#x2F;share&#x2F;fonts 和 fontconfig 目录，所以我们首先要做的就是找到中文字体文件放到该目录下，而中文字体文件在我们的 windows 系统中就可以找到，打开c盘下的 Windows&#x2F;Fonts 目录<br>，我们只需要将我们需要的字体拷贝出来并上传至 linu x服务器即可，在这里我选择宋体和黑体，是两个后缀名为ttf和ttc的文件：</p>
-<p>在这之前我们还需要新建目录，首先在 &#x2F;usr&#x2F;share&#x2F;fonts 目录下新建一个目录chinese：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/share/fonts/chinese</span><br></pre></td></tr></table></figure>
-
-<p>然后就是将上面的两个字体上传至 &#x2F;usr&#x2F;share&#x2F;fonts&#x2F;chinese 目录下即可：</p>
-<p>紧接着需要修改chinese目录的权限：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 755 /usr/share/fonts/chinese</span><br></pre></td></tr></table></figure>
-
-<p>然后执行 ttmkfdir 命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ttmkfdir -e /usr/share/X11/fonts/encodings/encodings.dir</span><br></pre></td></tr></table></figure>
-
-<p>最后一步就是修改字体配置文件了，首先通过编辑器打开配置文件：</p>
-<p>vi &#x2F;etc&#x2F;fonts&#x2F;fonts.conf</p>
-<p>可以看到一个 Font list，即字体列表，在这里需要把我们添加的中文字体位置加进去：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;dir&gt;/usr/usr/share/fonts/chinese&lt;/dir&gt;</span><br></pre></td></tr></table></figure>
-
-<p>然后输入保存退出，最后别忘了刷新内存中的字体缓存，这样就不用reboot重启了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fc-cache</span><br></pre></td></tr></table></figure>
-<p>这样所有的步骤就算完成了，最后再次通过 fc-list 看一下字体列表</p>
+          <p><a target="_blank" rel="noopener" href="https://www.seabreezecomputers.com/tips/find.htm">https://www.seabreezecomputers.com/tips/find.htm</a></p>
+<p>默认不给下载，必须捐赠给钱才行。</p>
+<p>白嫖：</p>
+<p>找到id&#x3D;”dl_link_find5.js”这个a标签，里面的 href 就是下载地址</p>
 
       
     </div>
@@ -241,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/09/10/PHP%E5%85%B3%E4%BA%8E-pack-unpack-%E8%BF%98%E6%9C%89%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF%E5%BA%8F-%E5%B0%8F%E7%AB%AF%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/07/10/SQL-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%E6%80%9D%E8%80%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -255,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/10/PHP%E5%85%B3%E4%BA%8E-pack-unpack-%E8%BF%98%E6%9C%89%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF%E5%BA%8F-%E5%B0%8F%E7%AB%AF%E5%BA%8F/" class="post-title-link" itemprop="url">PHP 关于 pack unpack 还有字节序 大端序  小端序</a>
+            <a href="/2021/07/10/SQL-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%E6%80%9D%E8%80%83/" class="post-title-link" itemprop="url">SQL 语句的执行顺序，以及优化的方向思考</a>
         </h2>
 
         <div class="post-meta">
@@ -265,7 +240,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-10 01:01:00" itemprop="dateCreated datePublished" datetime="2020-09-10T01:01:00+08:00">2020-09-10</time>
+              <time title="创建时间：2021-07-10 15:03:00" itemprop="dateCreated datePublished" datetime="2021-07-10T15:03:00+08:00">2021-07-10</time>
             </span>
 
           
@@ -279,11 +254,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>偶然在网上看到了三篇写的不错的文章，这里留个记录</p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/goal/blog/195749">PHP: 深入pack&#x2F;unpack</a></p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/goal/blog/202378">PHP: chr和pack、unpack那些事</a></p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/goal/blog/202381">PHP: pack&#x2F;unpack补遗</a></p>
-<p><a href="/2020/09/10/PHP%E5%85%B3%E4%BA%8E-pack-unpack-%E8%BF%98%E6%9C%89%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF%E5%BA%8F-%E5%B0%8F%E7%AB%AF%E5%BA%8F/PHP%E5%AD%97%E8%8A%82%E5%BA%8F.rar">页面防丢备份</a></p>
+          <p><img src="/2021/07/10/SQL-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%E6%80%9D%E8%80%83/sql.jpg" alt="执行顺序"></p>
+<p>这是一条SQL的执行顺序</p>
+<p>可以看到JOIN和WHERE在早期执行，所以优化的重点往往也在这里。数据库的查询性能一般受CPU检索能力+I&#x2F;O设备的读写速度影响，所以要提高查询性能最简单粗暴的方式就是 换更强的CPU（这样逻辑判断就更快），或者增加存储设备的性能（例如机械盘换SSD）。这种方式有点类似于以力破巧，简单粗暴有效果。</p>
+<p>当硬件都没法再提高的情况下，就要从思路上来解决问题了。索引就是一个简单的提高查询性能的方法，具体原理就是把关键数据的位置单独保存一下，类似于一本书的目录，没有目录的时候找一篇文章需要翻遍整本书，但是有目录了以后，就可以根据目录直接翻到对应页码。不过要注意，索引也是有副作用的，首先是降低写入性能，因为制作目录需要单独的计算，还有就是不要滥用索引，只索引最需要的字段（往往是查询条件最常见的字段），这里还有联合索引的概念，就不具体展开了。</p>
+<p>根据执行顺序，要小心的考虑join的方向（不同的join出来的结果不同），要join出来（能够包含查询需要的数据）最小的结果集，这样CPU的性能就会减少浪费。然后是仔细斟酌where的条件，也是避免无端的CPU性能浪费，原则就是尽可能在早期筛掉明显不符合查询条件的结果，减少CPU判断次数。</p>
+<p>GROOUP BY和HAVING也是比较早期的执行过程，所以要慎用，这个非常影响性能，不过好在它在where之后，如果在where之前，那就是个灾难了，在对全部数据集做分组，不敢想象会有多慢。</p>
+<p>SELECT以前不太建议条件直接用 * 但现在基本没问题了 ,查询优化器会自动优化了。<br>所以优化SQL的整体方向就是，减少硬件的读写和判断，尽可能在早期筛掉无效结果，减少结果集的大小<br>但这个想法如果不经过实践应该会比较难理解，需要在具体工作中多分析思考尝试。</p>
 
       
     </div>
@@ -303,7 +280,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/09/05/%E4%BF%AE%E5%A4%8D-EXT2FSD-%E5%9C%A8-win10-%E4%B8%8B%E6%8C%82%E8%BD%BD-ext4-%EF%BC%88%E8%AF%86%E5%88%AB%E6%88%90ext3%EF%BC%89%E9%80%A0%E6%88%90%E7%9A%84%E5%88%86%E5%8C%BA%E6%8D%9F%E5%9D%8F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/07/02/tmp-%E6%BB%A1%E4%BA%86%E5%8F%AF%E8%83%BD%E6%98%AF%E7%A3%81%E7%9B%98%E6%BB%A1%E4%BA%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -317,7 +294,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/05/%E4%BF%AE%E5%A4%8D-EXT2FSD-%E5%9C%A8-win10-%E4%B8%8B%E6%8C%82%E8%BD%BD-ext4-%EF%BC%88%E8%AF%86%E5%88%AB%E6%88%90ext3%EF%BC%89%E9%80%A0%E6%88%90%E7%9A%84%E5%88%86%E5%8C%BA%E6%8D%9F%E5%9D%8F/" class="post-title-link" itemprop="url">修复 EXT2FSD 在 win10 下挂载 ext4 （识别成ext3）造成的分区损坏</a>
+            <a href="/2021/07/02/tmp-%E6%BB%A1%E4%BA%86%E5%8F%AF%E8%83%BD%E6%98%AF%E7%A3%81%E7%9B%98%E6%BB%A1%E4%BA%86/" class="post-title-link" itemprop="url">/tmp 满了可能是磁盘满了</a>
         </h2>
 
         <div class="post-meta">
@@ -327,7 +304,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-05 22:42:00" itemprop="dateCreated datePublished" datetime="2020-09-05T22:42:00+08:00">2020-09-05</time>
+              <time title="创建时间：2021-07-02 13:49:00" itemprop="dateCreated datePublished" datetime="2021-07-02T13:49:00+08:00">2021-07-02</time>
             </span>
 
           
@@ -341,13 +318,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>从这里看到的</p>
-<p><a target="_blank" rel="noopener" href="https://morningd.github.io/2017/07/18/use-ext2fsd-mount-ext4-partition-cause-a-superblock-error/">https://morningd.github.io/2017/07/18/use-ext2fsd-mount-ext4-partition-cause-a-superblock-error/</a></p>
-<p>网址失效，保存了一个截图</p>
-<p><img src="/2020/09/05/%E4%BF%AE%E5%A4%8D-EXT2FSD-%E5%9C%A8-win10-%E4%B8%8B%E6%8C%82%E8%BD%BD-ext4-%EF%BC%88%E8%AF%86%E5%88%AB%E6%88%90ext3%EF%BC%89%E9%80%A0%E6%88%90%E7%9A%84%E5%88%86%E5%8C%BA%E6%8D%9F%E5%9D%8F/ext4.png" alt="输入图片说明"></p>
-<p>知道设备名称 </p>
-<p>然后直接运行</p>
-<p>fsck -t ext4 &#x2F;dev&#x2F;sda2（假设这个&#x2F;dev&#x2F;sda2是要修复的设备）</p>
+          <p>网站提示报错 文件无法上传，好像是 &#x2F;tmp 满了 实际是数据盘满了</p>
+<p>于是先扩容 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/toumingbai/p/10216142.html">https://www.cnblogs.com/toumingbai/p/10216142.html</a></p>
+<p>再新加一块磁盘，格式化成ext4 挂载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/vdc</span><br><span class="line">mount /dev/vdc /data/v2</span><br><span class="line"><span class="comment">#然后转移部分文件进去</span></span><br><span class="line"><span class="built_in">cp</span> -rp /data/v1 /data/v2</span><br></pre></td></tr></table></figure>
+<p>复制完记得备份再删</p>
 
       
     </div>
@@ -367,7 +342,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/08/24/Yii-1-%E8%AE%B0%E5%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84-SQL/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/06/28/acme-sh%EF%BC%8C%E9%BB%98%E8%AE%A4-CA-%E5%8F%98%E6%88%90%E4%BA%86-ZeroSSL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -381,7 +356,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/24/Yii-1-%E8%AE%B0%E5%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84-SQL/" class="post-title-link" itemprop="url">Yii 1 记录执行的 SQL</a>
+            <a href="/2021/06/28/acme-sh%EF%BC%8C%E9%BB%98%E8%AE%A4-CA-%E5%8F%98%E6%88%90%E4%BA%86-ZeroSSL/" class="post-title-link" itemprop="url">acme.sh，默认 CA 变成了 ZeroSSL</a>
         </h2>
 
         <div class="post-meta">
@@ -391,7 +366,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-24 13:00:00" itemprop="dateCreated datePublished" datetime="2020-08-24T13:00:00+08:00">2020-08-24</time>
+              <time title="创建时间：2021-06-28 10:14:00" itemprop="dateCreated datePublished" datetime="2021-06-28T10:14:00+08:00">2021-06-28</time>
             </span>
 
           
@@ -405,8 +380,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>官方文档 <a target="_blank" rel="noopener" href="https://www.yiiframework.com/extension/dbprofiler">https://www.yiiframework.com/extension/dbprofiler</a></p>
-<p>配置起来比较麻烦，不像其他框架那样有 last sql</p>
+          <p><a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/wiki/Change-default-CA-to-ZeroSSL">官方说明</a></p>
+<p><a target="_blank" rel="noopener" href="https://twitter.com/neilpangxa/status/1222792801835872256">具体原因</a></p>
+<p>继续用原来的配置的方法<br>配置文件里删掉最后一行的 Le_API&#x3D;’<a target="_blank" rel="noopener" href="https://acme.zerossl.com/v2/DV90">https://acme.zerossl.com/v2/DV90</a>‘ （之前配置应该没有这一行），再执行<br><code>acme.sh --set-default-ca --server letsencrypt</code></p>
+<p><a target="_blank" rel="noopener" href="https://www.ffis.me/archives/2110.html">使用新的配置的办法</a></p>
+<blockquote>
+<p>acme.sh –register-account -m 邮箱地址 –server zerossl</p>
+</blockquote>
+<p><a href="/2021/06/28/acme-sh%EF%BC%8C%E9%BB%98%E8%AE%A4-CA-%E5%8F%98%E6%88%90%E4%BA%86-ZeroSSL/%E6%94%BE%E5%BC%83LetusEncrypt%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2ZeroSSL%E8%AF%81%E4%B9%A6.rar">备份</a></p>
 
       
     </div>
@@ -426,7 +407,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/08/24/win10-%E6%81%A2%E5%A4%8D%E5%BC%80%E6%9C%BA-F8-%E8%BF%9B%E5%85%A5%E5%AE%89%E5%85%A8%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/06/16/windows-10-%E6%89%93%E4%B8%8D%E5%BC%80%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E5%92%8C%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%8D%A1-0-%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%83%BD%E6%80%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -440,7 +421,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/24/win10-%E6%81%A2%E5%A4%8D%E5%BC%80%E6%9C%BA-F8-%E8%BF%9B%E5%85%A5%E5%AE%89%E5%85%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">win10 恢复开机 F8 进入安全模式</a>
+            <a href="/2021/06/16/windows-10-%E6%89%93%E4%B8%8D%E5%BC%80%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E5%92%8C%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%8D%A1-0-%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%83%BD%E6%80%A7/" class="post-title-link" itemprop="url">windows 10 打不开应用商店和自动更新卡 0&#37; 的一个可能性</a>
         </h2>
 
         <div class="post-meta">
@@ -450,7 +431,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-24 12:53:00" itemprop="dateCreated datePublished" datetime="2020-08-24T12:53:00+08:00">2020-08-24</time>
+              <time title="创建时间：2021-06-16 12:07:00" itemprop="dateCreated datePublished" datetime="2021-06-16T12:07:00+08:00">2021-06-16</time>
             </span>
 
           
@@ -464,10 +445,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>管理员身份启动 cmd 输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdedit /set &#123;default&#125; bootmenupolicy legacy</span><br></pre></td></tr></table></figure>
-<p>回车后 重启测试 </p>
-<p>我看不懂这个命令，好像是把启动改成 legacy 这么搞不一定支持所有的 BIOS 设置或者笔记本电脑的 BIOS 兼容legacy 的启动，慎用。除非你真的明白 legacy 和 uefi 启动如何切换&#x2F;修复。</p>
+          <p>Proxifier 3.15 会影响。卸载后恢复，这个软件如果是刚需又不能卸载。</p>
+<p>新版好像原理不一样了，虽然不会卡更新，但不是我需要的功能。</p>
+<p>在 开始菜单 - proxifier - 系统设置 - 卸载模块 - 重置 wsock（会强制重启电脑） 重启后重复这个步骤在窗口的左下角切换到64位 再来一次，再重启<br>此时应该可以更新系统了，更新完再反向操作，安装模块，重启生效。</p>
+<p>根据这个原理<br>禁止 win10 自动更新的办法又多了一个，直接装一个Proxifier 3.15 （不要装新版，就这个版本最管用）不需要启动软件，都可以禁止更新了。<br>搞的我这两年想更都更不了。</p>
 
       
     </div>
@@ -486,7 +467,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -552,14 +533,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-count">180</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -155,6 +155,125 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/09/14/shell-%E5%A4%87%E4%BB%BD-mysql-%E7%9A%84%E8%A1%A8%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/14/shell-%E5%A4%87%E4%BB%BD-mysql-%E7%9A%84%E8%A1%A8%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">shell 备份 mysql 的表结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-14 18:51:02" itemprop="dateCreated datePublished" datetime="2023-09-14T18:51:02+08:00">2023-09-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">DB_USER=&quot;root&quot;</span><br><span class="line">DB_PASS=&quot;密码&quot;</span><br><span class="line">DB_NAME=&quot;MYSQL1&quot;</span><br><span class="line">BIN_DIR=&quot;/usr/bin&quot;</span><br><span class="line">BACK_DIR=&quot;./&quot;</span><br><span class="line">MYSQL_IP=&quot;127.0.0.1&quot;</span><br><span class="line">for dbname in $(mysql -u$DB_USER -p$DB_PASS -h $MYSQL_IP -P 3306 -e &quot;show databases;&quot; | grep -Evi &quot;binlog|logs|performance_schema|information_schema|perfo|database|mysql&quot;)</span><br><span class="line">do</span><br><span class="line">echo $dbname;</span><br><span class="line">echo &quot;use $&#123;dbname&#125;;&quot;&gt;&gt;结构文件.sql</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">BIN_DIR/mysqldump --single-transaction -h <span class="variable">$MYSQL_IP</span> -P 3306 -u<span class="variable">$DB_USER</span> -p<span class="variable">$DB_PASS</span> -d <span class="variable">$dbname</span> &gt;&gt;结构文件.sql</span></span><br><span class="line">done</span><br><span class="line">echo &quot;$DB_NAME done&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这样备份出来的文件换行符要转换成windows下的，然后navicat导入的时候要忽略错误继续。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/09/14/hexo-next-%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98%E4%B8%8D%E8%83%BD%E6%9C%89%E7%99%BE%E5%88%86%E5%8F%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/14/hexo-next-%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98%E4%B8%8D%E8%83%BD%E6%9C%89%E7%99%BE%E5%88%86%E5%8F%B7/" class="post-title-link" itemprop="url">hexo + next 文章标题不能有百分号&#37;</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-14 17:54:06" itemprop="dateCreated datePublished" datetime="2023-09-14T17:54:06+08:00">2023-09-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>因为模版渲染的标记符是百分号 所以标题里面如果有百分号会影响渲染<br>只能用html转义字符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;#37;</span><br></pre></td></tr></table></figure>
+<p>这个替代。但是文章内容里面写是没事的。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/05/19/%E8%BD%AC%E8%BD%BD%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%80%E6%BA%90%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -407,139 +526,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/05/14/MySQL-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/14/MySQL-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">MySQL 分页查询优化技巧</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-14 11:34:59" itemprop="dateCreated datePublished" datetime="2023-05-14T11:34:59+08:00">2023-05-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>情况：分页前面很快，后面的页很慢</p>
-<p>原始语句</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id,birthday,title <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> title limit <span class="number">400000</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>分析：此语句效率低主要是因为有排序</p>
-<p>改进</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id,birthday,title <span class="keyword">from</span> person <span class="keyword">as</span> p1 </span><br><span class="line"><span class="keyword">join</span> </span><br><span class="line">(<span class="keyword">select</span> id <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> title limit <span class="number">400000</span>,<span class="number">1</span>) p2</span><br><span class="line"><span class="keyword">on</span> p1.id<span class="operator">=</span>p2.id;</span><br></pre></td></tr></table></figure>
-<p>表结构</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `person` (</span><br><span class="line">	`id` <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">	`birthday` <span class="type">date</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	`title` <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	`comm1` <span class="type">varchar</span>(<span class="number">6383</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	<span class="keyword">PRIMARY</span> KEY (`id`) ,</span><br><span class="line">	KEY `p_1`(`title`)</span><br><span class="line">)ENGINE<span class="operator">=</span>InnODB AUTO_INCRENENT<span class="operator">=</span><span class="number">438174</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8mb4_0900_ai_ci;</span><br></pre></td></tr></table></figure>
-<p>总结：<br>二级索引 p_1 实际上是包含 主键索引的，P2临时表只查询这两个字段所以会提高查询速度<br>利用的就是索引比表小的多的原理，如果索引不合适，条件覆盖不到，那一样会很慢。</p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12M4y1m7N9">转载来源</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/04/15/%E8%AE%A9-html-%E9%A1%B5%E9%9D%A2%E9%87%8C%E9%9D%A2%E7%9A%84%E8%B6%85%E9%93%BE%E6%8E%A5%E9%BB%98%E8%AE%A4%E4%BB%A5%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%89%93%E5%BC%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/15/%E8%AE%A9-html-%E9%A1%B5%E9%9D%A2%E9%87%8C%E9%9D%A2%E7%9A%84%E8%B6%85%E9%93%BE%E6%8E%A5%E9%BB%98%E8%AE%A4%E4%BB%A5%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%89%93%E5%BC%80/" class="post-title-link" itemprop="url">让 html 页面里面的超链接默认以新标签页打开</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-15 18:04:52" itemprop="dateCreated datePublished" datetime="2023-04-15T18:04:52+08:00">2023-04-15</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>平时我们写一个超链接 A 标签 有一个 target 属性可以控制打开行为，默认行为是 _self 也就是跳转。偶尔需要新标签页打开可以把这个值设置成 _blank。</p>
-<p>假如页面里面链接很多，我们又想让 A 标签默认全是新标签页打开，最典型的例子就是搜索结果的列表 ，那么就可以使用 <base> 标签来控制默认行为。<br>例如</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh-CN&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 设定页面默认打开链接的行为，注意base必须在head段 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">base</span> <span class="attr">target</span>=<span class="string">_blank</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 被控制了默认行为 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://baidu.com&quot;</span>&gt;</span>新标签页打开baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 标签自有属性可以无视默认设置 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://baidu.com&quot;</span> <span class="attr">target</span>=<span class="string">_self</span>&gt;</span>原标签页跳转baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>除此之外，base 还可以控制页面中相对链接的基准 URL 。</p>
-<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/tag_base.asp">关于 base 的介绍</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -605,14 +595,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-count">180</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

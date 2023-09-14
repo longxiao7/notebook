@@ -155,6 +155,135 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/05/14/MySQL-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/14/MySQL-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">MySQL 分页查询优化技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-14 11:34:59" itemprop="dateCreated datePublished" datetime="2023-05-14T11:34:59+08:00">2023-05-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>情况：分页前面很快，后面的页很慢</p>
+<p>原始语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id,birthday,title <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> title limit <span class="number">400000</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>分析：此语句效率低主要是因为有排序</p>
+<p>改进</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id,birthday,title <span class="keyword">from</span> person <span class="keyword">as</span> p1 </span><br><span class="line"><span class="keyword">join</span> </span><br><span class="line">(<span class="keyword">select</span> id <span class="keyword">from</span> person <span class="keyword">order</span> <span class="keyword">by</span> title limit <span class="number">400000</span>,<span class="number">1</span>) p2</span><br><span class="line"><span class="keyword">on</span> p1.id<span class="operator">=</span>p2.id;</span><br></pre></td></tr></table></figure>
+<p>表结构</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `person` (</span><br><span class="line">	`id` <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">	`birthday` <span class="type">date</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	`title` <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	`comm1` <span class="type">varchar</span>(<span class="number">6383</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">	<span class="keyword">PRIMARY</span> KEY (`id`) ,</span><br><span class="line">	KEY `p_1`(`title`)</span><br><span class="line">)ENGINE<span class="operator">=</span>InnODB AUTO_INCRENENT<span class="operator">=</span><span class="number">438174</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8mb4_0900_ai_ci;</span><br></pre></td></tr></table></figure>
+<p>总结：<br>二级索引 p_1 实际上是包含 主键索引的，P2临时表只查询这两个字段所以会提高查询速度<br>利用的就是索引比表小的多的原理，如果索引不合适，条件覆盖不到，那一样会很慢。</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12M4y1m7N9">转载来源</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/04/15/%E8%AE%A9-html-%E9%A1%B5%E9%9D%A2%E9%87%8C%E9%9D%A2%E7%9A%84%E8%B6%85%E9%93%BE%E6%8E%A5%E9%BB%98%E8%AE%A4%E4%BB%A5%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%89%93%E5%BC%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/15/%E8%AE%A9-html-%E9%A1%B5%E9%9D%A2%E9%87%8C%E9%9D%A2%E7%9A%84%E8%B6%85%E9%93%BE%E6%8E%A5%E9%BB%98%E8%AE%A4%E4%BB%A5%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%89%93%E5%BC%80/" class="post-title-link" itemprop="url">让 html 页面里面的超链接默认以新标签页打开</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-15 18:04:52" itemprop="dateCreated datePublished" datetime="2023-04-15T18:04:52+08:00">2023-04-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>平时我们写一个超链接 A 标签 有一个 target 属性可以控制打开行为，默认行为是 _self 也就是跳转。偶尔需要新标签页打开可以把这个值设置成 _blank。</p>
+<p>假如页面里面链接很多，我们又想让 A 标签默认全是新标签页打开，最典型的例子就是搜索结果的列表 ，那么就可以使用 <base> 标签来控制默认行为。<br>例如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh-CN&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 设定页面默认打开链接的行为，注意base必须在head段 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">base</span> <span class="attr">target</span>=<span class="string">_blank</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 被控制了默认行为 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://baidu.com&quot;</span>&gt;</span>新标签页打开baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 标签自有属性可以无视默认设置 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://baidu.com&quot;</span> <span class="attr">target</span>=<span class="string">_self</span>&gt;</span>原标签页跳转baidu<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>除此之外，base 还可以控制页面中相对链接的基准 URL 。</p>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/tag_base.asp">关于 base 的介绍</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/04/06/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -225,7 +354,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/04/16/iMac-%E6%8D%A2-SSD-%E5%90%8E%E7%A1%AC%E7%9B%98%E5%BC%80%E5%90%AF-trim/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/01/07/VMessAEAD-is-enforced-and-a-non-VMessAEAD-connection-is-received/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -239,7 +368,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/16/iMac-%E6%8D%A2-SSD-%E5%90%8E%E7%A1%AC%E7%9B%98%E5%BC%80%E5%90%AF-trim/" class="post-title-link" itemprop="url">iMac 换 SSD 后硬盘开启 trim</a>
+            <a href="/2022/01/07/VMessAEAD-is-enforced-and-a-non-VMessAEAD-connection-is-received/" class="post-title-link" itemprop="url">VMessAEAD is enforced and a non VMessAEAD connection is received.</a>
         </h2>
 
         <div class="post-meta">
@@ -249,7 +378,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-04-16 19:09:00" itemprop="dateCreated datePublished" datetime="2021-04-16T19:09:00+08:00">2021-04-16</time>
+              <time title="创建时间：2022-01-07 10:51:00" itemprop="dateCreated datePublished" datetime="2022-01-07T10:51:00+08:00">2022-01-07</time>
             </span>
 
           
@@ -263,9 +392,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>开启trim，可以给SSD写入提速的一种模式，打开 关于本机→系统报告→sata（查看trim状态）显示否的话就继续往下操作开启trim，<br>打开终端输入</p>
-<p>sudo trimforce enable</p>
-<p>回车，输入密码 回车<br>接着输入Y回车<br>等待提示成功自动重启电脑，如果没有重启就手动重启一下再去查看trim状态，显示 是 即为成功开启trim模式</p>
+          <p><a target="_blank" rel="noopener" href="https://91ai.net/thread-950258-1-1.html">https://91ai.net/thread-950258-1-1.html</a></p>
+<p>处理方法，</p>
+<ul>
+<li>两端alterID改成0</li>
+<li>vnext 段添加 “security”: “auto”, 或者使用其他指定的加密方式。唯独不能缺少这个字段</li>
+</ul>
 
       
     </div>
@@ -285,7 +417,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/04/12/%E8%8B%B9%E6%9E%9C%E7%94%B5%E8%84%91-os-x-10-9-5-%E6%9B%B4%E6%96%B0%E4%B8%8D%E4%BA%86%E7%89%88%E6%9C%AC/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/12/24/shell-%E8%8E%B7%E5%8F%96%E5%85%AC%E7%BD%91-IP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -299,7 +431,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/12/%E8%8B%B9%E6%9E%9C%E7%94%B5%E8%84%91-os-x-10-9-5-%E6%9B%B4%E6%96%B0%E4%B8%8D%E4%BA%86%E7%89%88%E6%9C%AC/" class="post-title-link" itemprop="url">苹果电脑 os x 10.9.5 更新不了版本</a>
+            <a href="/2021/12/24/shell-%E8%8E%B7%E5%8F%96%E5%85%AC%E7%BD%91-IP/" class="post-title-link" itemprop="url">shell 获取公网 IP</a>
         </h2>
 
         <div class="post-meta">
@@ -309,7 +441,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-04-12 14:56:00" itemprop="dateCreated datePublished" datetime="2021-04-12T14:56:00+08:00">2021-04-12</time>
+              <time title="创建时间：2021-12-24 15:25:00" itemprop="dateCreated datePublished" datetime="2021-12-24T15:25:00+08:00">2021-12-24</time>
             </span>
 
           
@@ -323,151 +455,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Mac 上的软件更新不能查找跨版本更新，需要一个中间步骤。</p>
-<p>另外，因为 OS X Mavericks 10.9 和目前的 macOS High Sierra 10.13 跨越了太多的版本，所以需要分成两个步骤更新：先更新到 OS X El Capitan 10.11，再更新到 macOS High Sierra 10.13。</p>
-<p>首先，更新到 OS X El Capitan 10.11。10.11 已经无法自行在 App Store 搜索到了，所以需要按照这里的方法用专用的链接下载：<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT206886">如何下载 OS X EL CAPITAN - APPLE 支持</a>；</p>
-<p>然后，再更新到 macOS High Sierra 10.13：<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT201475">如何下载 macOS High Sierra - Apple 支持</a>。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/03/15/lnmp-%E7%8E%AF%E5%A2%83%E4%B8%8B%E4%BD%BF%E7%94%A8-acme-sh-%E7%AD%BE%E5%8F%91Let-s-Encrypt-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/15/lnmp-%E7%8E%AF%E5%A2%83%E4%B8%8B%E4%BD%BF%E7%94%A8-acme-sh-%E7%AD%BE%E5%8F%91Let-s-Encrypt-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">lnmp 环境下使用 acme.sh 签发Let's Encrypt 出现错误解决记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-15 14:18:00" itemprop="dateCreated datePublished" datetime="2021-03-15T14:18:00+08:00">2021-03-15</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近在使用 lnmp脚本工具包 的时候 里面的acme.sh脚本签发 Let’s Encrypt证书报错</p>
-<p>Please refer to <a target="_blank" rel="noopener" href="https://curl.haxx.se/libcurl/c/libcurl-errors.html">https://curl.haxx.se/libcurl/c/libcurl-errors.html</a> for error code: 28</p>
-<p>根据网上搜索，说是参数换成强制wget就行了，经过测试发现一样不行，于是开始了折腾之路。</p>
-<p>经过反复测试发现，在境外的主机上操作都是正常的，但是境内就不行，难道是网络缘故？</p>
-<p>思来想去，还是把签发这个事放在境外吧。</p>
-<p>于是新建一台境外实例，部署好lnmp，修改 php-fpm的配置文件 用户名和用户组都改成root （避免权限问题）然后 lnmp stop php-fpm</p>
-<p>修改&#x2F;etc&#x2F;init.d&#x2F;php-fpm 这个文件给php-fpm 添加一个启动参数</p>
-<p>php_opts&#x3D;” -R –allow-to-run-as-root  –fpm-config $php_fpm_CONF –pid $php_fpm_PID”</p>
-<p>修改&#x2F;usr&#x2F;local&#x2F;php&#x2F;etc&#x2F;php.ini </p>
-<p>在disable_functions 里面去掉exec</p>
-<p>修改&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;fastcgi.conf</p>
-<p>fastcgi_param PHP_ADMIN_VALUE “open_basedir&#x3D;$document_root&#x2F;:&#x2F;tmp&#x2F;:&#x2F;proc&#x2F;:&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;ssl&#x2F;“;</p>
-<p>添加:&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;ssl&#x2F;</p>
-<p>准备工作就绪（lnmp php-fpm start &amp;&amp; lnmp nginx reload），假设这台机器的域名是 ca.com 解析放在阿里云</p>
-<p>在终端添加ssl虚拟主机，使用lnmp dns ali 然后根据lnmp的提示，添加好主机</p>
-<p>再添加要帮忙签的域名，使用 lnmp onlyssl ali ，例如这里添加 abc.com</p>
-<p>然后在&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;ssl&#x2F; 目录下可以找到对应域名的证书，我们只需要把文件复制到需要的服务器上就可以了，一般来说scp就行，但我采用了PHP更新的方案，所以这里要上代码了</p>
-<p>服务端，也就是ca.com服务器上部署</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>]) || !<span class="title function_ invoke__">is_valid_domain_name</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取域名的解析记录</span></span><br><span class="line"><span class="variable">$ip</span> = <span class="title function_ invoke__">dns_get_record</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>],DNS_A);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$ip</span>[<span class="number">0</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$ip</span>[<span class="number">0</span>][<span class="string">&#x27;ip&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$ip</span> = <span class="variable">$ip</span>[<span class="number">0</span>][<span class="string">&#x27;ip&#x27;</span>];</span><br><span class="line">&#125;<span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//判断访问来源和域名是否一致</span></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$ip</span> !== <span class="variable">$_SERVER</span>[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//验证通过后开始打包证书文件</span></span><br><span class="line"><span class="variable">$base</span> = <span class="string">&#x27;/usr/local/nginx/conf/ssl/&#x27;</span>;</span><br><span class="line"><span class="variable">$path</span> = <span class="variable">$base</span> . <span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>] . <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="variable">$path</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_ invoke__">exec</span>(<span class="string">&quot;cd &#x27;<span class="subst">&#123;$path&#125;</span>&#x27; &amp;&amp; tar -czf <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.tgz ca.cer fullchain.cer <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.cer <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.csr <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.csr.conf <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.key&quot;</span>);</span><br><span class="line">    <span class="comment">//计算hash</span></span><br><span class="line">    <span class="variable">$new_md5</span> = <span class="title function_ invoke__">md5_file</span>(<span class="variable">$path</span>.<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>].<span class="string">&#x27;.tgz&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$new_md5</span> !== <span class="variable">$_POST</span>[<span class="string">&#x27;md5&#x27;</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_ invoke__">send_file</span>(<span class="variable">$path</span>.<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>].<span class="string">&#x27;.tgz&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//验证域名合法性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">is_valid_domain_name</span>(<span class="params"><span class="variable">$domain_name</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">        <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//valid chars check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^.&#123;1,253&#125;$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//overall length check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^[^\.]&#123;1,63&#125;(\.[^\.]&#123;1,63&#125;)*$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//length of each label</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//发送文件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">send_file</span>(<span class="params"><span class="variable">$file</span></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$size</span> = <span class="title function_ invoke__">filesize</span>(<span class="variable">$file</span>); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-type: application/octet-stream&quot;</span>); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Accept-Ranges: bytes&quot;</span>); </span><br><span class="line">    <span class="variable">$begin</span> = <span class="number">0</span>; </span><br><span class="line">    <span class="variable">$end</span> = <span class="variable">$size</span> - <span class="number">1</span>; </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Length: &quot;</span> . (<span class="variable">$end</span> - <span class="variable">$begin</span> + <span class="number">1</span>)); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Disposition: attachment;filename=&quot;</span>.<span class="title function_ invoke__">basename</span>(<span class="variable">$file</span>)); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Range: bytes &quot;</span>.<span class="variable">$begin</span>.<span class="string">&quot;-&quot;</span>.<span class="variable">$end</span>.<span class="string">&quot;/&quot;</span>.<span class="variable">$size</span>); </span><br><span class="line">    <span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$file</span>); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<p>然后在abc.com这台机器上（前提是部署好了lnmp网站，创建了ssl配置，由于是基础这里不在赘述）创建 dnsca.php文件 内容如下</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$argv</span>[<span class="number">1</span>])) <span class="keyword">exit</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">is_valid_domain_name</span>(<span class="variable">$argv</span>[<span class="number">1</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$domain_name</span> = <span class="variable">$argv</span>[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//目录不在就新建</span></span><br><span class="line"><span class="variable">$path</span> = <span class="string">&#x27;/usr/local/nginx/conf/ssl/&#x27;</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;/&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">file_exists</span>(<span class="variable">$path</span>))</span><br><span class="line">&#123;</span><br><span class="line">    @<span class="title function_ invoke__">mkdir</span>(<span class="variable">$path</span>,<span class="number">0777</span>,<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//文件hash</span></span><br><span class="line"><span class="variable">$now_hash</span> = <span class="string">&quot;0&quot;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="variable">$path</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz&#x27;</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$now_hash</span> = <span class="title function_ invoke__">md5_file</span>(<span class="variable">$path</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$now_hash</span> = <span class="string">&quot;0&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">exec</span>(<span class="string">&#x27; cd \&#x27;&#x27;</span>.<span class="variable">$path</span>.<span class="string">&#x27;\&#x27; &amp;&amp; wget --post-data &quot;domain=&#x27;</span>.<span class="title function_ invoke__">urlencode</span>(<span class="variable">$domain_name</span>).<span class="string">&#x27;&amp;md5=&#x27;</span>.<span class="variable">$now_hash</span>.<span class="string">&#x27;&quot; --no-check-certificate -O &#x27;</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz https://ca.com/ca.php&#x27;</span>);</span><br><span class="line"><span class="variable">$size</span> = <span class="title function_ invoke__">filesize</span>(<span class="variable">$path</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz&#x27;</span>); </span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$size</span>&gt;<span class="number">1000</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_ invoke__">exec</span>(<span class="string">&#x27;cd \&#x27;&#x27;</span>.<span class="variable">$path</span>.<span class="string">&#x27;\&#x27; &amp;&amp; tar -xzf &#x27;</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz &amp;&amp; lnmp nginx reload&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//验证域名合法性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">is_valid_domain_name</span>(<span class="params"><span class="variable">$domain_name</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">        <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//valid chars check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^.&#123;1,253&#125;$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//overall length check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^[^\.]&#123;1,63&#125;(\.[^\.]&#123;1,63&#125;)*$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//length of each label</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>设置好文件可执行权限，然后执行</p>
-<p>&#x2F;usr&#x2F;bin&#x2F;php dnsca.php abc.com </p>
-<p>也可以设置成 crontab 任务 </p>
-<h2 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h2><p>这个方案太麻烦了，我后面不用了，就是做个记录，现在是在服务器上装7zip 用 shell 定期加密打包证书文件并且移动到 http 目录下，然后需要下载的服务器用 wget 下回来以后再解压到对应目录，全程使用 shell 和 crontab 。由于证书使用通配符签发，也就不需要验证域名了，出于安全考虑，把 http 目录设置了 IP 白名单。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/03/11/cer-%E8%BD%AC-pfx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/11/cer-%E8%BD%AC-pfx/" class="post-title-link" itemprop="url">cer 转 pfx</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-11 10:07:00" itemprop="dateCreated datePublished" datetime="2021-03-11T10:07:00+08:00">2021-03-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -export -in fullchain.cer -inkey 域名.key -passout pass:&quot;key的密码&quot; -out fullchain.pfx</span><br></pre></td></tr></table></figure>
+          <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s http://www.net.cn/static/customercare/yourip.asp |grep -P -o &quot;[0-9.]+(?=&lt;/h2&gt;)&quot;</span><br></pre></td></tr></table></figure>
+<p>压缩网址 302 跳转需要调整curl的参数 （但是网址压缩可能失效导致命令不能用）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L -s https://shorturl.at/hiqyE |grep -P -o &quot;[0-9.]+(?=&lt;/h2&gt;)&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>curl </p>
+<ul>
+<li>-s 隐藏下载进度</li>
+<li>-L 兼容 302 跳转</li>
+</ul>
+<p>grep </p>
+<ul>
+<li>-P 开启断言模式 </li>
+<li>-o 只显示匹配部分，不显示匹配到的整行</li>
+</ul>
+<h3 id="啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）"><a href="#啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）" class="headerlink" title="啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）"></a>啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s http://www.net.cn/static/customercare/yourip.asp |grep &quot;&lt;/h2&gt;&quot; |cut -f2 -d &#x27;&gt;&#x27; |cut -f1 -d &#x27;&lt;&#x27;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -485,7 +486,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -551,14 +552,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-count">180</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

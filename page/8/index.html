@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/12/26/windows10-%E4%B8%8B%E7%BC%96%E8%AF%91-OpenCC-1-0-5-%E7%AE%80%E7%B9%81%E8%BD%AC%E6%8D%A2%E5%BC%80%E6%BA%90%E5%BA%93/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/05/PC%E7%89%88%E8%B7%91%E8%B7%91%E5%8D%A1%E4%B8%81%E8%BD%A6-%E6%95%85%E4%BA%8B%E6%A8%A1%E5%BC%8F-%E4%BA%9A%E7%91%9F%E4%BC%A0%E8%AF%B4%E7%AB%A0%E8%8A%82-%E5%8D%A1%E7%BE%8E%E6%B4%9B%E5%BA%86%E5%85%B8-2%E9%98%B6%E6%AE%B5-%E5%BF%83%E7%81%B5%E4%B9%8B%E7%9C%BC-%E6%94%BB%E7%95%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/26/windows10-%E4%B8%8B%E7%BC%96%E8%AF%91-OpenCC-1-0-5-%E7%AE%80%E7%B9%81%E8%BD%AC%E6%8D%A2%E5%BC%80%E6%BA%90%E5%BA%93/" class="post-title-link" itemprop="url">windows10 下编译 OpenCC 1.0.5 简繁转换开源库</a>
+            <a href="/2020/12/05/PC%E7%89%88%E8%B7%91%E8%B7%91%E5%8D%A1%E4%B8%81%E8%BD%A6-%E6%95%85%E4%BA%8B%E6%A8%A1%E5%BC%8F-%E4%BA%9A%E7%91%9F%E4%BC%A0%E8%AF%B4%E7%AB%A0%E8%8A%82-%E5%8D%A1%E7%BE%8E%E6%B4%9B%E5%BA%86%E5%85%B8-2%E9%98%B6%E6%AE%B5-%E5%BF%83%E7%81%B5%E4%B9%8B%E7%9C%BC-%E6%94%BB%E7%95%A5/" class="post-title-link" itemprop="url">PC版跑跑卡丁车-故事模式-亚瑟传说章节-卡美洛庆典-2阶段-心灵之眼 攻略</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-26 23:19:00" itemprop="dateCreated datePublished" datetime="2019-12-26T23:19:00+08:00">2019-12-26</time>
+              <time title="创建时间：2020-12-05 14:23:00" itemprop="dateCreated datePublished" datetime="2020-12-05T14:23:00+08:00">2020-12-05</time>
             </span>
 
           
@@ -193,22 +193,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>OpenCC 的介绍就不写了 ，这里只记录一下流程</p>
-<p>下载源码包（有些问题，已经修正 这里提供一下下载）<br><a href="/2019/12/26/windows10-%E4%B8%8B%E7%BC%96%E8%AF%91-OpenCC-1-0-5-%E7%AE%80%E7%B9%81%E8%BD%AC%E6%8D%A2%E5%BC%80%E6%BA%90%E5%BA%93/OpenCC.rar">OpenCC.rar</a> </p>
-<p>下载vs2015 安装<br><a href="/2019/12/26/windows10-%E4%B8%8B%E7%BC%96%E8%AF%91-OpenCC-1-0-5-%E7%AE%80%E7%B9%81%E8%BD%AC%E6%8D%A2%E5%BC%80%E6%BA%90%E5%BA%93/VS2015%E5%AE%89%E8%A3%85%E5%99%A8.rar">VS2015安装器.rar</a></p>
-<p>下载python3.8安装（cmd里面可以直接执行python指令就成功了）</p>
-<p><a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/3.8.1/python-3.8.1.exe">https://www.python.org/ftp/python/3.8.1/python-3.8.1.exe</a></p>
-<p>下载Cmake</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Kitware/CMake/releases/download/v3.16.2/cmake-3.16.2-win32-x86.zip">https://github.com/Kitware/CMake/releases/download/v3.16.2/cmake-3.16.2-win32-x86.zip</a></p>
-<p>解压 并且添加环境变量 （cmd里面可以直接执行cmake指令就成功了）</p>
-<p>解压源码包，cmd 切换到源码包目录</p>
-<p>执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake -H. -Bbuild -G<span class="string">&quot;Visual Studio 14&quot;</span> -DCMAKE_INSTALL_PREFIX=”path/to/install”</span><br><span class="line">cmake --build build --config Release --target install</span><br></pre></td></tr></table></figure>
-
-<p>如果需要64位的，可以用这个命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake -H. -Bbuild -G<span class="string">&quot;Visual Studio 14 Win64&quot;</span> -DCMAKE_INSTALL_PREFIX=”path/to/install”</span><br><span class="line">cmake --build build --config Release --target install</span><br></pre></td></tr></table></figure>
-
-<p>编译完如果没错误，去源码目录下的path目录找编译结果,顺便要带上bulid目录里src里面搜出来的 opencc.dll，这里不讨论 OpenCC 具体使用方法。</p>
+          <p>假设靠近终点的方向为前</p>
+<p>靠近起点的方向为后，在行车过程中 坐标系不发生旋转</p>
+<p>从右手边下坡</p>
+<p>前 5<br>右 3<br>前 1<br>右 1<br>前 2<br>左 6<br>后 1<br>左 2<br>前 5<br>右 2<br>前 1<br>右 1<br>然后直接按前 </p>
 
       
     </div>
@@ -228,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/11/25/PHP-%E5%A4%84%E7%90%86-PUT-%E8%AF%B7%E6%B1%82/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/11/15/Nvidia-RTX-Voice-%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -242,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/25/PHP-%E5%A4%84%E7%90%86-PUT-%E8%AF%B7%E6%B1%82/" class="post-title-link" itemprop="url">PHP 处理 PUT 请求</a>
+            <a href="/2020/11/15/Nvidia-RTX-Voice-%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Nvidia RTX Voice 启动报错修复方法</a>
         </h2>
 
         <div class="post-meta">
@@ -252,7 +240,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-11-25 13:11:00" itemprop="dateCreated datePublished" datetime="2019-11-25T13:11:00+08:00">2019-11-25</time>
+              <time title="创建时间：2020-11-15 15:17:00" itemprop="dateCreated datePublished" datetime="2020-11-15T15:17:00+08:00">2020-11-15</time>
             </span>
 
           
@@ -266,68 +254,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="建立一个PUT接口"><a href="#建立一个PUT接口" class="headerlink" title="建立一个PUT接口"></a>建立一个PUT接口</h3><p>发送的HTTP头应该是 Content-Type&#x3D;application&#x2F;json<br>然后读取客户端发过来的数据<br><code>parse_str(file_get_contents(&#39;php://input&#39;), $data);</code></p>
-<h3 id="主动请求一个PUT接口-curl"><a href="#主动请求一个PUT接口-curl" class="headerlink" title="主动请求一个PUT接口 (curl)"></a>主动请求一个PUT接口 (curl)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl_setopt($handle, CURLOPT_CUSTOMREQUEST, &#x27;PUT&#x27;);</span><br><span class="line">curl_setopt($handle, CURLOPT_POSTFIELDS, $data); //设置请求体，提交数据包</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/10/25/%E5%85%B3%E9%97%AD-Chrome-78-%E7%9A%84%E6%A0%87%E7%AD%BE%E9%A1%B5%E9%A2%84%E8%A7%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/25/%E5%85%B3%E9%97%AD-Chrome-78-%E7%9A%84%E6%A0%87%E7%AD%BE%E9%A1%B5%E9%A2%84%E8%A7%88/" class="post-title-link" itemprop="url">关闭 Chrome 78 的标签页预览</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-25 09:42:00" itemprop="dateCreated datePublished" datetime="2019-10-25T09:42:00+08:00">2019-10-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>地址栏输入 chrome:&#x2F;&#x2F;flags&#x2F;#tab-hover-cards 回车</p>
-<p>Tab Hover Cards</p>
-<p>Tab Hover Cards Images</p>
-<p>这两项都改成 Disabled</p>
+          <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>应该是手贱把设备禁用了，然后rtx voice找不到设备报错了，所以就是不要手贱禁用RTX Voice 虚拟出来的设备。</p>
+<h3 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h3><p>打开控制面板 - 声音 - 播放</p>
+<p>右键菜单 - 打开 显示禁用的设备</p>
+<p>然后把窗口放在一边，不要关闭。</p>
+<p>此时启动 Rtx voice 程序，在程序还没有报错之前，赶紧在声音面板中把 Speakers 点右键 启用。</p>
+<p>同理，如果是麦克风被禁用了，也启用处理。</p>
 
       
     </div>
@@ -347,7 +279,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/09/02/JQuery-%E8%B0%83%E7%94%A8-Promise-%E7%8A%B6%E6%80%81%E6%94%B9%E5%8F%98%E4%B8%8E%E8%A7%A6%E5%8F%91%E8%B0%83%E7%94%A8%E7%9A%84%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/11/15/%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E9%97%AD%E8%B7%A8%E5%9F%9F%E9%99%90%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -361,7 +293,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/09/02/JQuery-%E8%B0%83%E7%94%A8-Promise-%E7%8A%B6%E6%80%81%E6%94%B9%E5%8F%98%E4%B8%8E%E8%A7%A6%E5%8F%91%E8%B0%83%E7%94%A8%E7%9A%84%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">JQuery 调用 Promise 状态改变与触发调用的记录</a>
+            <a href="/2020/11/15/%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E9%97%AD%E8%B7%A8%E5%9F%9F%E9%99%90%E5%88%B6/" class="post-title-link" itemprop="url">火狐浏览器关闭跨域限制</a>
         </h2>
 
         <div class="post-meta">
@@ -371,7 +303,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-09-02 12:03:00" itemprop="dateCreated datePublished" datetime="2019-09-02T12:03:00+08:00">2019-09-02</time>
+              <time title="创建时间：2020-11-15 15:11:00" itemprop="dateCreated datePublished" datetime="2020-11-15T15:11:00+08:00">2020-11-15</time>
             </span>
 
           
@@ -385,7 +317,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Parcel Sandbox<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&#x27;btn&#x27;</span>&gt;</span>Get Data<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">showError</span>(<span class="params">e</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">&quot;Error&quot;</span>, e);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">fail</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;fail&quot;</span>, <span class="variable language_">arguments</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">success</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;success&quot;</span>, <span class="variable language_">arguments</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">getUser</span>(<span class="params">id</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (id % <span class="number">2</span> == <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">a</span>(<span class="number">654321</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">b</span>(<span class="number">123456</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    $(<span class="string">&quot;#btn&quot;</span>).<span class="title function_">on</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">getUser</span>(<span class="number">666</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//当then的参数为两个的时候 无论如何都不执行catch</span></span></span><br><span class="line"><span class="language-javascript">        .<span class="title function_">then</span>(success, fail)</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//.finally(success)</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//当then没有第二个参数的时候 b会触发一个找不到函数的异常 被catch捕获</span></span></span><br><span class="line"><span class="language-javascript">        .<span class="title function_">catch</span>(showError);</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <p>打开火狐 在地址栏访问 about:config</p>
+<p>选择 我了解此风险</p>
+<p>然后搜 security.fileuri.strict_origin_policy</p>
+<p>切换到false 即可关闭跨域限制，此时所有页面js都可以随意访问跨域限制的数据 安全性极大的降低，不建议一直开着， 某些特殊测试用途可以关闭，用完马上打开。</p>
+<p>chrome 如果想设置跨域 需要安装扩展<br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=zh-CN">https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=zh-CN</a></p>
+
       
     </div>
 
@@ -404,7 +341,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/08/23/%E5%BF%AB%E9%80%9F%E5%AF%BC%E5%87%BA-B-%E7%AB%99%E6%94%B6%E8%97%8F%E5%A4%B9%E8%8A%82%E7%9B%AE%E5%88%97%E8%A1%A8%E5%92%8C%E4%B8%AA%E4%BA%BA%E5%85%B3%E6%B3%A8%E5%88%97%E8%A1%A8/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/11/06/%E9%BA%A6%E5%85%8B%E9%A3%8E%E5%AE%9E%E6%97%B6%E9%99%8D%E5%99%AA%E6%96%B9%E6%A1%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -418,7 +355,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/08/23/%E5%BF%AB%E9%80%9F%E5%AF%BC%E5%87%BA-B-%E7%AB%99%E6%94%B6%E8%97%8F%E5%A4%B9%E8%8A%82%E7%9B%AE%E5%88%97%E8%A1%A8%E5%92%8C%E4%B8%AA%E4%BA%BA%E5%85%B3%E6%B3%A8%E5%88%97%E8%A1%A8/" class="post-title-link" itemprop="url">快速导出 B 站收藏夹节目列表和个人关注列表</a>
+            <a href="/2020/11/06/%E9%BA%A6%E5%85%8B%E9%A3%8E%E5%AE%9E%E6%97%B6%E9%99%8D%E5%99%AA%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">麦克风实时降噪方案</a>
         </h2>
 
         <div class="post-meta">
@@ -428,7 +365,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-08-23 12:10:00" itemprop="dateCreated datePublished" datetime="2019-08-23T12:10:00+08:00">2019-08-23</time>
+              <time title="创建时间：2020-11-06 01:10:00" itemprop="dateCreated datePublished" datetime="2020-11-06T01:10:00+08:00">2020-11-06</time>
             </span>
 
           
@@ -442,13 +379,91 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>打开一个收藏列表 例如 <a target="_blank" rel="noopener" href="https://space.bilibili.com/232495155/favlist?fid=1097406455&ftype=create">https://space.bilibili.com/232495155/favlist?fid=1097406455&amp;ftype=create</a></p>
-<p>然后在控制台执行（F12 - console - 粘贴 - 回车）下面的代码 </p>
-<p>剩下慢慢等 5秒钟处理一页</p>
-<p>实现代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">get_list</span> ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    $(<span class="string">&quot;.fav-video-list &gt; li &gt;a.title&quot;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        result += $(<span class="variable language_">this</span>).<span class="title function_">text</span>() + <span class="string">&#x27;&lt;br&gt;&lt;a href=&quot;&#x27;</span> + $(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;href&quot;</span>) + <span class="string">&#x27;&quot; target=_blank &gt;https:&#x27;</span>+$(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;href&quot;</span>)+<span class="string">&#x27;&lt;/a&gt;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> html = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span> ()&#123;</span><br><span class="line">    html += <span class="title function_">get_list</span>();</span><br><span class="line">    <span class="keyword">if</span>($(<span class="string">&quot;.be-pager-next:visible&quot;</span>).<span class="property">length</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">write</span>(html);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $(<span class="string">&quot;.be-pager-next&quot;</span>).<span class="title function_">click</span>();</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="string">&quot;main()&quot;</span>,<span class="number">5000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">main</span>();</span><br></pre></td></tr></table></figure>
-<p>导出个人关注UP列表也顺便做了<br>例如 <a target="_blank" rel="noopener" href="https://space.bilibili.com/232495155/fans/follow">https://space.bilibili.com/232495155/fans/follow</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">get_list</span> ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    $(<span class="string">&quot;.relation-list &gt; li &gt;div.content &gt; a&quot;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        result += $(<span class="variable language_">this</span>).<span class="title function_">text</span>() + <span class="string">&#x27;&lt;br&gt;&lt;a href=&quot;&#x27;</span> + $(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;href&quot;</span>) + <span class="string">&#x27;&quot; target=_blank &gt;https:&#x27;</span>+$(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;href&quot;</span>)+<span class="string">&#x27;&lt;/a&gt;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> html = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span> ()&#123;</span><br><span class="line">    html += <span class="title function_">get_list</span>();</span><br><span class="line">    <span class="keyword">if</span>($(<span class="string">&quot;.be-pager-next:visible&quot;</span>).<span class="property">length</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">write</span>(html);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $(<span class="string">&quot;.be-pager-next&quot;</span>).<span class="title function_">click</span>();</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="string">&quot;main()&quot;</span>,<span class="number">5000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">main</span>();</span><br></pre></td></tr></table></figure>
+          <h3 id="方案1-：rtx-voice"><a href="#方案1-：rtx-voice" class="headerlink" title="方案1 ：rtx voice"></a>方案1 ：rtx voice</h3><p>优点：简单</p>
+<p>缺点：只支持win10 + rtx显卡 （GTX显卡可以破解安装包）</p>
+<p>网址：<a target="_blank" rel="noopener" href="https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/">https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/</a></p>
+<p>破解：<a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1167289-1-1.html">https://www.52pojie.cn/thread-1167289-1-1.html</a></p>
+<p>注意：每一代用的版本不一样，例如 30 系之后这个功能被集成到了 Nvidia Broadcast 这个软件里面了</p>
+<h3 id="方案2：-krisp"><a href="#方案2：-krisp" class="headerlink" title="方案2： krisp"></a>方案2： krisp</h3><p>优点：不限定硬件，支持win10 MacOS</p>
+<p>缺点：收费的</p>
+<p>网址：<a target="_blank" rel="noopener" href="https://krisp.ai/">https://krisp.ai/</a></p>
+<h3 id="方案3：-Equalizer-APO-noise-suppression-for-voice-win10"><a href="#方案3：-Equalizer-APO-noise-suppression-for-voice-win10" class="headerlink" title="方案3： Equalizer APO + noise-suppression-for-voice (win10)"></a>方案3： Equalizer APO + noise-suppression-for-voice (win10)</h3><p>优点：不要钱 支持linux win10 MacOS</p>
+<p>缺点：设置复杂</p>
+<p>网址：</p>
+<p>Equalizer APO <a target="_blank" rel="noopener" href="https://equalizerapo.com/download.html">https://equalizerapo.com/download.html</a></p>
+<p> noise-suppression-for-voice <a target="_blank" rel="noopener" href="https://github.com/werman/noise-suppression-for-voice">https://github.com/werman/noise-suppression-for-voice</a></p>
+<p>win10设置教程  <a target="_blank" rel="noopener" href="https://medium.com/@bssankaran/free-and-open-source-software-noise-cancelling-for-working-from-home-edb1b4e9764e">https://medium.com/@bssankaran/free-and-open-source-software-noise-cancelling-for-working-from-home-edb1b4e9764e</a></p>
+<p>其他系统安装详见 noise-suppression-for-voice 的readme文档</p>
+<h3 id="方案4：Sound-Tune-AI"><a href="#方案4：Sound-Tune-AI" class="headerlink" title="方案4：Sound Tune AI"></a>方案4：Sound Tune AI</h3><p>没实验过，可能需要微星的笔记本或者整机以及特定主板支持。</p>
+<p>网址：</p>
+<p><a target="_blank" rel="noopener" href="https://www.msi.com/Landing/msi_sound_tune">https://www.msi.com/Landing/msi_sound_tune</a></p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/a078ze9z/">https://post.smzdm.com/p/a078ze9z/</a></p>
+<h3 id="方案5-华硕主板"><a href="#方案5-华硕主板" class="headerlink" title="方案5 华硕主板"></a>方案5 华硕主板</h3><p>和方案4一样，但是只要是华硕主板应该就可以，自己搜一下驱动就行</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/10/20/Linux-%E5%8F%8D%E6%9F%A5%E7%A8%8B%E5%BA%8F%E4%BE%9D%E8%B5%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/20/Linux-%E5%8F%8D%E6%9F%A5%E7%A8%8B%E5%BA%8F%E4%BE%9D%E8%B5%96/" class="post-title-link" itemprop="url">Linux 反查程序依赖</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-20 11:44:00" itemprop="dateCreated datePublished" datetime="2020-10-20T11:44:00+08:00">2020-10-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd  命令"></a>ldd  命令</h3><p>例如  查看ls的依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldd /bin/ls</span><br></pre></td></tr></table></figure>
+
+
+<p>然后缺失的依赖 反查软件包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum provides 依赖的名字</span><br></pre></td></tr></table></figure>
+
+<p>具体实例 <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000015802337">https://segmentfault.com/a/1190000015802337</a></p>
 
       
     </div>
@@ -467,7 +482,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -533,14 +548,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-count">180</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

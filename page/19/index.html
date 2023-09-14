@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/20/ssh-%E6%8E%89%E7%BA%BF%E6%95%91%E6%98%9F-screen-%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/10/16/linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2-CodeIgniter-3-%E6%8A%A5%E9%94%99-session-%E9%94%99%E8%AF%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/03/20/ssh-%E6%8E%89%E7%BA%BF%E6%95%91%E6%98%9F-screen-%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">ssh 掉线救星 screen 的简单使用</a>
+            <a href="/2015/10/16/linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2-CodeIgniter-3-%E6%8A%A5%E9%94%99-session-%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">linux 环境部署 CodeIgniter 3 报错 session 错误</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2014-03-20 23:37:00" itemprop="dateCreated datePublished" datetime="2014-03-20T23:37:00+08:00">2014-03-20</time>
+              <time title="创建时间：2015-10-16 14:06:00" itemprop="dateCreated datePublished" datetime="2015-10-16T14:06:00+08:00">2015-10-16</time>
             </span>
 
           
@@ -193,138 +193,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>在远程 ssh 命令行下某些长时间的操作，一旦网络出现故障，后果可能会很严重，在这种情况下可以使用 screen 命令来解决。 screen 可以创建一个session，在不小心断开以后还可以继续恢复 session 保存的状态.</p>
+          <hr>
+<h2 id="权限不足"><a href="#权限不足" class="headerlink" title="权限不足"></a>权限不足</h2><blockquote>
+<p>codeigniter Message: mkdir(): Invalid path Filename: drivers&#x2F;Session_files_driver.php</p>
 </blockquote>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RedHat or CentOS</span></span><br><span class="line">yum install epel-release</span><br><span class="line">yum install screen</span><br><span class="line"><span class="comment"># Debian</span></span><br><span class="line">apt-get install screen</span><br><span class="line"><span class="comment"># 编译：rocky linux9 yum 没安装成功 所以只能从源码装了</span></span><br><span class="line">yum install ncurses-devel autoconf automake tar gcc wget -y</span><br><span class="line">wget https://ftp.gnu.org/gnu/screen/screen-4.9.0.tar.gz</span><br><span class="line">tar -zxvf screen-4.9.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> screen-4.9.0</span><br><span class="line">sh autogen.sh</span><br><span class="line">sh configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建session</span></span><br><span class="line">screen -S newsession</span><br><span class="line"><span class="comment"># 恢复一个session</span></span><br><span class="line">screen -r newsession</span><br><span class="line"><span class="comment"># 查看所有的session</span></span><br><span class="line">screen -<span class="built_in">ls</span></span><br><span class="line"><span class="comment"># 退出session</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"><span class="comment"># 演示屏幕</span></span><br><span class="line"><span class="comment"># 观众可以登录到远程服务器使用</span></span><br><span class="line">screen -x newsession </span><br><span class="line"><span class="comment"># 和操作者同步屏幕内容</span></span><br><span class="line"><span class="comment"># 暂离</span></span><br><span class="line"><span class="comment"># 按住Ctrl，再按a,d</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 有时候使用screen的时候，离开当前session时，想要用screen -r name重新连接该session时发现连不上</span></span><br><span class="line"><span class="comment"># 提示There is no screen to be resumed matching xxx。</span></span><br><span class="line"><span class="comment"># 输入screen -ls命令，发现有session处于Attached状态：</span></span><br><span class="line"><span class="comment"># 如果想重新连接speaker这个session的话，如下：</span></span><br><span class="line"><span class="comment"># 提示：There is no screen to be resumed matching speaker.</span></span><br><span class="line"><span class="comment"># 解决办法：</span></span><br><span class="line"><span class="comment"># 利用</span></span><br><span class="line">screen -d 你的session名字</span><br><span class="line"><span class="comment"># 远程detach某个session</span></span><br><span class="line"><span class="comment"># 之后，这个session的状态就会变成Detached：</span></span><br><span class="line"><span class="comment"># 这时候再用 screen -r 你的session名字，就可以进入这个session了。</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/xdebug-%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/12/xdebug-%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">xdebug 初步使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-12 19:32:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:32:00+08:00">2014-03-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">;加载xdebug模块。 根据PHP版本来选择是zend_extension还是zend_extension_ts  ts代表线程安全  被坑过1次</span></span><br><span class="line"><span class="attr">zend_extension</span>=<span class="string">&quot;\web\xampp\php\ext\php_xdebug.dll&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;自动打开“监测函数调用过程”的功模。该功能可以在你指定的目录中将函数调用的监测信息以文件的形式输出。此配置项的默认值为off。</span></span><br><span class="line"><span class="attr">xdebug.auto_trace</span>=<span class="literal">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;打开收集“函数参数”的功能。将函数调用的参数值列入函数过程调用的监测信息中。此配置项的默认值为off。</span></span><br><span class="line"><span class="attr">xdebug.collect_params</span>=<span class="literal">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;打开收集“函数返回值”的功能。将函数的返回值列入函数过程调用的监测信息中。此配置项的默认值为off。</span></span><br><span class="line"><span class="attr">xdebug.collect_return</span>=<span class="literal">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;设定函数调用监测信息的输出文件的路径。</span></span><br><span class="line"><span class="attr">xdebug.trace_output_dir</span>=<span class="string">&quot;\web\xampp\tmp&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;打开效能监测器。</span></span><br><span class="line"><span class="attr">xdebug.profiler_enable</span>=<span class="literal">on</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;设定效能监测信息输出文件的路径。</span></span><br><span class="line"><span class="attr">xdebug.profiler_output_dir</span>=<span class="string">&quot;\web\xampp\tmp&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">;当此项打开时分析器文件会采用同名（xdebug.profiler_output_name设置名称）追加方式写入而不是覆盖文件</span></span><br><span class="line"><span class="attr">xdebug.profiler_append</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;当此选项设置为1,通过使用XDEBUG_PROFILE作为GET/POST参数,或者以XDEBUG_PROFILE作为名称来设置一个cookie</span></span><br><span class="line"><span class="comment">;你可以触发生成效能分析文件。 这样，效能数据将会被写入defined directory目录. 如果不想为每一个请求都生成效能分析文件</span></span><br><span class="line"><span class="comment">;你需要将 xdebug.profiler_enable设置为0.</span></span><br><span class="line"><span class="comment">;xdebug.profiler_enable_trigger = 0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">;这项设置决定被用来转存效能信息文件的名称。</span></span><br><span class="line"><span class="attr">xdebug.profiler_output_name</span> = <span class="string">&quot;cachegrind.out.%t-%s&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;该设置控制Xdebug是否应该尝试连接一个调试客户端</span></span><br><span class="line"><span class="comment">;该调试客户端监听的主机和端口通过 xdebug.remote_host和 xdebug.remote_port配置项来设置</span></span><br><span class="line"><span class="comment">;如果不能建立到调试客户端的连接，脚本将继续执行，就像该设置被设置为0一样.</span></span><br><span class="line"><span class="comment">;xdebug.remote_enable = 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;固定项。输出风格</span></span><br><span class="line"><span class="comment">;xdebug.remote_handler = &quot;dbgp&quot;</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/%E6%9C%AC%E5%9C%B0%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/03/12/%E6%9C%AC%E5%9C%B0%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8C%82%E8%BD%BD-windows-%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">本地虚拟机挂载 windows 共享目录搭建开发环境</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2014-03-12 19:30:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:30:00+08:00">2014-03-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="windows-宿主机-（192-168-1-216）"><a href="#windows-宿主机-（192-168-1-216）" class="headerlink" title="windows 宿主机 （192.168.1.216）"></a>windows 宿主机 （192.168.1.216）</h2><p>设置目录共享 ，建立一个有密码帐号 可以访问共享文件夹 假设为 htdocs<br>假设 用户名是 admin  密码是 123456 然后切换账户登录访问测试</p>
-<h2 id="虚拟机下的linux"><a href="#虚拟机下的linux" class="headerlink" title="虚拟机下的linux"></a>虚拟机下的linux</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭防火墙(本地环境 直接关掉即可)</span></span><br><span class="line"></span><br><span class="line">service iptables stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查是否安装了需要的samba软件包</span></span><br><span class="line">rpm –q samba</span><br><span class="line"><span class="comment"># 如果没安装</span></span><br><span class="line">yum install samba system-config-samba samba-client samba-common</span><br><span class="line"><span class="comment"># linux挂载</span></span><br><span class="line">mount -t cifs -o username=admin,password=123456 //192.168.1.216/htdocs /usr/wwwroot</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>最后在win系统下用PSTrayFactory把虚拟机窗口缩到任务栏托盘</p>
-<h2 id="开机启动-1"><a href="#开机启动-1" class="headerlink" title="开机启动 (1)"></a>开机启动 (1)</h2><p>编辑 &#x2F;etc&#x2F;init.d&#x2F;rc.local （有些系统已经失效了，这个只适合旧版本的centos）</p>
-<p>vi &#x2F;etc&#x2F;init.d&#x2F;rc.local<br>写入挂载命令</p>
-<p>同时使用ls -l shared会发现shared目录所有者和用户组均是root，即使使用sudo chmod和sudo chown修改权限也提示权限不够。不过可以添加两个参数即可达到我们所要的效果：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t smbfs -o username=&quot;***&quot;,password=&quot;***&quot;,gid=&quot;***&quot;,uid=&quot;****&quot; //WindowsHost/sharefolder  /home/xxx/shared</span><br></pre></td></tr></table></figure>
-<h2 id="开机启动-2"><a href="#开机启动-2" class="headerlink" title="开机启动 (2)"></a>开机启动 (2)</h2><p>vi &#x2F;etc&#x2F;fstab 最后加入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//WindowsHost/sharefolder /home/xxx/shared cifs defaults,auto,username=&quot;xxxx&quot;,password=&quot;***&quot;,gid=&quot;1000&quot;,uid=&quot;1000&quot; 0 0</span><br></pre></td></tr></table></figure>
-<p>属性中的gid、uid，是你想要让挂载属于哪个用户的gid和uid。至于这个gid和uid，你可以使用id username来获得，比如说我的xxx，用户获得的gid和uid就是1000。<br>同时上述命令中的username和password是访问用来WindowsHost的。</p>
-<h2 id="卸载挂载目录："><a href="#卸载挂载目录：" class="headerlink" title="卸载挂载目录："></a>卸载挂载目录：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo umount shared</span><br></pre></td></tr></table></figure>
-
+<p>看起来像权限问题，在默认情况下使用的是php.ini里面的设置</p>
+<p>排除权限问题以后就正常了</p>
+<p>也可以在congfig文件夹里面的 config.php 文件的371行增加一句</p>
+<p><code>$config[&#39;sess_save_path&#39;] = &#39;./你可以有权限读写的目录路径&#39;;</code></p>
+<p>本质上 session 默认配置下是文件读写操作，所以需要有权限。</p>
+<hr>
+<h2 id="自动加载-session-模块报错"><a href="#自动加载-session-模块报错" class="headerlink" title="自动加载 session 模块报错:"></a>自动加载 session 模块报错:</h2><p>解决办法:<br>先生成一个 key 用于加密</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">$this</span>-&gt;load-&gt;<span class="title function_ invoke__">library</span>(<span class="string">&#x27;encryption&#x27;</span>);</span><br><span class="line"><span class="variable">$key</span> = <span class="title function_ invoke__">bin2hex</span>(<span class="variable">$this</span>-&gt;encryption-&gt;<span class="title function_ invoke__">create_key</span>(<span class="number">16</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$key</span>;</span><br></pre></td></tr></table></figure>
+<p>然后在配置文件里面把 key 写入<br><code> $config[&#39;encryption_key&#39;] = &#39;生成的key&#39;;</code></p>
 
       
     </div>
@@ -344,7 +225,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/MySQL-5-6-%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF-command-line-interface-can-be-insecure-%E4%BF%AE%E5%A4%8D/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/09/22/%E5%85%B3%E4%BA%8E%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81%E4%B8%AD-DOCTYPE-%E7%9A%84%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -358,7 +239,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/03/12/MySQL-5-6-%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF-command-line-interface-can-be-insecure-%E4%BF%AE%E5%A4%8D/" class="post-title-link" itemprop="url">MySQL 5.6 警告信息 command line interface can be insecure 修复</a>
+            <a href="/2015/09/22/%E5%85%B3%E4%BA%8E%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81%E4%B8%AD-DOCTYPE-%E7%9A%84%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">关于网页源码中 DOCTYPE 的笔记</a>
         </h2>
 
         <div class="post-meta">
@@ -368,7 +249,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2014-03-12 19:24:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:24:00+08:00">2014-03-12</time>
+              <time title="创建时间：2015-09-22 15:05:00" itemprop="dateCreated datePublished" datetime="2015-09-22T15:05:00+08:00">2015-09-22</time>
             </span>
 
           
@@ -382,15 +263,71 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在命令行输入密码，就会提示这些安全警告信息。</p>
-<blockquote>
-<p>Warning: Using a password on the command line interface can be insecure.</p>
-</blockquote>
-<p>注: mysql -u root -pPASSWORD 或 mysqldump -u root -pPASSWORD 都会输出这样的警告信息.</p>
-<h3 id="1、针对mysql"><a href="#1、针对mysql" class="headerlink" title="1、针对mysql"></a>1、针对mysql</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -pPASSWORD </span><br><span class="line"></span><br><span class="line">#改成</span><br><span class="line"></span><br><span class="line">mysql -u root -p回车</span><br><span class="line"></span><br><span class="line"># 再输入密码即可.</span><br></pre></td></tr></table></figure>
-<h3 id="2、mysqldump就比较麻烦了，通常都写在scripts脚本中。"><a href="#2、mysqldump就比较麻烦了，通常都写在scripts脚本中。" class="headerlink" title="2、mysqldump就比较麻烦了，通常都写在scripts脚本中。"></a>2、mysqldump就比较麻烦了，通常都写在scripts脚本中。</h3><p>vim &#x2F;etc&#x2F;mysql&#x2F;my.cnf 编辑配置文件 ，在里面指定用户名和密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqldump]</span><br><span class="line">user=your_backup_user_name</span><br><span class="line">password=your_backup_password</span><br></pre></td></tr></table></figure>
-<p>修改完配置文件后, 只需要执行mysqldump 脚本就可以了。备份脚本中不需要涉及用户名密码相关信息。</p>
+          <p>平时用HTML5 所以都直接简写 doctype</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个东西完整写法是</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>除了上面这种 其实还有几种声明方式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* 过渡的(Transitional)：要求非常宽松的DTD，它允许你继续使用HTML4.01的标识(但是要符合xhtml的写法)，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 严格的(Strict)：要求严格的DTD，你不能使用任何表现层的标识和属性，例如<span class="tag">&lt;<span class="name">br</span>&gt;</span>，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 框架的(Frameset)：专门针对框架页面设计使用的DTD，如果你的页面中包含有框架，需要采用这种DTD，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Frameset//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/09/14/Yii1-%E6%8E%A7%E5%88%B6%E5%89%8D%E7%AB%AF%E8%BD%BD%E5%85%A5%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/09/14/Yii1-%E6%8E%A7%E5%88%B6%E5%89%8D%E7%AB%AF%E8%BD%BD%E5%85%A5%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Yii1 控制前端载入文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-09-14 17:11:00" itemprop="dateCreated datePublished" datetime="2015-09-14T17:11:00+08:00">2015-09-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>通过逻辑控制前端文件载入，并且可以调整载入位置，避免直接修改模版，减少模版里面的逻辑<br>但因为现在流行前后端分离，其实这个已经没啥大用了，做个记录。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerCssFile</span>(CSS_URL.<span class="string">&#x27;reset.css&#x27;</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerCssFile</span>(CSS_URL.<span class="string">&#x27;my.css&#x27;</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerCss</span>(<span class="string">&#x27;remove-footer&#x27;</span>,<span class="string">&quot;#footer&#123;display:none;&#125;&quot;</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerScriptFile</span>(JS_URL.<span class="string">&#x27;remove_rmenu.js&#x27;</span>,<span class="title class_">CClientScript</span>::<span class="variable constant_">POS_HEAD</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerScriptFile</span>(JS_URL.<span class="string">&#x27;jquery-ui.min.js&#x27;</span>,<span class="title class_">CClientScript</span>::<span class="variable constant_">POS_HEAD</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerScriptFile</span>(SITE_URL.<span class="string">&#x27;/assets/MathJax2.5/MathJax.js?config=default&#x27;</span>,<span class="title class_">CClientScript</span>::<span class="variable constant_">POS_HEAD</span>);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -410,7 +347,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/12/PHP%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%91%A8%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/08/25/MySQL-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -424,7 +361,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/03/12/PHP%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%91%A8%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4/" class="post-title-link" itemprop="url">PHP获取本周开始时间</a>
+            <a href="/2015/08/25/MySQL-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">MySQL 触发器简单实例</a>
         </h2>
 
         <div class="post-meta">
@@ -434,7 +371,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2014-03-12 19:05:00" itemprop="dateCreated datePublished" datetime="2014-03-12T19:05:00+08:00">2014-03-12</time>
+              <time title="创建时间：2015-08-25 17:56:00" itemprop="dateCreated datePublished" datetime="2015-08-25T17:56:00+08:00">2015-08-25</time>
             </span>
 
           
@@ -448,7 +385,70 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/*先设置时区*/</span></span><br><span class="line"><span class="title function_ invoke__">date_default_timezone_set</span>(<span class="string">&#x27;PRC&#x27;</span>);</span><br><span class="line"><span class="comment">/*网上的写法：总觉得这周跨年或者跨月的时候会悲剧 未验证*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">mktime</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="title function_ invoke__">date</span>(<span class="string">&#x27;m&#x27;</span>),<span class="title function_ invoke__">date</span>(<span class="string">&#x27;d&#x27;</span>)-<span class="title function_ invoke__">date</span>(<span class="string">&#x27;w&#x27;</span>),<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">/*同事的写法：当本日为周日的时候 就坑了*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last sunday&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*自己的写法: 目前还没发现问题*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$now</span> = <span class="title function_ invoke__">time</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$now</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;w&#x27;</span>,<span class="variable">$now</span>) )*<span class="number">86400</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;H&#x27;</span>,<span class="variable">$now</span>) )*<span class="number">3600</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;i&#x27;</span>,<span class="variable">$now</span>) ) *<span class="number">60</span> - <span class="title function_ invoke__">intval</span>( <span class="title function_ invoke__">date</span>(<span class="string">&#x27;s&#x27;</span>,<span class="variable">$now</span>) );</span><br><span class="line"></span><br><span class="line"><span class="comment">/*过后的思考*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last saturday&#x27;</span>)+<span class="number">86400</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*如果获取的不是0点 而是当前时间*/</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$t</span> = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strtotime</span>(<span class="string">&#x27;last saturday &#x27;</span>.<span class="variable">$t</span>);</span><br></pre></td></tr></table></figure>
+          <h2 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*取消外键约束*/</span></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*创建C1表 主键ID 字段name*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `c1`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `c1` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">120</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>MEMORY <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*C2与C1结构相同 去掉了ID自增*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `c2`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `c2` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">120</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>MEMORY <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*给C1创建一个触发器 名称叫c1-insert*/</span><span class="comment">/*触发条件是 AFTER INSERT*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> `c1<span class="operator">-</span><span class="keyword">insert</span>`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> `c1<span class="operator">-</span><span class="keyword">insert</span>` AFTER <span class="keyword">INSERT</span> <span class="keyword">ON</span> `c1` <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="keyword">BEGIN</span> </span><br><span class="line"><span class="comment">/*插入后的ID*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@id</span> <span class="operator">=</span> NEW.id; </span><br><span class="line"><span class="comment">/*插入后的name*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@name</span> <span class="operator">=</span> NEW.name ;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `c2` (`id`, `name`) <span class="keyword">VALUES</span> (<span class="variable">@id</span>,<span class="variable">@name</span>); <span class="comment">/*插入到C2表*/</span></span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*给C1创建一个触发器 名称叫c1-update*/</span><span class="comment">/*触发条件是 AFTER UPDATE*/</span></span><br><span class="line">DELIMITER ;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> `c1<span class="operator">-</span><span class="keyword">update</span>`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> `c1<span class="operator">-</span><span class="keyword">update</span>` AFTER <span class="keyword">UPDATE</span> <span class="keyword">ON</span> `c1` <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> BEGIN.</span><br><span class="line"><span class="comment">/*修改前的ID*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@id</span> <span class="operator">=</span> OLD.id; </span><br><span class="line"><span class="comment">/*修改后的name*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@name</span> <span class="operator">=</span> NEW.name;</span><br><span class="line"><span class="keyword">UPDATE</span> `c2` <span class="keyword">SET</span> `name`<span class="operator">=</span><span class="variable">@name</span> <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="variable">@id</span>; <span class="comment">/*更新到C2表*/</span></span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/07/30/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/07/30/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">PHP正则表达式匹配中文字符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-07-30 10:22:00" itemprop="dateCreated datePublished" datetime="2015-07-30T10:22:00+08:00">2015-07-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>网上有很多类似的文章，但往往都不能用 所以记录一下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/([\x&#123;4e00&#125;-\x&#123;9fa5&#125;])/u&quot;</span>, <span class="variable">$input</span>, <span class="variable">$match</span>);</span><br></pre></td></tr></table></figure>
+
+<p><b>注意：限定代码文件和input字符串都是utf-8编码。其他编码不适用</b></p>
 
       
     </div>
@@ -467,7 +467,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -533,14 +533,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-count">180</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

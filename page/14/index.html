@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/" class="post-title-link" itemprop="url">Apache 2.4 针对某个文件限速</a>
+            <a href="/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/" class="post-title-link" itemprop="url">PHP.ini 能不能加载子配置文件 ？</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2016-10-11 14:47:00" itemprop="dateCreated datePublished" datetime="2016-10-11T14:47:00+08:00">2016-10-11</time>
+              <time title="创建时间：2019-04-30 11:15:00" itemprop="dateCreated datePublished" datetime="2019-04-30T11:15:00+08:00">2019-04-30</time>
             </span>
 
           
@@ -193,11 +193,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>例如限 mp4 文件的下载速度</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Location</span> &quot;/<span class="attr">downloads</span>/*<span class="attr">.mp4</span>&quot;&gt;</span></span><br><span class="line">    SetOutputFilter RATE_LIMIT</span><br><span class="line">    SetEnv rate-limit 400 </span><br><span class="line"><span class="tag">&lt;/<span class="name">Location</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>单位是kb&#x2F;s</p>
-<p>这个只能限制单线程 多线程无用。多线程下载需要用到第三方 mod 建议静态文件直接改用 Nginx </p>
-<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ratelimit.html">官方文档</a></p>
+          <p>配置 nginx 的时候，在配置文件中可以方便的使用 include 指令来把配置文件内容分割，从而达到方便管理的目的。<br>但是在使用 php 的时候也希望有这样的功能，这样在升级或者重装环境的时候就知道自己曾经改过哪些配置了。<br>但是 php.ini 里面并不能直接载入其他文件，但是在官方文档中给出了<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">解决方案</a> 。</p>
+<p>首先明确一点，php在加载配置文件的时候分为主配置文件和附加配置文件。<br>主配置文件这里不讨论，因为不同操作系统下位置不同，搜索机制也不同。具体参见文档中的说明。</p>
+<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><p>这里我们只看在主配置文件 php.ini 加载完成以后如何补充加载从配置文件。<br>它有以下两个方法</p>
+<ol>
+<li>编译 php 的时候，使用参数 –with-config-file-scan-dir 指定目录 php在加载主配置文件之后再加载在这个目录里面 ini 文件</li>
+<li>设置环境变量 PHP_INI_SCAN_DIR 的值为子配置文件的目录</li>
+</ol>
+<p>方法1 适合自己有编译环境或者很方便编译的系统，例如 linux 下经常自己编译 php 。<br>方法2 适合下载别人编译好的版本。</p>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ul>
+<li>无论 1 还是 2 都可以按顺序指定多个目录，加载顺序也会根据目录顺序，每个目录里面 ini 文件文件名排序按顺序加载。</li>
+<li>多个目录设置分隔符根据操作系统不同而不同，具体可以用PHP打印 PATH_SEPARATOR 常量查看，windows是分号，linux 是冒号</li>
+<li>环境变量并不是只有操作系统才有，Apache 运行 或者 IIS 运行也有专门的环境变量设置，在鼓捣的时候不要弄混了去设置成系统环境变量，如果是命令行执行，可以使用 export 或者 set 命令来分别给 linux 和 windows 添加临时环境变量</li>
+</ul>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>可以使用phpinfo();查看<br>代码验证相关函数 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">php_ini_scanned_files</a></p>
 
       
     </div>
@@ -217,7 +226,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -231,7 +240,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">Yii1 数据库 DAO 绑定参数实例</a>
+            <a href="/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/" class="post-title-link" itemprop="url">PHP 处理表单数据的一个安全回顾（记录教训）</a>
         </h2>
 
         <div class="post-meta">
@@ -241,7 +250,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2016-06-01 17:30:00" itemprop="dateCreated datePublished" datetime="2016-06-01T17:30:00+08:00">2016-06-01</time>
+              <time title="创建时间：2019-03-29 10:32:00" itemprop="dateCreated datePublished" datetime="2019-03-29T10:32:00+08:00">2019-03-29</time>
             </span>
 
           
@@ -255,12 +264,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>绑定参数预处理 SQL 可以有效的防 SQL 注入攻击; Yii1 框架的 ActiveRecord 操作数据库默认就可以防止注入 ，但是复杂业务下 使用 DAO 操作数据库就需要小心了</p>
-</blockquote>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM admin_user WHERE user_name=:uname AND password LIKE :c&quot;</span>;</span><br><span class="line"><span class="variable">$command</span> = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;admin1&#x27;</span>;</span><br><span class="line"><span class="variable">$c</span> = <span class="string">&#x27;%mkjymji%&#x27;</span>;</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:uname&quot;</span>,<span class="variable">$a</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:c&quot;</span>,<span class="variable">$c</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$r</span> = <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">queryAll</span>();</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$r</span>);<span class="keyword">exit</span>;</span><br></pre></td></tr></table></figure>
-
-<p>绑定参数的时候 如果是PDO::PARAM_STR类型的参数 是不需要在SQL里面再写引号的  </p>
+          <p>曾经看过一个讲 PHP 代码安全的文章中写过这么一条</p>
+<p>表单输入数据要做 htmlspecialchars_decode 处理</p>
+<p>表单输出数据要做 htmlspecialchars 处理</p>
+<p>当时还不是很理解为什么，自己也没遇到问题，所以就没做</p>
+<p>然而不是不报 时候未到 今天终于遇到了这个坑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input  type=&quot;text&quot; value=&quot;&lt;?php echo $value; ?&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>当采用上面代码输出的时候</p>
+<p>假如 $value 里面有 “ 双引号 那么value这个键将会被提前闭合，造成表单数据显示不完全，而且会多出来其他内容被识别为键的情况</p>
+<p>这下就惨了 所有这么输出的地方都要处理了，暂时也只能头痛医头，脚痛医脚了，先做转义好了</p>
 
       
     </div>
@@ -280,7 +292,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/05/25/%E9%9A%90%E8%97%8F-Apache-NGINX-PHP-%E7%89%88%E6%9C%AC%E5%8F%B7/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/02/24/%E4%B8%8D%E7%94%A8U%E7%9B%98%EF%BC%8C%E7%94%A8%E4%B8%80%E5%8F%B0%E5%A5%BD%E7%94%B5%E8%84%91%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85-windows10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -294,7 +306,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/05/25/%E9%9A%90%E8%97%8F-Apache-NGINX-PHP-%E7%89%88%E6%9C%AC%E5%8F%B7/" class="post-title-link" itemprop="url">隐藏 Apache NGINX PHP 版本号</a>
+            <a href="/2019/02/24/%E4%B8%8D%E7%94%A8U%E7%9B%98%EF%BC%8C%E7%94%A8%E4%B8%80%E5%8F%B0%E5%A5%BD%E7%94%B5%E8%84%91%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85-windows10/" class="post-title-link" itemprop="url">不用U盘，用一台好电脑给另一个电脑重装 windows10</a>
         </h2>
 
         <div class="post-meta">
@@ -304,67 +316,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2016-05-25 17:36:00" itemprop="dateCreated datePublished" datetime="2016-05-25T17:36:00+08:00">2016-05-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 httpd-default.conf</span><br><span class="line">ServerTokens Prod</span><br><span class="line">ServerSignature Off</span><br></pre></td></tr></table></figure></h2><h2 id="NGINX"><a href="#NGINX" class="headerlink" title="NGINX"></a>NGINX<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 nginx.conf</span><br><span class="line">server_tokens off;</span><br><span class="line">这个可以加在 http 段，也可以加在 server 段</span><br></pre></td></tr></table></figure></h2><p>PHP</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 php.ini</span><br><span class="line">expose_php Off</span><br></pre></td></tr></table></figure>
-<p>　　</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/12/22/Oracle-VM-VirtualBox-5-0-%E5%AE%89%E8%A3%85-CentOS-6-4-%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/12/22/Oracle-VM-VirtualBox-5-0-%E5%AE%89%E8%A3%85-CentOS-6-4-%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/" class="post-title-link" itemprop="url">Oracle VM VirtualBox 5.0 安装 CentOS 6.4 与宿主机共享文件夹</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-12-22 17:07:00" itemprop="dateCreated datePublished" datetime="2015-12-22T17:07:00+08:00">2015-12-22</time>
+              <time title="创建时间：2019-02-24 19:34:00" itemprop="dateCreated datePublished" datetime="2019-02-24T19:34:00+08:00">2019-02-24</time>
             </span>
 
           
@@ -379,16 +331,22 @@
 
       
           <ol>
-<li><p>首先在宿主机（windows）的硬盘建立需要共享文件夹 例如 D:\share_test</p>
+<li><p>先把坏电脑硬盘拆下来，然后挂到好电脑上</p>
 </li>
-<li><p>然后虚拟机光驱加载 Oracle VM VirtualBox 安装目录的 iso  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso</span><br></pre></td></tr></table></figure></li>
-<li><p>虚拟机开机 保证正常联网</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /mnt/share_test</span><br><span class="line">mount /dev/dvd /mnt/share_test/</span><br><span class="line">yum update -y </span><br><span class="line"><span class="built_in">cd</span> /mnt/share_test/</span><br><span class="line">sudo ./VBoxLinuxAdditions.run</span><br><span class="line"><span class="built_in">cd</span> /mnt/</span><br><span class="line">umount /mnt/share_test/</span><br><span class="line">mount -t vboxsf share_test /mnt/share_test/</span><br><span class="line"><span class="built_in">cd</span> share_test/</span><br></pre></td></tr></table></figure></li>
+<li><p>把这块盘用磁盘管理工具改成GPT分区表格式，然后整盘分区（NTFS）。</p>
+</li>
+<li><p>这个分区进行压缩卷操作，分出第二个区（FAT32 格式 大小大于5G 我这里用了6G）</p>
+</li>
+<li><p>把 win10 的 iso 解压到第二个 FAT32 分区，在磁盘管理里面删掉前面那个 NTFS 的分区，这样磁盘就变成了开头一大片未分区的空间，末尾有一个 FAT32 分区, 里面是系统镜像解压后的安装文件</p>
+</li>
+<li><p>拆掉硬盘装回坏电脑上去。</p>
+</li>
+<li><p>在 bios 中设置启动（一般新主板会不需要设置，自己会主动找到启动分区） </p>
+</li>
+<li><p>正常按照安装 win10 的步骤继续即可</p>
+</li>
 </ol>
-<p>之前用 VMWare 的时候相关信息</p>
-<p><a href="/2014/03/12/本地虚拟机挂载-windows-共享目录搭建开发环境/" target="_blank">本地虚拟机挂载 windows 共享目录搭建开发环境</a></p>
-<p><a href="/2014/09/26/通过-VMware-Tools-将主机-windows-的目录共享给-linux-虚拟机/" target="_blank">通过 VMware Tools 将主机windows的目录共享给linux虚拟机</a></p>
+<p>此方法需要支持GPT+UEFI启动的环境，太老的电脑不支持 UEFI 的无法使用此方法。</p>
 
       
     </div>
@@ -408,7 +366,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/11/17/MySql-5-6-%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97-%E4%B8%8E-%E6%85%A2%E6%9F%A5%E8%AF%A2/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/28/%E7%9C%81%E5%BF%83%E7%9A%84%E8%AE%BF%E9%97%AE%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -422,7 +380,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/11/17/MySql-5-6-%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97-%E4%B8%8E-%E6%85%A2%E6%9F%A5%E8%AF%A2/" class="post-title-link" itemprop="url">MySQL 5.6 查询日志 与 慢查询</a>
+            <a href="/2019/01/28/%E7%9C%81%E5%BF%83%E7%9A%84%E8%AE%BF%E9%97%AE%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">省心的网络代理配置</a>
         </h2>
 
         <div class="post-meta">
@@ -432,7 +390,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-11-17 15:28:00" itemprop="dateCreated datePublished" datetime="2015-11-17T15:28:00+08:00">2015-11-17</time>
+              <time title="创建时间：2019-01-28 12:09:00" itemprop="dateCreated datePublished" datetime="2019-01-28T12:09:00+08:00">2019-01-28</time>
             </span>
 
           
@@ -446,23 +404,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="记录所有查询的方法"><a href="#记录所有查询的方法" class="headerlink" title="记录所有查询的方法"></a>记录所有查询的方法</h2><p>打开my.ini 在 [mysqld]下面写</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">general_log</span>= <span class="literal">ON</span><span class="comment">;</span></span><br><span class="line"><span class="attr">log_output</span>= TABLE<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>然后保存重启mysql</p>
-<p>最后在mysql库下 general_log 表内可以查询想要的内容</p>
-<p>general_log 可以在运行的时候执行 <code>set global general_log=on;</code> 来动态开启 这样就不用重启 MySQL 服务了。但是下次重启的时候又会失效，想要避免还得改配置文件。</p>
-<p>log_output 也可以使用FILE格式，但是不知道为啥 我这里没能成功。</p>
-<hr>
-<h2 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h2><h3 id="开启"><a href="#开启" class="headerlink" title="开启"></a>开启</h3><p>网上开启的方法都不行，巨坑。最后在官网找到了开启方法 原来是配置文件改了。<br><b sytle="color: #FF0000;">所以以后遇到类似情况，一定要去看官网文档，mysql经常在新版本搞变化</b></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Updated example for 2015 MySQL 5.6:</span><br><span class="line"></span><br><span class="line">slow_query_log = 1</span><br><span class="line">slow_query_log_file = /var/log/mysql/slow.log</span><br><span class="line">long_query_time = 10</span><br><span class="line">log_queries_not_using_indexes = 1</span><br><span class="line"></span><br><span class="line">Change permissions so that mysqld can write to the specified log file. Giving write permissions to the &#x27;other&#x27; group should suffice.</span><br></pre></td></tr></table></figure>
-<h3 id="使用mysql自带命令mysqldumpslow查看"><a href="#使用mysql自带命令mysqldumpslow查看" class="headerlink" title="使用mysql自带命令mysqldumpslow查看"></a>使用mysql自带命令mysqldumpslow查看</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mysqldumpslow -s at -t 20 /opt/lampp/var/mysql/slow.log</span><br></pre></td></tr></table></figure>
-<p>常用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-s ORDER what to sort by (t, at, l, al, r, ar etc), &#x27;at’ is default</span><br><span class="line">-t NUM just show the top n queries</span><br><span class="line">-g PATTERN grep: only consider stmts that include this string</span><br></pre></td></tr></table></figure>
-<p>s，是结果的顺序，说明写的不够详细，俺用下来，包括看了代码，主要有 c,t,l,r和ac,at,al,ar，分别是按照query次数，时间，lock的时间和返回的记录数来排序，前面加了a的时倒序 -t，是top n的意思，即为返回前面多少条的数据 -g，后边可以写一个正则匹配模式，大小写不敏感的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldumpslow -s c -t 20 host-slow.log</span><br><span class="line">mysqldumpslow -s r -t 20 host-slow.log</span><br></pre></td></tr></table></figure>
-<p>上述命令可以看出访问次数最多的20个sql语句和返回记录集最多的20个sql。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldumpslow -t 10 -s t -g &quot;left join&quot; host-slow.log</span><br></pre></td></tr></table></figure>
-<p>这个是按照时间返回前10条里面含有左连接的sql语句。</p>
+          <ol>
+<li><p>先装插件 推荐用 <a target="_blank" rel="noopener" href="https://www.switchyomega.com/download/">SwitchyOmega</a></p>
+</li>
+<li><p>配置好 sock5 代理(例如 v2 之类的) 具体这里不讨论 然后提供一个本地端口 127.0.0.1:6666</p>
+</li>
+<li><p>配置 cow ，作用是 sock5 转 http 代理 配置成 127.0.0.1:7777</p>
+</li>
+<li><p>在第1步的插件里面配置所有地址走 7777 端口 模式是pac 路径是 <a target="_blank" rel="noopener" href="http://127.0.0.1:7777/pac">http://127.0.0.1:7777/pac</a> 更新频率1小时1次</p>
+</li>
+</ol>
+<blockquote>
+<p>cow会检测访问是否成功，记录次数 然后不断改进pac结果，所以一开始用会很慢 多刷新几次，越用越流畅</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/27/virtualbox-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/27/virtualbox-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="post-title-link" itemprop="url">virtualbox 命令行启动虚拟机和关闭虚拟机</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-27 21:19:00" itemprop="dateCreated datePublished" datetime="2019-01-27T21:19:00+08:00">2019-01-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="开机（后台运行）"><a href="#开机（后台运行）" class="headerlink" title="开机（后台运行）"></a>开机（后台运行）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxManage.exe startvm 虚拟机名字 --type headless</span><br></pre></td></tr></table></figure>
+
+<h3 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxManage.exe controlvm 虚拟机名字  acpipowerbutton</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -481,7 +495,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -547,14 +561,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">117</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-count">180</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
