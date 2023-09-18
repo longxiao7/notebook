@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"np.lvtoude.ltd","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="原文地址 一份简单够用的 Nginx Location 配置讲解 - SegmentFault 思否 前言Location 是 Nginx 中一个非常核心的配置，这篇重点讲解一下 Location 的配置问题以及一些注意事项。 语法关于 Location，举个简单的配置例子： 12345678910http &amp;#123;   server &amp;#123;      listen 80;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转载：一份简单够用的 Nginx Location 配置讲解">
+<meta property="og:url" content="https://np.lvtoude.ltd/2022/05/07/%E8%BD%AC%E8%BD%BD%EF%BC%9A%E4%B8%80%E4%BB%BD%E7%AE%80%E5%8D%95%E5%A4%9F%E7%94%A8%E7%9A%84-Nginx-Location-%E9%85%8D%E7%BD%AE%E8%AE%B2%E8%A7%A3/index.html">
+<meta property="og:site_name" content="名字还没想好">
+<meta property="og:description" content="原文地址 一份简单够用的 Nginx Location 配置讲解 - SegmentFault 思否 前言Location 是 Nginx 中一个非常核心的配置，这篇重点讲解一下 Location 的配置问题以及一些注意事项。 语法关于 Location，举个简单的配置例子： 12345678910http &amp;#123;   server &amp;#123;      listen 80;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-07T11:18:00.000Z">
+<meta property="article:modified_time" content="2023-09-18T02:52:43.295Z">
+<meta property="article:author" content="透明白">
+<meta property="article:tag" content="nginx">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://np.lvtoude.ltd/2022/05/07/%E8%BD%AC%E8%BD%BD%EF%BC%9A%E4%B8%80%E4%BB%BD%E7%AE%80%E5%8D%95%E5%A4%9F%E7%94%A8%E7%9A%84-Nginx-Location-%E9%85%8D%E7%BD%AE%E8%AE%B2%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>转载：一份简单够用的 Nginx Location 配置讲解 | 名字还没想好</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">名字还没想好</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">等想好了在写</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/05/07/%E8%BD%AC%E8%BD%BD%EF%BC%9A%E4%B8%80%E4%BB%BD%E7%AE%80%E5%8D%95%E5%A4%9F%E7%94%A8%E7%9A%84-Nginx-Location-%E9%85%8D%E7%BD%AE%E8%AE%B2%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          转载：一份简单够用的 Nginx Location 配置讲解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-05-07 19:18:00" itemprop="dateCreated datePublished" datetime="2022-05-07T19:18:00+08:00">2022-05-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>原文地址 <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000041217732">一份简单够用的 Nginx Location 配置讲解 - SegmentFault 思否</a></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Location 是 Nginx 中一个非常核心的配置，这篇重点讲解一下 Location 的配置问题以及一些注意事项。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>关于 Location，举个简单的配置例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">http &#123; </span><br><span class="line">  server &#123;</span><br><span class="line">      listen 80;</span><br><span class="line">        server_name www.yayujs.com;</span><br><span class="line">        location / &#123;</span><br><span class="line">          root /home/www/ts/;</span><br><span class="line">          index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大致的意思是，当你访问 <a target="_blank" rel="noopener" href="http://www.yayujs.com/">www.yayujs.com</a> 的 80 端口的时候，返回 &#x2F;home&#x2F;www&#x2F;ts&#x2F;index.html 文件。</p>
+<p>我们看下 Location 的具体语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location [ = | ~ | ~* | ^~ ] uri &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>重点看方括号中的 [ &#x3D; | ~ | <del>* | ^</del> ]，其中 | 分隔的内容表示你可能会用到的语法，其中：</p>
+<h4 id="x3D-表示精确匹配，比如："><a href="#x3D-表示精确匹配，比如：" class="headerlink" title="&#x3D; 表示精确匹配，比如："></a>&#x3D; 表示精确匹配，比如：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location = /test &#123;</span><br><span class="line">  return 200 &quot;hello&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /test ok</span><br><span class="line"># /test/ not ok</span><br><span class="line"># /test2 not ok</span><br><span class="line"># /test/2 not ok</span><br></pre></td></tr></table></figure>
+
+<h4 id="表示区分大小写的正则匹配，比如："><a href="#表示区分大小写的正则匹配，比如：" class="headerlink" title="~ 表示区分大小写的正则匹配，比如："></a>~ 表示区分大小写的正则匹配，比如：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location ~ ^/test$ &#123;</span><br><span class="line">  [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /test ok</span><br><span class="line"># /Test not ok</span><br><span class="line"># /test/ not ok</span><br><span class="line"># /test2 not ok</span><br></pre></td></tr></table></figure>
+
+<h4 id="表示不区分大小写的正则匹配"><a href="#表示不区分大小写的正则匹配" class="headerlink" title="~* 表示不区分大小写的正则匹配"></a>~* 表示不区分大小写的正则匹配</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location ~* ^/test$ &#123;     </span><br><span class="line">    [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /test ok</span><br><span class="line"># /Test ok</span><br><span class="line"># /test/ not ok</span><br><span class="line"># /test2 not ok</span><br></pre></td></tr></table></figure>
+
+<h4 id="表示-uri-以某个字符串开头"><a href="#表示-uri-以某个字符串开头" class="headerlink" title="^~ 表示 uri 以某个字符串开头"></a>^~ 表示 uri 以某个字符串开头</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location ^~ /images/ &#123;    </span><br><span class="line">    [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /images/1.gif ok</span><br></pre></td></tr></table></figure>
+
+<p>而当你不使用这些语法的时候，只写 uri 的时候：</p>
+<h4 id="x2F-表示通用匹配："><a href="#x2F-表示通用匹配：" class="headerlink" title="&#x2F; 表示通用匹配："></a>&#x2F; 表示通用匹配：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;     </span><br><span class="line">    [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /index.html ok</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location /test &#123;</span><br><span class="line">    [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /test ok</span><br><span class="line"># /test2 ok</span><br><span class="line"># /test/ ok</span><br></pre></td></tr></table></figure>
+
+<h3 id="匹配顺序"><a href="#匹配顺序" class="headerlink" title="匹配顺序"></a>匹配顺序</h3><p>当存在多个 location 的时候，他们的匹配顺序引用 <a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location">Nginx 官方文档</a>就是：</p>
+<blockquote>
+<p>A location can either be defined by a prefix string, or by a regular expression. Regular expressions are specified with the preceding “<del>*” modifier (for case-insensitive matching), or the “</del>” modifier (for case-sensitive matching). To find location matching a given request, nginx first checks locations defined using the prefix strings (prefix locations). Among them, the location with the longest matching prefix is selected and remembered. Then regular expressions are checked, in the order of their appearance in the configuration file. The search of regular expressions terminates on the first match, and the corresponding configuration is used. If no match with a regular expression is found then the configuration of the prefix location remembered earlier is used.</p>
+<p>If the longest matching prefix location has the “^~” modifier then regular expressions are not checked.</p>
+<p>Also, using the “&#x3D;” modifier it is possible to define an exact match of URI and location. If an exact match is found, the search terminates. For example, if a “&#x2F;” request happens frequently, defining “location &#x3D; &#x2F;” will speed up the processing of these requests, as search terminates right after the first comparison. Such a location cannot obviously contain nested locations.</p>
+</blockquote>
+<p>翻译整理后就是：</p>
+<p>location 的定义分为两种：</p>
+<ul>
+<li>前缀字符串（prefix string）</li>
+<li>正则表达式（regular expression），具体为前面带 ~* 和 ~ 修饰符的</li>
+</ul>
+<p>而匹配 location 的顺序为：</p>
+<ol>
+<li>检查使用前缀字符串的 locations，在使用前缀字符串的 locations 中选择最长匹配的，并将结果进行储存</li>
+<li>如果符合带有 &#x3D; 修饰符的 URI，则立刻停止匹配</li>
+<li>如果符合带有 ^~ 修饰符的 URI，则也立刻停止匹配。</li>
+<li>然后按照定义文件的顺序，检查正则表达式，匹配到就停止</li>
+<li>当正则表达式匹配不到的时候，使用之前储存的前缀字符串</li>
+</ol>
+<p>再总结一下就是：</p>
+<p>在顺序上，前缀字符串顺序不重要，按照匹配长度来确定，正则表达式则按照定义顺序。</p>
+<p>在优先级上，&#x3D; 修饰符最高，^~ 次之，再者是正则，最后是前缀字符串匹配。<br>我们举几个简单的例子复习下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    location /doc &#123;</span><br><span class="line">        [ configuration A ] </span><br><span class="line">    &#125;</span><br><span class="line">    location /docu &#123;</span><br><span class="line">        [ configuration B ] </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 请求 /document 使用 configuration B</span><br><span class="line"># 虽然 /doc 也能匹配到，但在顺序上，前缀字符串顺序不重要，按照匹配长度来确定</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    location ~ ^/doc &#123;</span><br><span class="line">        [ configuration A ] </span><br><span class="line">    &#125;</span><br><span class="line">    location ~ ^/docu &#123;</span><br><span class="line">        [ configuration B ] </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 请求 /document 使用 configuration A</span><br><span class="line"># 虽然 ~ ^/docu 也能匹配到，但正则表达式则按照定义顺序</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    location ^~ /doc &#123;</span><br><span class="line">        [ configuration A ] </span><br><span class="line">    &#125;</span><br><span class="line">    location ~ ^/docu &#123;</span><br><span class="line">        [ configuration B ] </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 请求 /document 使用 configuration A</span><br><span class="line"># 虽然 ~ ^/docu 也能匹配到，但 ^~ 的优先级更高</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    location /document &#123;</span><br><span class="line">        [ configuration A ] </span><br><span class="line">    &#125;</span><br><span class="line">    location ~ ^/docu &#123;</span><br><span class="line">        [ configuration B ] </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 请求 /document 使用 configuration B</span><br><span class="line"># 虽然 /document 也能匹配到，但正则的优先级更高</span><br></pre></td></tr></table></figure>
+
+<h3 id="root-与-alias-的区别"><a href="#root-与-alias-的区别" class="headerlink" title="root 与 alias 的区别"></a>root 与 alias 的区别</h3><p>当我们这样设置 root 的时候：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /i/ &#123;</span><br><span class="line">    root /data/w3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当请求 &#x2F;i&#x2F;top.gif ，&#x2F;data&#x2F;w3&#x2F;i&#x2F;top.gif 会被返回。</p>
+<p>当我们这样设置 alias 的时候：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /i/ &#123;</span><br><span class="line">    alias /data/w3/images/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当请求 &#x2F;i&#x2F;top.gif ，&#x2F;data&#x2F;w3&#x2F;images&#x2F;top.gif 会被返回。</p>
+<p>乍一看两者很像，但细一看，就能看出两者的区别，root 是直接拼接 root + location 而 alias 是用 alias 替换 location，所以 root 中最后的路径里有 &#x2F;i&#x2F;，而 alias 中最后的路径里没有 &#x2F;i&#x2F; 。</p>
+<p>所以如果你这样使用 allias 定义一个路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /images/ &#123;</span><br><span class="line">    alias /data/w3/images/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实使用 root 会更好：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /images/ &#123;</span><br><span class="line">    root /data/w3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="server-和-location-中的-root"><a href="#server-和-location-中的-root" class="headerlink" title="server 和 location 中的 root"></a>server 和 location 中的 root</h3><p>server 和 location 中都可以使用 root，举个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">http &#123; </span><br><span class="line">  server &#123;</span><br><span class="line">      listen 80;</span><br><span class="line">        server_name www.yayujs.com;</span><br><span class="line">        root /home/www/website/;</span><br><span class="line">        location / &#123;</span><br><span class="line">          root /home/www/ts/;</span><br><span class="line">          index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果两者都出现，是怎样的优先级呢？</p>
+<p>简单的来说，就是就近原则，如果 location 中能匹配到，就是用 location 中的 root 配置，忽略 server 中的 root，当 location 中匹配不到的时候，则使用 server 中的 root 配置。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nginx/" rel="tag"># nginx</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/07/windows-%E6%89%B9%E5%A4%84%E7%90%86%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/" rel="prev" title="windows 批处理同步系统时间">
+      <i class="fa fa-chevron-left"></i> windows 批处理同步系统时间
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/14/IPv6-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E8%81%94%E6%9C%BA%E8%BD%AF%E4%BB%B6-4to6/" rel="next" title="IPv6 端口转发联机软件 4to6">
+      IPv6 端口转发联机软件 4to6 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#x3D-%E8%A1%A8%E7%A4%BA%E7%B2%BE%E7%A1%AE%E5%8C%B9%E9%85%8D%EF%BC%8C%E6%AF%94%E5%A6%82%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">&#x3D; 表示精确匹配，比如：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E5%8C%BA%E5%88%86%E5%A4%A7%E5%B0%8F%E5%86%99%E7%9A%84%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%EF%BC%8C%E6%AF%94%E5%A6%82%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">~ 表示区分大小写的正则匹配，比如：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E4%B8%8D%E5%8C%BA%E5%88%86%E5%A4%A7%E5%B0%8F%E5%86%99%E7%9A%84%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D"><span class="nav-number">2.3.</span> <span class="nav-text">~* 表示不区分大小写的正则匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA-uri-%E4%BB%A5%E6%9F%90%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BC%80%E5%A4%B4"><span class="nav-number">2.4.</span> <span class="nav-text">^~ 表示 uri 以某个字符串开头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-%E8%A1%A8%E7%A4%BA%E9%80%9A%E7%94%A8%E5%8C%B9%E9%85%8D%EF%BC%9A"><span class="nav-number">2.5.</span> <span class="nav-text">&#x2F; 表示通用匹配：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E9%A1%BA%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">匹配顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#root-%E4%B8%8E-alias-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">root 与 alias 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server-%E5%92%8C-location-%E4%B8%AD%E7%9A%84-root"><span class="nav-number">5.</span> <span class="nav-text">server 和 location 中的 root</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">透明白</p>
+  <div class="site-description" itemprop="description">凑字数</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">147</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">216</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">透明白</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

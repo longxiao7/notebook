@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/05/10/linux-%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1-crontab-%E7%9A%84%E6%89%B9%E9%87%8F%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/06/10/%E4%BF%9D%E6%8A%A4-windows-%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E7%99%BB%E5%BD%95%E4%B8%8D%E8%A2%AB%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%A1%88%EF%BC%88%E6%9C%AA%E5%AE%9E%E9%99%85%E6%B5%8B%E8%AF%95%E4%BB%85%E8%AE%B0%E5%BD%95%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/10/linux-%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1-crontab-%E7%9A%84%E6%89%B9%E9%87%8F%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">linux 计划任务 crontab 的批量配置</a>
+            <a href="/2022/06/10/%E4%BF%9D%E6%8A%A4-windows-%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E7%99%BB%E5%BD%95%E4%B8%8D%E8%A2%AB%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%A1%88%EF%BC%88%E6%9C%AA%E5%AE%9E%E9%99%85%E6%B5%8B%E8%AF%95%E4%BB%85%E8%AE%B0%E5%BD%95%EF%BC%89/" class="post-title-link" itemprop="url">保护 windows 远程桌面登录不被暴力破解的一些方案（未实际测试仅记录）</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-05-10 11:54:00" itemprop="dateCreated datePublished" datetime="2021-05-10T11:54:00+08:00">2021-05-10</time>
+              <time title="创建时间：2022-06-10 04:07:00" itemprop="dateCreated datePublished" datetime="2022-06-10T04:07:00+08:00">2022-06-10</time>
             </span>
 
           
@@ -193,8 +193,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>crontab用法就不说了，网上一大堆。这里记录一下如何通过编辑文件来配置它。<br><code>/var/spool/cron/用户名</code>  这个文件中直接编辑</p>
-<p><a target="_blank" rel="noopener" href="https://crontab.guru/">https://crontab.guru/</a> 一个在线生成计划任务格式的工具 避免自己写错</p>
+          <p><a target="_blank" rel="noopener" href="https://www.chenxin.info/2020/06/08/windows-rdp-defender/">防暴破策略建立的思路与具体实现（Windows 远程桌面防护）</a></p>
+<p><a href="/2022/06/10/%E4%BF%9D%E6%8A%A4-windows-%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E7%99%BB%E5%BD%95%E4%B8%8D%E8%A2%AB%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%A1%88%EF%BC%88%E6%9C%AA%E5%AE%9E%E9%99%85%E6%B5%8B%E8%AF%95%E4%BB%85%E8%AE%B0%E5%BD%95%EF%BC%89/rdp.rar">防止失效</a></p>
+<hr>
+<p><a target="_blank" rel="noopener" href="http://opensource.wellbury.com/projects/windows_sshd_block/newest-release/">一个VBS方案防护SSH</a></p>
+<h4 id="视窗sshd-block"><a href="#视窗sshd-block" class="headerlink" title="视窗sshd_block"></a>视窗sshd_block</h4><blockquote>
+<p>sshd_block 是一个 VBScript 程序，它充当 WMI 事件接收器，以接收 sshd 记录的 Windows 事件日志条目。它解析这些日志条目并按如下方式对其进行操作：</p>
+<p>如果 IP 地址尝试使用标记为“立即禁止”的用户名登录，则该 IP 地址将立即被禁止。</p>
+<p>如果 IP 地址尝试登录的频率高于给定时间段内允许的频率，则该 IP 地址将被禁止。</p>
+<p>与重复登录尝试相关的“立即禁止”用户名和阈值可在脚本的“配置”部分中进行配置。默认设置如下：</p>
+<p>立即禁止用户名 - 管理员、根、访客</p>
+<p>允许登录尝试 - 120 秒（2 分钟）内有 5 次</p>
+<p>禁令持续时间 - 300 秒（5 分钟）</p>
+</blockquote>
+<hr>
+<p>EvlWatcher</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/devnulli/EvlWatcher">https://github.com/devnulli/EvlWatcher</a></p>
+<p>它基本上是 Windows 的 fail2ban</p>
+<hr>
+<p>IPBan 看不懂咋用的 好像支持windowns和linux</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/digitalruby/ipban">https://github.com/digitalruby/ipban</a></p>
+<hr>
+<p>ts_block</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/EvanAnderson/ts_block">https://github.com/EvanAnderson/ts_block</a></p>
+<p>利用vbs和本地回环网络制造黑洞的方案 好几个人推荐这个</p>
 
       
     </div>
@@ -214,7 +236,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/04/16/iMac-%E6%8D%A2-SSD-%E5%90%8E%E7%A1%AC%E7%9B%98%E5%BC%80%E5%90%AF-trim/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/05/14/IPv6-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E8%81%94%E6%9C%BA%E8%BD%AF%E4%BB%B6-4to6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -228,7 +250,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/16/iMac-%E6%8D%A2-SSD-%E5%90%8E%E7%A1%AC%E7%9B%98%E5%BC%80%E5%90%AF-trim/" class="post-title-link" itemprop="url">iMac 换 SSD 后硬盘开启 trim</a>
+            <a href="/2022/05/14/IPv6-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E8%81%94%E6%9C%BA%E8%BD%AF%E4%BB%B6-4to6/" class="post-title-link" itemprop="url">IPv6 端口转发联机软件 4to6</a>
         </h2>
 
         <div class="post-meta">
@@ -238,7 +260,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-04-16 19:09:00" itemprop="dateCreated datePublished" datetime="2021-04-16T19:09:00+08:00">2021-04-16</time>
+              <time title="创建时间：2022-05-14 13:32:00" itemprop="dateCreated datePublished" datetime="2022-05-14T13:32:00+08:00">2022-05-14</time>
             </span>
 
           
@@ -252,9 +274,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>开启trim，可以给SSD写入提速的一种模式，打开 关于本机→系统报告→sata（查看trim状态）显示否的话就继续往下操作开启trim，<br>打开终端输入</p>
-<p>sudo trimforce enable</p>
-<p>回车，输入密码 回车<br>接着输入Y回车<br>等待提示成功自动重启电脑，如果没有重启就手动重启一下再去查看trim状态，显示 是 即为成功开启trim模式</p>
+          <ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/wangyu-/tinyPortMapper">https://github.com/wangyu-/tinyPortMapper</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.onlinedown.net/soft/110765.htm">https://www.onlinedown.net/soft/110765.htm</a></li>
+</ul>
+<p>两个工具都可以用，但难点不在这里，家庭路由器和光猫很少有对ipv6防火墙的管理设定，导致哪怕拿到了公网IP<br>也开不出端口，防火墙挡住了。openwrt路由器+光猫（路由器拨号）可以通过关闭防火墙让ipv6端口可用。<br>感觉无论如何还是少数人的玩具，大多数人用不上简单的公网IP。</p>
 
       
     </div>
@@ -274,7 +298,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/04/12/%E8%8B%B9%E6%9E%9C%E7%94%B5%E8%84%91-os-x-10-9-5-%E6%9B%B4%E6%96%B0%E4%B8%8D%E4%BA%86%E7%89%88%E6%9C%AC/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/05/07/%E8%BD%AC%E8%BD%BD%EF%BC%9A%E4%B8%80%E4%BB%BD%E7%AE%80%E5%8D%95%E5%A4%9F%E7%94%A8%E7%9A%84-Nginx-Location-%E9%85%8D%E7%BD%AE%E8%AE%B2%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -288,7 +312,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/12/%E8%8B%B9%E6%9E%9C%E7%94%B5%E8%84%91-os-x-10-9-5-%E6%9B%B4%E6%96%B0%E4%B8%8D%E4%BA%86%E7%89%88%E6%9C%AC/" class="post-title-link" itemprop="url">苹果电脑 os x 10.9.5 更新不了版本</a>
+            <a href="/2022/05/07/%E8%BD%AC%E8%BD%BD%EF%BC%9A%E4%B8%80%E4%BB%BD%E7%AE%80%E5%8D%95%E5%A4%9F%E7%94%A8%E7%9A%84-Nginx-Location-%E9%85%8D%E7%BD%AE%E8%AE%B2%E8%A7%A3/" class="post-title-link" itemprop="url">转载：一份简单够用的 Nginx Location 配置讲解</a>
         </h2>
 
         <div class="post-meta">
@@ -298,7 +322,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-04-12 14:56:00" itemprop="dateCreated datePublished" datetime="2021-04-12T14:56:00+08:00">2021-04-12</time>
+              <time title="创建时间：2022-05-07 19:18:00" itemprop="dateCreated datePublished" datetime="2022-05-07T19:18:00+08:00">2022-05-07</time>
             </span>
 
           
@@ -312,10 +336,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Mac 上的软件更新不能查找跨版本更新，需要一个中间步骤。</p>
-<p>另外，因为 OS X Mavericks 10.9 和目前的 macOS High Sierra 10.13 跨越了太多的版本，所以需要分成两个步骤更新：先更新到 OS X El Capitan 10.11，再更新到 macOS High Sierra 10.13。</p>
-<p>首先，更新到 OS X El Capitan 10.11。10.11 已经无法自行在 App Store 搜索到了，所以需要按照这里的方法用专用的链接下载：<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT206886">如何下载 OS X EL CAPITAN - APPLE 支持</a>；</p>
-<p>然后，再更新到 macOS High Sierra 10.13：<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT201475">如何下载 macOS High Sierra - Apple 支持</a>。</p>
+          <p>原文地址 <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000041217732">一份简单够用的 Nginx Location 配置讲解 - SegmentFault 思否</a></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Location 是 Nginx 中一个非常核心的配置，这篇重点讲解一下 Location 的配置问题以及一些注意事项。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>关于 Location，举个简单的配置例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">http &#123; </span><br><span class="line">  server &#123;</span><br><span class="line">      listen 80;</span><br><span class="line">        server_name www.yayujs.com;</span><br><span class="line">        location / &#123;</span><br><span class="line">          root /home/www/ts/;</span><br><span class="line">          index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大致的意思是，当你访问 <a target="_blank" rel="noopener" href="http://www.yayujs.com/">www.yayujs.com</a> 的 80 端口的时候，返回 &#x2F;home&#x2F;www&#x2F;ts&#x2F;index.html 文件。</p>
+<p>我们看下 Location 的具体语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location [ = | ~ | ~* | ^~ ] uri &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>重点看方括号中的 [ &#x3D; | ~ | <del>* | ^</del> ]，其中 | 分隔的内容表示你可能会用到的语法，其中：</p>
+<h4 id="x3D-表示精确匹配，比如："><a href="#x3D-表示精确匹配，比如：" class="headerlink" title="&#x3D; 表示精确匹配，比如："></a>&#x3D; 表示精确匹配，比如：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location = /test &#123;</span><br><span class="line">  return 200 &quot;hello&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /test ok</span><br><span class="line"># /test/ not ok</span><br><span class="line"># /test2 not ok</span><br><span class="line"># /test/2 not ok</span><br></pre></td></tr></table></figure>
+
+<h4 id="表示区分大小写的正则匹配，比如："><a href="#表示区分大小写的正则匹配，比如：" class="headerlink" title="~ 表示区分大小写的正则匹配，比如："></a>~ 表示区分大小写的正则匹配，比如：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location ~ ^/test$ &#123;</span><br><span class="line">  [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /test ok</span><br><span class="line"># /Test not ok</span><br><span class="line"># /test/ not ok</span><br><span class="line"># /test2 not ok</span><br></pre></td></tr></table></figure>
+
+<h4 id="表示不区分大小写的正则匹配"><a href="#表示不区分大小写的正则匹配" class="headerlink" title="~* 表示不区分大小写的正则匹配"></a>~* 表示不区分大小写的正则匹配</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location ~* ^/test$ &#123;     </span><br><span class="line">    [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /test ok</span><br><span class="line"># /Test ok</span><br><span class="line"># /test/ not ok</span><br><span class="line"># /test2 not ok</span><br></pre></td></tr></table></figure>
+
+<h4 id="表示-uri-以某个字符串开头"><a href="#表示-uri-以某个字符串开头" class="headerlink" title="^~ 表示 uri 以某个字符串开头"></a>^~ 表示 uri 以某个字符串开头</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location ^~ /images/ &#123;    </span><br><span class="line">    [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /images/1.gif ok</span><br></pre></td></tr></table></figure>
+
+<p>而当你不使用这些语法的时候，只写 uri 的时候：</p>
+<h4 id="x2F-表示通用匹配："><a href="#x2F-表示通用匹配：" class="headerlink" title="&#x2F; 表示通用匹配："></a>&#x2F; 表示通用匹配：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;     </span><br><span class="line">    [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /index.html ok</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location /test &#123;</span><br><span class="line">    [ configuration ] </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># /test ok</span><br><span class="line"># /test2 ok</span><br><span class="line"># /test/ ok</span><br></pre></td></tr></table></figure>
+
+<h3 id="匹配顺序"><a href="#匹配顺序" class="headerlink" title="匹配顺序"></a>匹配顺序</h3><p>当存在多个 location 的时候，他们的匹配顺序引用 <a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location">Nginx 官方文档</a>就是：</p>
+<blockquote>
+<p>A location can either be defined by a prefix string, or by a regular expression. Regular expressions are specified with the preceding “<del>*” modifier (for case-insensitive matching), or the “</del>” modifier (for case-sensitive matching). To find location matching a given request, nginx first checks locations defined using the prefix strings (prefix locations). Among them, the location with the longest matching prefix is selected and remembered. Then regular expressions are checked, in the order of their appearance in the configuration file. The search of regular expressions terminates on the first match, and the corresponding configuration is used. If no match with a regular expression is found then the configuration of the prefix location remembered earlier is used.</p>
+<p>If the longest matching prefix location has the “^~” modifier then regular expressions are not checked.</p>
+<p>Also, using the “&#x3D;” modifier it is possible to define an exact match of URI and location. If an exact match is found, the search terminates. For example, if a “&#x2F;” request happens frequently, defining “location &#x3D; &#x2F;” will speed up the processing of these requests, as search terminates right after the first comparison. Such a location cannot obviously contain nested locations.</p>
+</blockquote>
+<p>翻译整理后就是：</p>
+<p>location 的定义分为两种：</p>
+<ul>
+<li>前缀字符串（prefix string）</li>
+<li>正则表达式（regular expression），具体为前面带 ~* 和 ~ 修饰符的</li>
+</ul>
+<p>而匹配 location 的顺序为：</p>
+<ol>
+<li>检查使用前缀字符串的 locations，在使用前缀字符串的 locations 中选择最长匹配的，并将结果进行储存</li>
+<li>如果符合带有 &#x3D; 修饰符的 URI，则立刻停止匹配</li>
+<li>如果符合带有 ^~ 修饰符的 URI，则也立刻停止匹配。</li>
+<li>然后按照定义文件的顺序，检查正则表达式，匹配到就停止</li>
+<li>当正则表达式匹配不到的时候，使用之前储存的前缀字符串</li>
+</ol>
+<p>再总结一下就是：</p>
+<p>在顺序上，前缀字符串顺序不重要，按照匹配长度来确定，正则表达式则按照定义顺序。</p>
+<p>在优先级上，&#x3D; 修饰符最高，^~ 次之，再者是正则，最后是前缀字符串匹配。<br>我们举几个简单的例子复习下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    location /doc &#123;</span><br><span class="line">        [ configuration A ] </span><br><span class="line">    &#125;</span><br><span class="line">    location /docu &#123;</span><br><span class="line">        [ configuration B ] </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 请求 /document 使用 configuration B</span><br><span class="line"># 虽然 /doc 也能匹配到，但在顺序上，前缀字符串顺序不重要，按照匹配长度来确定</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    location ~ ^/doc &#123;</span><br><span class="line">        [ configuration A ] </span><br><span class="line">    &#125;</span><br><span class="line">    location ~ ^/docu &#123;</span><br><span class="line">        [ configuration B ] </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 请求 /document 使用 configuration A</span><br><span class="line"># 虽然 ~ ^/docu 也能匹配到，但正则表达式则按照定义顺序</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    location ^~ /doc &#123;</span><br><span class="line">        [ configuration A ] </span><br><span class="line">    &#125;</span><br><span class="line">    location ~ ^/docu &#123;</span><br><span class="line">        [ configuration B ] </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 请求 /document 使用 configuration A</span><br><span class="line"># 虽然 ~ ^/docu 也能匹配到，但 ^~ 的优先级更高</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    location /document &#123;</span><br><span class="line">        [ configuration A ] </span><br><span class="line">    &#125;</span><br><span class="line">    location ~ ^/docu &#123;</span><br><span class="line">        [ configuration B ] </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 请求 /document 使用 configuration B</span><br><span class="line"># 虽然 /document 也能匹配到，但正则的优先级更高</span><br></pre></td></tr></table></figure>
+
+<h3 id="root-与-alias-的区别"><a href="#root-与-alias-的区别" class="headerlink" title="root 与 alias 的区别"></a>root 与 alias 的区别</h3><p>当我们这样设置 root 的时候：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /i/ &#123;</span><br><span class="line">    root /data/w3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当请求 &#x2F;i&#x2F;top.gif ，&#x2F;data&#x2F;w3&#x2F;i&#x2F;top.gif 会被返回。</p>
+<p>当我们这样设置 alias 的时候：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /i/ &#123;</span><br><span class="line">    alias /data/w3/images/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当请求 &#x2F;i&#x2F;top.gif ，&#x2F;data&#x2F;w3&#x2F;images&#x2F;top.gif 会被返回。</p>
+<p>乍一看两者很像，但细一看，就能看出两者的区别，root 是直接拼接 root + location 而 alias 是用 alias 替换 location，所以 root 中最后的路径里有 &#x2F;i&#x2F;，而 alias 中最后的路径里没有 &#x2F;i&#x2F; 。</p>
+<p>所以如果你这样使用 allias 定义一个路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /images/ &#123;</span><br><span class="line">    alias /data/w3/images/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实使用 root 会更好：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /images/ &#123;</span><br><span class="line">    root /data/w3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="server-和-location-中的-root"><a href="#server-和-location-中的-root" class="headerlink" title="server 和 location 中的 root"></a>server 和 location 中的 root</h3><p>server 和 location 中都可以使用 root，举个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">http &#123; </span><br><span class="line">  server &#123;</span><br><span class="line">      listen 80;</span><br><span class="line">        server_name www.yayujs.com;</span><br><span class="line">        root /home/www/website/;</span><br><span class="line">        location / &#123;</span><br><span class="line">          root /home/www/ts/;</span><br><span class="line">          index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果两者都出现，是怎样的优先级呢？</p>
+<p>简单的来说，就是就近原则，如果 location 中能匹配到，就是用 location 中的 root 配置，忽略 server 中的 root，当 location 中匹配不到的时候，则使用 server 中的 root 配置。</p>
 
       
     </div>
@@ -335,7 +421,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/03/15/lnmp-%E7%8E%AF%E5%A2%83%E4%B8%8B%E4%BD%BF%E7%94%A8-acme-sh-%E7%AD%BE%E5%8F%91Let-s-Encrypt-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/04/07/windows-%E6%89%B9%E5%A4%84%E7%90%86%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -349,7 +435,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/15/lnmp-%E7%8E%AF%E5%A2%83%E4%B8%8B%E4%BD%BF%E7%94%A8-acme-sh-%E7%AD%BE%E5%8F%91Let-s-Encrypt-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">lnmp 环境下使用 acme.sh 签发Let's Encrypt 出现错误解决记录</a>
+            <a href="/2022/04/07/windows-%E6%89%B9%E5%A4%84%E7%90%86%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/" class="post-title-link" itemprop="url">windows 批处理同步系统时间</a>
         </h2>
 
         <div class="post-meta">
@@ -359,7 +445,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-03-15 14:18:00" itemprop="dateCreated datePublished" datetime="2021-03-15T14:18:00+08:00">2021-03-15</time>
+              <time title="创建时间：2022-04-07 20:08:00" itemprop="dateCreated datePublished" datetime="2022-04-07T20:08:00+08:00">2022-04-07</time>
             </span>
 
           
@@ -373,33 +459,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>最近在使用 lnmp脚本工具包 的时候 里面的acme.sh脚本签发 Let’s Encrypt证书报错</p>
-<p>Please refer to <a target="_blank" rel="noopener" href="https://curl.haxx.se/libcurl/c/libcurl-errors.html">https://curl.haxx.se/libcurl/c/libcurl-errors.html</a> for error code: 28</p>
-<p>根据网上搜索，说是参数换成强制wget就行了，经过测试发现一样不行，于是开始了折腾之路。</p>
-<p>经过反复测试发现，在境外的主机上操作都是正常的，但是境内就不行，难道是网络缘故？</p>
-<p>思来想去，还是把签发这个事放在境外吧。</p>
-<p>于是新建一台境外实例，部署好lnmp，修改 php-fpm的配置文件 用户名和用户组都改成root （避免权限问题）然后 lnmp stop php-fpm</p>
-<p>修改&#x2F;etc&#x2F;init.d&#x2F;php-fpm 这个文件给php-fpm 添加一个启动参数</p>
-<p>php_opts&#x3D;” -R –allow-to-run-as-root  –fpm-config $php_fpm_CONF –pid $php_fpm_PID”</p>
-<p>修改&#x2F;usr&#x2F;local&#x2F;php&#x2F;etc&#x2F;php.ini </p>
-<p>在disable_functions 里面去掉exec</p>
-<p>修改&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;fastcgi.conf</p>
-<p>fastcgi_param PHP_ADMIN_VALUE “open_basedir&#x3D;$document_root&#x2F;:&#x2F;tmp&#x2F;:&#x2F;proc&#x2F;:&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;ssl&#x2F;“;</p>
-<p>添加:&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;ssl&#x2F;</p>
-<p>准备工作就绪（lnmp php-fpm start &amp;&amp; lnmp nginx reload），假设这台机器的域名是 ca.com 解析放在阿里云</p>
-<p>在终端添加ssl虚拟主机，使用lnmp dns ali 然后根据lnmp的提示，添加好主机</p>
-<p>再添加要帮忙签的域名，使用 lnmp onlyssl ali ，例如这里添加 abc.com</p>
-<p>然后在&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;ssl&#x2F; 目录下可以找到对应域名的证书，我们只需要把文件复制到需要的服务器上就可以了，一般来说scp就行，但我采用了PHP更新的方案，所以这里要上代码了</p>
-<p>服务端，也就是ca.com服务器上部署</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>]) || !<span class="title function_ invoke__">is_valid_domain_name</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取域名的解析记录</span></span><br><span class="line"><span class="variable">$ip</span> = <span class="title function_ invoke__">dns_get_record</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>],DNS_A);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$ip</span>[<span class="number">0</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$ip</span>[<span class="number">0</span>][<span class="string">&#x27;ip&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$ip</span> = <span class="variable">$ip</span>[<span class="number">0</span>][<span class="string">&#x27;ip&#x27;</span>];</span><br><span class="line">&#125;<span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//判断访问来源和域名是否一致</span></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$ip</span> !== <span class="variable">$_SERVER</span>[<span class="string">&#x27;REMOTE_ADDR&#x27;</span>])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//验证通过后开始打包证书文件</span></span><br><span class="line"><span class="variable">$base</span> = <span class="string">&#x27;/usr/local/nginx/conf/ssl/&#x27;</span>;</span><br><span class="line"><span class="variable">$path</span> = <span class="variable">$base</span> . <span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>] . <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="variable">$path</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_ invoke__">exec</span>(<span class="string">&quot;cd &#x27;<span class="subst">&#123;$path&#125;</span>&#x27; &amp;&amp; tar -czf <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.tgz ca.cer fullchain.cer <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.cer <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.csr <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.csr.conf <span class="subst">&#123;$_POST[&#x27;domain&#x27;]&#125;</span>.key&quot;</span>);</span><br><span class="line">    <span class="comment">//计算hash</span></span><br><span class="line">    <span class="variable">$new_md5</span> = <span class="title function_ invoke__">md5_file</span>(<span class="variable">$path</span>.<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>].<span class="string">&#x27;.tgz&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$new_md5</span> !== <span class="variable">$_POST</span>[<span class="string">&#x27;md5&#x27;</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_ invoke__">send_file</span>(<span class="variable">$path</span>.<span class="variable">$_POST</span>[<span class="string">&#x27;domain&#x27;</span>].<span class="string">&#x27;.tgz&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//验证域名合法性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">is_valid_domain_name</span>(<span class="params"><span class="variable">$domain_name</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">        <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//valid chars check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^.&#123;1,253&#125;$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//overall length check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^[^\.]&#123;1,63&#125;(\.[^\.]&#123;1,63&#125;)*$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//length of each label</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//发送文件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">send_file</span>(<span class="params"><span class="variable">$file</span></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$size</span> = <span class="title function_ invoke__">filesize</span>(<span class="variable">$file</span>); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-type: application/octet-stream&quot;</span>); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Accept-Ranges: bytes&quot;</span>); </span><br><span class="line">    <span class="variable">$begin</span> = <span class="number">0</span>; </span><br><span class="line">    <span class="variable">$end</span> = <span class="variable">$size</span> - <span class="number">1</span>; </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Length: &quot;</span> . (<span class="variable">$end</span> - <span class="variable">$begin</span> + <span class="number">1</span>)); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Disposition: attachment;filename=&quot;</span>.<span class="title function_ invoke__">basename</span>(<span class="variable">$file</span>)); </span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Range: bytes &quot;</span>.<span class="variable">$begin</span>.<span class="string">&quot;-&quot;</span>.<span class="variable">$end</span>.<span class="string">&quot;/&quot;</span>.<span class="variable">$size</span>); </span><br><span class="line">    <span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$file</span>); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<p>然后在abc.com这台机器上（前提是部署好了lnmp网站，创建了ssl配置，由于是基础这里不在赘述）创建 dnsca.php文件 内容如下</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$argv</span>[<span class="number">1</span>])) <span class="keyword">exit</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">is_valid_domain_name</span>(<span class="variable">$argv</span>[<span class="number">1</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$domain_name</span> = <span class="variable">$argv</span>[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//目录不在就新建</span></span><br><span class="line"><span class="variable">$path</span> = <span class="string">&#x27;/usr/local/nginx/conf/ssl/&#x27;</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;/&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">file_exists</span>(<span class="variable">$path</span>))</span><br><span class="line">&#123;</span><br><span class="line">    @<span class="title function_ invoke__">mkdir</span>(<span class="variable">$path</span>,<span class="number">0777</span>,<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//文件hash</span></span><br><span class="line"><span class="variable">$now_hash</span> = <span class="string">&quot;0&quot;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="variable">$path</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz&#x27;</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$now_hash</span> = <span class="title function_ invoke__">md5_file</span>(<span class="variable">$path</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$now_hash</span> = <span class="string">&quot;0&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">exec</span>(<span class="string">&#x27; cd \&#x27;&#x27;</span>.<span class="variable">$path</span>.<span class="string">&#x27;\&#x27; &amp;&amp; wget --post-data &quot;domain=&#x27;</span>.<span class="title function_ invoke__">urlencode</span>(<span class="variable">$domain_name</span>).<span class="string">&#x27;&amp;md5=&#x27;</span>.<span class="variable">$now_hash</span>.<span class="string">&#x27;&quot; --no-check-certificate -O &#x27;</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz https://ca.com/ca.php&#x27;</span>);</span><br><span class="line"><span class="variable">$size</span> = <span class="title function_ invoke__">filesize</span>(<span class="variable">$path</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz&#x27;</span>); </span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$size</span>&gt;<span class="number">1000</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_ invoke__">exec</span>(<span class="string">&#x27;cd \&#x27;&#x27;</span>.<span class="variable">$path</span>.<span class="string">&#x27;\&#x27; &amp;&amp; tar -xzf &#x27;</span>.<span class="variable">$domain_name</span>.<span class="string">&#x27;.tgz &amp;&amp; lnmp nginx reload&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//验证域名合法性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">is_valid_domain_name</span>(<span class="params"><span class="variable">$domain_name</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">        <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//valid chars check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^.&#123;1,253&#125;$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//overall length check</span></span><br><span class="line"></span><br><span class="line">        &amp;&amp; <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^[^\.]&#123;1,63&#125;(\.[^\.]&#123;1,63&#125;)*$/&quot;</span>, <span class="variable">$domain_name</span>) <span class="comment">//length of each label</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>设置好文件可执行权限，然后执行</p>
-<p>&#x2F;usr&#x2F;bin&#x2F;php dnsca.php abc.com </p>
-<p>也可以设置成 crontab 任务 </p>
-<h2 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h2><p>这个方案太麻烦了，我后面不用了，就是做个记录，现在是在服务器上装7zip 用 shell 定期加密打包证书文件并且移动到 http 目录下，然后需要下载的服务器用 wget 下回来以后再解压到对应目录，全程使用 shell 和 crontab 。由于证书使用通配符签发，也就不需要验证域名了，出于安全考虑，把 http 目录设置了 IP 白名单。</p>
-
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">&gt;NUL 2&gt;&amp;1 REG.exe query &quot;HKU\S-1-5-19&quot; || (</span><br><span class="line">    ECHO SET UAC = CreateObject^(&quot;Shell.Application&quot;^) &gt; &quot;%TEMP%\Getadmin.vbs&quot;</span><br><span class="line">    ECHO UAC.ShellExecute &quot;%~f0&quot;, &quot;%1&quot;, &quot;&quot;, &quot;runas&quot;, 1 &gt;&gt; &quot;%TEMP%\Getadmin.vbs&quot;</span><br><span class="line">    &quot;%TEMP%\Getadmin.vbs&quot;</span><br><span class="line">    DEL /f /q &quot;%TEMP%\Getadmin.vbs&quot; 2&gt;NUL</span><br><span class="line">    Exit /b</span><br><span class="line">)</span><br><span class="line">cd /d %~dp0</span><br><span class="line">net stop w32time</span><br><span class="line">w32tm /unregister</span><br><span class="line">w32tm /register</span><br><span class="line">net start w32time</span><br><span class="line">w32tm /config /manualpeerlist:&quot;ntp1.aliyun.com&quot; /syncfromflags:manual /reliable:yes /update</span><br><span class="line">w32tm /resync</span><br><span class="line">``</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -418,7 +478,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/03/11/cer-%E8%BD%AC-pfx/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/03/16/%E5%AE%B6%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E5%BC%80%E5%90%AF-IPV6%EF%BC%8C-wifi-%E8%AE%BF%E9%97%AE%E5%8F%98%E6%85%A2%E7%94%9A%E8%87%B3%E6%89%93%E4%B8%8D%E5%BC%80%E7%BD%91%E9%A1%B5%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -432,7 +492,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/11/cer-%E8%BD%AC-pfx/" class="post-title-link" itemprop="url">cer 转 pfx</a>
+            <a href="/2022/03/16/%E5%AE%B6%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E5%BC%80%E5%90%AF-IPV6%EF%BC%8C-wifi-%E8%AE%BF%E9%97%AE%E5%8F%98%E6%85%A2%E7%94%9A%E8%87%B3%E6%89%93%E4%B8%8D%E5%BC%80%E7%BD%91%E9%A1%B5%EF%BC%9F/" class="post-title-link" itemprop="url">家用路由器开启 IPv6， wifi 访问变慢甚至打不开网页？</a>
         </h2>
 
         <div class="post-meta">
@@ -442,7 +502,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-03-11 10:07:00" itemprop="dateCreated datePublished" datetime="2021-03-11T10:07:00+08:00">2021-03-11</time>
+              <time title="创建时间：2022-03-16 12:43:00" itemprop="dateCreated datePublished" datetime="2022-03-16T12:43:00+08:00">2022-03-16</time>
             </span>
 
           
@@ -456,7 +516,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -export -in fullchain.cer -inkey 域名.key -passout pass:&quot;key的密码&quot; -out fullchain.pfx</span><br></pre></td></tr></table></figure>
+          <p>发现最近经常有人提到开启 IPv6 连接速度慢的问题。目前国内确实存在支持 IPv6 的服务器、CDN 节点不够多，IPv6 国际带宽比 IPv4 带宽小的问题，但也不至于会打开国内网站都卡。通常情况下遇到这个问题说明你到目标服务器的链路上存在 PMTU 黑洞。</p>
+<p>关于 PMTU 黑洞<br>MTU (Maximum transmission unit) 是一条链路上可以通过的三层数据包的最大尺寸（包含 IP 包头）。以太网上默认的 MTU 是 1500 字节，但是你和目标服务器之间的路径上可能存在小于 MTU 1500 的链路。这条路径上最小的 MTU 值就是整条路径的 PMTU 值。路由器在转发包时，超过 MTU 大小的包会被分片（ Fragmentation ），也就是一个大包会被分切为多个不超过 MTU 的小包进行传输，传输效率会下降。</p>
+<p>终端设备在发包时，也可以设置 DF （ Don’t Fragment ）标记来告诉路由器不要分片。这时中间路由器会丢掉超过 MTU 的包，回复一条 ICMP Fragmentation Needed 消息。发送者收到这个包后，下次就会发小一点的包，这个过程叫做 PMTU Discovery 。现实中可以看到 HTTPS （ TLS ）的流量大都是带 DF 标记的。</p>
+<p>然而，互联网上有大量的中间设备为了所谓的“安全”或者没有正确配置，不回应 ICMP Fragmentation Needed 包，这使得访问某些网站时如果某个包的大小超过了 PMTU，会被无声地丢弃，直到 TCP 协议发现超时丢包进行重传，这非常缓慢。遇到这种情况，我们可以说你和目标服务器的路径上存在 PMTU 黑洞。</p>
+<p>此外，IPv6 不支持分片，换句话说可以理解为 IPv6 下所有的包都是带 DF 标记的。中间路由器在遇到包尺寸大于 MTU 的情况时，应该回应 ICMPv6 Packet Too Big 消息。同样的，由于种种原因，某些中间设备可能会直接丢包而不回应 ICMPv6 Packet Too Big 消息，直到 TCP 协议发现超时丢包进行重传。。。</p>
+<p>为什么 IPv4 没有这个问题<br>其实 IPv4 也有这个问题，我不只一次见网友说自己搭的软路由访问某些网站非常慢，而换回硬路由就正常。这是因为多数家用路由器默认对 IPv4 下的 TCP 开启了 MSS (maximum segment size) Clamping （使用 OpenWRT 软路由的朋友们可以在防火墙设置中找到 MSS Clamping 开关）。MSS Clamping 是针对 PMTU 黑洞的 Workaround，简单来说就是 TCP 握手时有个 MSS 字段决定单个 TCP 包的最大尺寸。路由器可以通过嗅探 TCP 握手包，把 MSS 值改小，使最终的三层 IP 包的尺寸（ MSS+TCP 头大小+IP 头大小）不超过某个特定的值。</p>
+<p>总结<br>现在国内 ISP 一般都是通过 PPPoE 虚拟拨号建立 WAN 口连接的。Ethernet 的默认 MTU 是 1500，但是 PPPoE 隧道有 8 个 bytes 的开销，所以 PPPoE 虚连接的 MTU 就是 1500-8&#x3D;1492，减掉 IPv4 包头（ 20 字节）和 TCP 包头（ 20 字节），可以得知 IPv4 下需要把 MSS 设为 1452 以下。</p>
+<p>IPv6 的包头是 40 字节，所以 IPv6 下需要把 MSS 设为 1432 以下。</p>
+<p>这时问题来了，目前很多光猫、家用路由器对 IPv6 的优化很差，不支持对 IPv6 下的 TCP 包进行 MSS Clamping，这就导致访问 IPv6 网站时，若路径中存在 PMTU 黑洞，则打开很慢。</p>
+<p>我前段时间帮朋友配置 IPv6 时发现了很多光猫、家用路由器的固件问题，使得国内使用 IPv6 的体验不太理想。我打算抽空专门开一个帖子去讨论这些问题，声讨那些垃圾厂家。目前来看，要想在国内比较理想地体验 IPv6，你需要把光猫改为桥接模式，并使用 OpenWRT 或者 VyOS 这类对 IPv6 支持较好的软路由。</p>
+<p>附：在基于 Linux 的路由器启用MSS Clamping的命令：</p>
+<p>自动MSS，假设PPPOE虚接口是pppoe0<br>iptables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –clamp-mss-to-pmtu<br>ip6tables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –clamp-mss-to-pmtu</p>
+<p>手动指定MSS，假设PPPOE虚接口是pppoe0<br>$ iptables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –set-mss 1452<br>$ ip6tables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –set-mss 1432</p>
+<p>RouterOS里设置MSS的命令。其中pppoe-out1是wan口，1420是要MSS值，请根据需要修改。</p>
+<p>&#x2F;ipv6 firewall mangle add chain&#x3D;forward out-interface&#x3D;pppoe-out1 protocol&#x3D;tcp tcp-flags&#x3D;syn action&#x3D;change-mss new-mss&#x3D;1420</p>
+<p>UBNT Edgerouter 系列的MSS设置方法：</p>
+<p>set firewall options mss-clamp6 interface-type pppoe<br>set firewall options mss-clamp6 mss 1420</p>
+<p>转载：<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/800024">https://www.v2ex.com/t/800024</a></p>
+
       
     </div>
 
@@ -474,7 +552,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -540,14 +618,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

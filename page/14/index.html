@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/05/PC%E7%89%88%E8%B7%91%E8%B7%91%E5%8D%A1%E4%B8%81%E8%BD%A6-%E6%95%85%E4%BA%8B%E6%A8%A1%E5%BC%8F-%E4%BA%9A%E7%91%9F%E4%BC%A0%E8%AF%B4%E7%AB%A0%E8%8A%82-%E5%8D%A1%E7%BE%8E%E6%B4%9B%E5%BA%86%E5%85%B8-2%E9%98%B6%E6%AE%B5-%E5%BF%83%E7%81%B5%E4%B9%8B%E7%9C%BC-%E6%94%BB%E7%95%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/30/PHP-ini-%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%AD%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%EF%BC%9F/" class="post-title-link" itemprop="url">PHP.ini 能不能加载子配置文件 ？</a>
+            <a href="/2020/12/05/PC%E7%89%88%E8%B7%91%E8%B7%91%E5%8D%A1%E4%B8%81%E8%BD%A6-%E6%95%85%E4%BA%8B%E6%A8%A1%E5%BC%8F-%E4%BA%9A%E7%91%9F%E4%BC%A0%E8%AF%B4%E7%AB%A0%E8%8A%82-%E5%8D%A1%E7%BE%8E%E6%B4%9B%E5%BA%86%E5%85%B8-2%E9%98%B6%E6%AE%B5-%E5%BF%83%E7%81%B5%E4%B9%8B%E7%9C%BC-%E6%94%BB%E7%95%A5/" class="post-title-link" itemprop="url">PC版跑跑卡丁车-故事模式-亚瑟传说章节-卡美洛庆典-2阶段-心灵之眼 攻略</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-04-30 11:15:00" itemprop="dateCreated datePublished" datetime="2019-04-30T11:15:00+08:00">2019-04-30</time>
+              <time title="创建时间：2020-12-05 14:23:00" itemprop="dateCreated datePublished" datetime="2020-12-05T14:23:00+08:00">2020-12-05</time>
             </span>
 
           
@@ -193,20 +193,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>配置 nginx 的时候，在配置文件中可以方便的使用 include 指令来把配置文件内容分割，从而达到方便管理的目的。<br>但是在使用 php 的时候也希望有这样的功能，这样在升级或者重装环境的时候就知道自己曾经改过哪些配置了。<br>但是 php.ini 里面并不能直接载入其他文件，但是在官方文档中给出了<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">解决方案</a> 。</p>
-<p>首先明确一点，php在加载配置文件的时候分为主配置文件和附加配置文件。<br>主配置文件这里不讨论，因为不同操作系统下位置不同，搜索机制也不同。具体参见文档中的说明。</p>
-<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><p>这里我们只看在主配置文件 php.ini 加载完成以后如何补充加载从配置文件。<br>它有以下两个方法</p>
-<ol>
-<li>编译 php 的时候，使用参数 –with-config-file-scan-dir 指定目录 php在加载主配置文件之后再加载在这个目录里面 ini 文件</li>
-<li>设置环境变量 PHP_INI_SCAN_DIR 的值为子配置文件的目录</li>
-</ol>
-<p>方法1 适合自己有编译环境或者很方便编译的系统，例如 linux 下经常自己编译 php 。<br>方法2 适合下载别人编译好的版本。</p>
-<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ul>
-<li>无论 1 还是 2 都可以按顺序指定多个目录，加载顺序也会根据目录顺序，每个目录里面 ini 文件文件名排序按顺序加载。</li>
-<li>多个目录设置分隔符根据操作系统不同而不同，具体可以用PHP打印 PATH_SEPARATOR 常量查看，windows是分号，linux 是冒号</li>
-<li>环境变量并不是只有操作系统才有，Apache 运行 或者 IIS 运行也有专门的环境变量设置，在鼓捣的时候不要弄混了去设置成系统环境变量，如果是命令行执行，可以使用 export 或者 set 命令来分别给 linux 和 windows 添加临时环境变量</li>
-</ul>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>可以使用phpinfo();查看<br>代码验证相关函数 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.php-ini-scanned-files.php">php_ini_scanned_files</a></p>
+          <p>假设靠近终点的方向为前</p>
+<p>靠近起点的方向为后，在行车过程中 坐标系不发生旋转</p>
+<p>从右手边下坡</p>
+<p>前 5<br>右 3<br>前 1<br>右 1<br>前 2<br>左 6<br>后 1<br>左 2<br>前 5<br>右 2<br>前 1<br>右 1<br>然后直接按前 </p>
 
       
     </div>
@@ -226,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/11/15/Nvidia-RTX-Voice-%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -240,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/29/PHP-%E5%A4%84%E7%90%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E5%9B%9E%E9%A1%BE%EF%BC%88%E8%AE%B0%E5%BD%95%E6%95%99%E8%AE%AD%EF%BC%89/" class="post-title-link" itemprop="url">PHP 处理表单数据的一个安全回顾（记录教训）</a>
+            <a href="/2020/11/15/Nvidia-RTX-Voice-%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Nvidia RTX Voice 启动报错修复方法</a>
         </h2>
 
         <div class="post-meta">
@@ -250,7 +240,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-29 10:32:00" itemprop="dateCreated datePublished" datetime="2019-03-29T10:32:00+08:00">2019-03-29</time>
+              <time title="创建时间：2020-11-15 15:17:00" itemprop="dateCreated datePublished" datetime="2020-11-15T15:17:00+08:00">2020-11-15</time>
             </span>
 
           
@@ -264,15 +254,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>曾经看过一个讲 PHP 代码安全的文章中写过这么一条</p>
-<p>表单输入数据要做 htmlspecialchars_decode 处理</p>
-<p>表单输出数据要做 htmlspecialchars 处理</p>
-<p>当时还不是很理解为什么，自己也没遇到问题，所以就没做</p>
-<p>然而不是不报 时候未到 今天终于遇到了这个坑</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input  type=&quot;text&quot; value=&quot;&lt;?php echo $value; ?&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>当采用上面代码输出的时候</p>
-<p>假如 $value 里面有 “ 双引号 那么value这个键将会被提前闭合，造成表单数据显示不完全，而且会多出来其他内容被识别为键的情况</p>
-<p>这下就惨了 所有这么输出的地方都要处理了，暂时也只能头痛医头，脚痛医脚了，先做转义好了</p>
+          <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>应该是手贱把设备禁用了，然后rtx voice找不到设备报错了，所以就是不要手贱禁用RTX Voice 虚拟出来的设备。</p>
+<h3 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h3><p>打开控制面板 - 声音 - 播放</p>
+<p>右键菜单 - 打开 显示禁用的设备</p>
+<p>然后把窗口放在一边，不要关闭。</p>
+<p>此时启动 Rtx voice 程序，在程序还没有报错之前，赶紧在声音面板中把 Speakers 点右键 启用。</p>
+<p>同理，如果是麦克风被禁用了，也启用处理。</p>
 
       
     </div>
@@ -292,7 +279,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/02/24/%E4%B8%8D%E7%94%A8U%E7%9B%98%EF%BC%8C%E7%94%A8%E4%B8%80%E5%8F%B0%E5%A5%BD%E7%94%B5%E8%84%91%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85-windows10/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/11/15/%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E9%97%AD%E8%B7%A8%E5%9F%9F%E9%99%90%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -306,7 +293,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/02/24/%E4%B8%8D%E7%94%A8U%E7%9B%98%EF%BC%8C%E7%94%A8%E4%B8%80%E5%8F%B0%E5%A5%BD%E7%94%B5%E8%84%91%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85-windows10/" class="post-title-link" itemprop="url">不用U盘，用一台好电脑给另一个电脑重装 windows10</a>
+            <a href="/2020/11/15/%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E9%97%AD%E8%B7%A8%E5%9F%9F%E9%99%90%E5%88%B6/" class="post-title-link" itemprop="url">火狐浏览器关闭跨域限制</a>
         </h2>
 
         <div class="post-meta">
@@ -316,7 +303,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-02-24 19:34:00" itemprop="dateCreated datePublished" datetime="2019-02-24T19:34:00+08:00">2019-02-24</time>
+              <time title="创建时间：2020-11-15 15:11:00" itemprop="dateCreated datePublished" datetime="2020-11-15T15:11:00+08:00">2020-11-15</time>
             </span>
 
           
@@ -330,23 +317,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ol>
-<li><p>先把坏电脑硬盘拆下来，然后挂到好电脑上</p>
-</li>
-<li><p>把这块盘用磁盘管理工具改成GPT分区表格式，然后整盘分区（NTFS）。</p>
-</li>
-<li><p>这个分区进行压缩卷操作，分出第二个区（FAT32 格式 大小大于5G 我这里用了6G）</p>
-</li>
-<li><p>把 win10 的 iso 解压到第二个 FAT32 分区，在磁盘管理里面删掉前面那个 NTFS 的分区，这样磁盘就变成了开头一大片未分区的空间，末尾有一个 FAT32 分区, 里面是系统镜像解压后的安装文件</p>
-</li>
-<li><p>拆掉硬盘装回坏电脑上去。</p>
-</li>
-<li><p>在 bios 中设置启动（一般新主板会不需要设置，自己会主动找到启动分区） </p>
-</li>
-<li><p>正常按照安装 win10 的步骤继续即可</p>
-</li>
-</ol>
-<p>此方法需要支持GPT+UEFI启动的环境，太老的电脑不支持 UEFI 的无法使用此方法。</p>
+          <p>打开火狐 在地址栏访问 about:config</p>
+<p>选择 我了解此风险</p>
+<p>然后搜 security.fileuri.strict_origin_policy</p>
+<p>切换到false 即可关闭跨域限制，此时所有页面js都可以随意访问跨域限制的数据 安全性极大的降低，不建议一直开着， 某些特殊测试用途可以关闭，用完马上打开。</p>
+<p>chrome 如果想设置跨域 需要安装扩展<br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=zh-CN">https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=zh-CN</a></p>
 
       
     </div>
@@ -366,7 +341,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/28/%E7%9C%81%E5%BF%83%E7%9A%84%E8%AE%BF%E9%97%AE%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/11/06/%E9%BA%A6%E5%85%8B%E9%A3%8E%E5%AE%9E%E6%97%B6%E9%99%8D%E5%99%AA%E6%96%B9%E6%A1%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -380,7 +355,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/28/%E7%9C%81%E5%BF%83%E7%9A%84%E8%AE%BF%E9%97%AE%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">省心的网络代理配置</a>
+            <a href="/2020/11/06/%E9%BA%A6%E5%85%8B%E9%A3%8E%E5%AE%9E%E6%97%B6%E9%99%8D%E5%99%AA%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">麦克风实时降噪方案</a>
         </h2>
 
         <div class="post-meta">
@@ -390,7 +365,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-28 12:09:00" itemprop="dateCreated datePublished" datetime="2019-01-28T12:09:00+08:00">2019-01-28</time>
+              <time title="创建时间：2020-11-06 01:10:00" itemprop="dateCreated datePublished" datetime="2020-11-06T01:10:00+08:00">2020-11-06</time>
             </span>
 
           
@@ -404,19 +379,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ol>
-<li><p>先装插件 推荐用 <a target="_blank" rel="noopener" href="https://www.switchyomega.com/download/">SwitchyOmega</a></p>
-</li>
-<li><p>配置好 sock5 代理(例如 v2 之类的) 具体这里不讨论 然后提供一个本地端口 127.0.0.1:6666</p>
-</li>
-<li><p>配置 cow ，作用是 sock5 转 http 代理 配置成 127.0.0.1:7777</p>
-</li>
-<li><p>在第1步的插件里面配置所有地址走 7777 端口 模式是pac 路径是 <a target="_blank" rel="noopener" href="http://127.0.0.1:7777/pac">http://127.0.0.1:7777/pac</a> 更新频率1小时1次</p>
-</li>
-</ol>
-<blockquote>
-<p>cow会检测访问是否成功，记录次数 然后不断改进pac结果，所以一开始用会很慢 多刷新几次，越用越流畅</p>
-</blockquote>
+          <h3 id="方案1-：rtx-voice"><a href="#方案1-：rtx-voice" class="headerlink" title="方案1 ：rtx voice"></a>方案1 ：rtx voice</h3><p>优点：简单</p>
+<p>缺点：只支持win10 + rtx显卡 （GTX显卡可以破解安装包）</p>
+<p>网址：<a target="_blank" rel="noopener" href="https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/">https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/</a></p>
+<p>破解：<a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1167289-1-1.html">https://www.52pojie.cn/thread-1167289-1-1.html</a></p>
+<p>注意：每一代用的版本不一样，例如 30 系之后这个功能被集成到了 Nvidia Broadcast 这个软件里面了</p>
+<h3 id="方案2：-krisp"><a href="#方案2：-krisp" class="headerlink" title="方案2： krisp"></a>方案2： krisp</h3><p>优点：不限定硬件，支持win10 MacOS</p>
+<p>缺点：收费的</p>
+<p>网址：<a target="_blank" rel="noopener" href="https://krisp.ai/">https://krisp.ai/</a></p>
+<h3 id="方案3：-Equalizer-APO-noise-suppression-for-voice-win10"><a href="#方案3：-Equalizer-APO-noise-suppression-for-voice-win10" class="headerlink" title="方案3： Equalizer APO + noise-suppression-for-voice (win10)"></a>方案3： Equalizer APO + noise-suppression-for-voice (win10)</h3><p>优点：不要钱 支持linux win10 MacOS</p>
+<p>缺点：设置复杂</p>
+<p>网址：</p>
+<p>Equalizer APO <a target="_blank" rel="noopener" href="https://equalizerapo.com/download.html">https://equalizerapo.com/download.html</a></p>
+<p> noise-suppression-for-voice <a target="_blank" rel="noopener" href="https://github.com/werman/noise-suppression-for-voice">https://github.com/werman/noise-suppression-for-voice</a></p>
+<p>win10设置教程  <a target="_blank" rel="noopener" href="https://medium.com/@bssankaran/free-and-open-source-software-noise-cancelling-for-working-from-home-edb1b4e9764e">https://medium.com/@bssankaran/free-and-open-source-software-noise-cancelling-for-working-from-home-edb1b4e9764e</a></p>
+<p>其他系统安装详见 noise-suppression-for-voice 的readme文档</p>
+<h3 id="方案4：Sound-Tune-AI"><a href="#方案4：Sound-Tune-AI" class="headerlink" title="方案4：Sound Tune AI"></a>方案4：Sound Tune AI</h3><p>没实验过，可能需要微星的笔记本或者整机以及特定主板支持。</p>
+<p>网址：</p>
+<p><a target="_blank" rel="noopener" href="https://www.msi.com/Landing/msi_sound_tune">https://www.msi.com/Landing/msi_sound_tune</a></p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/a078ze9z/">https://post.smzdm.com/p/a078ze9z/</a></p>
+<h3 id="方案5-华硕主板"><a href="#方案5-华硕主板" class="headerlink" title="方案5 华硕主板"></a>方案5 华硕主板</h3><p>和方案4一样，但是只要是华硕主板应该就可以，自己搜一下驱动就行</p>
 
       
     </div>
@@ -436,7 +418,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/01/27/virtualbox-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/10/20/Linux-%E5%8F%8D%E6%9F%A5%E7%A8%8B%E5%BA%8F%E4%BE%9D%E8%B5%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -450,7 +432,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/27/virtualbox-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%92%8C%E5%85%B3%E9%97%AD%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="post-title-link" itemprop="url">virtualbox 命令行启动虚拟机和关闭虚拟机</a>
+            <a href="/2020/10/20/Linux-%E5%8F%8D%E6%9F%A5%E7%A8%8B%E5%BA%8F%E4%BE%9D%E8%B5%96/" class="post-title-link" itemprop="url">Linux 反查程序依赖</a>
         </h2>
 
         <div class="post-meta">
@@ -460,7 +442,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-27 21:19:00" itemprop="dateCreated datePublished" datetime="2019-01-27T21:19:00+08:00">2019-01-27</time>
+              <time title="创建时间：2020-10-20 11:44:00" itemprop="dateCreated datePublished" datetime="2020-10-20T11:44:00+08:00">2020-10-20</time>
             </span>
 
           
@@ -474,9 +456,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="开机（后台运行）"><a href="#开机（后台运行）" class="headerlink" title="开机（后台运行）"></a>开机（后台运行）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxManage.exe startvm 虚拟机名字 --type headless</span><br></pre></td></tr></table></figure>
+          <h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd  命令"></a>ldd  命令</h3><p>例如  查看ls的依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldd /bin/ls</span><br></pre></td></tr></table></figure>
 
-<h3 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxManage.exe controlvm 虚拟机名字  acpipowerbutton</span><br></pre></td></tr></table></figure>
+
+<p>然后缺失的依赖 反查软件包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum provides 依赖的名字</span><br></pre></td></tr></table></figure>
+
+<p>具体实例 <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000015802337">https://segmentfault.com/a/1190000015802337</a></p>
 
       
     </div>
@@ -495,7 +482,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -561,14 +548,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/11/Typecho%E9%9B%86%E6%88%90ueditor%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/03/11/Typecho%E9%9B%86%E6%88%90ueditor%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Typecho集成ueditor笔记</a>
+            <a href="/2016/10/11/Apache-2-4-%E9%92%88%E5%AF%B9%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E9%99%90%E9%80%9F/" class="post-title-link" itemprop="url">Apache 2.4 针对某个文件限速</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2014-03-11 00:21:00" itemprop="dateCreated datePublished" datetime="2014-03-11T00:21:00+08:00">2014-03-11</time>
+              <time title="创建时间：2016-10-11 14:47:00" itemprop="dateCreated datePublished" datetime="2016-10-11T14:47:00+08:00">2016-10-11</time>
             </span>
 
           
@@ -193,24 +193,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>前言：萝卜青菜各有所爱，因为个人需求所以需要在博客中集成ueditor，并非是我不喜欢md语法 其实本篇的笔记的书写最早也是在本地的md编辑器上完成的</p>
-</blockquote>
-<p>首先下载 ueditor 编辑器，然后重命名文件为 ueditor，将文件夹复制到 admin 目录,打开 admin 目录的 editor-js.php 文件 在文件末尾处</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;?php endif;?&gt;</span><br></pre></td></tr></table></figure>
-<p>之间插入以下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php else:?&gt;</span><br><span class="line">&lt;!--不开启markdown时使用ueditor--&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 配置文件 --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./ueditor/ueditor.config.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 编辑器源码文件 --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./ueditor/ueditor.all.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 语言包文件(建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败) --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./ueditor/lang/zh-cn/zh-cn.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	var editor = UE.getEditor(&#x27;text&#x27;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>打开 var\Typecho\Common\Paragraph.php 文件注释掉152行的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$text = Typecho_Common::lockHTML($text);</span><br></pre></td></tr></table></figure>
-<p>此处是否会对原有功能产生bug未知,如果不注释掉 会对 ueditor 编辑器的部分代码高亮功能产生显示 bug<br>打开模版文件夹的 footer.php 这里我使用的是默认模版 所以路径是 \usr\themes\default 在 <?php $this->footer(); ?> 的下面插入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;&lt;?php $this-&gt;options-&gt;siteUrl(); ?&gt;admin/ueditor/third-party/SyntaxHighlighter/shCore.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;&lt;?php $this-&gt;options-&gt;siteUrl(); ?&gt;admin/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css&quot; type=&quot;text/css&quot; /&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">SyntaxHighlighter.all() //执行代码高亮</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>在 \ueditor\third-party\SyntaxHighlighter 下的shCore.js中搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textarea.appendChild(document.createTextNode(code));</span><br></pre></td></tr></table></figure>
-<p>在后面添加一句 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textarea.style.height = &quot;100%&quot;; </span><br></pre></td></tr></table></figure>
-<p>此处是为了修正代码高亮时 双击代码全选出错的BUG，新版的 SyntaxHighlighter 插件中已经默认双击代码全选，去掉了以前的flash复制功能</p>
-<p>保存所有文件并关闭，并在个人设置页面关闭 markdown 语法编辑选项。目前还没仔细测试是否有 BUG ，也没去调整图片上传的功能。 所以对于本文的修改内容请慎重使用。</p>
+          <p>例如限 mp4 文件的下载速度</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Location</span> &quot;/<span class="attr">downloads</span>/*<span class="attr">.mp4</span>&quot;&gt;</span></span><br><span class="line">    SetOutputFilter RATE_LIMIT</span><br><span class="line">    SetEnv rate-limit 400 </span><br><span class="line"><span class="tag">&lt;/<span class="name">Location</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>单位是kb&#x2F;s</p>
+<p>这个只能限制单线程 多线程无用。多线程下载需要用到第三方 mod 建议静态文件直接改用 Nginx </p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ratelimit.html">官方文档</a></p>
 
       
     </div>
@@ -230,7 +217,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2014/03/11/CentOS-5-5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85MariaDB-5-5-35/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -244,7 +231,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2014/03/11/CentOS-5-5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85MariaDB-5-5-35/" class="post-title-link" itemprop="url">CentOS 5.5 快速安装MariaDB-5.5.35</a>
+            <a href="/2016/06/01/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93-DAO-%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">Yii1 数据库 DAO 绑定参数实例</a>
         </h2>
 
         <div class="post-meta">
@@ -254,7 +241,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2014-03-11 00:15:00" itemprop="dateCreated datePublished" datetime="2014-03-11T00:15:00+08:00">2014-03-11</time>
+              <time title="创建时间：2016-06-01 17:30:00" itemprop="dateCreated datePublished" datetime="2016-06-01T17:30:00+08:00">2016-06-01</time>
             </span>
 
           
@@ -269,37 +256,214 @@
 
       
           <blockquote>
-<p>CentOS 5.5下不升级yum的情况下想快速安装还真有点费劲 至于源码编译安装坑貌似更多 而且在小内存的VPS上编译实在费力。我们采用二进制方式安装，下载地址 <a target="_blank" rel="noopener" href="http://yum.mariadb.org/5.5/">http://yum.mariadb.org/5.5/</a> 因为系统是32位的 所以这里选择x86的目录下载</p>
+<p>绑定参数预处理 SQL 可以有效的防 SQL 注入攻击; Yii1 框架的 ActiveRecord 操作数据库默认就可以防止注入 ，但是复杂业务下 使用 DAO 操作数据库就需要小心了</p>
 </blockquote>
-<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install perl-DBI</span><br><span class="line">sudo rpm -ivh MariaDB-5.5.35-centos5-i686-common.rpm </span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>PERL-DBI不联网的安装 需要先下载源码的rpm包 然后创建源码目录 再安装rpm 最后编译安装 这里不再赘述</p>
-</blockquote>
-<h1 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /var/lib/mysql</span><br><span class="line">sudo rpm -ivh MariaDB-5.5.35-centos5-i686-server.rpm </span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM admin_user WHERE user_name=:uname AND password LIKE :c&quot;</span>;</span><br><span class="line"><span class="variable">$command</span> = <span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;db-&gt;<span class="title function_ invoke__">createCommand</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;admin1&#x27;</span>;</span><br><span class="line"><span class="variable">$c</span> = <span class="string">&#x27;%mkjymji%&#x27;</span>;</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:uname&quot;</span>,<span class="variable">$a</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$command</span>-&gt;<span class="title function_ invoke__">bindParam</span>(<span class="string">&quot;:c&quot;</span>,<span class="variable">$c</span>,PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$r</span> = <span class="variable">$command</span>-&gt;<span class="title function_ invoke__">queryAll</span>();</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$r</span>);<span class="keyword">exit</span>;</span><br></pre></td></tr></table></figure>
 
-<h1 id="启动并初始化密码"><a href="#启动并初始化密码" class="headerlink" title="启动并初始化密码"></a>启动并初始化密码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br><span class="line">/usr/bin/mysqladmin -u root password &#x27;123456&#x27;</span><br></pre></td></tr></table></figure>
+<p>绑定参数的时候 如果是PDO::PARAM_STR类型的参数 是不需要在SQL里面再写引号的  </p>
 
-<h1 id="登入测试"><a href="#登入测试" class="headerlink" title="登入测试"></a>登入测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p123456</span><br><span class="line"># CTRL+D 退出</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<h1 id="修改数据存放目录"><a href="#修改数据存放目录" class="headerlink" title="修改数据存放目录"></a>修改数据存放目录</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># mysql, MariaDB 的默认数据存放在 /var/lib/mysql/ </span><br><span class="line"># 停止数据库  </span><br><span class="line">service mysql stop  </span><br><span class="line"># 创建新目录</span><br><span class="line">mkdir /usr/local/mysql_data</span><br><span class="line"></span><br><span class="line"># 拷贝默认数据库到新的位置  </span><br><span class="line">cp -a /var/lib/mysql /usr/local/ieternal/mysql_data  </span><br><span class="line"></span><br><span class="line"># 备份原来的配置文件</span><br><span class="line">cp -a /etc/my.cnf /etc/my.cnf_original  </span><br><span class="line"></span><br><span class="line"># 其实查看 /etc/my.cnf 文件可以发现  </span><br><span class="line"># MariaDB 的此文件之中只有一个包含语句  !includedir /etc/my.cnf.d</span><br><span class="line"># 所以需要修改的配置文件为 /etc/my.cnf.d/server.cnf  </span><br><span class="line">cp /etc/my.cnf.d/server.cnf /etc/my.cnf.d/server.cnf_original  </span><br><span class="line">vim /etc/my.cnf.d/server.cnf  </span><br><span class="line"></span><br><span class="line"># 在文件的 mysqld 节下添加内容  </span><br><span class="line">[mysqld]  </span><br><span class="line">datadir=/usr/local/mysql_data</span><br><span class="line">socket=/usr/local/mysql_data/mysql.sock  </span><br><span class="line">#default-character-set=utf8  #mysql的配置</span><br><span class="line">character_set_server=utf8   # mariadb5.5 的配置</span><br><span class="line">slow_query_log=on  </span><br><span class="line">slow_query_log_file=/usr/local/mysql_data/mysql_data/slow_query_log.log  </span><br><span class="line">long_query_time=2  </span><br><span class="line">[client]</span><br><span class="line">socket=/usr/local/mysql_data/mysql.sock  </span><br><span class="line"></span><br><span class="line"># 保存文件后修改新文件的权限</span><br><span class="line">chown -R mysql:mysql  /usr/local/mysql_data/</span><br><span class="line">cd /usr/local/mysql_data/</span><br><span class="line">chown -R mysql:mysql *</span><br><span class="line"># 重新初始化密码（存疑</span><br><span class="line">/usr/bin/mysqladmin -u root password &#x27;123456&#x27;</span><br><span class="line">service mysql start </span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-<h1 id="常见操作"><a href="#常见操作" class="headerlink" title="常见操作"></a>常见操作</h1><h2 id="查看mysql状态"><a href="#查看mysql状态" class="headerlink" title="查看mysql状态"></a>查看mysql状态</h2><blockquote>
-<p>service mysql status</p>
-</blockquote>
-<h2 id="关闭数据库"><a href="#关闭数据库" class="headerlink" title="关闭数据库"></a>关闭数据库</h2><blockquote>
-<p>service mysql stop</p>
-</blockquote>
-<h2 id="启动数据库"><a href="#启动数据库" class="headerlink" title="启动数据库"></a>启动数据库</h2><blockquote>
-<p>service mysql start</p>
-</blockquote>
-<h2 id="授权root远程登录权限（慎用-可能会带来安全隐患）"><a href="#授权root远程登录权限（慎用-可能会带来安全隐患）" class="headerlink" title="授权root远程登录权限（慎用 可能会带来安全隐患）"></a>授权root远程登录权限（慎用 可能会带来安全隐患）</h2><blockquote>
-<p>执行以下SQL</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON *.* to root@&#x27;%&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>上面的命令创建的root用户没有办法给其他用户授权，但可以正常使用。解决这个问题需要在授权语句后面加WITH GRANT OPTION</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON *.* to &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;123456&#x27; WITH GRANT OPTION;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2016/05/25/%E9%9A%90%E8%97%8F-Apache-NGINX-PHP-%E7%89%88%E6%9C%AC%E5%8F%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/25/%E9%9A%90%E8%97%8F-Apache-NGINX-PHP-%E7%89%88%E6%9C%AC%E5%8F%B7/" class="post-title-link" itemprop="url">隐藏 Apache NGINX PHP 版本号</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-05-25 17:36:00" itemprop="dateCreated datePublished" datetime="2016-05-25T17:36:00+08:00">2016-05-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 httpd-default.conf</span><br><span class="line">ServerTokens Prod</span><br><span class="line">ServerSignature Off</span><br></pre></td></tr></table></figure></h2><h2 id="NGINX"><a href="#NGINX" class="headerlink" title="NGINX"></a>NGINX<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 nginx.conf</span><br><span class="line">server_tokens off;</span><br><span class="line">这个可以加在 http 段，也可以加在 server 段</span><br></pre></td></tr></table></figure></h2><p>PHP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">编辑配置文件 例如 php.ini</span><br><span class="line">expose_php Off</span><br></pre></td></tr></table></figure>
+<p>　　</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/12/22/Oracle-VM-VirtualBox-5-0-%E5%AE%89%E8%A3%85-CentOS-6-4-%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/12/22/Oracle-VM-VirtualBox-5-0-%E5%AE%89%E8%A3%85-CentOS-6-4-%E4%B8%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/" class="post-title-link" itemprop="url">Oracle VM VirtualBox 5.0 安装 CentOS 6.4 与宿主机共享文件夹</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-12-22 17:07:00" itemprop="dateCreated datePublished" datetime="2015-12-22T17:07:00+08:00">2015-12-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>首先在宿主机（windows）的硬盘建立需要共享文件夹 例如 D:\share_test</p>
+</li>
+<li><p>然后虚拟机光驱加载 Oracle VM VirtualBox 安装目录的 iso  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso</span><br></pre></td></tr></table></figure></li>
+<li><p>虚拟机开机 保证正常联网</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /mnt/share_test</span><br><span class="line">mount /dev/dvd /mnt/share_test/</span><br><span class="line">yum update -y </span><br><span class="line"><span class="built_in">cd</span> /mnt/share_test/</span><br><span class="line">sudo ./VBoxLinuxAdditions.run</span><br><span class="line"><span class="built_in">cd</span> /mnt/</span><br><span class="line">umount /mnt/share_test/</span><br><span class="line">mount -t vboxsf share_test /mnt/share_test/</span><br><span class="line"><span class="built_in">cd</span> share_test/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>之前用 VMWare 的时候相关信息</p>
+<p><a href="/2014/03/12/本地虚拟机挂载-windows-共享目录搭建开发环境/" target="_blank">本地虚拟机挂载 windows 共享目录搭建开发环境</a></p>
+<p><a href="/2014/09/26/通过-VMware-Tools-将主机-windows-的目录共享给-linux-虚拟机/" target="_blank">通过 VMware Tools 将主机windows的目录共享给linux虚拟机</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/11/17/MySql-5-6-%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97-%E4%B8%8E-%E6%85%A2%E6%9F%A5%E8%AF%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/11/17/MySql-5-6-%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97-%E4%B8%8E-%E6%85%A2%E6%9F%A5%E8%AF%A2/" class="post-title-link" itemprop="url">MySQL 5.6 查询日志 与 慢查询</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-11-17 15:28:00" itemprop="dateCreated datePublished" datetime="2015-11-17T15:28:00+08:00">2015-11-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="记录所有查询的方法"><a href="#记录所有查询的方法" class="headerlink" title="记录所有查询的方法"></a>记录所有查询的方法</h2><p>打开my.ini 在 [mysqld]下面写</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">general_log</span>= <span class="literal">ON</span><span class="comment">;</span></span><br><span class="line"><span class="attr">log_output</span>= TABLE<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>然后保存重启mysql</p>
+<p>最后在mysql库下 general_log 表内可以查询想要的内容</p>
+<p>general_log 可以在运行的时候执行 <code>set global general_log=on;</code> 来动态开启 这样就不用重启 MySQL 服务了。但是下次重启的时候又会失效，想要避免还得改配置文件。</p>
+<p>log_output 也可以使用FILE格式，但是不知道为啥 我这里没能成功。</p>
+<hr>
+<h2 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h2><h3 id="开启"><a href="#开启" class="headerlink" title="开启"></a>开启</h3><p>网上开启的方法都不行，巨坑。最后在官网找到了开启方法 原来是配置文件改了。<br><b sytle="color: #FF0000;">所以以后遇到类似情况，一定要去看官网文档，mysql经常在新版本搞变化</b></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Updated example for 2015 MySQL 5.6:</span><br><span class="line"></span><br><span class="line">slow_query_log = 1</span><br><span class="line">slow_query_log_file = /var/log/mysql/slow.log</span><br><span class="line">long_query_time = 10</span><br><span class="line">log_queries_not_using_indexes = 1</span><br><span class="line"></span><br><span class="line">Change permissions so that mysqld can write to the specified log file. Giving write permissions to the &#x27;other&#x27; group should suffice.</span><br></pre></td></tr></table></figure>
+<h3 id="使用mysql自带命令mysqldumpslow查看"><a href="#使用mysql自带命令mysqldumpslow查看" class="headerlink" title="使用mysql自带命令mysqldumpslow查看"></a>使用mysql自带命令mysqldumpslow查看</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mysqldumpslow -s at -t 20 /opt/lampp/var/mysql/slow.log</span><br></pre></td></tr></table></figure>
+<p>常用命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-s ORDER what to sort by (t, at, l, al, r, ar etc), &#x27;at’ is default</span><br><span class="line">-t NUM just show the top n queries</span><br><span class="line">-g PATTERN grep: only consider stmts that include this string</span><br></pre></td></tr></table></figure>
+<p>s，是结果的顺序，说明写的不够详细，俺用下来，包括看了代码，主要有 c,t,l,r和ac,at,al,ar，分别是按照query次数，时间，lock的时间和返回的记录数来排序，前面加了a的时倒序 -t，是top n的意思，即为返回前面多少条的数据 -g，后边可以写一个正则匹配模式，大小写不敏感的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldumpslow -s c -t 20 host-slow.log</span><br><span class="line">mysqldumpslow -s r -t 20 host-slow.log</span><br></pre></td></tr></table></figure>
+<p>上述命令可以看出访问次数最多的20个sql语句和返回记录集最多的20个sql。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldumpslow -t 10 -s t -g &quot;left join&quot; host-slow.log</span><br></pre></td></tr></table></figure>
+<p>这个是按照时间返回前10条里面含有左连接的sql语句。</p>
+
       
     </div>
 
@@ -317,7 +481,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span>
+    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -383,14 +547,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

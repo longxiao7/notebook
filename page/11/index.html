@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/01/29/Nginx-%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%20IP%20%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/08/30/JS-%E5%B1%8F%E5%B9%95%E6%90%9C%E7%B4%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0CTRL-F%E7%9A%84%E6%95%88%E6%9E%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/29/Nginx-%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%20IP%20%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">Nginx 快速建立IP查询接口</a>
+            <a href="/2021/08/30/JS-%E5%B1%8F%E5%B9%95%E6%90%9C%E7%B4%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0CTRL-F%E7%9A%84%E6%95%88%E6%9E%9C/" class="post-title-link" itemprop="url">JS 屏幕搜索，实现CTRL + F的效果</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-01-29 16:21:00" itemprop="dateCreated datePublished" datetime="2020-01-29T16:21:00+08:00">2020-01-29</time>
+              <time title="创建时间：2021-08-30 09:59:00" itemprop="dateCreated datePublished" datetime="2021-08-30T09:59:00+08:00">2021-08-30</time>
             </span>
 
           
@@ -193,134 +193,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location /ip &#123;</span><br><span class="line">    default_type text/plain;</span><br><span class="line">    return 200 $remote_addr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location /json_ip &#123;</span><br><span class="line">    default_type application/json;</span><br><span class="line">    return 200 &quot;&#123;\&quot;ip\&quot;:\&quot;$remote_addr\&quot;&#125;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/01/15/%E7%A6%81%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-WebAssembly-%E6%94%AF%E6%8C%81%E3%80%82%E5%85%B3%E9%97%AD-WebAssembly/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/15/%E7%A6%81%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-WebAssembly-%E6%94%AF%E6%8C%81%E3%80%82%E5%85%B3%E9%97%AD-WebAssembly/" class="post-title-link" itemprop="url">禁用浏览器的 WebAssembly 支持。关闭 WebAssembly</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-15 15:55:00" itemprop="dateCreated datePublished" datetime="2020-01-15T15:55:00+08:00">2020-01-15</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>出于安全性方便的考虑，需要禁用浏览器对WebAssembly的支持。具体如下</p>
-<h3 id="FireFox"><a href="#FireFox" class="headerlink" title="FireFox"></a>FireFox</h3><ol>
-<li>打开新标签页输入地址 about:config 回车</li>
-<li>在搜索框中输入 javascript.options.wasm 修改成 false</li>
-</ol>
-<h3 id="Chrome-x2F-Chromium"><a href="#Chrome-x2F-Chromium" class="headerlink" title="Chrome&#x2F;Chromium"></a>Chrome&#x2F;Chromium</h3><p>添加启动参数</p>
-<p><code>chrome.exe --js-flags=--noexpose_wasm</code></p>
-<p>macOS系统下参数需要这么写</p>
-<p><code>open /Applications/Google/Chrome.app --args --js-flags=--noexpose_wasm</code></p>
-<p>windows 系统可以在下面的注册表项关闭写入权限，以便应对chrome的自动更新带来的重置 由于我使用绿色版 chrome，所以暂时忽略</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HKEY_CLASSES_ROOT\ChromeHTML\shell\open\command</span><br><span class="line">HKEY_CLASSES_ROOT\http\shell\open\command</span><br><span class="line">HKEY_CLASSES_ROOT\https\shell\open\command</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/01/09/Epic-%E5%B9%B3%E5%8F%B0-The-Messenger-%E4%BF%A1%E4%BD%BF-%E6%B8%B8%E6%88%8F%E9%94%AE%E4%BD%8D%E9%87%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/09/Epic-%E5%B9%B3%E5%8F%B0-The-Messenger-%E4%BF%A1%E4%BD%BF-%E6%B8%B8%E6%88%8F%E9%94%AE%E4%BD%8D%E9%87%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Epic 平台 The Messenger 信使 游戏键位重置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-09 10:31:00" itemprop="dateCreated datePublished" datetime="2020-01-09T10:31:00+08:00">2020-01-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>垃圾游戏，旧版不能改键位</p>
-<p>新版改错了键位没法重置，网上搜的方法都不好使，经过仔细对比，发现不是配置文件而是注册表存储的</p>
-<p>关闭游戏</p>
-<p>打开注册表 删除 计算机\HKEY_CURRENT_USER\Software\Sabotage Studio\The Messenger 这个下面所有的项，重新启动游戏</p>
+          <p><a target="_blank" rel="noopener" href="https://www.seabreezecomputers.com/tips/find.htm">https://www.seabreezecomputers.com/tips/find.htm</a></p>
+<p>默认不给下载，必须捐赠给钱才行。</p>
+<p>白嫖：</p>
+<p>找到id&#x3D;”dl_link_find5.js”这个a标签，里面的 href 就是下载地址</p>
 
       
     </div>
@@ -340,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/01/05/PHP-%E8%B0%83%E7%94%A8-par2-%E9%80%92%E5%BD%92%E7%9A%84%E5%A4%84%E7%90%86%E7%9B%AE%E5%BD%95%E5%B9%B6%E5%88%86%E7%A6%BB%E6%96%87%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/07/10/SQL-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%E6%80%9D%E8%80%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -354,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/05/PHP-%E8%B0%83%E7%94%A8-par2-%E9%80%92%E5%BD%92%E7%9A%84%E5%A4%84%E7%90%86%E7%9B%AE%E5%BD%95%E5%B9%B6%E5%88%86%E7%A6%BB%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">PHP 调用 par2 递归的处理目录并分离文件</a>
+            <a href="/2021/07/10/SQL-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%E6%80%9D%E8%80%83/" class="post-title-link" itemprop="url">SQL 语句的执行顺序，以及优化的方向思考</a>
         </h2>
 
         <div class="post-meta">
@@ -364,7 +240,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-01-05 13:08:00" itemprop="dateCreated datePublished" datetime="2020-01-05T13:08:00+08:00">2020-01-05</time>
+              <time title="创建时间：2021-07-10 15:03:00" itemprop="dateCreated datePublished" datetime="2021-07-10T15:03:00+08:00">2021-07-10</time>
             </span>
 
           
@@ -378,9 +254,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 转义引号(<span class="params"><span class="variable">$str</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&#x27;&quot;</span>,<span class="string">&quot;\&#x27;&quot;</span>,<span class="variable">$str</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dir_list</span>(<span class="params"><span class="variable">$dir_path</span> = <span class="string">&#x27;&#x27;</span></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">is_dir</span>(<span class="variable">$dir_path</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$dirs</span> = <span class="title function_ invoke__">opendir</span>(<span class="variable">$dir_path</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$dirs</span>) </span><br><span class="line">    &#123;    </span><br><span class="line">        <span class="keyword">while</span>((<span class="variable">$file</span> = <span class="title function_ invoke__">readdir</span>(<span class="variable">$dirs</span>)) !== <span class="literal">false</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="title function_ invoke__">in_array</span>(<span class="variable">$file</span>,[<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;..&#x27;</span>,<span class="string">&#x27;hash&#x27;</span>])) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//目录</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="title function_ invoke__">is_dir</span>(<span class="variable">$dir_path</span>.<span class="string">&#x27;/&#x27;</span>.<span class="variable">$file</span>)) </span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">//在hash目录下建立对应目录结构，用来存储最终的par2文件</span></span><br><span class="line">                    <span class="variable">$hash</span>目录对应路径 = HASH路径 .<span class="title function_ invoke__">mb_substr</span>(<span class="variable">$dir_path</span>.<span class="string">&#x27;/&#x27;</span>.<span class="variable">$file</span>,<span class="title function_ invoke__">preg_match_all</span>(<span class="string">&#x27;/(.)/&#x27;</span>,原始路径));</span><br><span class="line">                    @<span class="title function_ invoke__">mkdir</span>(<span class="variable">$hash</span>目录对应路径,<span class="number">0777</span>,<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">//进入目录 递归    </span></span><br><span class="line">                    <span class="title function_ invoke__">dir_list</span>(<span class="variable">$dir_path</span> . <span class="string">&#x27;/&#x27;</span> .<span class="variable">$file</span>);</span><br><span class="line">                &#125;<span class="keyword">else</span> </span><br><span class="line">                &#123;</span><br><span class="line">                <span class="comment">//文件</span></span><br><span class="line">                    <span class="variable">$file</span> = 转义引号(<span class="variable">$file</span>);</span><br><span class="line">                    $原始路径 = 转义引号(原始路径);</span><br><span class="line">                    <span class="variable">$hash</span>目录对应路径 = HASH路径 .<span class="title function_ invoke__">mb_substr</span>(<span class="variable">$dir_path</span>,<span class="title function_ invoke__">preg_match_all</span>(<span class="string">&#x27;/(.)/&#x27;</span>,原始路径));</span><br><span class="line">                    <span class="variable">$command</span> = <span class="string">&quot;cd $&#x27;&quot;</span>.转义引号(<span class="variable">$dir_path</span>). <span class="string">&quot;&#x27; &amp;&amp; par2 c -r3 -n1 $&#x27;<span class="subst">&#123;$file&#125;</span>.par2&#x27; $&#x27;<span class="subst">&#123;$file&#125;</span>&#x27; &quot;</span>;</span><br><span class="line">                    <span class="title function_ invoke__">file_put_contents</span>(HASH路径.<span class="string">&#x27;/par2.sh&#x27;</span>, <span class="variable">$command</span>.PHP_EOL,FILE_APPEND);</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//移动par2文件</span></span><br><span class="line">        <span class="title function_ invoke__">file_put_contents</span>(HASH路径.<span class="string">&#x27;/par2.sh&#x27;</span>,<span class="string">&quot;cd $&#x27;&quot;</span>.转义引号(<span class="variable">$dir_path</span>).<span class="string">&quot;&#x27; &amp;&amp; find . -maxdepth 1 -name \&quot;*.par2\&quot; -exec mv &#123;&#125; $&#x27;&quot;</span>.转义引号(<span class="title function_ invoke__">str_replace</span>(原始路径,HASH路径,<span class="variable">$dir_path</span>)).<span class="string">&quot;&#x27; \;&quot;</span>.PHP_EOL,FILE_APPEND);</span><br><span class="line">        <span class="title function_ invoke__">closedir</span>(<span class="variable">$dirs</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">exec</span>(<span class="string">&#x27;pwd&#x27;</span>,$当前路径,<span class="variable">$re</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$re</span> == <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    $当前路径 = $当前路径[<span class="number">0</span>];</span><br><span class="line">    <span class="title function_ invoke__">define</span>(<span class="string">&quot;原始路径&quot;</span>,$当前路径);</span><br><span class="line">    <span class="title function_ invoke__">define</span>(<span class="string">&quot;HASH路径&quot;</span>, $当前路径.<span class="string">&#x27;/hash&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">file_exists</span>(HASH路径))&#123;</span><br><span class="line">        @<span class="title function_ invoke__">mkdir</span>(HASH路径,<span class="number">0777</span>,<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">unlink</span>(HASH路径.<span class="string">&#x27;/par2.sh&#x27;</span>);</span><br><span class="line">    <span class="comment">//强制使用bash</span></span><br><span class="line">    <span class="title function_ invoke__">file_put_contents</span>(HASH路径.<span class="string">&#x27;/par2.sh&#x27;</span>, <span class="string">&#x27;#!/usr/bin/env bash&#x27;</span>.PHP_EOL);</span><br><span class="line">    <span class="title function_ invoke__">dir_list</span>($当前路径);</span><br><span class="line">    <span class="title function_ invoke__">chmod</span>(HASH路径.<span class="string">&#x27;/par2.sh&#x27;</span>,<span class="number">0755</span>);</span><br><span class="line">    <span class="title function_ invoke__">exec</span>(HASH路径.<span class="string">&#x27;/par2.sh&#x27;</span>,<span class="variable">$r</span>);</span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">implode</span>(PHP_EOL,<span class="variable">$r</span>));</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为了快速校验文件用的，但是最后没用上，先做个记录</p>
+          <p><img src="/2021/07/10/SQL-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%E6%80%9D%E8%80%83/sql.jpg" alt="执行顺序"></p>
+<p>这是一条SQL的执行顺序</p>
+<p>可以看到JOIN和WHERE在早期执行，所以优化的重点往往也在这里。数据库的查询性能一般受CPU检索能力+I&#x2F;O设备的读写速度影响，所以要提高查询性能最简单粗暴的方式就是 换更强的CPU（这样逻辑判断就更快），或者增加存储设备的性能（例如机械盘换SSD）。这种方式有点类似于以力破巧，简单粗暴有效果。</p>
+<p>当硬件都没法再提高的情况下，就要从思路上来解决问题了。索引就是一个简单的提高查询性能的方法，具体原理就是把关键数据的位置单独保存一下，类似于一本书的目录，没有目录的时候找一篇文章需要翻遍整本书，但是有目录了以后，就可以根据目录直接翻到对应页码。不过要注意，索引也是有副作用的，首先是降低写入性能，因为制作目录需要单独的计算，还有就是不要滥用索引，只索引最需要的字段（往往是查询条件最常见的字段），这里还有联合索引的概念，就不具体展开了。</p>
+<p>根据执行顺序，要小心的考虑join的方向（不同的join出来的结果不同），要join出来（能够包含查询需要的数据）最小的结果集，这样CPU的性能就会减少浪费。然后是仔细斟酌where的条件，也是避免无端的CPU性能浪费，原则就是尽可能在早期筛掉明显不符合查询条件的结果，减少CPU判断次数。</p>
+<p>GROOUP BY和HAVING也是比较早期的执行过程，所以要慎用，这个非常影响性能，不过好在它在where之后，如果在where之前，那就是个灾难了，在对全部数据集做分组，不敢想象会有多慢。</p>
+<p>SELECT以前不太建议条件直接用 * 但现在基本没问题了 ,查询优化器会自动优化了。<br>所以优化SQL的整体方向就是，减少硬件的读写和判断，尽可能在早期筛掉无效结果，减少结果集的大小<br>但这个想法如果不经过实践应该会比较难理解，需要在具体工作中多分析思考尝试。</p>
 
       
     </div>
@@ -400,7 +280,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/01/01/linux-%E4%B8%8B%E7%BB%99%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B4%E9%83%A8%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9%EF%BC%8C%E4%BE%8B%E5%A6%82-%E6%B7%BB%E5%8A%A0-UTF-8-BOM-%E5%A4%B4/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/07/02/tmp-%E6%BB%A1%E4%BA%86%E5%8F%AF%E8%83%BD%E6%98%AF%E7%A3%81%E7%9B%98%E6%BB%A1%E4%BA%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -414,7 +294,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/01/linux-%E4%B8%8B%E7%BB%99%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B4%E9%83%A8%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9%EF%BC%8C%E4%BE%8B%E5%A6%82-%E6%B7%BB%E5%8A%A0-UTF-8-BOM-%E5%A4%B4/" class="post-title-link" itemprop="url">Linux 下给一个文件头部添加内容，例如 添加 UTF-8 BOM 头</a>
+            <a href="/2021/07/02/tmp-%E6%BB%A1%E4%BA%86%E5%8F%AF%E8%83%BD%E6%98%AF%E7%A3%81%E7%9B%98%E6%BB%A1%E4%BA%86/" class="post-title-link" itemprop="url">/tmp 满了可能是磁盘满了</a>
         </h2>
 
         <div class="post-meta">
@@ -424,7 +304,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-01-01 14:33:00" itemprop="dateCreated datePublished" datetime="2020-01-01T14:33:00+08:00">2020-01-01</time>
+              <time title="创建时间：2021-07-02 13:49:00" itemprop="dateCreated datePublished" datetime="2021-07-02T13:49:00+08:00">2021-07-02</time>
             </span>
 
           
@@ -438,13 +318,138 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>假如文件内容是这样的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">123456789</span><br><span class="line">123456789</span><br><span class="line">123456789</span><br><span class="line">123456789</span><br><span class="line">123456789</span><br></pre></td></tr></table></figure>
-<p>要在第一行加一个abc</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;0,/^/s/^/abc&#x27;</span> 文件名字</span><br></pre></td></tr></table></figure>
+          <p>网站提示报错 文件无法上传，好像是 &#x2F;tmp 满了 实际是数据盘满了</p>
+<p>于是先扩容 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/toumingbai/p/10216142.html">https://www.cnblogs.com/toumingbai/p/10216142.html</a></p>
+<p>再新加一块磁盘，格式化成ext4 挂载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/vdc</span><br><span class="line">mount /dev/vdc /data/v2</span><br><span class="line"><span class="comment">#然后转移部分文件进去</span></span><br><span class="line"><span class="built_in">cp</span> -rp /data/v1 /data/v2</span><br></pre></td></tr></table></figure>
+<p>复制完记得备份再删</p>
 
-<p>扩展用法，给一个文本文件添加 UTF-8 BOM 头</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;0,/^/s/^/\xEF\xBB\xBF/&#x27;</span> 文本文件.txt</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/06/28/acme-sh%EF%BC%8C%E9%BB%98%E8%AE%A4-CA-%E5%8F%98%E6%88%90%E4%BA%86-ZeroSSL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/28/acme-sh%EF%BC%8C%E9%BB%98%E8%AE%A4-CA-%E5%8F%98%E6%88%90%E4%BA%86-ZeroSSL/" class="post-title-link" itemprop="url">acme.sh，默认 CA 变成了 ZeroSSL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-28 10:14:00" itemprop="dateCreated datePublished" datetime="2021-06-28T10:14:00+08:00">2021-06-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/wiki/Change-default-CA-to-ZeroSSL">官方说明</a></p>
+<p><a target="_blank" rel="noopener" href="https://twitter.com/neilpangxa/status/1222792801835872256">具体原因</a></p>
+<p>继续用原来的配置的方法<br>配置文件里删掉最后一行的 Le_API&#x3D;’<a target="_blank" rel="noopener" href="https://acme.zerossl.com/v2/DV90">https://acme.zerossl.com/v2/DV90</a>‘ （之前配置应该没有这一行），再执行<br><code>acme.sh --set-default-ca --server letsencrypt</code></p>
+<p><a target="_blank" rel="noopener" href="https://www.ffis.me/archives/2110.html">使用新的配置的办法</a></p>
+<blockquote>
+<p>acme.sh –register-account -m 邮箱地址 –server zerossl</p>
+</blockquote>
+<p><a href="/2021/06/28/acme-sh%EF%BC%8C%E9%BB%98%E8%AE%A4-CA-%E5%8F%98%E6%88%90%E4%BA%86-ZeroSSL/%E6%94%BE%E5%BC%83LetusEncrypt%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2ZeroSSL%E8%AF%81%E4%B9%A6.rar">备份</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/06/16/windows-10-%E6%89%93%E4%B8%8D%E5%BC%80%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E5%92%8C%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%8D%A1-0-%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%83%BD%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/16/windows-10-%E6%89%93%E4%B8%8D%E5%BC%80%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E5%92%8C%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%8D%A1-0-%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%83%BD%E6%80%A7/" class="post-title-link" itemprop="url">windows 10 打不开应用商店和自动更新卡 0&#37; 的一个可能性</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-16 12:07:00" itemprop="dateCreated datePublished" datetime="2021-06-16T12:07:00+08:00">2021-06-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Proxifier 3.15 会影响。卸载后恢复，这个软件如果是刚需又不能卸载。</p>
+<p>新版好像原理不一样了，虽然不会卡更新，但不是我需要的功能。</p>
+<p>在 开始菜单 - proxifier - 系统设置 - 卸载模块 - 重置 wsock（会强制重启电脑） 重启后重复这个步骤在窗口的左下角切换到64位 再来一次，再重启<br>此时应该可以更新系统了，更新完再反向操作，安装模块，重启生效。</p>
+<p>根据这个原理<br>禁止 win10 自动更新的办法又多了一个，直接装一个Proxifier 3.15 （不要装新版，就这个版本最管用）不需要启动软件，都可以禁止更新了。<br>搞的我这两年想更都更不了。</p>
+
       
     </div>
 
@@ -462,7 +467,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -528,14 +533,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

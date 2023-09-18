@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"np.lvtoude.ltd","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="发现最近经常有人提到开启 IPv6 连接速度慢的问题。目前国内确实存在支持 IPv6 的服务器、CDN 节点不够多，IPv6 国际带宽比 IPv4 带宽小的问题，但也不至于会打开国内网站都卡。通常情况下遇到这个问题说明你到目标服务器的链路上存在 PMTU 黑洞。 关于 PMTU 黑洞MTU (Maximum transmission unit) 是一条链路上可以通过的三层数据包的最大尺寸（包含 I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="家用路由器开启 IPv6， wifi 访问变慢甚至打不开网页？">
+<meta property="og:url" content="https://np.lvtoude.ltd/2022/03/16/%E5%AE%B6%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E5%BC%80%E5%90%AF-IPV6%EF%BC%8C-wifi-%E8%AE%BF%E9%97%AE%E5%8F%98%E6%85%A2%E7%94%9A%E8%87%B3%E6%89%93%E4%B8%8D%E5%BC%80%E7%BD%91%E9%A1%B5%EF%BC%9F/index.html">
+<meta property="og:site_name" content="名字还没想好">
+<meta property="og:description" content="发现最近经常有人提到开启 IPv6 连接速度慢的问题。目前国内确实存在支持 IPv6 的服务器、CDN 节点不够多，IPv6 国际带宽比 IPv4 带宽小的问题，但也不至于会打开国内网站都卡。通常情况下遇到这个问题说明你到目标服务器的链路上存在 PMTU 黑洞。 关于 PMTU 黑洞MTU (Maximum transmission unit) 是一条链路上可以通过的三层数据包的最大尺寸（包含 I">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-16T04:43:00.000Z">
+<meta property="article:modified_time" content="2023-09-18T02:40:07.548Z">
+<meta property="article:author" content="透明白">
+<meta property="article:tag" content="IPv6">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://np.lvtoude.ltd/2022/03/16/%E5%AE%B6%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E5%BC%80%E5%90%AF-IPV6%EF%BC%8C-wifi-%E8%AE%BF%E9%97%AE%E5%8F%98%E6%85%A2%E7%94%9A%E8%87%B3%E6%89%93%E4%B8%8D%E5%BC%80%E7%BD%91%E9%A1%B5%EF%BC%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>家用路由器开启 IPv6， wifi 访问变慢甚至打不开网页？ | 名字还没想好</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">名字还没想好</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">等想好了在写</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/03/16/%E5%AE%B6%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E5%BC%80%E5%90%AF-IPV6%EF%BC%8C-wifi-%E8%AE%BF%E9%97%AE%E5%8F%98%E6%85%A2%E7%94%9A%E8%87%B3%E6%89%93%E4%B8%8D%E5%BC%80%E7%BD%91%E9%A1%B5%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          家用路由器开启 IPv6， wifi 访问变慢甚至打不开网页？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-16 12:43:00" itemprop="dateCreated datePublished" datetime="2022-03-16T12:43:00+08:00">2022-03-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>发现最近经常有人提到开启 IPv6 连接速度慢的问题。目前国内确实存在支持 IPv6 的服务器、CDN 节点不够多，IPv6 国际带宽比 IPv4 带宽小的问题，但也不至于会打开国内网站都卡。通常情况下遇到这个问题说明你到目标服务器的链路上存在 PMTU 黑洞。</p>
+<p>关于 PMTU 黑洞<br>MTU (Maximum transmission unit) 是一条链路上可以通过的三层数据包的最大尺寸（包含 IP 包头）。以太网上默认的 MTU 是 1500 字节，但是你和目标服务器之间的路径上可能存在小于 MTU 1500 的链路。这条路径上最小的 MTU 值就是整条路径的 PMTU 值。路由器在转发包时，超过 MTU 大小的包会被分片（ Fragmentation ），也就是一个大包会被分切为多个不超过 MTU 的小包进行传输，传输效率会下降。</p>
+<p>终端设备在发包时，也可以设置 DF （ Don’t Fragment ）标记来告诉路由器不要分片。这时中间路由器会丢掉超过 MTU 的包，回复一条 ICMP Fragmentation Needed 消息。发送者收到这个包后，下次就会发小一点的包，这个过程叫做 PMTU Discovery 。现实中可以看到 HTTPS （ TLS ）的流量大都是带 DF 标记的。</p>
+<p>然而，互联网上有大量的中间设备为了所谓的“安全”或者没有正确配置，不回应 ICMP Fragmentation Needed 包，这使得访问某些网站时如果某个包的大小超过了 PMTU，会被无声地丢弃，直到 TCP 协议发现超时丢包进行重传，这非常缓慢。遇到这种情况，我们可以说你和目标服务器的路径上存在 PMTU 黑洞。</p>
+<p>此外，IPv6 不支持分片，换句话说可以理解为 IPv6 下所有的包都是带 DF 标记的。中间路由器在遇到包尺寸大于 MTU 的情况时，应该回应 ICMPv6 Packet Too Big 消息。同样的，由于种种原因，某些中间设备可能会直接丢包而不回应 ICMPv6 Packet Too Big 消息，直到 TCP 协议发现超时丢包进行重传。。。</p>
+<p>为什么 IPv4 没有这个问题<br>其实 IPv4 也有这个问题，我不只一次见网友说自己搭的软路由访问某些网站非常慢，而换回硬路由就正常。这是因为多数家用路由器默认对 IPv4 下的 TCP 开启了 MSS (maximum segment size) Clamping （使用 OpenWRT 软路由的朋友们可以在防火墙设置中找到 MSS Clamping 开关）。MSS Clamping 是针对 PMTU 黑洞的 Workaround，简单来说就是 TCP 握手时有个 MSS 字段决定单个 TCP 包的最大尺寸。路由器可以通过嗅探 TCP 握手包，把 MSS 值改小，使最终的三层 IP 包的尺寸（ MSS+TCP 头大小+IP 头大小）不超过某个特定的值。</p>
+<p>总结<br>现在国内 ISP 一般都是通过 PPPoE 虚拟拨号建立 WAN 口连接的。Ethernet 的默认 MTU 是 1500，但是 PPPoE 隧道有 8 个 bytes 的开销，所以 PPPoE 虚连接的 MTU 就是 1500-8&#x3D;1492，减掉 IPv4 包头（ 20 字节）和 TCP 包头（ 20 字节），可以得知 IPv4 下需要把 MSS 设为 1452 以下。</p>
+<p>IPv6 的包头是 40 字节，所以 IPv6 下需要把 MSS 设为 1432 以下。</p>
+<p>这时问题来了，目前很多光猫、家用路由器对 IPv6 的优化很差，不支持对 IPv6 下的 TCP 包进行 MSS Clamping，这就导致访问 IPv6 网站时，若路径中存在 PMTU 黑洞，则打开很慢。</p>
+<p>我前段时间帮朋友配置 IPv6 时发现了很多光猫、家用路由器的固件问题，使得国内使用 IPv6 的体验不太理想。我打算抽空专门开一个帖子去讨论这些问题，声讨那些垃圾厂家。目前来看，要想在国内比较理想地体验 IPv6，你需要把光猫改为桥接模式，并使用 OpenWRT 或者 VyOS 这类对 IPv6 支持较好的软路由。</p>
+<p>附：在基于 Linux 的路由器启用MSS Clamping的命令：</p>
+<p>自动MSS，假设PPPOE虚接口是pppoe0<br>iptables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –clamp-mss-to-pmtu<br>ip6tables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –clamp-mss-to-pmtu</p>
+<p>手动指定MSS，假设PPPOE虚接口是pppoe0<br>$ iptables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –set-mss 1452<br>$ ip6tables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –set-mss 1432</p>
+<p>RouterOS里设置MSS的命令。其中pppoe-out1是wan口，1420是要MSS值，请根据需要修改。</p>
+<p>&#x2F;ipv6 firewall mangle add chain&#x3D;forward out-interface&#x3D;pppoe-out1 protocol&#x3D;tcp tcp-flags&#x3D;syn action&#x3D;change-mss new-mss&#x3D;1420</p>
+<p>UBNT Edgerouter 系列的MSS设置方法：</p>
+<p>set firewall options mss-clamp6 interface-type pppoe<br>set firewall options mss-clamp6 mss 1420</p>
+<p>转载：<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/800024">https://www.v2ex.com/t/800024</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IPv6/" rel="tag"># IPv6</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/15/Linux-%E8%B0%83%E8%AF%95%E4%BF%A1%E6%81%AF%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%B0%E6%96%87%E4%BB%B6%E6%97%A5%E5%BF%97%E7%9A%84%E5%88%86%E5%89%B2-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E9%87%8D%E5%91%BD%E5%90%8D%E6%93%8D%E4%BD%9C%E4%B8%8D%E4%BC%9A%E5%88%87%E6%96%AD%E7%A8%8B%E5%BA%8F%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/" rel="prev" title="Linux 调试信息重定向到文件日志的分割 对文件进行重命名操作不会切断程序与重定向文件之间的联系">
+      <i class="fa fa-chevron-left"></i> Linux 调试信息重定向到文件日志的分割 对文件进行重命名操作不会切断程序与重定向文件之间的联系
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/07/windows-%E6%89%B9%E5%A4%84%E7%90%86%E5%90%8C%E6%AD%A5%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/" rel="next" title="windows 批处理同步系统时间">
+      windows 批处理同步系统时间 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">透明白</p>
+  <div class="site-description" itemprop="description">凑字数</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">147</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">216</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">透明白</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

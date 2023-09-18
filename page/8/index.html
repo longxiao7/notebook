@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/05/PC%E7%89%88%E8%B7%91%E8%B7%91%E5%8D%A1%E4%B8%81%E8%BD%A6-%E6%95%85%E4%BA%8B%E6%A8%A1%E5%BC%8F-%E4%BA%9A%E7%91%9F%E4%BC%A0%E8%AF%B4%E7%AB%A0%E8%8A%82-%E5%8D%A1%E7%BE%8E%E6%B4%9B%E5%BA%86%E5%85%B8-2%E9%98%B6%E6%AE%B5-%E5%BF%83%E7%81%B5%E4%B9%8B%E7%9C%BC-%E6%94%BB%E7%95%A5/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/01/14/%E7%8E%B0%E4%BB%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-CSS-%E9%87%8D%E7%BD%AE%EF%BC%88reset%EF%BC%89%E4%BB%A3%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/05/PC%E7%89%88%E8%B7%91%E8%B7%91%E5%8D%A1%E4%B8%81%E8%BD%A6-%E6%95%85%E4%BA%8B%E6%A8%A1%E5%BC%8F-%E4%BA%9A%E7%91%9F%E4%BC%A0%E8%AF%B4%E7%AB%A0%E8%8A%82-%E5%8D%A1%E7%BE%8E%E6%B4%9B%E5%BA%86%E5%85%B8-2%E9%98%B6%E6%AE%B5-%E5%BF%83%E7%81%B5%E4%B9%8B%E7%9C%BC-%E6%94%BB%E7%95%A5/" class="post-title-link" itemprop="url">PC版跑跑卡丁车-故事模式-亚瑟传说章节-卡美洛庆典-2阶段-心灵之眼 攻略</a>
+            <a href="/2022/01/14/%E7%8E%B0%E4%BB%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-CSS-%E9%87%8D%E7%BD%AE%EF%BC%88reset%EF%BC%89%E4%BB%A3%E7%A0%81/" class="post-title-link" itemprop="url">现代浏览器的 CSS 重置（reset）代码</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-05 14:23:00" itemprop="dateCreated datePublished" datetime="2020-12-05T14:23:00+08:00">2020-12-05</time>
+              <time title="创建时间：2022-01-14 13:54:00" itemprop="dateCreated datePublished" datetime="2022-01-14T13:54:00+08:00">2022-01-14</time>
             </span>
 
           
@@ -193,10 +193,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>假设靠近终点的方向为前</p>
-<p>靠近起点的方向为后，在行车过程中 坐标系不发生旋转</p>
-<p>从右手边下坡</p>
-<p>前 5<br>右 3<br>前 1<br>右 1<br>前 2<br>左 6<br>后 1<br>左 2<br>前 5<br>右 2<br>前 1<br>右 1<br>然后直接按前 </p>
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">  1. Use a more-intuitive box-sizing model.</span><br><span class="line">*/</span><br><span class="line">*, *::before, *::after &#123;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  2. Remove default margin</span><br><span class="line">*/</span><br><span class="line">* &#123;</span><br><span class="line">  margin: 0;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  3. Allow percentage-based heights in the application</span><br><span class="line">*/</span><br><span class="line">html, body &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  Typographic tweaks!</span><br><span class="line">  4. Add accessible line-height</span><br><span class="line">  5. Improve text rendering</span><br><span class="line">*/</span><br><span class="line">body &#123;</span><br><span class="line">  line-height: 1.5;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  6. Improve media defaults</span><br><span class="line">*/</span><br><span class="line">img, picture, video, canvas, svg &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  max-width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  7. Remove built-in form typography styles</span><br><span class="line">*/</span><br><span class="line">input, button, textarea, select &#123;</span><br><span class="line">  font: inherit;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  8. Avoid text overflows</span><br><span class="line">*/</span><br><span class="line">p, h1, h2, h3, h4, h5, h6 &#123;</span><br><span class="line">  overflow-wrap: break-word;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  9. Create a root stacking context</span><br><span class="line">*/</span><br><span class="line">#root, #__next &#123;</span><br><span class="line">  isolation: isolate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*,*::before,*::after&#123;box-sizing:border-box&#125;*&#123;margin:0&#125;html,body&#123;height:100%&#125;body&#123;line-height:1.5;-webkit-font-smoothing:antialiased&#125;img,picture,video,canvas,svg&#123;display:block;max-width:100%&#125;input,button,textarea,select&#123;font:inherit&#125;p,h1,h2,h3,h4,h5,h6&#123;overflow-wrap:break-word&#125;#root,#__next&#123;isolation:isolate&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>引用自 <a target="_blank" rel="noopener" href="https://www.joshwcomeau.com/css/custom-css-reset/">https://www.joshwcomeau.com/css/custom-css-reset/</a></p>
 
       
     </div>
@@ -216,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/11/15/Nvidia-RTX-Voice-%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/01/12/ipv6-%E5%85%AC%E7%BD%91%E5%85%A5%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%86%85%E7%BD%91-ipv4-%E8%AE%BE%E5%A4%87%E7%AB%AF%E5%8F%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -230,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/15/Nvidia-RTX-Voice-%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Nvidia RTX Voice 启动报错修复方法</a>
+            <a href="/2022/01/12/ipv6-%E5%85%AC%E7%BD%91%E5%85%A5%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%86%85%E7%BD%91-ipv4-%E8%AE%BE%E5%A4%87%E7%AB%AF%E5%8F%A3/" class="post-title-link" itemprop="url">ipv6 公网入口转发内网 ipv4 设备端口</a>
         </h2>
 
         <div class="post-meta">
@@ -240,7 +240,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-15 15:17:00" itemprop="dateCreated datePublished" datetime="2020-11-15T15:17:00+08:00">2020-11-15</time>
+              <time title="创建时间：2022-01-12 13:18:00" itemprop="dateCreated datePublished" datetime="2022-01-12T13:18:00+08:00">2022-01-12</time>
             </span>
 
           
@@ -254,12 +254,94 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>应该是手贱把设备禁用了，然后rtx voice找不到设备报错了，所以就是不要手贱禁用RTX Voice 虚拟出来的设备。</p>
-<h3 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h3><p>打开控制面板 - 声音 - 播放</p>
-<p>右键菜单 - 打开 显示禁用的设备</p>
-<p>然后把窗口放在一边，不要关闭。</p>
-<p>此时启动 Rtx voice 程序，在程序还没有报错之前，赶紧在声音面板中把 Speakers 点右键 启用。</p>
-<p>同理，如果是麦克风被禁用了，也启用处理。</p>
+          <p>假如内网的设备不支持ipv6或者不想动配置，可以在公网入口设备（一般是光猫桥接路由器拨号）上转发端口<br>在入口设备上起一个nginx ，版本大于1.9<br>在配置文件里面添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line">    # 添加socket转发的代理</span><br><span class="line">    upstream socket_proxy &#123;</span><br><span class="line">        hash $remote_addr consistent;</span><br><span class="line">        # 转发的目的地址和端口</span><br><span class="line">        server 127.0.0.1:80 weight=5 max_fails=3 fail_timeout=30s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # 提供转发的服务，即访问localhost:9001，会跳转至代理socket_proxy指定的转发地址</span><br><span class="line">    server &#123;</span><br><span class="line">       listen [::]:9001; #ipv6的监听配置</span><br><span class="line">       proxy_connect_timeout 1s;</span><br><span class="line">       proxy_timeout 3s;</span><br><span class="line">       proxy_pass socket_proxy;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre>
+注意要加http段外，因为这里是转发tcp端口 不是http端口。
+如果是需要转发http服务，那做法和正常的反向代理一样了，这里不考虑
+
+参考https://blog.csdn.net/blscok/article/details/81941619
+
+另一个方案
+以下在梅林测试通过，理论上基于LINUX的路由都能行，无非是安装方式的区别。
+SSH连接路由后：
+
+opkg update
+opkg install socat
+socat TCP6-LISTEN:8000,reuseaddr,fork TCP4:192.168.2.3:8000
+
+监听公网传入的IPV6的8000端口，转发到内网的192.168.2.3主机的8000端口。
+如此可在公网通过IPV6地址或域名加端口号访问内网的服务。
+CSDN转帖内容。
+
+</pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/01/12/windows-%E4%B8%8B-cmd-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%A8%8B%E5%BA%8F%E8%BE%93%E5%87%BA%E5%86%85%E5%AE%B9%E6%89%93%E5%8D%B0%E5%88%B0%E5%B1%8F%E5%B9%95%E5%90%8C%E6%97%B6%E4%BF%9D%E5%AD%98%E5%88%B0%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/12/windows-%E4%B8%8B-cmd-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%A8%8B%E5%BA%8F%E8%BE%93%E5%87%BA%E5%86%85%E5%AE%B9%E6%89%93%E5%8D%B0%E5%88%B0%E5%B1%8F%E5%B9%95%E5%90%8C%E6%97%B6%E4%BF%9D%E5%AD%98%E5%88%B0%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">windows 下 cmd 命令行程序输出内容打印到屏幕同时保存到文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-12 11:53:00" itemprop="dateCreated datePublished" datetime="2022-01-12T11:53:00+08:00">2022-01-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="tee-命令"><a href="#tee-命令" class="headerlink" title="tee 命令"></a>tee 命令</h3><p>类似标题的需求在 Linux 下可以使用 tee 命令实现， windows cmd 环境下需要 单独的一个程序来做</p>
+<p>wintee </p>
+<p><a target="_blank" rel="noopener" href="https://code.google.com/archive/p/wintee/" title="下载地址（需要代理） ">下载地址（需要代理） </a>  </p>
+<p><a href="/2022/01/12/windows-%E4%B8%8B-cmd-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%A8%8B%E5%BA%8F%E8%BE%93%E5%87%BA%E5%86%85%E5%AE%B9%E6%89%93%E5%8D%B0%E5%88%B0%E5%B1%8F%E5%B9%95%E5%90%8C%E6%97%B6%E4%BF%9D%E5%AD%98%E5%88%B0%E6%96%87%E4%BB%B6/wtee.zip" title="分流下载地址 ">分流下载地址 </a></p>
+<p>示例 <code>echo aaaaa | wtee.exe 1.log -</code></p>
+<p>tee命令更多使用示例 <a target="_blank" rel="noopener" href="https://blog.csdn.net/hongrisl/article/details/88060220">https://blog.csdn.net/hongrisl/article/details/88060220</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br></pre></td><td class="code"><pre><span class="line">以下是防丢失备份</span><br><span class="line">tee</span><br><span class="line"></span><br><span class="line">　　功能说明：读取标准输入的数据，并将其内容输出成文件。</span><br><span class="line">　　语 　 法：tee [-ai][--help][--version][文件…]</span><br><span class="line">　　补充说明：tee指令会从标准输入设备读取数据，将其内容输出到标准输出设备,同时保存成文件。我们可利用tee把管道导入的数据存成文件，甚至一次保存数份文件。</span><br><span class="line">　　参 　 数：-a 附加到既有文件的后面，而非覆盖它。如果给予tee指令的文件名称已经存在，预设会覆盖该文件的内容。加上此参数后，数据会新增在该文件内容的最后面，而不会删除原先之内容。</span><br><span class="line">　　　　　　　-i 忽略中断信号</span><br><span class="line">　　　　　　　--help 在线帮助</span><br><span class="line">　　　　　　　--version 显示版本信息</span><br><span class="line"></span><br><span class="line">　　范 　 例：</span><br><span class="line"></span><br><span class="line">　　列出文本文件slayers.story的内容，同时复制3份副本，文件名称分别为ss-copy1、ss-copy2、ss-copy3：</span><br><span class="line">　　$ cat slayers.story |tee ss-copy1 ss-copy2 ss-copy3</span><br><span class="line"></span><br><span class="line">tee [-ai][--help][--version][文件...]</span><br><span class="line"></span><br><span class="line">【功能】</span><br><span class="line"></span><br><span class="line">tee以标准输入作为输入，标准输出和文件作为输出。</span><br><span class="line"></span><br><span class="line">【举例】</span><br><span class="line"></span><br><span class="line">tee file     //覆盖</span><br><span class="line">tee -a file    //追加</span><br><span class="line"></span><br><span class="line">tee -        //输出到标准输出两次</span><br><span class="line">tee - -    //输出到标准输出三次</span><br><span class="line"></span><br><span class="line">tee file1 file2 -    //输出到标准输出两次,并写到那两个文件中</span><br><span class="line">ls | tee file  </span><br><span class="line"></span><br><span class="line">另：把标准错误也被tee读取</span><br><span class="line">ls &quot;*&quot; 2&gt;&amp;1 | tee ls.txt</span><br><span class="line"></span><br><span class="line">*用tee生成一个文件，包含你敲入的内容：</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">复制代码</span><br><span class="line"></span><br><span class="line">代码如下:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$tee testfile</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">这样，会提示要你用标准输入输入内容，然后敲回车会将你输入的内容写入testfile和输出到标准输出，如果用[Ctrl]d结束输入([Ctrl]c也行)。如果原来testfile有内容，将会覆盖。</span><br><span class="line"></span><br><span class="line">*把内容追加到文件的末尾行：</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">复制代码</span><br><span class="line"></span><br><span class="line">代码如下:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$tee -a testfile</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">结果类似上，不过如果原来testfile有内容则不会覆盖而是追加。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*生成一个文件，敲入的时候，不接受中断信号：</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">复制代码</span><br><span class="line"></span><br><span class="line">代码如下:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$tee -i testfile</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">结果同testfile，不过不会接收中断信号，只能用[Ctrl]d结束，而不能用[Ctrl]c了。</span><br><span class="line"></span><br><span class="line">*执行ls列出目录文件同时将输出保存到文件test中：</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">复制代码</span><br><span class="line"></span><br><span class="line">代码如下:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ls | tee test</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">这样，会像平时一样执行ls命令并将当前目录的文件名输出到标准输出。另外由于进行了tee命令，所以会生成一个test文件，这个test文件的内容和标准输出的内容一样。</span><br><span class="line"></span><br><span class="line">【描述】</span><br><span class="line"></span><br><span class="line">tee指令会从标准输入设备读取数据，将其内容输出到标准输出设备，同时保存成文件。可以用于既想看到标准输出，又想将标准输出保存到文件中的情况。</span><br><span class="line"></span><br><span class="line">参数：</span><br><span class="line"></span><br><span class="line">　-a或--append 　附加到既有文件的后面，而非覆盖它．</span><br><span class="line">　-i-i或--ignore-interrupts 　忽略中断信号。</span><br><span class="line">　--help 　在线帮助。</span><br><span class="line">　--version 　显示版本信息。</span><br><span class="line"></span><br><span class="line">常用参数</span><br><span class="line">格式：tee</span><br><span class="line"></span><br><span class="line">只输出到标准输出，因为没有指定文件嘛。</span><br><span class="line"></span><br><span class="line">格式：tee file</span><br><span class="line"></span><br><span class="line">输出到标准输出的同时，保存到文件file中。如果文件不存在，则创建；如果已经存在，则覆盖之。（If a file being written to does not already exist, it is created. If a file being written to already exists, the data it previously</span><br><span class="line">contained is overwritten unless the `-a&#x27; option is used.）</span><br><span class="line"></span><br><span class="line">格式：tee -a file</span><br><span class="line"></span><br><span class="line">输出到标准输出的同时，追加到文件file中。如果文件不存在，则创建；如果已经存在，就在末尾追加内容，而不是覆盖。</span><br><span class="line"></span><br><span class="line">格式：tee -</span><br><span class="line"></span><br><span class="line">输出到标准输出两次。（A FILE of `-&#x27; causes `tee&#x27; to send another copy of input to standard output, but this is typically not that useful as the copies are interleaved.）</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">格式：tee file1 file2 -</span><br><span class="line"></span><br><span class="line">输出到标准输出两次，同时保存到file1和file2中。</span><br><span class="line"> </span><br><span class="line">使用示例补充：</span><br><span class="line"></span><br><span class="line">示例一 tee命令与重定向的对比</span><br><span class="line"></span><br><span class="line">[root@web ~]# seq 5 &gt;1.txt </span><br><span class="line">[root@web ~]# cat 1.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">[root@web ~]# cat 1.txt &gt;2.txt </span><br><span class="line">[root@web ~]# cat 1.txt | tee 3.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">[root@web ~]# cat 2.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">[root@web ~]# cat 3.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">[root@web ~]# cat 1.txt &gt;&gt;2.txt </span><br><span class="line">[root@web ~]# cat 1.txt | tee -a 3.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">[root@web ~]# cat 2.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">[root@web ~]# cat 3.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">[root@web ~]#</span><br><span class="line"></span><br><span class="line">示例二 使用tee命令重复输出字符串</span><br><span class="line"></span><br><span class="line">[root@web ~]# echo 12345 | tee </span><br><span class="line">12345</span><br><span class="line"></span><br><span class="line">[root@web ~]# echo 12345 | tee - </span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">[root@web ~]# echo 12345 | tee - - </span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">[root@web ~]# echo 12345 | tee - - - </span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">[root@web ~]# echo 12345 | tee - - - - </span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">12345</span><br><span class="line">[root@web ~]#</span><br><span class="line"></span><br><span class="line">[root@web ~]# echo -n 12345 | tee</span><br><span class="line"></span><br><span class="line">12345[root@web ~]# echo -n 12345 | tee - </span><br><span class="line">1234512345[root@web ~]# echo -n 12345 | tee - - </span><br><span class="line">123451234512345[root@web ~]# echo -n 12345 | tee - - - </span><br><span class="line">12345123451234512345[root@web ~]# echo -n 12345 | tee - - - - </span><br><span class="line">1234512345123451234512345[root@web ~]#</span><br><span class="line"></span><br><span class="line">示例三 使用tee命令把标准错误输出也保存到文件</span><br><span class="line"></span><br><span class="line">[root@web ~]# ls &quot;*&quot; </span><br><span class="line">ls: *: 没有那个文件或目录</span><br><span class="line">[root@web ~]# ls &quot;*&quot; | tee - </span><br><span class="line">ls: *: 没有那个文件或目录</span><br><span class="line">[root@web ~]# ls &quot;*&quot; | tee ls.txt </span><br><span class="line">ls: *: 没有那个文件或目录</span><br><span class="line">[root@web ~]# cat ls.txt </span><br><span class="line">[root@web ~]# ls &quot;*&quot; 2&gt;&amp;1 | tee ls.txt </span><br><span class="line">ls: *: 没有那个文件或目录</span><br><span class="line">[root@web ~]# cat ls.txt </span><br><span class="line">ls: *: 没有那个文件或目录</span><br><span class="line">[root@web ~]#</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="python-实现类似功能"><a href="#python-实现类似功能" class="headerlink" title="python 实现类似功能"></a>python 实现类似功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*- </span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_text</span>(<span class="params">text=<span class="string">&quot;&quot;</span></span>):</span><br><span class="line">	connect_log = <span class="string">&#x27;connect.log&#x27;</span></span><br><span class="line">	chat_log = <span class="string">&#x27;chat.log&#x27;</span></span><br><span class="line">	others_log = <span class="string">&#x27;others.log&#x27;</span></span><br><span class="line">	match_times = <span class="number">0</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">#判断是不是连线日志</span></span><br><span class="line">	matchObj = re.search(<span class="string">&#x27;has joined the lobby.&#x27;</span>, text)</span><br><span class="line">	<span class="keyword">if</span> matchObj <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">		match_times = match_times + <span class="number">1</span></span><br><span class="line">		<span class="keyword">with</span> <span class="built_in">open</span>(connect_log, <span class="string">&#x27;a+&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">			file.write(datetime.datetime.now().strftime(<span class="string">&#x27;%F %T&#x27;</span>)+<span class="string">&#x27;,&#x27;</span>+text)</span><br><span class="line">			</span><br><span class="line">	matchObj = <span class="literal">None</span></span><br><span class="line">	matchObj = re.search(<span class="string">&#x27;has disconnected&#x27;</span>, text)</span><br><span class="line">	<span class="keyword">if</span> matchObj <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">		match_times = match_times + <span class="number">1</span></span><br><span class="line">		<span class="keyword">with</span> <span class="built_in">open</span>(connect_log, <span class="string">&#x27;a+&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">			file.write(datetime.datetime.now().strftime(<span class="string">&#x27;%F %T&#x27;</span>)+<span class="string">&#x27;,&#x27;</span>+text)</span><br><span class="line">	</span><br><span class="line">	<span class="comment">#判断是不是聊天		</span></span><br><span class="line">	matchObj = <span class="literal">None</span></span><br><span class="line">	matchObj = re.search(<span class="string">r&#x27;&lt;.*?&gt;:(.*?)+&#x27;</span>, text)</span><br><span class="line">	<span class="keyword">if</span> matchObj <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">		match_times = match_times + <span class="number">1</span></span><br><span class="line">		<span class="keyword">with</span> <span class="built_in">open</span>(chat_log, <span class="string">&#x27;a+&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">			file.write(datetime.datetime.now().strftime(<span class="string">&#x27;%F %T&#x27;</span>)+<span class="string">&#x27;,&#x27;</span>+text)</span><br><span class="line">	</span><br><span class="line">	<span class="comment">#其他</span></span><br><span class="line">	<span class="keyword">if</span> match_times == <span class="number">0</span>:</span><br><span class="line">		<span class="keyword">with</span> <span class="built_in">open</span>(others_log, <span class="string">&#x27;a+&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">			file.write(datetime.datetime.now().strftime(<span class="string">&#x27;%F %T&#x27;</span>)+<span class="string">&#x27;,&#x27;</span>+text)</span><br><span class="line">			</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">	sys.stdin.reconfigure(errors=<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line">	<span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</span><br><span class="line">		process_text(line)</span><br><span class="line">		sys.stdout.write(line)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>process_text 方法是对内容进行以行为单位的自定义处理，如果只是实现标题里面的功能，直接写入文件就好了。本文中代码是为了实现某个服务器的日志功能，所以写的很啰嗦。<br>使用方式</p>
+<p>示例 <code>echo aaaaa | python log.py</code></p>
 
       
     </div>
@@ -279,7 +361,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/11/15/%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E9%97%AD%E8%B7%A8%E5%9F%9F%E9%99%90%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/01/07/VMessAEAD-is-enforced-and-a-non-VMessAEAD-connection-is-received/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -293,7 +375,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/15/%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E9%97%AD%E8%B7%A8%E5%9F%9F%E9%99%90%E5%88%B6/" class="post-title-link" itemprop="url">火狐浏览器关闭跨域限制</a>
+            <a href="/2022/01/07/VMessAEAD-is-enforced-and-a-non-VMessAEAD-connection-is-received/" class="post-title-link" itemprop="url">VMessAEAD is enforced and a non VMessAEAD connection is received.</a>
         </h2>
 
         <div class="post-meta">
@@ -303,7 +385,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-15 15:11:00" itemprop="dateCreated datePublished" datetime="2020-11-15T15:11:00+08:00">2020-11-15</time>
+              <time title="创建时间：2022-01-07 10:51:00" itemprop="dateCreated datePublished" datetime="2022-01-07T10:51:00+08:00">2022-01-07</time>
             </span>
 
           
@@ -317,11 +399,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>打开火狐 在地址栏访问 about:config</p>
-<p>选择 我了解此风险</p>
-<p>然后搜 security.fileuri.strict_origin_policy</p>
-<p>切换到false 即可关闭跨域限制，此时所有页面js都可以随意访问跨域限制的数据 安全性极大的降低，不建议一直开着， 某些特殊测试用途可以关闭，用完马上打开。</p>
-<p>chrome 如果想设置跨域 需要安装扩展<br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=zh-CN">https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=zh-CN</a></p>
+          <p><a target="_blank" rel="noopener" href="https://91ai.net/thread-950258-1-1.html">https://91ai.net/thread-950258-1-1.html</a></p>
+<p>处理方法，</p>
+<ul>
+<li>两端alterID改成0</li>
+<li>vnext 段添加 “security”: “auto”, 或者使用其他指定的加密方式。唯独不能缺少这个字段</li>
+</ul>
 
       
     </div>
@@ -341,7 +424,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/11/06/%E9%BA%A6%E5%85%8B%E9%A3%8E%E5%AE%9E%E6%97%B6%E9%99%8D%E5%99%AA%E6%96%B9%E6%A1%88/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/12/24/shell-%E8%8E%B7%E5%8F%96%E5%85%AC%E7%BD%91-IP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -355,7 +438,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/06/%E9%BA%A6%E5%85%8B%E9%A3%8E%E5%AE%9E%E6%97%B6%E9%99%8D%E5%99%AA%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">麦克风实时降噪方案</a>
+            <a href="/2021/12/24/shell-%E8%8E%B7%E5%8F%96%E5%85%AC%E7%BD%91-IP/" class="post-title-link" itemprop="url">shell 获取公网 IP</a>
         </h2>
 
         <div class="post-meta">
@@ -365,7 +448,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-06 01:10:00" itemprop="dateCreated datePublished" datetime="2020-11-06T01:10:00+08:00">2020-11-06</time>
+              <time title="创建时间：2021-12-24 15:25:00" itemprop="dateCreated datePublished" datetime="2021-12-24T15:25:00+08:00">2021-12-24</time>
             </span>
 
           
@@ -379,92 +462,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="方案1-：rtx-voice"><a href="#方案1-：rtx-voice" class="headerlink" title="方案1 ：rtx voice"></a>方案1 ：rtx voice</h3><p>优点：简单</p>
-<p>缺点：只支持win10 + rtx显卡 （GTX显卡可以破解安装包）</p>
-<p>网址：<a target="_blank" rel="noopener" href="https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/">https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/</a></p>
-<p>破解：<a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1167289-1-1.html">https://www.52pojie.cn/thread-1167289-1-1.html</a></p>
-<p>注意：每一代用的版本不一样，例如 30 系之后这个功能被集成到了 Nvidia Broadcast 这个软件里面了</p>
-<h3 id="方案2：-krisp"><a href="#方案2：-krisp" class="headerlink" title="方案2： krisp"></a>方案2： krisp</h3><p>优点：不限定硬件，支持win10 MacOS</p>
-<p>缺点：收费的</p>
-<p>网址：<a target="_blank" rel="noopener" href="https://krisp.ai/">https://krisp.ai/</a></p>
-<h3 id="方案3：-Equalizer-APO-noise-suppression-for-voice-win10"><a href="#方案3：-Equalizer-APO-noise-suppression-for-voice-win10" class="headerlink" title="方案3： Equalizer APO + noise-suppression-for-voice (win10)"></a>方案3： Equalizer APO + noise-suppression-for-voice (win10)</h3><p>优点：不要钱 支持linux win10 MacOS</p>
-<p>缺点：设置复杂</p>
-<p>网址：</p>
-<p>Equalizer APO <a target="_blank" rel="noopener" href="https://equalizerapo.com/download.html">https://equalizerapo.com/download.html</a></p>
-<p> noise-suppression-for-voice <a target="_blank" rel="noopener" href="https://github.com/werman/noise-suppression-for-voice">https://github.com/werman/noise-suppression-for-voice</a></p>
-<p>win10设置教程  <a target="_blank" rel="noopener" href="https://medium.com/@bssankaran/free-and-open-source-software-noise-cancelling-for-working-from-home-edb1b4e9764e">https://medium.com/@bssankaran/free-and-open-source-software-noise-cancelling-for-working-from-home-edb1b4e9764e</a></p>
-<p>其他系统安装详见 noise-suppression-for-voice 的readme文档</p>
-<h3 id="方案4：Sound-Tune-AI"><a href="#方案4：Sound-Tune-AI" class="headerlink" title="方案4：Sound Tune AI"></a>方案4：Sound Tune AI</h3><p>没实验过，可能需要微星的笔记本或者整机以及特定主板支持。</p>
-<p>网址：</p>
-<p><a target="_blank" rel="noopener" href="https://www.msi.com/Landing/msi_sound_tune">https://www.msi.com/Landing/msi_sound_tune</a></p>
-<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/a078ze9z/">https://post.smzdm.com/p/a078ze9z/</a></p>
-<h3 id="方案5-华硕主板"><a href="#方案5-华硕主板" class="headerlink" title="方案5 华硕主板"></a>方案5 华硕主板</h3><p>和方案4一样，但是只要是华硕主板应该就可以，自己搜一下驱动就行</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/10/20/Linux-%E5%8F%8D%E6%9F%A5%E7%A8%8B%E5%BA%8F%E4%BE%9D%E8%B5%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/20/Linux-%E5%8F%8D%E6%9F%A5%E7%A8%8B%E5%BA%8F%E4%BE%9D%E8%B5%96/" class="post-title-link" itemprop="url">Linux 反查程序依赖</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-20 11:44:00" itemprop="dateCreated datePublished" datetime="2020-10-20T11:44:00+08:00">2020-10-20</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd  命令"></a>ldd  命令</h3><p>例如  查看ls的依赖</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldd /bin/ls</span><br></pre></td></tr></table></figure>
-
-
-<p>然后缺失的依赖 反查软件包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum provides 依赖的名字</span><br></pre></td></tr></table></figure>
-
-<p>具体实例 <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000015802337">https://segmentfault.com/a/1190000015802337</a></p>
-
+          <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s http://www.net.cn/static/customercare/yourip.asp |grep -P -o &quot;[0-9.]+(?=&lt;/h2&gt;)&quot;</span><br></pre></td></tr></table></figure>
+<p>压缩网址 302 跳转需要调整curl的参数 （但是网址压缩可能失效导致命令不能用）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L -s https://shorturl.at/hiqyE |grep -P -o &quot;[0-9.]+(?=&lt;/h2&gt;)&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>curl </p>
+<ul>
+<li>-s 隐藏下载进度</li>
+<li>-L 兼容 302 跳转</li>
+</ul>
+<p>grep </p>
+<ul>
+<li>-P 开启断言模式 </li>
+<li>-o 只显示匹配部分，不显示匹配到的整行</li>
+</ul>
+<h3 id="啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）"><a href="#啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）" class="headerlink" title="啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）"></a>啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s http://www.net.cn/static/customercare/yourip.asp |grep &quot;&lt;/h2&gt;&quot; |cut -f2 -d &#x27;&gt;&#x27; |cut -f1 -d &#x27;&lt;&#x27;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -482,7 +493,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -548,14 +559,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

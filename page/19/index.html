@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/10/16/linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2-CodeIgniter-3-%E6%8A%A5%E9%94%99-session-%E9%94%99%E8%AF%AF/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/08/13/%E6%89%93%E5%8C%85-Python-%E7%A8%8B%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/10/16/linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2-CodeIgniter-3-%E6%8A%A5%E9%94%99-session-%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">linux 环境部署 CodeIgniter 3 报错 session 错误</a>
+            <a href="/2019/08/13/%E6%89%93%E5%8C%85-Python-%E7%A8%8B%E5%BA%8F/" class="post-title-link" itemprop="url">打包 Python 程序</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-10-16 14:06:00" itemprop="dateCreated datePublished" datetime="2015-10-16T14:06:00+08:00">2015-10-16</time>
+              <time title="创建时间：2019-08-13 17:54:00" itemprop="dateCreated datePublished" datetime="2019-08-13T17:54:00+08:00">2019-08-13</time>
             </span>
 
           
@@ -193,19 +193,254 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
-<h2 id="权限不足"><a href="#权限不足" class="headerlink" title="权限不足"></a>权限不足</h2><blockquote>
-<p>codeigniter Message: mkdir(): Invalid path Filename: drivers&#x2F;Session_files_driver.php</p>
+          <p>cxfreeze比较简单，不容易出错。<br>cxfreeeze有几种文件形式，msi和whl。msi是安装包直接双击运行 </p>
+<p>下载地址 <a target="_blank" rel="noopener" href="http://sourceforge.net/projects/cx-freeze/files/4.3.2/">http://sourceforge.net/projects/cx-freeze/files/4.3.2/</a> </p>
+<p>whl是python安装包，安装格式:</p>
+<p><code>pip install whl文件地址</code></p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
+<p>安装后cxfreeze执行脚本在python_home\Scripts下面</p>
+<p>cxfreeze打包exe命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python cxfreeze全路径 要打包的py文件  --target-dir=</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cxfreeze D:/hello.py --target-dir D:/123</span><br><span class="line"><span class="comment">#或</span></span><br><span class="line">python cxfreeze D:/hello.py --target-dir=D:/123</span><br></pre></td></tr></table></figure>
+
+<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a>具体步骤：</h3><ol>
+<li><p>首先，下载本机器安装的python相应版本的cx_Freeze软件包 注意区分X64和X86</p>
+<p> msi: <a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
+<p> whl: <a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
+</li>
+<li><p>安装whl ：pip install whl安装包 或 msi 双击安装</p>
+</li>
+<li><p>安装完成后，在python安装目录下的Scripts文件夹下，生成cx_freeze相关文件。</p>
+<p> cmd，进入该文件目录，然后键入</p>
+<p> cxfreeze –version  或者python cxfreeze –version</p>
+<p> 查看版本信息</p>
+</li>
+<li><p>新建一个python程序，例如：hello.py ; 在”C:\Python33\Scripts”目录（也就是cxfreeze命令所在的文件目录）下运行：</p>
+<p> cxfreeze D:&#x2F;hello.py –target-dir D:&#x2F;123  </p>
+<p> 就可以将D:&#x2F;hello.py文件打包到D:&#x2F;123目录下，生成hello.exe程序和相关依赖文件。</p>
+</li>
+<li><p>Enigma Virtual Box打包成单文件程序即可</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/08/12/PHP-%E5%BA%94%E7%94%A8%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/12/PHP-%E5%BA%94%E7%94%A8%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">PHP应用日志记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-12 14:04:00" itemprop="dateCreated datePublished" datetime="2019-08-12T14:04:00+08:00">2019-08-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="记录日志发送给日志服务器接口"><a href="#记录日志发送给日志服务器接口" class="headerlink" title="记录日志发送给日志服务器接口"></a>记录日志发送给日志服务器接口</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$log</span> = <span class="keyword">array</span>();</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;time&#x27;</span>]               = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y-m-d H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;ip&#x27;</span>]                 = <span class="title class_">IpHelper</span>::<span class="title function_ invoke__">realIp</span>();</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REDIRECT_STATUS&quot;</span>]    = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_HOST&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_HOST&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;user_id&#x27;</span>]            = <span class="variable">$_SESSION</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;session_id&#x27;</span>]         = <span class="title function_ invoke__">session_id</span>();</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;get&#x27;</span>]                = <span class="keyword">isset</span>(<span class="variable">$_GET</span>)    ? <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$_GET</span>):<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;post&#x27;</span>]               = <span class="keyword">isset</span>(<span class="variable">$_POST</span>)   ? <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$_POST</span>):<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;session&#x27;</span>]            = <span class="keyword">isset</span>(<span class="variable">$_SESSION</span>)? <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$_SESSION</span>):<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REDIRECT_STATUS&quot;</span>]    = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REDIRECT_STATUS&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REDIRECT_STATUS&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;HTTP_REFERER&quot;</span>]       = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_REFERER&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_REFERER&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;HTTP_COOKIE&quot;</span>]        = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_COOKIE&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_COOKIE&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REDIRECT_URL&quot;</span>]       = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REDIRECT_URL&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REDIRECT_URL&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REQUEST_URI&quot;</span>]        = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_URI&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_URI&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REQUEST_TIME_FLOAT&quot;</span>] = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_TIME_FLOAT&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_TIME_FLOAT&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REQUEST_TIME&quot;</span>]       = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_TIME&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_TIME&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;HTTP_USER_AGENT&quot;</span>]    = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_USER_AGENT&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_USER_AGENT&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$curl</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line"><span class="variable">$options</span> = [</span><br><span class="line">    CURLOPT_URL =&gt; <span class="string">&#x27;http://日志服务器/index.php?data=&#x27;</span>.<span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">str_replace</span>(<span class="keyword">array</span>(<span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;\r&quot;</span>, <span class="string">&quot;\n&quot;</span>), <span class="string">&#x27;&#x27;</span>,<span class="title function_ invoke__">var_export</span>(<span class="variable">$log</span>,<span class="literal">true</span>))),</span><br><span class="line">    CURLOPT_RETURNTRANSFER =&gt; <span class="number">1</span>,        <span class="comment">#将curl_exec()获取的信息以文件流的形式返回，而不是直接输出</span></span><br><span class="line">    CURLOPT_FOLLOWLOCATION =&gt; <span class="number">1</span>,        <span class="comment">#启用时会将服务器服务器返回的&quot;Location: &quot;放在header中递归的返回给服务器，使用CURLOPT_MAXREDIRS可以限定递归返回的数量。</span></span><br><span class="line">    CURLOPT_USERAGENT =&gt; <span class="string">&quot;&quot;</span>,</span><br><span class="line">    CURLOPT_TIMEOUT =&gt; <span class="number">1</span>,</span><br><span class="line">    CURLOPT_NOSIGNAL =&gt;<span class="number">1</span>,               <span class="comment">#只获取信息，不下载内容</span></span><br><span class="line">    CURLOPT_NOBODY =&gt;<span class="literal">true</span></span><br><span class="line">];</span><br><span class="line"><span class="title function_ invoke__">curl_setopt_array</span>(<span class="variable">$curl</span>, <span class="variable">$options</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_exec</span>(<span class="variable">$curl</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="日志服务器写入文件-按日期分割"><a href="#日志服务器写入文件-按日期分割" class="headerlink" title="日志服务器写入文件 按日期分割"></a>日志服务器写入文件 按日期分割</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ignore_user_abort</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="variable">$data</span> = <span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;data&#x27;</span>]) ? <span class="variable">$_GET</span>[<span class="string">&#x27;data&#x27;</span>]: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$data</span> === <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">function_exists</span>(<span class="string">&#x27;fastcgi_finish_request&#x27;</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_ invoke__">fastcgi_finish_request</span>(); <span class="comment">//如果是fastcgi 环境 快速响应</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;/data_log/&#x27;</span>.<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Ymd&#x27;</span>,<span class="title function_ invoke__">time</span>()).<span class="string">&#x27;.log&#x27;</span>, <span class="variable">$data</span>. PHP_EOL , FILE_APPEND | LOCK_EX );</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩日志文件"><a href="#压缩日志文件" class="headerlink" title="压缩日志文件"></a>压缩日志文件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* 15分钟的执行时间 */</span></span><br><span class="line"><span class="title function_ invoke__">set_time_limit</span>(<span class="number">60</span>*<span class="number">15</span>); </span><br><span class="line"><span class="variable">$f_name</span> = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;Ymd&#x27;</span>,<span class="title function_ invoke__">strtotime</span>(<span class="string">&quot;-9 day&quot;</span>)) .<span class="string">&#x27;.log&#x27;</span>;</span><br><span class="line"><span class="variable">$path</span> = <span class="string">&#x27;/data_log/&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>( <span class="title function_ invoke__">file_exists</span>( <span class="variable">$path</span>.<span class="variable">$f_name</span> ) !== <span class="literal">false</span> )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//exit; /* 日志不存在 */</span></span><br><span class="line">    <span class="comment">/* 打包 */</span></span><br><span class="line">    <span class="title function_ invoke__">exec</span>(<span class="string">&quot;cd <span class="subst">&#123;$path&#125;</span> &amp;&amp; tar -cjf <span class="subst">&#123;$f_name&#125;</span>.tar.bz2 <span class="subst">&#123;$f_name&#125;</span> &amp;&amp; rm -f <span class="subst">&#123;$f_name&#125;</span>&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="计划任务-每天压缩日志-crontab-e-配置计划任务"><a href="#计划任务-每天压缩日志-crontab-e-配置计划任务" class="headerlink" title="计划任务 每天压缩日志 (crontab -e 配置计划任务)"></a>计划任务 每天压缩日志 (crontab -e 配置计划任务)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每天4点压缩</span></span><br><span class="line">0 4 * * * /usr/bin/php <span class="string">&quot;/data/日志压缩.php&quot;</span> &gt; /data_log/cron.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h3 id="一个简单的日志查看方法"><a href="#一个简单的日志查看方法" class="headerlink" title="一个简单的日志查看方法"></a>一个简单的日志查看方法</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$handle</span> = @<span class="title function_ invoke__">fopen</span>(<span class="string">&quot;log.txt&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$handle</span>) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$i</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> ((<span class="variable">$buffer</span> = <span class="title function_ invoke__">fgets</span>(<span class="variable">$handle</span>)) !== <span class="literal">false</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$str</span> = <span class="string">&#x27;$data=&#x27;</span>.<span class="variable">$buffer</span>.<span class="string">&#x27;;&#x27;</span>;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$str</span>);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;get&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;get&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;post&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;post&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;session&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;session&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;HTTP_REFERER&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;HTTP_REFERER&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;HTTP_COOKIE&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;HTTP_COOKIE&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;REDIRECT_URL&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>( <span class="variable">$data</span>[<span class="string">&#x27;REDIRECT_URL&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>]);</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$i</span>,<span class="string">&#x27;,&#x27;</span>,<span class="variable">$data</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>], PHP_EOL;</span><br><span class="line">        <span class="variable">$i</span>++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">feof</span>(<span class="variable">$handle</span>)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Error: unexpected fgets() fail\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">fclose</span>(<span class="variable">$handle</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/08/12/PHP%E5%BA%94%E7%94%A8%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/12/PHP%E5%BA%94%E7%94%A8%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">PHP 应用日志记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-12 14:04:00" itemprop="dateCreated datePublished" datetime="2019-08-12T14:04:00+08:00">2019-08-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="记录日志发送给日志服务器接口"><a href="#记录日志发送给日志服务器接口" class="headerlink" title="记录日志发送给日志服务器接口"></a>记录日志发送给日志服务器接口</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$log</span> = <span class="keyword">array</span>();</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;time&#x27;</span>]               = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y-m-d H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;ip&#x27;</span>]                 = <span class="title class_">IpHelper</span>::<span class="title function_ invoke__">realIp</span>();</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REDIRECT_STATUS&quot;</span>]    = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_HOST&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_HOST&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;user_id&#x27;</span>]            = <span class="variable">$_SESSION</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;session_id&#x27;</span>]         = <span class="title function_ invoke__">session_id</span>();</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;get&#x27;</span>]                = <span class="keyword">isset</span>(<span class="variable">$_GET</span>)    ? <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$_GET</span>):<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;post&#x27;</span>]               = <span class="keyword">isset</span>(<span class="variable">$_POST</span>)   ? <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$_POST</span>):<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&#x27;session&#x27;</span>]            = <span class="keyword">isset</span>(<span class="variable">$_SESSION</span>)? <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$_SESSION</span>):<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REDIRECT_STATUS&quot;</span>]    = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REDIRECT_STATUS&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REDIRECT_STATUS&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;HTTP_REFERER&quot;</span>]       = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_REFERER&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_REFERER&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;HTTP_COOKIE&quot;</span>]        = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_COOKIE&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_COOKIE&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REDIRECT_URL&quot;</span>]       = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REDIRECT_URL&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REDIRECT_URL&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REQUEST_URI&quot;</span>]        = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_URI&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_URI&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REQUEST_TIME_FLOAT&quot;</span>] = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_TIME_FLOAT&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_TIME_FLOAT&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;REQUEST_TIME&quot;</span>]       = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_TIME&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;REQUEST_TIME&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$log</span>[<span class="string">&quot;HTTP_USER_AGENT&quot;</span>]    = <span class="keyword">isset</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_USER_AGENT&quot;</span>])?<span class="variable">$_SERVER</span>[<span class="string">&quot;HTTP_USER_AGENT&quot;</span>]:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$curl</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line"><span class="variable">$options</span> = [</span><br><span class="line">    CURLOPT_URL =&gt; <span class="string">&#x27;http://日志服务器/index.php?data=&#x27;</span>.<span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">str_replace</span>(<span class="keyword">array</span>(<span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;\r&quot;</span>, <span class="string">&quot;\n&quot;</span>), <span class="string">&#x27;&#x27;</span>,<span class="title function_ invoke__">var_export</span>(<span class="variable">$log</span>,<span class="literal">true</span>))),</span><br><span class="line">    CURLOPT_RETURNTRANSFER =&gt; <span class="number">1</span>,        <span class="comment">#将curl_exec()获取的信息以文件流的形式返回，而不是直接输出</span></span><br><span class="line">    CURLOPT_FOLLOWLOCATION =&gt; <span class="number">1</span>,        <span class="comment">#启用时会将服务器服务器返回的&quot;Location: &quot;放在header中递归的返回给服务器，使用CURLOPT_MAXREDIRS可以限定递归返回的数量。</span></span><br><span class="line">    CURLOPT_USERAGENT =&gt; <span class="string">&quot;&quot;</span>,</span><br><span class="line">    CURLOPT_TIMEOUT =&gt; <span class="number">1</span>,</span><br><span class="line">    CURLOPT_NOSIGNAL =&gt;<span class="number">1</span>,               <span class="comment">#只获取信息，不下载内容</span></span><br><span class="line">    CURLOPT_NOBODY =&gt;<span class="literal">true</span></span><br><span class="line">];</span><br><span class="line"><span class="title function_ invoke__">curl_setopt_array</span>(<span class="variable">$curl</span>, <span class="variable">$options</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_exec</span>(<span class="variable">$curl</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="日志服务器写入文件-按日期分割"><a href="#日志服务器写入文件-按日期分割" class="headerlink" title="日志服务器写入文件 按日期分割"></a>日志服务器写入文件 按日期分割</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ignore_user_abort</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="variable">$data</span> = <span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;data&#x27;</span>]) ? <span class="variable">$_GET</span>[<span class="string">&#x27;data&#x27;</span>]: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$data</span> === <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">function_exists</span>(<span class="string">&#x27;fastcgi_finish_request&#x27;</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="title function_ invoke__">fastcgi_finish_request</span>(); <span class="comment">//如果是fastcgi 环境 快速响应</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;/data_log/&#x27;</span>.<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Ymd&#x27;</span>,<span class="title function_ invoke__">time</span>()).<span class="string">&#x27;.log&#x27;</span>, <span class="variable">$data</span>. PHP_EOL , FILE_APPEND | LOCK_EX );</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩日志文件"><a href="#压缩日志文件" class="headerlink" title="压缩日志文件"></a>压缩日志文件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* 15分钟的执行时间 */</span></span><br><span class="line"><span class="title function_ invoke__">set_time_limit</span>(<span class="number">60</span>*<span class="number">15</span>); </span><br><span class="line"><span class="variable">$f_name</span> = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;Ymd&#x27;</span>,<span class="title function_ invoke__">strtotime</span>(<span class="string">&quot;-9 day&quot;</span>)) .<span class="string">&#x27;.log&#x27;</span>;</span><br><span class="line"><span class="variable">$path</span> = <span class="string">&#x27;/data_log/&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>( <span class="title function_ invoke__">file_exists</span>( <span class="variable">$path</span>.<span class="variable">$f_name</span> ) !== <span class="literal">false</span> )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//exit; /* 日志不存在 */</span></span><br><span class="line">    <span class="comment">/* 打包 */</span></span><br><span class="line">    <span class="title function_ invoke__">exec</span>(<span class="string">&quot;cd <span class="subst">&#123;$path&#125;</span> &amp;&amp; tar -cjf <span class="subst">&#123;$f_name&#125;</span>.tar.bz2 <span class="subst">&#123;$f_name&#125;</span> &amp;&amp; rm -f <span class="subst">&#123;$f_name&#125;</span>&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="计划任务-每天压缩日志-crontab-e-配置计划任务"><a href="#计划任务-每天压缩日志-crontab-e-配置计划任务" class="headerlink" title="计划任务 每天压缩日志 (crontab -e 配置计划任务)"></a>计划任务 每天压缩日志 (crontab -e 配置计划任务)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每天4点压缩</span></span><br><span class="line">0 4 * * * /usr/bin/php <span class="string">&quot;/data/日志压缩.php&quot;</span> &gt; /data_log/cron.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h3 id="一个简单的日志查看方法"><a href="#一个简单的日志查看方法" class="headerlink" title="一个简单的日志查看方法"></a>一个简单的日志查看方法</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$handle</span> = @<span class="title function_ invoke__">fopen</span>(<span class="string">&quot;log.txt&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$handle</span>) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$i</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> ((<span class="variable">$buffer</span> = <span class="title function_ invoke__">fgets</span>(<span class="variable">$handle</span>)) !== <span class="literal">false</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$str</span> = <span class="string">&#x27;$data=&#x27;</span>.<span class="variable">$buffer</span>.<span class="string">&#x27;;&#x27;</span>;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$str</span>);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;get&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;get&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;post&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;post&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;session&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;session&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;HTTP_REFERER&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;HTTP_REFERER&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;HTTP_COOKIE&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;HTTP_COOKIE&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;REDIRECT_URL&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>( <span class="variable">$data</span>[<span class="string">&#x27;REDIRECT_URL&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>] = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$data</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>]);</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$i</span>,<span class="string">&#x27;,&#x27;</span>,<span class="variable">$data</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>], PHP_EOL;</span><br><span class="line">        <span class="variable">$i</span>++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">feof</span>(<span class="variable">$handle</span>)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Error: unexpected fgets() fail\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">fclose</span>(<span class="variable">$handle</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/05/19/%E8%BF%99%E5%87%A0%E5%A4%A9%E6%8A%98%E8%85%BE-win10-%E8%AE%BF%E9%97%AE-deepin-%E5%85%B1%E4%BA%AB%E7%9A%84%E5%8E%86%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/19/%E8%BF%99%E5%87%A0%E5%A4%A9%E6%8A%98%E8%85%BE-win10-%E8%AE%BF%E9%97%AE-deepin-%E5%85%B1%E4%BA%AB%E7%9A%84%E5%8E%86%E7%A8%8B/" class="post-title-link" itemprop="url">这几天折腾 win10 访问 deepin 共享的历程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-19 16:25:00" itemprop="dateCreated datePublished" datetime="2019-05-19T16:25:00+08:00">2019-05-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>新手小白的流水账，希望可以帮助到后来者</p>
+<p>最近产生了把家里的存储服务器系统换成deepin的想法，于是就开始了这两天的折腾</p>
+<p>硬件：<br>奔腾G5400 + B360 + 8G DDR4 +东芝128G M.2 NVME </p>
+<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><p>因为没在实体机上装过 所以傻傻的就把 ISO 解压到U盘里面去安装了 （win10都这样弄的，看着好像也有EFI的启动）</p>
+<p>然后安装就失败了，直接卡logo。我还以为是我电脑不兼容，摸索了一下 发现是我U盘启动盘做的不对，必须要深度百科里面提供的安装器制作地址来制作启动盘<br><a target="_blank" rel="noopener" href="https://www.deepin.org/original/deepin-boot-maker/">安装器下载</a></p>
+<p>安装设置好以后第一次进系统，就给了我一个大惊喜 半透明毛玻璃特效的BUG，只能看见毛玻璃，上面所有的图标都看不见，右键菜单也是。难道是因为我是用核显的缘故？搜了半天发现可以用快捷键 shift+win+tab 来关闭特效，总算是可以正常显示了。</p>
+<h3 id="折腾硬盘"><a href="#折腾硬盘" class="headerlink" title="折腾硬盘"></a>折腾硬盘</h3><p>把之前的盘插上发现不识别，但是搜索发现deepin是支持ntfs自动挂载的，难道是我盘有问题？</p>
+<p>拿到另一台电脑上重新用 DiskGenius4.7 格式化选项一切默认总算识别出来了。<br>我琢磨着其他数据盘都用ext4 ，留一个 NTFS 当中转空间，这样网络不能用的时候可以用这个移动硬盘来转移文件。<br>添加硬盘分区之类的都没什么好说的一切正常 只不过添加好以后需要 在终端里面执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R 你的用户名所在组:你的用户名 你磁盘的挂载路径</span><br></pre></td></tr></table></figure>
+<p>否则没法创建文件，因为默认它是root的，而且权限不是777 ，所以没有写入权限</p>
+<h3 id="下一个大坑-文件共享"><a href="#下一个大坑-文件共享" class="headerlink" title="下一个大坑 文件共享"></a>下一个大坑 文件共享</h3><p>这玩意我在win下已经被坑的不要不要的了，各种设置细节，玄学现象搞不懂。希望deepin能简单点，你还别说 还真简单，右键文件夹属性菜单，在里面设置一下就行了。手机上用es文件浏览器添加网络位置，立刻就可以用了。接着我就卡在win10上了，资源管理器里面怎么弄也是打不开共享路径，我用的win10是 LSTC 2019 。后来发现一个问题</p>
+<p><img src="/2019/05/19/%E8%BF%99%E5%87%A0%E5%A4%A9%E6%8A%98%E8%85%BE-win10-%E8%AE%BF%E9%97%AE-deepin-%E5%85%B1%E4%BA%AB%E7%9A%84%E5%8E%86%E7%A8%8B/1.png" alt="setting"></p>
+<p>这个地方我本来是两个都开启了，但是当我关闭下面哪个的时候，竟然奇迹般的能用了，？？？！<br>昨天到这里已经深夜了，我就没管后面的问题，就直接睡觉了<br>今天早上起来继续尝试设置，然后我发现，只有系统盘的部分目录可以设置共享，我新添加的数据盘都不能共享？？？<br>在网上搜了半天，又看了百科，最后发现这么一页 <a target="_blank" rel="noopener" href="https://wiki.deepin.org/wiki/Samba%E6%9C%8D%E5%8A%A1">https://wiki.deepin.org/wiki/Samba%E6%9C%8D%E5%8A%A1</a><br>根据里面的内容配置好，发现数据盘也可以共享目录了，但是win10又打不开共享了 wtf ！！！<br>我测了一下手机，发现还是正常的，于是问题应该是出在 win10 上了，研究好几个小时没有结果，于是吃饭 太饿了，一边吃一边思考<br>共享是基于samba协议的，既然samba问题这么多，我或许可以放弃它，改用其他协议，因为以前折腾rsync的时候也是用了ssh协议来传输文件<br>估计ssh协议也可以用在这里，于是经过搜索发现还真有，一个叫win-sshfs的软件。</p>
+<p>首先要安装 Dokan 这是一个驱动，win-sshfs是基于这个驱动开发的，我经过不断的尝试发现，这个组合的版本号还是要求挺苛刻的<br>最后我用了 这么两个版本配合起来的 DokanSetup-1.0.5.1000 和 WinSSHFS-1.6.1.13-devel</p>
+<p>下载地址（记得挂代理）</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/dokan-dev/dokany/releases/tag/v1.0.5">https://github.com/dokan-dev/dokany/releases/tag/v1.0.5</a></p>
 </blockquote>
-<p>看起来像权限问题，在默认情况下使用的是php.ini里面的设置</p>
-<p>排除权限问题以后就正常了</p>
-<p>也可以在congfig文件夹里面的 config.php 文件的371行增加一句</p>
-<p><code>$config[&#39;sess_save_path&#39;] = &#39;./你可以有权限读写的目录路径&#39;;</code></p>
-<p>本质上 session 默认配置下是文件读写操作，所以需要有权限。</p>
-<hr>
-<h2 id="自动加载-session-模块报错"><a href="#自动加载-session-模块报错" class="headerlink" title="自动加载 session 模块报错:"></a>自动加载 session 模块报错:</h2><p>解决办法:<br>先生成一个 key 用于加密</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">$this</span>-&gt;load-&gt;<span class="title function_ invoke__">library</span>(<span class="string">&#x27;encryption&#x27;</span>);</span><br><span class="line"><span class="variable">$key</span> = <span class="title function_ invoke__">bin2hex</span>(<span class="variable">$this</span>-&gt;encryption-&gt;<span class="title function_ invoke__">create_key</span>(<span class="number">16</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$key</span>;</span><br></pre></td></tr></table></figure>
-<p>然后在配置文件里面把 key 写入<br><code> $config[&#39;encryption_key&#39;] = &#39;生成的key&#39;;</code></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/feo-cz/win-sshfs/releases/tag/1.6.1">https://github.com/feo-cz/win-sshfs/releases/tag/1.6.1</a></p>
+</blockquote>
+<p>顺便一提 Dokan如果卸载以后发现再安装的时候装不上了 记得重启电脑 手动删除 system32&#x2F;drivers 目录下面的 dokan.sys 被这个问题坑了半天。</p>
+<p>安装好Dokan ，再执行WinSSHFS，配置SSH的用户名和密码。挂载开始！ 然后华丽的失败了</p>
+<p>我用其他 ssh 软件实验了一下，发现桌面版本的 deepin 并不能用 ssh 远程登录<br>需要单独配置一下 打开deepin终端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server.</span><br><span class="line">sudo /etc/init.d/ssh start 或者 service ssh start</span><br></pre></td></tr></table></figure>
+<p>然后用 <code>netstat -an | grep 22 </code>看看端口是不是正常了。<br>再回到windows去挂载到盘符，目录选择&#x2F;media&#x2F;用户名&#x2F; 至此，总算可以暂时凑合用一下了。<br>至于为什么samba不能访问网络位置（提示权限不对）已经没力气去折腾了，希望能有明白人来指导一下</p>
+<p>后话：XFS 用中文文件名会乱码，需要把 win10 改成 unicode 字符集才能正常（千万不要动这里，否则可能就要重装系统了），这样部分老程序就乱码， sshfs大文件传输性能太低，而且容易断。于是还得折腾samba，无奈研究了几天还是搞不定deepin的samba配置，smb.conf简直就像没有用一样，怎么改都不行</p>
+<p>最后无奈换了debian（裸机装还没网卡驱动 乖乖 用 win10+vmware15装的，然后挂载物理磁盘做共享）<br>后来因为觉得不好用，又换回了win10 + NTFS</p>
+<h3 id="折腾的时候参考的一些资料"><a href="#折腾的时候参考的一些资料" class="headerlink" title="折腾的时候参考的一些资料"></a>折腾的时候参考的一些资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xycoin/p/6095688.html">Debian下配置Samba服务器</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yinqingwang/article/details/80161453">Win10 1709 无法访问局域网共享问题及解决</a> </li>
+<li><a href="samba%E5%A4%87%E4%BB%BD.rar">防止内容失效上面两个页面存个备份</a></li>
+</ul>
 
       
     </div>
@@ -225,7 +460,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/09/22/%E5%85%B3%E4%BA%8E%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81%E4%B8%AD-DOCTYPE-%E7%9A%84%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2019/05/09/PHP-%E6%9B%B4%E6%96%B0%E6%9C%AC%E5%9C%B0%E5%85%AC%E7%BD%91IP%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%EF%BC%8C%E5%AE%9E%E7%8E%B0-DDNS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -239,7 +474,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/09/22/%E5%85%B3%E4%BA%8E%E7%BD%91%E9%A1%B5%E6%BA%90%E7%A0%81%E4%B8%AD-DOCTYPE-%E7%9A%84%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">关于网页源码中 DOCTYPE 的笔记</a>
+            <a href="/2019/05/09/PHP-%E6%9B%B4%E6%96%B0%E6%9C%AC%E5%9C%B0%E5%85%AC%E7%BD%91IP%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%EF%BC%8C%E5%AE%9E%E7%8E%B0-DDNS/" class="post-title-link" itemprop="url">PHP 更新本地公网IP到阿里云域名解析，实现 DDNS</a>
         </h2>
 
         <div class="post-meta">
@@ -249,7 +484,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-09-22 15:05:00" itemprop="dateCreated datePublished" datetime="2015-09-22T15:05:00+08:00">2015-09-22</time>
+              <time title="创建时间：2019-05-09 16:58:00" itemprop="dateCreated datePublished" datetime="2019-05-09T16:58:00+08:00">2019-05-09</time>
             </span>
 
           
@@ -263,193 +498,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>平时用HTML5 所以都直接简写 doctype</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这个东西完整写法是</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<p>除了上面这种 其实还有几种声明方式</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* 过渡的(Transitional)：要求非常宽松的DTD，它允许你继续使用HTML4.01的标识(但是要符合xhtml的写法)，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 严格的(Strict)：要求严格的DTD，你不能使用任何表现层的标识和属性，例如<span class="tag">&lt;<span class="name">br</span>&gt;</span>，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 框架的(Frameset)：专门针对框架页面设计使用的DTD，如果你的页面中包含有框架，需要采用这种DTD，完整代码如下：</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Frameset//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/09/14/Yii1-%E6%8E%A7%E5%88%B6%E5%89%8D%E7%AB%AF%E8%BD%BD%E5%85%A5%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/09/14/Yii1-%E6%8E%A7%E5%88%B6%E5%89%8D%E7%AB%AF%E8%BD%BD%E5%85%A5%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Yii1 控制前端载入文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-09-14 17:11:00" itemprop="dateCreated datePublished" datetime="2015-09-14T17:11:00+08:00">2015-09-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>通过逻辑控制前端文件载入，并且可以调整载入位置，避免直接修改模版，减少模版里面的逻辑<br>但因为现在流行前后端分离，其实这个已经没啥大用了，做个记录。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerCssFile</span>(CSS_URL.<span class="string">&#x27;reset.css&#x27;</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerCssFile</span>(CSS_URL.<span class="string">&#x27;my.css&#x27;</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerCss</span>(<span class="string">&#x27;remove-footer&#x27;</span>,<span class="string">&quot;#footer&#123;display:none;&#125;&quot;</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerScriptFile</span>(JS_URL.<span class="string">&#x27;remove_rmenu.js&#x27;</span>,<span class="title class_">CClientScript</span>::<span class="variable constant_">POS_HEAD</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerScriptFile</span>(JS_URL.<span class="string">&#x27;jquery-ui.min.js&#x27;</span>,<span class="title class_">CClientScript</span>::<span class="variable constant_">POS_HEAD</span>);</span><br><span class="line"><span class="title class_">Yii</span>::<span class="title function_ invoke__">app</span>()-&gt;clientScript-&gt;<span class="title function_ invoke__">registerScriptFile</span>(SITE_URL.<span class="string">&#x27;/assets/MathJax2.5/MathJax.js?config=default&#x27;</span>,<span class="title class_">CClientScript</span>::<span class="variable constant_">POS_HEAD</span>);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/08/25/MySQL-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/08/25/MySQL-%E8%A7%A6%E5%8F%91%E5%99%A8%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">MySQL 触发器简单实例</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-08-25 17:56:00" itemprop="dateCreated datePublished" datetime="2015-08-25T17:56:00+08:00">2015-08-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*取消外键约束*/</span></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*创建C1表 主键ID 字段name*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `c1`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `c1` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">120</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>MEMORY <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*C2与C1结构相同 去掉了ID自增*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `c2`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `c2` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">120</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>MEMORY <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*给C1创建一个触发器 名称叫c1-insert*/</span><span class="comment">/*触发条件是 AFTER INSERT*/</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> `c1<span class="operator">-</span><span class="keyword">insert</span>`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> `c1<span class="operator">-</span><span class="keyword">insert</span>` AFTER <span class="keyword">INSERT</span> <span class="keyword">ON</span> `c1` <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="keyword">BEGIN</span> </span><br><span class="line"><span class="comment">/*插入后的ID*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@id</span> <span class="operator">=</span> NEW.id; </span><br><span class="line"><span class="comment">/*插入后的name*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@name</span> <span class="operator">=</span> NEW.name ;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `c2` (`id`, `name`) <span class="keyword">VALUES</span> (<span class="variable">@id</span>,<span class="variable">@name</span>); <span class="comment">/*插入到C2表*/</span></span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*给C1创建一个触发器 名称叫c1-update*/</span><span class="comment">/*触发条件是 AFTER UPDATE*/</span></span><br><span class="line">DELIMITER ;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> `c1<span class="operator">-</span><span class="keyword">update</span>`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> `c1<span class="operator">-</span><span class="keyword">update</span>` AFTER <span class="keyword">UPDATE</span> <span class="keyword">ON</span> `c1` <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> BEGIN.</span><br><span class="line"><span class="comment">/*修改前的ID*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@id</span> <span class="operator">=</span> OLD.id; </span><br><span class="line"><span class="comment">/*修改后的name*/</span></span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@name</span> <span class="operator">=</span> NEW.name;</span><br><span class="line"><span class="keyword">UPDATE</span> `c2` <span class="keyword">SET</span> `name`<span class="operator">=</span><span class="variable">@name</span> <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="variable">@id</span>; <span class="comment">/*更新到C2表*/</span></span><br><span class="line"><span class="keyword">END</span></span><br><span class="line">;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/07/30/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/07/30/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">PHP正则表达式匹配中文字符</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-07-30 10:22:00" itemprop="dateCreated datePublished" datetime="2015-07-30T10:22:00+08:00">2015-07-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>网上有很多类似的文章，但往往都不能用 所以记录一下</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/([\x&#123;4e00&#125;-\x&#123;9fa5&#125;])/u&quot;</span>, <span class="variable">$input</span>, <span class="variable">$match</span>);</span><br></pre></td></tr></table></figure>
-
-<p><b>注意：限定代码文件和input字符串都是utf-8编码。其他编码不适用</b></p>
-
+          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">#需要配置的项</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;ACCESSKEYID&#x27;</span>,<span class="string">&#x27;AAAAAAAAAAAAAAAA&#x27;</span>);                  <span class="comment">#阿里云用户密钥ID 获取方法 https://help.aliyun.com/knowledge_detail/38738.html</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;ACCESSKEYSECRET&#x27;</span>,<span class="string">&#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#x27;</span>);<span class="comment">#阿里云用户密钥</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;RR&#x27;</span>,<span class="string">&#x27;myhome&#x27;</span>);                                     <span class="comment">#二级域名的记录名 如果是一级 请用@</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;DOMAIN&#x27;</span>,<span class="string">&#x27;myhome.baidu.com&#x27;</span>);                       <span class="comment">#完整域名  </span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;RECORDID&#x27;</span>,<span class="string">&#x27;11111111111111111&#x27;</span>);                    <span class="comment">#解析记录ID</span></span><br><span class="line"><span class="comment">/*关键如何获取解析记录ID ，需要在下面这个地址中</span></span><br><span class="line"><span class="comment">https://api.aliyun.com/?spm=a2c4g.11186623.2.26.79ae2846d9RBBa#/?product=Alidns&amp;api=AddDomainRecord&amp;params=&#123;&#125;&amp;tab=DEMO&amp;lang=JAVA</span></span><br><span class="line"><span class="comment">先设置一个记录（二级域名） 然后返回结果中获取这个ID 添加记录所需的参数文档在下面这里查看</span></span><br><span class="line"><span class="comment">https://help.aliyun.com/document_detail/29772.html?spm=a2c4g.11186623.4.3.392b5eb4SAeph9</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment"># 获取自己公网 IP 的接口</span></span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;GET_IP_URL&#x27;</span>,<span class="string">&#x27;myip.fireflysoft.net&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;IP_FILE&#x27;</span>,<span class="keyword">__DIR__</span>. DIRECTORY_SEPARATOR .<span class="string">&#x27;ip.txt&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 获取<span class="title">HTTP</span>(<span class="params"><span class="variable">$url</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$curl_samples</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line">    <span class="variable">$options</span> = [CURLOPT_URL =&gt; <span class="variable">$url</span>,CURLOPT_RETURNTRANSFER =&gt; <span class="number">1</span>,CURLOPT_FOLLOWLOCATION =&gt; <span class="number">1</span>,CURLOPT_SSL_VERIFYPEER =&gt; <span class="number">0</span>];</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt_array</span>(<span class="variable">$curl_samples</span>, <span class="variable">$options</span>);                </span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$curl_samples</span>, CURLOPT_CUSTOMREQUEST, <span class="string">&#x27;GET&#x27;</span>);  </span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">curl_exec</span>(<span class="variable">$curl_samples</span>);                            </span><br><span class="line">    <span class="variable">$info</span> = <span class="title function_ invoke__">curl_getinfo</span>(<span class="variable">$curl_samples</span>); </span><br><span class="line">    <span class="variable">$curl_err</span> = <span class="title function_ invoke__">curl_errno</span>(<span class="variable">$curl_samples</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_close</span>(<span class="variable">$curl_samples</span>);                                 </span><br><span class="line">    <span class="keyword">if</span>( <span class="number">0</span> != <span class="variable">$curl_err</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;getip error:&quot;</span>.<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y-m-d H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$info</span>);</span><br><span class="line">        <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line">        <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$curl_err</span>;</span><br><span class="line">        <span class="keyword">echo</span> PHP_EOL;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> 编码字符(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">urlencode</span>(<span class="variable">$string</span>);</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">str_replace</span>([<span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;*&#x27;</span>], [<span class="string">&#x27;%20&#x27;</span>, <span class="string">&#x27;%2A&#x27;</span>], <span class="variable">$result</span>);</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/%7E/&#x27;</span>, <span class="string">&#x27;~&#x27;</span>, <span class="variable">$result</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 排序参数计算签名(<span class="params"><span class="variable">$parameters</span>,<span class="variable">$method</span>=<span class="string">&quot;GET&quot;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">ksort</span>(<span class="variable">$parameters</span>);</span><br><span class="line">    <span class="variable">$canonicalizedQuery</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$parameters</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$value</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$canonicalizedQuery</span> .= <span class="string">&#x27;&amp;&#x27;</span> . 编码字符(<span class="variable">$key</span>) . <span class="string">&#x27;=&#x27;</span> . 编码字符(<span class="variable">$value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="variable">$stringToBeSigned</span> = <span class="variable">$method</span>. <span class="string">&#x27;&amp;%2F&amp;&#x27;</span>. 编码字符(<span class="title function_ invoke__">substr</span>(<span class="variable">$canonicalizedQuery</span>, <span class="number">1</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">base64_encode</span>(<span class="title function_ invoke__">hash_hmac</span>(<span class="string">&#x27;sha1&#x27;</span>, <span class="variable">$stringToBeSigned</span>, ACCESSKEYSECRET . <span class="string">&#x27;&amp;&#x27;</span>, <span class="literal">true</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 获取当前的解析记录值(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">#请求dns的API重新做解析</span></span><br><span class="line">    <span class="variable">$api_url</span> = <span class="string">&#x27;https://alidns.aliyuncs.com/?&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span> = [];</span><br><span class="line">    <span class="comment">#公共参数</span></span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Format&#x27;</span>]          = <span class="string">&#x27;json&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Version&#x27;</span>]         = <span class="string">&#x27;2015-01-09&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;SignatureMethod&#x27;</span>] = <span class="string">&#x27;HMAC-SHA1&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;SignatureNonce&#x27;</span>]  = <span class="title function_ invoke__">uniqid</span>();</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;SignatureVersion&#x27;</span>]= <span class="string">&#x27;1.0&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;AccessKeyId&#x27;</span>]     = ACCESSKEYID; </span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Timestamp&#x27;</span>]       = <span class="title function_ invoke__">gmdate</span>(<span class="string">&quot;Y-m-d\TH:i:s\Z&quot;</span>);</span><br><span class="line">    <span class="comment">#专用参数</span></span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Action&#x27;</span>]     = <span class="string">&#x27;DescribeDomainRecordInfo&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;RecordId&#x27;</span>]   = RECORDID; <span class="comment">#解析记录的ID，此参数在添加解析时会返回，在获取域名解析列表时会返回</span></span><br><span class="line">    <span class="comment">#签名</span></span><br><span class="line">    <span class="variable">$data</span>[<span class="string">&#x27;Signature&#x27;</span>]  = 排序参数计算签名(<span class="variable">$data</span>);</span><br><span class="line">    <span class="comment">#请求接口</span></span><br><span class="line">    <span class="variable">$json</span> = 获取<span class="title function_ invoke__">HTTP</span>(<span class="variable">$api_url</span> . <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$data</span>));</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$json</span>,<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>[<span class="string">&#x27;Value&#x27;</span>];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 主函数(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="comment">#获取现在网络的IP</span></span><br><span class="line">    <span class="variable">$ip</span> = 获取<span class="title function_ invoke__">HTTP</span>(GET_IP_URL);</span><br><span class="line">    <span class="comment">#获取现在域名的解析结果 也就是旧的IP</span></span><br><span class="line">    $旧IP = 获取当前的解析记录值();</span><br><span class="line">    <span class="comment">#对比新旧IP是否一样</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">isset</span>($旧IP) || $旧IP !== <span class="variable">$ip</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">#请求dns的API重新做解析</span></span><br><span class="line">        <span class="variable">$api_url</span> = <span class="string">&#x27;https://alidns.aliyuncs.com/?&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span> = [];</span><br><span class="line">        <span class="comment">#公共参数</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Format&#x27;</span>]          = <span class="string">&#x27;json&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Version&#x27;</span>]         = <span class="string">&#x27;2015-01-09&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;SignatureMethod&#x27;</span>] = <span class="string">&#x27;HMAC-SHA1&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;SignatureNonce&#x27;</span>]  = <span class="title function_ invoke__">uniqid</span>();</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;SignatureVersion&#x27;</span>]= <span class="string">&#x27;1.0&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;AccessKeyId&#x27;</span>]     = ACCESSKEYID; </span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Timestamp&#x27;</span>]       = <span class="title function_ invoke__">gmdate</span>(<span class="string">&quot;Y-m-d\TH:i:s\Z&quot;</span>);</span><br><span class="line">        <span class="comment">#专用参数</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Action&#x27;</span>]     = <span class="string">&#x27;UpdateDomainRecord&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;RecordId&#x27;</span>]   = RECORDID; <span class="comment">#解析记录的ID，此参数在添加解析时会返回，在获取域名解析列表时会返回</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;RR&#x27;</span>]         = RR; <span class="comment">#主机记录</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Type&#x27;</span>]       = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Value&#x27;</span>]      = <span class="variable">$ip</span>;</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;TTL&#x27;</span>]        = <span class="number">600</span>;</span><br><span class="line">        <span class="comment">#$data[&#x27;Priority&#x27;]   = 10; #MX记录的优先级，取值范围[1,10]，记录类型为MX记录时，此参数必须</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Line&#x27;</span>]       = <span class="string">&#x27;default&#x27;</span>;</span><br><span class="line">        <span class="comment">#签名</span></span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;Signature&#x27;</span>]  = 排序参数计算签名(<span class="variable">$data</span>);</span><br><span class="line">        <span class="comment">#请求接口</span></span><br><span class="line">        <span class="variable">$json</span> = 获取<span class="title function_ invoke__">HTTP</span>(<span class="variable">$api_url</span> . <span class="title function_ invoke__">http_build_query</span>(<span class="variable">$data</span>));</span><br><span class="line">        <span class="variable">$result</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$json</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#完成以后</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$result</span>-&gt;RecordId))&#123;</span><br><span class="line">            <span class="title function_ invoke__">file_put_contents</span>(IP_FILE,<span class="variable">$ip</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;error&#x27;</span>;</span><br><span class="line">            <span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;IP没有发生变化，不需要修改解析记录&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">主函数();</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -467,7 +516,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -533,14 +582,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

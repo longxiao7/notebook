@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/06/02/%E8%AE%B0%E5%BD%95%E5%AE%B6%E9%87%8C%E7%9A%842-5G%E7%BD%91%E5%8D%A1%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/10/20/IPv6-%E6%B5%8B%E8%AF%95%E5%92%8C-OpenWRT-%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99%E7%AB%AF%E5%8F%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/02/%E8%AE%B0%E5%BD%95%E5%AE%B6%E9%87%8C%E7%9A%842-5G%E7%BD%91%E5%8D%A1%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">记录家里的2.5G网卡部署</a>
+            <a href="/2021/10/20/IPv6-%E6%B5%8B%E8%AF%95%E5%92%8C-OpenWRT-%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99%E7%AB%AF%E5%8F%A3/" class="post-title-link" itemprop="url">IPv6 测试和 OpenWRT 设置防火墙端口</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-02 13:19:00" itemprop="dateCreated datePublished" datetime="2020-06-02T13:19:00+08:00">2020-06-02</time>
+              <time title="创建时间：2021-10-20 17:49:00" itemprop="dateCreated datePublished" datetime="2021-10-20T17:49:00+08:00">2021-10-20</time>
             </span>
 
           
@@ -193,14 +193,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>首先是硬件，TL-NG421 x2  86块钱一张 买了两张</p>
-<p><a href="/2020/06/02/%E8%AE%B0%E5%BD%95%E5%AE%B6%E9%87%8C%E7%9A%842-5G%E7%BD%91%E5%8D%A1%E9%83%A8%E7%BD%B2/TL-NG421_V1.0%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F20200327.rar">驱动下载</a></p>
-<p>装好以后记得换网线，这里因为不需要满速 所以用了六类线，实际能跑到1.7G左右</p>
-<p>然后设置好固定IP，就可以用了</p>
-<p>由于NAS那边是windows10 套了一层vmware 虚拟机，所以需要在vm的网络编辑里面把 网卡1桥接设置成板载网卡，再添加一个新的，然后桥接成2.5G这一张</p>
-<p>保存好 打开虚拟机，设置好虚拟机新网卡的IP 测试没问题了关机，退出VMWARE 然后记事本打开虚拟机的vmx文件，搜e1000 一般会有两个，或者多个，找到对应2.5那个 改成vmxnet3</p>
-<p>保存文件，重新开启虚拟机 测试速度已经达到1G以上。</p>
-<p>具体修改是从<a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/515669">https://yq.aliyun.com/articles/515669</a> 这里找到的</p>
+          <p>防火墙设置</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/osnosn/p/11781359.html">https://www.cnblogs.com/osnosn/p/11781359.html</a></li>
+</ul>
+<p>测试工具</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.ipv6now.com.au/pingme.php">http://www.ipv6now.com.au/pingme.php</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.ipv6now.com.au/traceme.php">http://www.ipv6now.com.au/traceme.php</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.test-ipv6.com/index.html.zh_CN">https://www.test-ipv6.com/index.html.zh_CN</a></li>
+</ul>
 
       
     </div>
@@ -220,7 +222,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/03/22/CentOS-6-9-LNMP-1-6-PHP-7-3-16-%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85-php-redis-%E6%89%A9%E5%B1%95-5-2-1/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/10/11/%E6%9F%A5%E7%9C%8B-windows-%E4%BB%A5%E5%89%8D%E8%BF%9E%E8%BF%87%E7%9A%84-wifi-%E5%AF%86%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -234,7 +236,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/22/CentOS-6-9-LNMP-1-6-PHP-7-3-16-%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85-php-redis-%E6%89%A9%E5%B1%95-5-2-1/" class="post-title-link" itemprop="url">CentOS 6.9 LNMP 1.6 PHP 7.3.16 手动安装 php_redis 扩展 5.2.1</a>
+            <a href="/2021/10/11/%E6%9F%A5%E7%9C%8B-windows-%E4%BB%A5%E5%89%8D%E8%BF%9E%E8%BF%87%E7%9A%84-wifi-%E5%AF%86%E7%A0%81/" class="post-title-link" itemprop="url">查看 windows 以前连过的 wifi 密码</a>
         </h2>
 
         <div class="post-meta">
@@ -244,7 +246,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-22 14:38:00" itemprop="dateCreated datePublished" datetime="2020-03-22T14:38:00+08:00">2020-03-22</time>
+              <time title="创建时间：2021-10-11 15:31:00" itemprop="dateCreated datePublished" datetime="2021-10-11T15:31:00+08:00">2021-10-11</time>
             </span>
 
           
@@ -258,145 +260,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>脚本自动安装失败了 于是尝试手动安装扩展(其实是应该更新系统了，但历史包袱没法甩掉只能先凑合一下)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/php/lib/php/extensions/no-debug-non-zts-20180731/</span><br><span class="line">wget http://pecl.php.net/get/redis-5.2.1.tgz</span><br><span class="line">tar -zxvf redis-5.2.1.tgz </span><br><span class="line"><span class="built_in">cd</span> redis-5.2.1</span><br><span class="line">/usr/local/php/bin/phpize</span><br><span class="line"></span><br><span class="line"><span class="comment">#发现autoconf报错，原因是版本太低</span></span><br><span class="line"><span class="comment">#centos自带的yum库里面的版本已经是最新了于是只能手动升级</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查询旧的版本号 并卸载旧的</span></span><br><span class="line">rpm -qf /usr/bin/autoconf</span><br><span class="line">rpm -e --nodeps autoconf-2.63</span><br><span class="line"><span class="comment">#下载源码包</span></span><br><span class="line">wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz</span><br><span class="line">tar -xzvf autoconf-2.69.tar.gz </span><br><span class="line"><span class="built_in">cd</span> autoconf-2.69</span><br><span class="line">./configure</span><br><span class="line">make </span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">/usr/local/php/bin/phpize</span><br><span class="line">./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line">make </span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment">#新建/usr/local/php/conf.d/007-redis.ini里面内容写</span></span><br><span class="line">extension = <span class="string">&quot;redis.so&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看是否安装成功</span></span><br><span class="line">php -m</span><br><span class="line"><span class="comment">#载入扩展</span></span><br><span class="line">lnmp php-fpm reload</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/03/11/GreenChrome-6-6-6-%E6%9B%B4%E6%96%B0-Chrome-78-%E4%B9%8B%E5%90%8E%E9%A1%B5%E9%9D%A2%E5%B4%A9%E6%BA%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/11/GreenChrome-6-6-6-%E6%9B%B4%E6%96%B0-Chrome-78-%E4%B9%8B%E5%90%8E%E9%A1%B5%E9%9D%A2%E5%B4%A9%E6%BA%83/" class="post-title-link" itemprop="url">GreenChrome 6.6.6 更新 Chrome 78 之后页面崩溃</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-11 16:23:00" itemprop="dateCreated datePublished" datetime="2020-03-11T16:23:00+08:00">2020-03-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>打开GreenChrome.ini找到[追加参数]下面加入启动参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-features=RendererCodeIntegrity</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/03/10/FFmpeg-%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/10/FFmpeg-%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">ffmpeg 命令笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-10 16:01:00" itemprop="dateCreated datePublished" datetime="2020-03-10T16:01:00+08:00">2020-03-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>个人常用命令笔记，非公开教程</p>
-</blockquote>
-<h2 id="旋转视频"><a href="#旋转视频" class="headerlink" title="旋转视频"></a>旋转视频</h2><h3 id="直接复制流"><a href="#直接复制流" class="headerlink" title="直接复制流"></a>直接复制流</h3><p><code>ffmpeg -i &quot;输入文件&quot; -c copy -metadata:s:v:0 rotate=90 &quot;输出文件&quot;</code></p>
-<blockquote>
-<p>rotate&#x3D;90表示旋转90度 也可写入180或270的值</p>
-</blockquote>
-<h3 id="重新编码流"><a href="#重新编码流" class="headerlink" title="重新编码流"></a>重新编码流</h3><p><code>ffmpeg.exe -i &quot;1.mp4&quot; -c:v libx264 -preset veryslow -crf 24 -x264opts ref=6:deblock=1:1:1keyint=30:min-keyint=10 -vf &quot;transpose=2&quot; -c:a copy &quot;output.mkv&quot;</code></p>
-<blockquote>
-<p>编码参数为个人常用参数 非默认参数</p>
-</blockquote>
-<hr>
-<h2 id="重新编码视频和音频并且设置参数-缩放画面分辨率"><a href="#重新编码视频和音频并且设置参数-缩放画面分辨率" class="headerlink" title="重新编码视频和音频并且设置参数 + 缩放画面分辨率"></a>重新编码视频和音频并且设置参数 + 缩放画面分辨率</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe -y -i <span class="string">&quot;输入.mkv&quot;</span> -f wav - | nae.exe -he -br 64000 -ignorelength -<span class="keyword">if</span> - -of <span class="string">&quot;temp.m4a&quot;</span></span><br><span class="line">ffmpeg.exe -y -i <span class="string">&quot;输入.mkv&quot;</span> -c:v libx264 -preset veryslow -crf 24 -bf 6 -refs 6 -qcomp 0.5 -aq-mode 2 -aq-strength 0.8 -psy-rd 0.3:0 -deblock 1:1 -x264opts min-keyint=1 -vf <span class="string">&quot;scale=1280:720&quot;</span> -an <span class="string">&quot;temp.m4v&quot;</span></span><br><span class="line">ffmpeg.exe -y -i temp.m4v -i temp.m4a -map_chapters -1 -c copy <span class="string">&quot;输出.mp4&quot;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>nae.exe 是neroAAC编码器 ffmpeg 因为协议问题不能自带这个 所以只能外置</p>
-</blockquote>
-<hr>
-<h2 id="ffmpeg-（ffprobe）分析文件关键帧时间点"><a href="#ffmpeg-（ffprobe）分析文件关键帧时间点" class="headerlink" title="ffmpeg （ffprobe）分析文件关键帧时间点"></a>ffmpeg （ffprobe）分析文件关键帧时间点</h2><p><code>ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 &quot;input.mp4&quot;</code></p>
-<hr>
-<h2 id="简化输出信息"><a href="#简化输出信息" class="headerlink" title="简化输出信息"></a>简化输出信息</h2><p><code>ffmpeg.exe -hide_banner </code></p>
-<blockquote>
-<p>加上这个参数以后 输出会清爽很多</p>
-</blockquote>
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netsh wlan show profiles</span><br><span class="line">netsh wlan show profile name=&quot;wifi名称&quot; key=clear</span><br></pre></td></tr></table></figure>
+<p>先找热点名字，再根据名字找密码</p>
 
       
     </div>
@@ -416,7 +281,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/03/04/%E5%85%B3%E4%BA%8E%E5%8D%87%E7%BA%A7-acme-sh%EF%BC%8C%E6%9B%B4%E6%96%B0-Let-s-Encrypt/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/09/24/winscp-%E5%8F%AF%E8%83%BD%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%93%81%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -430,7 +295,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/04/%E5%85%B3%E4%BA%8E%E5%8D%87%E7%BA%A7-acme-sh%EF%BC%8C%E6%9B%B4%E6%96%B0-Let-s-Encrypt/" class="post-title-link" itemprop="url">关于升级 acme.sh，更新 Let's Encrypt</a>
+            <a href="/2021/09/24/winscp-%E5%8F%AF%E8%83%BD%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%93%81%EF%BC%9F/" class="post-title-link" itemprop="url">winscp 可能的替代品？</a>
         </h2>
 
         <div class="post-meta">
@@ -440,7 +305,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-04 17:37:00" itemprop="dateCreated datePublished" datetime="2020-03-04T17:37:00+08:00">2020-03-04</time>
+              <time title="创建时间：2021-09-24 19:17:00" itemprop="dateCreated datePublished" datetime="2021-09-24T19:17:00+08:00">2021-09-24</time>
             </span>
 
           
@@ -454,11 +319,138 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>acme.sh该升级了，但是github上的包下不回来</p>
-<p>先准备一个http代理，例如127.0.0.1 端口10800</p>
-<p>export ALL_PROXY&#x3D;<a target="_blank" rel="noopener" href="http://127.0.0.1:10800/">http://127.0.0.1:10800</a></p>
-<p>acme.sh –upgrade</p>
-<p>然后关掉代理软件</p>
+          <p><a target="_blank" rel="noopener" href="https://github.com/allanrbo/filesremote/releases">https://github.com/allanrbo/filesremote/releases</a></p>
+<p>没验证过 慎用</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/09/14/%E6%9F%A5%E7%9C%8B-windows-%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/14/%E6%9F%A5%E7%9C%8B-windows-%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">查看 windows 的进程启动参数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-14 17:05:00" itemprop="dateCreated datePublished" datetime="2021-09-14T17:05:00+08:00">2021-09-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic process where caption=&quot;进程名称.exe&quot; get caption,commandline /value</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/09/10/Ubuntu-Server-%E5%AE%89%E5%85%A8%E8%A1%A5%E4%B8%81%E3%80%81%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/10/Ubuntu-Server-%E5%AE%89%E5%85%A8%E8%A1%A5%E4%B8%81%E3%80%81%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/" class="post-title-link" itemprop="url">Ubuntu Server 安全补丁、版本升级</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-10 17:10:00" itemprop="dateCreated datePublished" datetime="2021-09-10T17:10:00+08:00">2021-09-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Ubuntu安装完毕，要做的第一件事就是升级、打补丁。<br>要安装安全补丁，需要先用 apt-get update 命令更新软件包列表，然后运行 apt-get upgrade 命令升级软件包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+<p>在运行上述 apt-get upgrade 命令后，如果系统提示某些软件包会被“保留”而不能被升级，则可以用 apt-get dist-upgrade 命令来升级所有软件包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get dist-upgrade</span><br></pre></td></tr></table></figure>
+<p>此外，Ubuntu还提供了一个命令 do-release-upgrade, 用于将现有版本分支升级到另一分支。比如，你现在安装的是 Ubuntu 8.04， 想升级到新的8.10，则可以使用这个命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo do-release-upgrade</span><br></pre></td></tr></table></figure>
+<p>Ubuntu 只安装安全更新的方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo unattended-upgrade</span><br></pre></td></tr></table></figure>
+<p>自动安裝安全更新</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg-reconfigure -plow unattended-upgrades</span><br></pre></td></tr></table></figure>
+<p>让 apt-get upgrade 只安裝安全更新</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/apt/preferences</span><br><span class="line"></span><br><span class="line">Package: *</span><br><span class="line">Pin: release a=lucid-security</span><br><span class="line">Pin-Priority: 500</span><br><span class="line"></span><br><span class="line">Package: *</span><br><span class="line">Pin: release o=Ubuntu</span><br><span class="line">Pin-Priority: 50</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://my.oschina.net/catia/blog/385051">https://my.oschina.net/catia/blog/385051</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cplusplus.me/2443.html">https://www.cplusplus.me/2443.html</a></li>
+</ul>
 
       
     </div>
@@ -477,7 +469,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -543,14 +535,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

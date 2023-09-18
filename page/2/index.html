@@ -354,7 +354,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/01/07/VMessAEAD-is-enforced-and-a-non-VMessAEAD-connection-is-received/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/03/31/%E9%98%B2%E6%AD%A2-nginx-%E6%B3%84%E6%BC%8F-cdn-%E5%90%8E%E9%9D%A2%E7%9A%84%E6%BA%90%E7%AB%99-IP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -368,7 +368,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/07/VMessAEAD-is-enforced-and-a-non-VMessAEAD-connection-is-received/" class="post-title-link" itemprop="url">VMessAEAD is enforced and a non VMessAEAD connection is received.</a>
+            <a href="/2023/03/31/%E9%98%B2%E6%AD%A2-nginx-%E6%B3%84%E6%BC%8F-cdn-%E5%90%8E%E9%9D%A2%E7%9A%84%E6%BA%90%E7%AB%99-IP/" class="post-title-link" itemprop="url">防止 nginx 泄漏 cdn 后面的源站 IP</a>
         </h2>
 
         <div class="post-meta">
@@ -378,7 +378,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-01-07 10:51:00" itemprop="dateCreated datePublished" datetime="2022-01-07T10:51:00+08:00">2022-01-07</time>
+              <time title="创建时间：2023-03-31 09:10:00" itemprop="dateCreated datePublished" datetime="2023-03-31T09:10:00+08:00">2023-03-31</time>
             </span>
 
           
@@ -392,12 +392,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://91ai.net/thread-950258-1-1.html">https://91ai.net/thread-950258-1-1.html</a></p>
-<p>处理方法，</p>
+          <p>参考：</p>
 <ul>
-<li>两端alterID改成0</li>
-<li>vnext 段添加 “security”: “auto”, 或者使用其他指定的加密方式。唯独不能缺少这个字段</li>
+<li><a target="_blank" rel="noopener" href="https://blog.hicasper.com/post/114.html">https://blog.hicasper.com/post/114.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.linuxprobe.com/ssl-expose-ip.html">https://www.linuxprobe.com/ssl-expose-ip.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://luotianyi.vc/5056.html">https://luotianyi.vc/5056.html</a></li>
 </ul>
+<pre>
+以下是防走失记录：
+原理：
+    在使用 nginx 作为 web 服务器的时候，对于未绑定的域名（例如默认服务器）可能会解析到其他域名，就是被恶意解析。
+在 443 端口上，这种情况可能更加严重，在直接访问 443 端口时，nginx 会使用第一个配置了 SSL 的站点的证书来建立连接，导致正常源站域名暴露，反查可得到CDN后面源站的IP，因为各大安全机构都有在扫描这个，所以要防御一下
+</pre>
+<p>防御方法：<br>nginx 1.19.4以上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 443 default_server;</span><br><span class="line">	listen [::]:443 default_server;</span><br><span class="line">	server_name _;</span><br><span class="line">	ssl_reject_handshake on;</span><br><span class="line">	return 444;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre>
+其他方法
+自签IP的SSL证书,返回444
+自签IP的SSL证书工具
+MySSL：https://myssl.com/create_test_cert.html
+MkCert：https://github.com/FiloSottile/mkcert
+注意：在新版 nginx 上 RSA 1024 位证书会出现错误，更换 2048 位证书即可。
+</pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name _;</span><br><span class="line">    index index.html;</span><br><span class="line">    root /www/server/nginx/html;  #这里填写web默认目录</span><br><span class="line">    return 444;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name _;</span><br><span class="line">    ssl_certificate    /xxx/ssl.crt;  #这里填写你的证书绝对路径</span><br><span class="line">    ssl_certificate_key    /xxx/ssl.key;</span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line">    ssl_session_cache shared:SSL:10m;</span><br><span class="line">    ssl_session_timeout 10m;</span><br><span class="line">    index index.html;</span><br><span class="line">    root /www/server/nginx/html;  #这里填写web默认目录</span><br><span class="line">    return 444;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>或者仅允许 cdn 服务器的 IP 访问源站，具体看文章开始的参考文章吧。 这里仅作必要的记录</p>
 
       
     </div>
@@ -417,7 +435,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/12/24/shell-%E8%8E%B7%E5%8F%96%E5%85%AC%E7%BD%91-IP/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2023/03/20/linux-%E5%90%8E%E5%8F%B0%E6%89%A7%E8%A1%8C%E7%9A%84%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -431,7 +449,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/12/24/shell-%E8%8E%B7%E5%8F%96%E5%85%AC%E7%BD%91-IP/" class="post-title-link" itemprop="url">shell 获取公网 IP</a>
+            <a href="/2023/03/20/linux-%E5%90%8E%E5%8F%B0%E6%89%A7%E8%A1%8C%E7%9A%84%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">linux 后台执行的总结</a>
         </h2>
 
         <div class="post-meta">
@@ -441,7 +459,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-12-24 15:25:00" itemprop="dateCreated datePublished" datetime="2021-12-24T15:25:00+08:00">2021-12-24</time>
+              <time title="创建时间：2023-03-20 18:09:00" itemprop="dateCreated datePublished" datetime="2023-03-20T18:09:00+08:00">2023-03-20</time>
             </span>
 
           
@@ -455,20 +473,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s http://www.net.cn/static/customercare/yourip.asp |grep -P -o &quot;[0-9.]+(?=&lt;/h2&gt;)&quot;</span><br></pre></td></tr></table></figure>
-<p>压缩网址 302 跳转需要调整curl的参数 （但是网址压缩可能失效导致命令不能用）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L -s https://shorturl.at/hiqyE |grep -P -o &quot;[0-9.]+(?=&lt;/h2&gt;)&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>curl </p>
+          <p><a href="/2021/12/05/Linux-%E7%9A%84-bg-%E5%92%8C-fg-%E5%91%BD%E4%BB%A4-%E8%AE%A9%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E4%B9%8B%E9%97%B4%E5%88%87%E6%8D%A2/">命令 + &amp; 以前写过使用方法</a></p>
+<p>此方法直接关掉终端窗口会停止运行<br>解决方法是先ctrl+d退出<br>缺点是再次登入的时候无法切回前台</p>
+<p><a href="/tags/screen/">使用 tmux 或者 screen</a></p>
+<p>其他（别人总结的）</p>
 <ul>
-<li>-s 隐藏下载进度</li>
-<li>-L 兼容 302 跳转</li>
+<li>视频版 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1H24y1g73T/">https://www.bilibili.com/video/BV1H24y1g73T/</a></li>
+<li>文字版 <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43667414/article/details/129415014">https://blog.csdn.net/weixin_43667414/article/details/129415014</a></li>
 </ul>
-<p>grep </p>
-<ul>
-<li>-P 开启断言模式 </li>
-<li>-o 只显示匹配部分，不显示匹配到的整行</li>
-</ul>
-<h3 id="啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）"><a href="#啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）" class="headerlink" title="啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）"></a>啰嗦版本（一般用不上，除非grep太旧了不支持断言模式）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s http://www.net.cn/static/customercare/yourip.asp |grep &quot;&lt;/h2&gt;&quot; |cut -f2 -d &#x27;&gt;&#x27; |cut -f1 -d &#x27;&lt;&#x27;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -486,7 +499,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -552,14 +565,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

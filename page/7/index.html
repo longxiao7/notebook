@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/02/13/golang-%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E4%B8%8B%E8%BD%BD%E5%8C%85%E5%87%BA%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/03/15/Linux-%E8%B0%83%E8%AF%95%E4%BF%A1%E6%81%AF%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%B0%E6%96%87%E4%BB%B6%E6%97%A5%E5%BF%97%E7%9A%84%E5%88%86%E5%89%B2-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E9%87%8D%E5%91%BD%E5%90%8D%E6%93%8D%E4%BD%9C%E4%B8%8D%E4%BC%9A%E5%88%87%E6%96%AD%E7%A8%8B%E5%BA%8F%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/13/golang-%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E4%B8%8B%E8%BD%BD%E5%8C%85%E5%87%BA%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">golang 解决网络下载包出错的问题</a>
+            <a href="/2022/03/15/Linux-%E8%B0%83%E8%AF%95%E4%BF%A1%E6%81%AF%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%B0%E6%96%87%E4%BB%B6%E6%97%A5%E5%BF%97%E7%9A%84%E5%88%86%E5%89%B2-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E9%87%8D%E5%91%BD%E5%90%8D%E6%93%8D%E4%BD%9C%E4%B8%8D%E4%BC%9A%E5%88%87%E6%96%AD%E7%A8%8B%E5%BA%8F%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/" class="post-title-link" itemprop="url">Linux 调试信息重定向到文件日志的分割 对文件进行重命名操作不会切断程序与重定向文件之间的联系</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-02-13 16:51:00" itemprop="dateCreated datePublished" datetime="2021-02-13T16:51:00+08:00">2021-02-13</time>
+              <time title="创建时间：2022-03-15 16:34:00" itemprop="dateCreated datePublished" datetime="2022-03-15T16:34:00+08:00">2022-03-15</time>
             </span>
 
           
@@ -193,9 +193,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="需要使用的-Go-版本是-1-13-及以上"><a href="#需要使用的-Go-版本是-1-13-及以上" class="headerlink" title="需要使用的 Go 版本是 1.13 及以上"></a>需要使用的 Go 版本是 1.13 及以上</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE=on</span><br><span class="line">go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct</span><br></pre></td></tr></table></figure>
-
-<h3 id="设置不走-proxy-的私有仓库，多个用逗号相隔（可选）"><a href="#设置不走-proxy-的私有仓库，多个用逗号相隔（可选）" class="headerlink" title="设置不走 proxy 的私有仓库，多个用逗号相隔（可选）"></a>设置不走 proxy 的私有仓库，多个用逗号相隔（可选）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env -w GOPRIVATE=*.corp.example.com</span><br></pre></td></tr></table></figure>
+          <p>对文件进行重命名操作不会切断程序与重定向文件之间的联系</p>
+<p>程序本身通过nohup模式启动的，重定向打印的内容到文件</p>
+<p>经过重命名的操作，并重新创建空文件的操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv -f xwzj_server.log xwzj_server_20210222.log &amp;&amp; touch $file;</span><br></pre></td></tr></table></figure>
+<p>原程序运行的日志会继续输出到xwzj_server_20210222.log中去。</p>
+<p>这就意味着对文件进行重命名操作并不能切断程序与重定向文件之间的联系。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_34624126/article/details/113974307">https://blog.csdn.net/sinat_34624126/article/details/113974307</a></p>
+<hr>
+<p>要解决这个问题 需要配合管道和 cronolog 程序使用，下面是一个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar -Xms128m -Xmx256m script-log.jar 2&gt;&amp;1 | /usr/local/sbin/cronolog /data/jar-server/user-behavior/logs/script-log.%Y-%m-%d.out</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -214,7 +221,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/01/09/%E4%BE%BF%E6%90%BA%E7%89%88-WinSCP-%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E5%90%8C%E6%AD%A5%E6%96%87%E4%BB%B6%E5%A4%B9/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/03/08/%E5%9B%BD%E5%86%85-vps-%E4%BC%98%E5%8C%96-github-%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -228,7 +235,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/09/%E4%BE%BF%E6%90%BA%E7%89%88-WinSCP-%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E5%90%8C%E6%AD%A5%E6%96%87%E4%BB%B6%E5%A4%B9/" class="post-title-link" itemprop="url">便携版 WinSCP 在命令行下同步文件夹</a>
+            <a href="/2022/03/08/%E5%9B%BD%E5%86%85-vps-%E4%BC%98%E5%8C%96-github-%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6/" class="post-title-link" itemprop="url">国内 vps 优化 github 访问速度</a>
         </h2>
 
         <div class="post-meta">
@@ -238,7 +245,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-01-09 12:12:00" itemprop="dateCreated datePublished" datetime="2021-01-09T12:12:00+08:00">2021-01-09</time>
+              <time title="创建时间：2022-03-08 14:27:00" itemprop="dateCreated datePublished" datetime="2022-03-08T14:27:00+08:00">2022-03-08</time>
             </span>
 
           
@@ -252,73 +259,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;D:\WinSCPPortable\App\WinSCP\WinSCP.exe&quot; /ini=&quot;D:\WinSCPPortable\Data\settings\winscp.ini&quot; /log=&quot;D:\WinSCPPortable\Data\settings\winscp.log&quot; /command &quot;open sftp://用户名@服务器地址:服务器SSH端口/ -hostkey=&quot;&quot;ssh-rsa 2048 一堆密钥=&quot;&quot; -privatekey=&quot;&quot;D:\新服务器密钥\private.ppk&quot;&quot;&quot; &quot;synchronize remote &quot;&quot;D:\同步的文件夹&quot;&quot; &quot;&quot;/home/data/同步&quot;&quot;&quot; &quot;exit&quot;</span><br></pre></td></tr></table></figure>
-<p>注意 remote 可以换成 both 或者是local 选择不同的同步方向</p>
-<p>整个命令可以用生成器，在 winscp 的菜单  会话 - 生成会话URL&#x2F;代码 - 脚本 -命令行 </p>
-<p>复制出来注意修改ini的路径和log路径</p>
-<p>至于同步命令的详细说明可以参照官方文档</p>
-<p><a target="_blank" rel="noopener" href="https://winscp.net/eng/docs/scriptcommand_synchronize">https://winscp.net/eng/docs/scriptcommand_synchronize</a></p>
-<p>整个命令是异步的，批处理中执行完立即会执行下一行，但同步过程还在继续，要注意。 </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/29/SQLite-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E6%88%96%E8%80%85%E8%A1%A8%E5%90%8E%EF%BC%8C%E5%9B%9E%E6%94%B6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/29/SQLite-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E6%88%96%E8%80%85%E8%A1%A8%E5%90%8E%EF%BC%8C%E5%9B%9E%E6%94%B6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F/" class="post-title-link" itemprop="url">SQLite 删除数据或者表后，回收数据库文件大小</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-29 12:02:00" itemprop="dateCreated datePublished" datetime="2020-12-29T12:02:00+08:00">2020-12-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>原因：<br>    sqlite采用的是变长纪录存储，当你从Sqlite删除数据后，未使用的磁盘空间被添加到一个内在的”空闲列表”中用于存储你下次插入的数据，用于提高效率，磁盘空间并没有丢失，但也不向操作系统返回磁盘空间，这就导致删除数据乃至清空整个数据库后，数据文件大小还是没有任何变化，还是很大</p>
-<p>解决办法：</p>
-<p>sqlite3 中执行 vacuum 命令即可。</p>
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -f /etc/hosts</span><br><span class="line">cp /etc/hosts.ori /etc/hosts </span><br><span class="line">curl -s https://gitee.com/ineo6/hosts/raw/master/hosts &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+<p>&#x2F;etc&#x2F;hosts.ori 是原始的 hosts 信息，如果不存在，记得备份 &#x2F;etc&#x2F;hosts</p>
 
       
     </div>
@@ -338,7 +280,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/27/ubuntu-20-04-%E4%B8%8B-freeswitch-%E9%85%8D%E5%90%88-fail2ban-%E9%98%B2%E6%81%B6%E6%84%8F%E8%AE%BF%E9%97%AE/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/02/26/PostgreSQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BB%BA%E8%A1%A8%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE%E8%87%AA%E5%A2%9E%E5%AD%97%E6%AE%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -352,7 +294,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/27/ubuntu-20-04-%E4%B8%8B-freeswitch-%E9%85%8D%E5%90%88-fail2ban-%E9%98%B2%E6%81%B6%E6%84%8F%E8%AE%BF%E9%97%AE/" class="post-title-link" itemprop="url">ubuntu 20.04 下 freeswitch 配合 fail2ban 防恶意访问</a>
+            <a href="/2022/02/26/PostgreSQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BB%BA%E8%A1%A8%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE%E8%87%AA%E5%A2%9E%E5%AD%97%E6%AE%B5/" class="post-title-link" itemprop="url">PostgreSQL 数据库建表设置主键自增字段</a>
         </h2>
 
         <div class="post-meta">
@@ -362,7 +304,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-27 15:51:00" itemprop="dateCreated datePublished" datetime="2020-12-27T15:51:00+08:00">2020-12-27</time>
+              <time title="创建时间：2022-02-26 12:43:00" itemprop="dateCreated datePublished" datetime="2022-02-26T12:43:00+08:00">2022-02-26</time>
             </span>
 
           
@@ -376,30 +318,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>ubuntu 20.04 </p>
-<p>freeswitch 1.10.5</p>
-<p>fail2ban 0.11.1  <a target="_blank" rel="noopener" href="https://github.com/fail2ban/fail2ban">https://github.com/fail2ban/fail2ban</a></p>
-<h3 id="1-先要让恶意访问的警告内容写入freeswitch的日志"><a href="#1-先要让恶意访问的警告内容写入freeswitch的日志" class="headerlink" title="1,先要让恶意访问的警告内容写入freeswitch的日志"></a>1,先要让恶意访问的警告内容写入freeswitch的日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">修改 /usr/local/freeswitch/conf/sip_profiles/internal.xml</span><br><span class="line"></span><br><span class="line">&lt;param name=&quot;log-auth-failures&quot; value=&quot;true&quot;/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">修改 /usr/local/freeswitch/conf/autoload_configs/switch.conf.xml</span><br><span class="line"></span><br><span class="line">&lt;param name=&quot;threaded-system-exec&quot; value=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure>
-<p>改好以后保存，然后重启 freeswitch 或者 reloadxml </p>
-<h3 id="2，安装fail2ban-，如果之前安装过但是出错了-需要先卸载"><a href="#2，安装fail2ban-，如果之前安装过但是出错了-需要先卸载" class="headerlink" title="2，安装fail2ban ，如果之前安装过但是出错了 需要先卸载"></a>2，安装fail2ban ，如果之前安装过但是出错了 需要先卸载</h3><p>apt-get安装的 直接 sudo apt-get remove fail2ban</p>
-<p>源码安装的可以考虑先结束fail2ban的进程然后手动删除下面的文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/fail2ban-*</span><br><span class="line">/usr/local/bin/fail2ban-*</span><br><span class="line">/usr/lib/python*/*/fail2ban</span><br><span class="line">/usr/local/lib/python*/*/fail2ban (例如 /usr/local/lib/python2.7/dist-packages/fail2ban/)</span><br><span class="line">/etc/fail2ban</span><br></pre></td></tr></table></figure>
-<p>然后重新安装 <code>apt-get install fail2ban</code></p>
-<p>再查看&#x2F;etc&#x2F;fail2ban目录下是否有配置文件，如果没有，需要从github上下载config文件夹下的配置文件 复制进来</p>
-<p>启动 systemctl start fail2ban</p>
-<p>查看状态 systemctl status fail2ban</p>
-<h3 id="3，配置"><a href="#3，配置" class="headerlink" title="3，配置"></a>3，配置</h3><p>修改 &#x2F;etc&#x2F;fail2ban&#x2F;jail.local 如果没有这个文件，那复制一个jail.conf 改名过来</p>
-<p>在里面搜 freeswitch，把对应端口补上，log文件地址改成 &#x2F;usr&#x2F;local&#x2F;freeswitch&#x2F;log&#x2F;freeswitch.log</p>
-<p>然后保存</p>
-<p>&#x2F;etc&#x2F;fail2ban&#x2F;jail.d&#x2F; 新建一个 freeswitch.local 文件</p>
-<p>内容写</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[freeswitch]</span><br><span class="line">enabled = true</span><br><span class="line"></span><br><span class="line">maxretry = 4 ; for a total of five failures</span><br><span class="line">findtime = 3600 ; based on empirical testing</span><br><span class="line">bantime = 259200 ; ban for 3day (which lets us pick up repeat offenders)</span><br><span class="line"></span><br><span class="line"># We do not use 5061 and it is not open to the outside world, so act on 5060 only</span><br><span class="line">port = 5060,5061,5080,5081,7060</span><br><span class="line"></span><br><span class="line"># we do not want mail, so remove that action from standard jail.conf freeswitch config</span><br><span class="line">action = %(banaction)s[name=%(__name__)s-tcp, port=&quot;%(port)s&quot;, protocol=&quot;tcp&quot;, chain=&quot;%(chain)s&quot;, actname=%(banaction)s-tcp]</span><br><span class="line">%(banaction)s[name=%(__name__)s-udp, port=&quot;%(port)s&quot;, protocol=&quot;udp&quot;, chain=&quot;%(chain)s&quot;, actname=%(banaction)s-udp]</span><br><span class="line"></span><br><span class="line"># Add intrusion log, which contains special string for host (see freeswitch.local filter)</span><br><span class="line">logpath = /usr/local/freeswitch/log/freeswitch.log</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>保存 然后重新载入配置</p>
-<p>fail2ban-client reload 如果出错 尝试在命令前面加python3</p>
-<p>python3 fail2ban-client reload</p>
-<p>python3 fail2ban-client status freeswitch   #查看当前freeswitch 被禁止的服务器的状态</p>
-<p>python3 fail2ban-client set freeswitch unbanip 1.2.3.4      #设置freeswitch策略，解禁IP 1.2.3.4</p>
+          <p>引用源 <a target="_blank" rel="noopener" href="https://www.runoob.com/postgresql/postgresql-autoincrement.html">https://www.runoob.com/postgresql/postgresql-autoincrement.html</a></p>
+<p>MySQL 设置自动增长使用 AUTO_INCREMENT 例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `runoob_tbl`(</span><br><span class="line">   `runoob_id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   `runoob_title` VARCHAR(100) NOT NULL,</span><br><span class="line">   `runoob_author` VARCHAR(40) NOT NULL,</span><br><span class="line">   `submission_date` DATE,</span><br><span class="line">   PRIMARY KEY ( `runoob_id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+<p>PostgreSQL对应使用三个关键字 SMALLSERIAL、SERIAL 和 BIGSERIAL </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE tablename (</span><br><span class="line">   colname SERIAL</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>伪类型</th>
+<th>存储大小</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SMALLSERIAL</td>
+<td>2字节</td>
+<td>1 到 32,767</td>
+</tr>
+<tr>
+<td>SERIA</td>
+<td>4字节</td>
+<td>1 到 2,147,483,647</td>
+</tr>
+<tr>
+<td>BIGSERIAL</td>
+<td>8字节</td>
+<td>1 到 922,337,2036,854,775,807</td>
+</tr>
+</tbody></table>
+<p>使用 Navicat 操作就麻烦了一点，需要先在顶部工具栏选择 其他-序列-新建序列<br>然后填好自己要的范围和自增值<br>保存好，然后建表的时候给字段默认值设置成<br>nextval(‘序列名’::regclass)</p>
+<p><img src="/2022/02/26/PostgreSQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BB%BA%E8%A1%A8%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE%E8%87%AA%E5%A2%9E%E5%AD%97%E6%AE%B5/postgresql.png" alt="image"></p>
+<p>其实使用关键字建表也是默认生成了一个序列，pgsql这里是个语法糖，mysql把这里隐藏起来了，所以mysql方便一些</p>
 
       
     </div>
@@ -419,7 +369,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/02/19/windows10-%E6%89%B9%E5%A4%84%E7%90%86%E7%A6%81%E7%94%A8-Windows-Defender-%E5%92%8C-Windows-Update/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -433,7 +383,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">ffmpeg 使用 nvenc 编码的结论记录</a>
+            <a href="/2022/02/19/windows10-%E6%89%B9%E5%A4%84%E7%90%86%E7%A6%81%E7%94%A8-Windows-Defender-%E5%92%8C-Windows-Update/" class="post-title-link" itemprop="url">windows10 批处理禁用 Windows Defender 和 Windows Update</a>
         </h2>
 
         <div class="post-meta">
@@ -443,7 +393,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-14 20:53:00" itemprop="dateCreated datePublished" datetime="2020-12-14T20:53:00+08:00">2020-12-14</time>
+              <time title="创建时间：2022-02-19 13:01:00" itemprop="dateCreated datePublished" datetime="2022-02-19T13:01:00+08:00">2022-02-19</time>
             </span>
 
           
@@ -457,22 +407,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
-<li><p>同码率下 速度比x264快很多，但是质量比不过，从字幕边缘可以看出来</p>
-</li>
-<li><p>涉及到 -vf “ass&#x3D;1.ass” 做字幕内嵌，连编码速度的优势也没了</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe -y -i &quot;demo.mp4&quot; -c:v h264_nvenc -preset llhq -bf 4 -b:v 400k -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@ECHO OFF</span><br><span class="line">&gt;NUL 2&gt;&amp;1 REG.exe query &quot;HKU\S-1-5-19&quot; || (</span><br><span class="line">    ECHO SET UAC = CreateObject^(&quot;Shell.Application&quot;^) &gt; &quot;%TEMP%\Getadmin.vbs&quot;</span><br><span class="line">    ECHO UAC.ShellExecute &quot;%~f0&quot;, &quot;%1&quot;, &quot;&quot;, &quot;runas&quot;, 1 &gt;&gt; &quot;%TEMP%\Getadmin.vbs&quot;</span><br><span class="line">    &quot;%TEMP%\Getadmin.vbs&quot;</span><br><span class="line">    DEL /f /q &quot;%TEMP%\Getadmin.vbs&quot; 2&gt;NUL</span><br><span class="line">    Exit /b</span><br><span class="line">)</span><br><span class="line">REG ADD &quot;HKLM\SOFTWARE\Policies\Microsoft\Windows Defender&quot; /v DisableAntiSpyware /t REG_DWORD /d 1 /f</span><br><span class="line">REG ADD &quot;HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection&quot; /v DisableRealtimeMonitoring /t REG_DWORD /d 1 /f</span><br><span class="line">REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update&quot; /v AUOptions /t REG_DWORD /d 1 /f</span><br><span class="line">REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update&quot; /v CachedAUOptions /t REG_DWORD /d 1 /f</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<p>于是内嵌字幕请直接使用x264</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe  -y -i &quot;demo.mp4&quot; -c:v libx264 -preset veryslow -crf 24 -bf 6 -refs 6 -qcomp 0.5 -aq-mode 2 -aq-strength 0.8 -psy-rd 0.3:0 -deblock 1:1 -x264opts min-keyint=1 -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意这个ass&#x3D;1.ass 在windows下，路径会有编码问题，最好把字幕和ffmpeg放在一起 避免输入路径，文件名也要用简单的。</p>
-</blockquote>
-<ol start="3">
-<li>要速度不要质量的时候，可以批量处理提高处理速度</li>
-</ol>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/01/28/docker-%E6%9B%B4%E6%8D%A2%E9%95%9C%E5%83%8F%E6%BA%90%EF%BC%8C%E5%8A%A0%E9%80%9F%E7%BD%91%E7%BB%9C%E6%8B%89%E5%8F%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/28/docker-%E6%9B%B4%E6%8D%A2%E9%95%9C%E5%83%8F%E6%BA%90%EF%BC%8C%E5%8A%A0%E9%80%9F%E7%BD%91%E7%BB%9C%E6%8B%89%E5%8F%96/" class="post-title-link" itemprop="url">docker 更换镜像源，加速网络拉取</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-28 14:01:00" itemprop="dateCreated datePublished" datetime="2022-01-28T14:01:00+08:00">2022-01-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>国内镜像源</p>
+<ul>
+<li>科大镜像：<a target="_blank" rel="noopener" href="https://docker.mirrors.ustc.edu.cn/">https://docker.mirrors.ustc.edu.cn/</a></li>
+<li>网易：<a target="_blank" rel="noopener" href="https://hub-mirror.c.163.com/">https://hub-mirror.c.163.com/</a></li>
+<li>阿里云：https:&#x2F;&#x2F;&lt;你的ID&gt;.mirror.aliyuncs.com<br>  打开此地址登录你的阿里云账号获取你的专属镜像源 <a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/#/accelerator">https://cr.console.aliyun.com/#/accelerator</a></li>
+<li>七牛云加速器：<a target="_blank" rel="noopener" href="https://reg-mirror.qiniu.com/">https://reg-mirror.qiniu.com</a></li>
+</ul>
+<p>本教程适用于 Centos 系统，其它系统环境没测试。</p>
+<p>新建 &#x2F;etc&#x2F;docker 目录</p>
+<p>编辑 &#x2F;etc&#x2F;docker&#x2F;daemon.json 并写入如下内容（如果文件不存在请新建该文件）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;registry-mirrors&quot;:[&quot;https://reg-mirror.qiniu.com/&quot;]&#125;</span><br></pre></td></tr></table></figure>
+<p>这里采用七牛的镜像源，也可以多添加几个，这个地址是数组，都加上也行，系统会自动尝试使用能用的地址</p>
+<p>vim自己编辑一个也行，FTP上传一个也行。</p>
+<p>sudo systemctl daemon-reload #重载配置<br>sudo systemctl restart docker #重启docker</p>
+<p>检查设置是否生效</p>
+<p>docker info<br>在返回信息中找到如下内容，这个地址就是你设置的镜像源地址。</p>
 
       
     </div>
@@ -491,7 +498,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -557,14 +564,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

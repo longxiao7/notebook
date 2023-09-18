@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/08/30/JS-%E5%B1%8F%E5%B9%95%E6%90%9C%E7%B4%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0CTRL-F%E7%9A%84%E6%95%88%E6%9E%9C/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/09/27/C-FindWindowEx-%E6%9F%A5%E6%89%BE%E7%AA%97%E4%BD%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/08/30/JS-%E5%B1%8F%E5%B9%95%E6%90%9C%E7%B4%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0CTRL-F%E7%9A%84%E6%95%88%E6%9E%9C/" class="post-title-link" itemprop="url">JS 屏幕搜索，实现CTRL + F的效果</a>
+            <a href="/2022/09/27/C-FindWindowEx-%E6%9F%A5%E6%89%BE%E7%AA%97%E4%BD%93/" class="post-title-link" itemprop="url">C# FindWindowEx 查找窗体</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-30 09:59:00" itemprop="dateCreated datePublished" datetime="2021-08-30T09:59:00+08:00">2021-08-30</time>
+              <time title="创建时间：2022-09-27 20:03:00" itemprop="dateCreated datePublished" datetime="2022-09-27T20:03:00+08:00">2022-09-27</time>
             </span>
 
           
@@ -193,10 +193,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.seabreezecomputers.com/tips/find.htm">https://www.seabreezecomputers.com/tips/find.htm</a></p>
-<p>默认不给下载，必须捐赠给钱才行。</p>
-<p>白嫖：</p>
-<p>找到id&#x3D;”dl_link_find5.js”这个a标签，里面的 href 就是下载地址</p>
+          <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Text;</span><br><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">ConsoleApp1</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        [<span class="meta">DllImport(<span class="string">&quot;user32.dll&quot;</span>, EntryPoint = <span class="string">&quot;FindWindowEx&quot;</span>)</span>]</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> IntPtr <span class="title">FindWindowEx</span>(<span class="params">IntPtr hwndParent, IntPtr hwndChildAfter, <span class="built_in">string</span> lpszClass, <span class="built_in">string</span> lpszWindow</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            IntPtr maindHwnd = FindWindowEx((IntPtr)<span class="number">0</span>, (IntPtr)<span class="number">0</span>,<span class="string">&quot;窗体Class&quot;</span>,<span class="string">&quot;窗体标题 也可以是null&quot;</span>); <span class="comment">//获得句柄 </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>具体参数就不写了，到处都能搜到，做个笔记</p>
 
       
     </div>
@@ -216,7 +214,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/07/10/SQL-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%E6%80%9D%E8%80%83/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/09/03/nginx-%E5%85%B3%E9%97%AD%E4%BD%8E%E7%89%88%E6%9C%AC-tls-%E5%8D%8F%E8%AE%AE-%E7%A6%81%E7%94%A8-tls-1-0-tls-1-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -230,7 +228,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/07/10/SQL-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%E6%80%9D%E8%80%83/" class="post-title-link" itemprop="url">SQL 语句的执行顺序，以及优化的方向思考</a>
+            <a href="/2022/09/03/nginx-%E5%85%B3%E9%97%AD%E4%BD%8E%E7%89%88%E6%9C%AC-tls-%E5%8D%8F%E8%AE%AE-%E7%A6%81%E7%94%A8-tls-1-0-tls-1-1/" class="post-title-link" itemprop="url">nginx 关闭低版本 tls 协议 禁用 tls 1.0 tls 1.1</a>
         </h2>
 
         <div class="post-meta">
@@ -240,7 +238,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-07-10 15:03:00" itemprop="dateCreated datePublished" datetime="2021-07-10T15:03:00+08:00">2021-07-10</time>
+              <time title="创建时间：2022-09-03 04:52:00" itemprop="dateCreated datePublished" datetime="2022-09-03T04:52:00+08:00">2022-09-03</time>
             </span>
 
           
@@ -254,13 +252,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="/2021/07/10/SQL-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%E6%80%9D%E8%80%83/sql.jpg" alt="执行顺序"></p>
-<p>这是一条SQL的执行顺序</p>
-<p>可以看到JOIN和WHERE在早期执行，所以优化的重点往往也在这里。数据库的查询性能一般受CPU检索能力+I&#x2F;O设备的读写速度影响，所以要提高查询性能最简单粗暴的方式就是 换更强的CPU（这样逻辑判断就更快），或者增加存储设备的性能（例如机械盘换SSD）。这种方式有点类似于以力破巧，简单粗暴有效果。</p>
-<p>当硬件都没法再提高的情况下，就要从思路上来解决问题了。索引就是一个简单的提高查询性能的方法，具体原理就是把关键数据的位置单独保存一下，类似于一本书的目录，没有目录的时候找一篇文章需要翻遍整本书，但是有目录了以后，就可以根据目录直接翻到对应页码。不过要注意，索引也是有副作用的，首先是降低写入性能，因为制作目录需要单独的计算，还有就是不要滥用索引，只索引最需要的字段（往往是查询条件最常见的字段），这里还有联合索引的概念，就不具体展开了。</p>
-<p>根据执行顺序，要小心的考虑join的方向（不同的join出来的结果不同），要join出来（能够包含查询需要的数据）最小的结果集，这样CPU的性能就会减少浪费。然后是仔细斟酌where的条件，也是避免无端的CPU性能浪费，原则就是尽可能在早期筛掉明显不符合查询条件的结果，减少CPU判断次数。</p>
-<p>GROOUP BY和HAVING也是比较早期的执行过程，所以要慎用，这个非常影响性能，不过好在它在where之后，如果在where之前，那就是个灾难了，在对全部数据集做分组，不敢想象会有多慢。</p>
-<p>SELECT以前不太建议条件直接用 * 但现在基本没问题了 ,查询优化器会自动优化了。<br>所以优化SQL的整体方向就是，减少硬件的读写和判断，尽可能在早期筛掉无效结果，减少结果集的大小<br>但这个想法如果不经过实践应该会比较难理解，需要在具体工作中多分析思考尝试。</p>
+          <p>关键配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssl_protocols TLSv1.2 TLSv1.3;</span><br><span class="line">ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;</span><br><span class="line">ssl_prefer_server_ciphers off;</span><br></pre></td></tr></table></figure>
+<p>改完记得重启nginx</p>
+<p>配置工具</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ssl-config.mozilla.org/#server=nginx&version=1.17.7&config=intermediate&openssl=1.1.1k&hsts=false&ocsp=false&guideline=5.6">https://ssl-config.mozilla.org/#server=nginx&amp;version=1.17.7&amp;config=intermediate&amp;openssl=1.1.1k&amp;hsts=false&amp;ocsp=false&amp;guideline=5.6</a></li>
+</ul>
+<p>测试工具（支持自定义端口的测试好难找）</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://geekflare.com/tools/tls-test">https://geekflare.com/tools/tls-test</a></li>
+<li><a target="_blank" rel="noopener" href="https://myssl.com/">https://myssl.com/</a></li>
+</ul>
 
       
     </div>
@@ -280,7 +283,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/07/02/tmp-%E6%BB%A1%E4%BA%86%E5%8F%AF%E8%83%BD%E6%98%AF%E7%A3%81%E7%9B%98%E6%BB%A1%E4%BA%86/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/08/28/iptables-%E6%8E%A7%E5%88%B6-docker-%E7%AB%AF%E5%8F%A3%E5%BC%80%E6%94%BE%E8%8C%83%E5%9B%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -294,7 +297,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/07/02/tmp-%E6%BB%A1%E4%BA%86%E5%8F%AF%E8%83%BD%E6%98%AF%E7%A3%81%E7%9B%98%E6%BB%A1%E4%BA%86/" class="post-title-link" itemprop="url">/tmp 满了可能是磁盘满了</a>
+            <a href="/2022/08/28/iptables-%E6%8E%A7%E5%88%B6-docker-%E7%AB%AF%E5%8F%A3%E5%BC%80%E6%94%BE%E8%8C%83%E5%9B%B4/" class="post-title-link" itemprop="url">iptables 控制 docker 端口开放范围</a>
         </h2>
 
         <div class="post-meta">
@@ -304,7 +307,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-07-02 13:49:00" itemprop="dateCreated datePublished" datetime="2021-07-02T13:49:00+08:00">2021-07-02</time>
+              <time title="创建时间：2022-08-28 15:03:00" itemprop="dateCreated datePublished" datetime="2022-08-28T15:03:00+08:00">2022-08-28</time>
             </span>
 
           
@@ -318,11 +321,85 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>网站提示报错 文件无法上传，好像是 &#x2F;tmp 满了 实际是数据盘满了</p>
-<p>于是先扩容 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/toumingbai/p/10216142.html">https://www.cnblogs.com/toumingbai/p/10216142.html</a></p>
-<p>再新加一块磁盘，格式化成ext4 挂载</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/vdc</span><br><span class="line">mount /dev/vdc /data/v2</span><br><span class="line"><span class="comment">#然后转移部分文件进去</span></span><br><span class="line"><span class="built_in">cp</span> -rp /data/v1 /data/v2</span><br></pre></td></tr></table></figure>
-<p>复制完记得备份再删</p>
+          <p>对于类似 docker run -d -p 80:80 shaowenchen&#x2F;demo-whoami 运行的服务，需要在 DOCKER-USER 链中添加规则。</p>
+<p>Docker 会将 iptables 规则添加到 DOCKER 链中，如果需要在 Docker 之前添加规则需要添加到 DOCKER-USER 链中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I DOCKER-USER -i ens192 ! -s 1.2.3.4 -p tcp --dport 80 -j DROP</span><br></pre></td></tr></table></figure>
+<p>ens192 是本地的网卡，这里仅允许 1.2.3.4 访问本地主机的 80 端口。</p>
+<p>如果需要在主机重启之后 iptables 设置，依然有效，需要安装 iptables-services 并保存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y iptables-services</span><br><span class="line">systemctl restart iptables.service</span><br><span class="line">service iptables save</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/07/11/%E8%AE%A9-Bash-shell-%E7%9A%84%E8%84%9A%E6%9C%AC%E7%9A%84%E7%BC%96%E5%86%99%E6%9B%B4%E4%B8%A5%E8%B0%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/11/%E8%AE%A9-Bash-shell-%E7%9A%84%E8%84%9A%E6%9C%AC%E7%9A%84%E7%BC%96%E5%86%99%E6%9B%B4%E4%B8%A5%E8%B0%A8/" class="post-title-link" itemprop="url">让 Bash shell 的脚本的编写更严谨</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-11 10:45:00" itemprop="dateCreated datePublished" datetime="2022-07-11T10:45:00+08:00">2022-07-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>因为shell不像其他语言那么严谨，所以经常会出现写完以后执行和预期不相符的情况，下面的几个方法可以让脚本在编写阶段更完善一些</p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line">set -u</span><br></pre></td></tr></table></figure>
+<p>禁止使用不存在的变量</p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line">set -x</span><br></pre></td></tr></table></figure>
+<p>脚本输出结果之前，把造成结果的命令也打印出来，类似于windows cmd下的echo on</p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line">set -e</span><br></pre></td></tr></table></figure>
+<p>如果脚本里面有运行失败的命令（返回值非0），Bash脚本停止执行，防止错误累积。<br>但是，某些命令的非零返回值可能不表示失败，或者开发者希望在命令失败的情况下，脚本继续执行下去,可以暂时调整一下开关</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set +e</span><br><span class="line">command1</span><br><span class="line">command2</span><br><span class="line">set -e</span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set -o pipefail</span><br></pre></td></tr></table></figure>
+<p>用来处理管道命令，作用和set -e 一样，保证管道命令的每个部分都必须正确执行</p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">set命令的上面这四个参数，一般都放在一起使用。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 写法一</span><br><span class="line">set -euxo pipefail</span><br><span class="line"></span><br><span class="line"># 写法二</span><br><span class="line">set -eux</span><br><span class="line">set -o pipefail</span><br><span class="line">这两种写法建议放在所有 Bash 脚本的头部。</span><br><span class="line"></span><br><span class="line">另一种办法是在执行 Bash 脚本的时候，从命令行传入这些参数。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ bash -euxo pipefail script.sh</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -342,7 +419,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/06/28/acme-sh%EF%BC%8C%E9%BB%98%E8%AE%A4-CA-%E5%8F%98%E6%88%90%E4%BA%86-ZeroSSL/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/06/17/%E5%85%B3%E4%BA%8E-Unicode-%E5%92%8C%E4%B9%B1%E7%A0%81%E6%81%A2%E5%A4%8D%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -356,7 +433,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/28/acme-sh%EF%BC%8C%E9%BB%98%E8%AE%A4-CA-%E5%8F%98%E6%88%90%E4%BA%86-ZeroSSL/" class="post-title-link" itemprop="url">acme.sh，默认 CA 变成了 ZeroSSL</a>
+            <a href="/2022/06/17/%E5%85%B3%E4%BA%8E-Unicode-%E5%92%8C%E4%B9%B1%E7%A0%81%E6%81%A2%E5%A4%8D%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">关于 Unicode 和乱码恢复的基本原理</a>
         </h2>
 
         <div class="post-meta">
@@ -366,7 +443,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-06-28 10:14:00" itemprop="dateCreated datePublished" datetime="2021-06-28T10:14:00+08:00">2021-06-28</time>
+              <time title="创建时间：2022-06-17 05:16:00" itemprop="dateCreated datePublished" datetime="2022-06-17T05:16:00+08:00">2022-06-17</time>
             </span>
 
           
@@ -380,75 +457,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/wiki/Change-default-CA-to-ZeroSSL">官方说明</a></p>
-<p><a target="_blank" rel="noopener" href="https://twitter.com/neilpangxa/status/1222792801835872256">具体原因</a></p>
-<p>继续用原来的配置的方法<br>配置文件里删掉最后一行的 Le_API&#x3D;’<a target="_blank" rel="noopener" href="https://acme.zerossl.com/v2/DV90">https://acme.zerossl.com/v2/DV90</a>‘ （之前配置应该没有这一行），再执行<br><code>acme.sh --set-default-ca --server letsencrypt</code></p>
-<p><a target="_blank" rel="noopener" href="https://www.ffis.me/archives/2110.html">使用新的配置的办法</a></p>
-<blockquote>
-<p>acme.sh –register-account -m 邮箱地址 –server zerossl</p>
-</blockquote>
-<p><a href="/2021/06/28/acme-sh%EF%BC%8C%E9%BB%98%E8%AE%A4-CA-%E5%8F%98%E6%88%90%E4%BA%86-ZeroSSL/%E6%94%BE%E5%BC%83LetusEncrypt%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2ZeroSSL%E8%AF%81%E4%B9%A6.rar">备份</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/06/16/windows-10-%E6%89%93%E4%B8%8D%E5%BC%80%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E5%92%8C%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%8D%A1-0-%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%83%BD%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/16/windows-10-%E6%89%93%E4%B8%8D%E5%BC%80%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E5%92%8C%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%8D%A1-0-%E7%9A%84%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%83%BD%E6%80%A7/" class="post-title-link" itemprop="url">windows 10 打不开应用商店和自动更新卡 0&#37; 的一个可能性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-16 12:07:00" itemprop="dateCreated datePublished" datetime="2021-06-16T12:07:00+08:00">2021-06-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Proxifier 3.15 会影响。卸载后恢复，这个软件如果是刚需又不能卸载。</p>
-<p>新版好像原理不一样了，虽然不会卡更新，但不是我需要的功能。</p>
-<p>在 开始菜单 - proxifier - 系统设置 - 卸载模块 - 重置 wsock（会强制重启电脑） 重启后重复这个步骤在窗口的左下角切换到64位 再来一次，再重启<br>此时应该可以更新系统了，更新完再反向操作，安装模块，重启生效。</p>
-<p>根据这个原理<br>禁止 win10 自动更新的办法又多了一个，直接装一个Proxifier 3.15 （不要装新版，就这个版本最管用）不需要启动软件，都可以禁止更新了。<br>搞的我这两年想更都更不了。</p>
+          <p>Unicode是个包含了字符集、编码方案的统一码<br>如果要转换编码，就要先从原始编码转换到Unicode，然后从Unicode再转换到目标编码</p>
+<p>假设现在 有一个日文程序在中文系统下生成了乱码文件名，文件名被复制到utf-8的txt里面以后要如何还原呢？</p>
+<ol>
+<li>将utf-8 转换成 gbk ，也就是先转Unicode，再从Unicode转gbk</li>
+<li>将第一步的gbk字符转Unicode，并设置源编码为 cp932</li>
+<li>将上一步得到的Unicode转成 utf-8。</li>
+</ol>
 
       
     </div>
@@ -467,7 +482,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -533,14 +548,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

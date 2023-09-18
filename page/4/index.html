@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/10/20/IPv6-%E6%B5%8B%E8%AF%95%E5%92%8C-OpenWRT-%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99%E7%AB%AF%E5%8F%A3/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/12/05/linux-%E9%87%8D%E5%90%AF%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5-%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%8F%90%E7%A4%BA-network-24100-Bringing-up-interface-eth2-Error-Connection-activation-failed-No-suitable-device/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/10/20/IPv6-%E6%B5%8B%E8%AF%95%E5%92%8C-OpenWRT-%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99%E7%AB%AF%E5%8F%A3/" class="post-title-link" itemprop="url">IPv6 测试和 OpenWRT 设置防火墙端口</a>
+            <a href="/2022/12/05/linux-%E9%87%8D%E5%90%AF%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5-%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%8F%90%E7%A4%BA-network-24100-Bringing-up-interface-eth2-Error-Connection-activation-failed-No-suitable-device/" class="post-title-link" itemprop="url">linux 重启网络失败 查看日志提示 network[24100]: Bringing up interface eth2: Error: Connection activation failed: No suitable device</a>
         </h2>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-10-20 17:49:00" itemprop="dateCreated datePublished" datetime="2021-10-20T17:49:00+08:00">2021-10-20</time>
+              <time title="创建时间：2022-12-05 17:13:00" itemprop="dateCreated datePublished" datetime="2022-12-05T17:13:00+08:00">2022-12-05</time>
             </span>
 
           
@@ -193,16 +193,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>防火墙设置</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/osnosn/p/11781359.html">https://www.cnblogs.com/osnosn/p/11781359.html</a></li>
-</ul>
-<p>测试工具</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="http://www.ipv6now.com.au/pingme.php">http://www.ipv6now.com.au/pingme.php</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.ipv6now.com.au/traceme.php">http://www.ipv6now.com.au/traceme.php</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.test-ipv6.com/index.html.zh_CN">https://www.test-ipv6.com/index.html.zh_CN</a></li>
-</ul>
+          <p>这个问题一般出在虚拟机复制以后，一般是设备和设备记录对不上，重启找不到设备。解决方案网上一大堆，一般都是让编辑 &#x2F;etc&#x2F;udev&#x2F;rules.d&#x2F;70-persistent-net.rules 这个文件，但也有不是这个情况的。这是因为除了配置文件管理，还有 NetworkManager 也在管理，所以就产生了混乱。<br>参考这篇文章学习使用 nm 管理网络，把多余的网卡清理掉<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46560589/article/details/125309320">https://blog.csdn.net/weixin_46560589/article/details/125309320</a></p>
+<p><a href="/2022/12/05/linux-%E9%87%8D%E5%90%AF%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5-%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%8F%90%E7%A4%BA-network-24100-Bringing-up-interface-eth2-Error-Connection-activation-failed-No-suitable-device/nmtui%E5%92%8Cnmcli%E5%91%BD%E4%BB%A4%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C.rar">防丢备份</a></p>
 
       
     </div>
@@ -222,7 +214,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/10/11/%E6%9F%A5%E7%9C%8B-windows-%E4%BB%A5%E5%89%8D%E8%BF%9E%E8%BF%87%E7%9A%84-wifi-%E5%AF%86%E7%A0%81/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/12/04/windows10-%E6%9F%A5%E7%9C%8B%E4%B8%BB%E6%9D%BF%E5%9E%8B%E5%8F%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -236,7 +228,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/10/11/%E6%9F%A5%E7%9C%8B-windows-%E4%BB%A5%E5%89%8D%E8%BF%9E%E8%BF%87%E7%9A%84-wifi-%E5%AF%86%E7%A0%81/" class="post-title-link" itemprop="url">查看 windows 以前连过的 wifi 密码</a>
+            <a href="/2022/12/04/windows10-%E6%9F%A5%E7%9C%8B%E4%B8%BB%E6%9D%BF%E5%9E%8B%E5%8F%B7/" class="post-title-link" itemprop="url">windows 10 查看主板型号</a>
         </h2>
 
         <div class="post-meta">
@@ -246,7 +238,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-10-11 15:31:00" itemprop="dateCreated datePublished" datetime="2021-10-11T15:31:00+08:00">2021-10-11</time>
+              <time title="创建时间：2022-12-04 03:26:00" itemprop="dateCreated datePublished" datetime="2022-12-04T03:26:00+08:00">2022-12-04</time>
             </span>
 
           
@@ -260,8 +252,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netsh wlan show profiles</span><br><span class="line">netsh wlan show profile name=&quot;wifi名称&quot; key=clear</span><br></pre></td></tr></table></figure>
-<p>先找热点名字，再根据名字找密码</p>
+          <p>查看主板型号这个事一般都是第三方软件做到的，但我是想着既然第三方软件能读取到，那系统肯定也能读取到<br>果不其然，按下ctrl+r 打开运行 输入 msinfo32 回车 即可查看到主板信息</p>
 
       
     </div>
@@ -281,7 +272,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/09/24/winscp-%E5%8F%AF%E8%83%BD%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%93%81%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/11/25/nvidia-%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E6%89%BE%E5%9B%9E%EF%BC%8CNVIDIA-GeForce-Experience-%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81-%E6%89%BE%E5%9B%9E%E5%AF%86%E7%A0%81-%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -295,7 +286,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/09/24/winscp-%E5%8F%AF%E8%83%BD%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%93%81%EF%BC%9F/" class="post-title-link" itemprop="url">winscp 可能的替代品？</a>
+            <a href="/2022/11/25/nvidia-%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E6%89%BE%E5%9B%9E%EF%BC%8CNVIDIA-GeForce-Experience-%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81-%E6%89%BE%E5%9B%9E%E5%AF%86%E7%A0%81-%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/" class="post-title-link" itemprop="url">nvidia 账户密码找回，NVIDIA GeForce Experience 修改密码 找回密码 重置密码</a>
         </h2>
 
         <div class="post-meta">
@@ -305,7 +296,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-24 19:17:00" itemprop="dateCreated datePublished" datetime="2021-09-24T19:17:00+08:00">2021-09-24</time>
+              <time title="创建时间：2022-11-25 04:53:00" itemprop="dateCreated datePublished" datetime="2022-11-25T04:53:00+08:00">2022-11-25</time>
             </span>
 
           
@@ -319,8 +310,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://github.com/allanrbo/filesremote/releases">https://github.com/allanrbo/filesremote/releases</a></p>
-<p>没验证过 慎用</p>
+          <p><a target="_blank" rel="noopener" href="https://login.nvgs.nvidia.cn/v1/forgot-password">https://login.nvgs.nvidia.cn/v1/forgot-password</a></p>
+<p>脑瘫公司，驱动设置还要登录，忘了密码还不给找回选项。翻来覆去在网上找啊找，总算找到了。</p>
 
       
     </div>
@@ -340,7 +331,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/09/14/%E6%9F%A5%E7%9C%8B-windows-%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/11/09/namp-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -354,7 +345,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/09/14/%E6%9F%A5%E7%9C%8B-windows-%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">查看 windows 的进程启动参数</a>
+            <a href="/2022/11/09/namp-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" class="post-title-link" itemprop="url">namp 常用命令 端口扫描</a>
         </h2>
 
         <div class="post-meta">
@@ -364,7 +355,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-14 17:05:00" itemprop="dateCreated datePublished" datetime="2021-09-14T17:05:00+08:00">2021-09-14</time>
+              <time title="创建时间：2022-11-09 15:42:00" itemprop="dateCreated datePublished" datetime="2022-11-09T15:42:00+08:00">2022-11-09</time>
             </span>
 
           
@@ -378,7 +369,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic process where caption=&quot;进程名称.exe&quot; get caption,commandline /value</span><br></pre></td></tr></table></figure>
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 扫描整个C段IP</span><br><span class="line">nmap -sn 10.10.10.0/24</span><br><span class="line"></span><br><span class="line"># 扫描一个ip的开放端口 例如10.10.10.25</span><br><span class="line">nmap -p - --min-rate 10000  10.10.10.25</span><br><span class="line"></span><br><span class="line"># 同上扫UDP</span><br><span class="line">nmap -sU -p - --min-rate 10000 10.10.10.25</span><br><span class="line"></span><br><span class="line"># 根据端口判断软件版本 操作系统版本 例如端口 21 22 80 3306 </span><br><span class="line"># -sT 指定TCP协议</span><br><span class="line"># -O  探测操作系统版本</span><br><span class="line"># -sV 探测软件版本</span><br><span class="line">nmap -sT -sV -O -p21,22,80,3306 10.10.10.25</span><br><span class="line"></span><br><span class="line"># 脚本扫描(例子里面的脚本是【扫描常见的漏洞】，其实还有很多种不同类型的脚本)</span><br><span class="line">nmap --script=vuln -p21,22,80,3306 10.10.10.25</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -397,7 +389,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2021/09/10/Ubuntu-Server-%E5%AE%89%E5%85%A8%E8%A1%A5%E4%B8%81%E3%80%81%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/10/29/Linux-%E5%BF%AB%E9%80%9F%E6%89%93%E5%8C%85%E5%B9%B6%E5%8A%A0%E5%AF%86%E6%96%87%E4%BB%B6%E5%A4%B9-%EF%BC%887zip%E6%9B%BF%E4%BB%A3tar%E5%8A%A0%E5%AF%86%E7%A0%81%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -411,7 +403,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/09/10/Ubuntu-Server-%E5%AE%89%E5%85%A8%E8%A1%A5%E4%B8%81%E3%80%81%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/" class="post-title-link" itemprop="url">Ubuntu Server 安全补丁、版本升级</a>
+            <a href="/2022/10/29/Linux-%E5%BF%AB%E9%80%9F%E6%89%93%E5%8C%85%E5%B9%B6%E5%8A%A0%E5%AF%86%E6%96%87%E4%BB%B6%E5%A4%B9-%EF%BC%887zip%E6%9B%BF%E4%BB%A3tar%E5%8A%A0%E5%AF%86%E7%A0%81%EF%BC%89/" class="post-title-link" itemprop="url">Linux 快速打包并加密文件夹 （7zip替代tar加密码）</a>
         </h2>
 
         <div class="post-meta">
@@ -421,7 +413,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-10 17:10:00" itemprop="dateCreated datePublished" datetime="2021-09-10T17:10:00+08:00">2021-09-10</time>
+              <time title="创建时间：2022-10-29 19:59:00" itemprop="dateCreated datePublished" datetime="2022-10-29T19:59:00+08:00">2022-10-29</time>
             </span>
 
           
@@ -435,22 +427,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Ubuntu安装完毕，要做的第一件事就是升级、打补丁。<br>要安装安全补丁，需要先用 apt-get update 命令更新软件包列表，然后运行 apt-get upgrade 命令升级软件包：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-<p>在运行上述 apt-get upgrade 命令后，如果系统提示某些软件包会被“保留”而不能被升级，则可以用 apt-get dist-upgrade 命令来升级所有软件包：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get dist-upgrade</span><br></pre></td></tr></table></figure>
-<p>此外，Ubuntu还提供了一个命令 do-release-upgrade, 用于将现有版本分支升级到另一分支。比如，你现在安装的是 Ubuntu 8.04， 想升级到新的8.10，则可以使用这个命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo do-release-upgrade</span><br></pre></td></tr></table></figure>
-<p>Ubuntu 只安装安全更新的方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo unattended-upgrade</span><br></pre></td></tr></table></figure>
-<p>自动安裝安全更新</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg-reconfigure -plow unattended-upgrades</span><br></pre></td></tr></table></figure>
-<p>让 apt-get upgrade 只安裝安全更新</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/apt/preferences</span><br><span class="line"></span><br><span class="line">Package: *</span><br><span class="line">Pin: release a=lucid-security</span><br><span class="line">Pin-Priority: 500</span><br><span class="line"></span><br><span class="line">Package: *</span><br><span class="line">Pin: release o=Ubuntu</span><br><span class="line">Pin-Priority: 50</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://my.oschina.net/catia/blog/385051">https://my.oschina.net/catia/blog/385051</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cplusplus.me/2443.html">https://www.cplusplus.me/2443.html</a></li>
-</ul>
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 安装7-zip</span><br><span class="line"># 注意这里硬件的指令集区别 有 x86 x64 arm 和 arm64</span><br><span class="line"># https://www.7-zip.org/a/7z2201-linux-x86.tar.xz</span><br><span class="line"># https://www.7-zip.org/a/7z2201-linux-x64.tar.xz</span><br><span class="line"># https://www.7-zip.org/a/7z2201-linux-arm.tar.xz</span><br><span class="line"># https://www.7-zip.org/a/7z2201-linux-arm64.tar.xz</span><br><span class="line"></span><br><span class="line">mkdir 7zip</span><br><span class="line">cd 7zip</span><br><span class="line">wget https://www.7-zip.org/a/7z2201-linux-x64.tar.xz</span><br><span class="line">tar -xf 7z2201-linux-x64.tar.xz</span><br><span class="line">chmod +x 7zzs </span><br><span class="line">mv 7zzs /usr/local/bin/</span><br><span class="line">ln -s /usr/local/bin/7zzs /usr/bin/7z</span><br><span class="line">cd ..</span><br><span class="line"></span><br><span class="line"># 清理文件</span><br><span class="line">tar -cf - 7zip --remove-files &gt; /dev/null</span><br><span class="line"></span><br><span class="line"># 打包并加密文件</span><br><span class="line">7z a 目标文件名.7z -p密码 ./源文件夹</span><br><span class="line"></span><br><span class="line"># 打包并加密文件同时加密文件名列表（未输入密码不能查看内部有什么文件）</span><br><span class="line">7z a 目标文件名.7z -mhe -p密码 ./源文件夹</span><br><span class="line"></span><br><span class="line"># 解压文件 保持打包之前的结构</span><br><span class="line">7z x 目标文件名.7z -p密码</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>更多使用方法 参考<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lczmx/p/12820077.html">https://www.cnblogs.com/lczmx/p/12820077.html</a></p>
 
       
     </div>
@@ -469,7 +447,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -535,14 +513,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">147</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-count">216</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
