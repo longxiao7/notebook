@@ -155,6 +155,79 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/FFmpeg-%E4%BD%BF%E7%94%A8-NVEnc-%E7%BC%96%E7%A0%81%E7%9A%84%E7%BB%93%E8%AE%BA%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">ffmpeg 使用 nvenc 编码的结论记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-14 20:53:00" itemprop="dateCreated datePublished" datetime="2020-12-14T20:53:00+08:00">2020-12-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
+<li><p>同码率下 速度比x264快很多，但是质量比不过，从字幕边缘可以看出来</p>
+</li>
+<li><p>涉及到 -vf “ass&#x3D;1.ass” 做字幕内嵌，连编码速度的优势也没了</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe -y -i &quot;demo.mp4&quot; -c:v h264_nvenc -preset llhq -bf 4 -b:v 400k -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
+
+<p>于是内嵌字幕请直接使用x264</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe  -y -i &quot;demo.mp4&quot; -c:v libx264 -preset veryslow -crf 24 -bf 6 -refs 6 -qcomp 0.5 -aq-mode 2 -aq-strength 0.8 -psy-rd 0.3:0 -deblock 1:1 -x264opts min-keyint=1 -vf &quot;ass=1.ass&quot; -c:a copy &quot;out.mp4&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意这个ass&#x3D;1.ass 在windows下，路径会有编码问题，最好把字幕和ffmpeg放在一起 避免输入路径，文件名也要用简单的。</p>
+</blockquote>
+<ol start="3">
+<li>要速度不要质量的时候，可以批量处理提高处理速度</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/12/05/PC%E7%89%88%E8%B7%91%E8%B7%91%E5%8D%A1%E4%B8%81%E8%BD%A6-%E6%95%85%E4%BA%8B%E6%A8%A1%E5%BC%8F-%E4%BA%9A%E7%91%9F%E4%BC%A0%E8%AF%B4%E7%AB%A0%E8%8A%82-%E5%8D%A1%E7%BE%8E%E6%B4%9B%E5%BA%86%E5%85%B8-2%E9%98%B6%E6%AE%B5-%E5%BF%83%E7%81%B5%E4%B9%8B%E7%9C%BC-%E6%94%BB%E7%95%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -414,71 +487,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2020/10/20/Linux-%E5%8F%8D%E6%9F%A5%E7%A8%8B%E5%BA%8F%E4%BE%9D%E8%B5%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/20/Linux-%E5%8F%8D%E6%9F%A5%E7%A8%8B%E5%BA%8F%E4%BE%9D%E8%B5%96/" class="post-title-link" itemprop="url">Linux 反查程序依赖</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-20 11:44:00" itemprop="dateCreated datePublished" datetime="2020-10-20T11:44:00+08:00">2020-10-20</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="ldd-命令"><a href="#ldd-命令" class="headerlink" title="ldd  命令"></a>ldd  命令</h3><p>例如  查看ls的依赖</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldd /bin/ls</span><br></pre></td></tr></table></figure>
-
-
-<p>然后缺失的依赖 反查软件包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum provides 依赖的名字</span><br></pre></td></tr></table></figure>
-
-<p>具体实例 <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000015802337">https://segmentfault.com/a/1190000015802337</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -548,14 +556,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">147</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">216</span>
+        <span class="site-state-item-count">218</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

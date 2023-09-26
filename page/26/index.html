@@ -155,6 +155,67 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/07/30/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/07/30/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">PHP正则表达式匹配中文字符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-07-30 10:22:00" itemprop="dateCreated datePublished" datetime="2015-07-30T10:22:00+08:00">2015-07-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>网上有很多类似的文章，但往往都不能用 所以记录一下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/([\x&#123;4e00&#125;-\x&#123;9fa5&#125;])/u&quot;</span>, <span class="variable">$input</span>, <span class="variable">$match</span>);</span><br></pre></td></tr></table></figure>
+
+<p><b>注意：限定代码文件和input字符串都是utf-8编码。其他编码不适用</b></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/05/19/Yii1-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C-%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -418,69 +479,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2015/01/29/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B-JavaScript-%E6%AD%A3%E5%88%99%E7%9A%84%E5%9D%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/01/29/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B-JavaScript-%E6%AD%A3%E5%88%99%E7%9A%84%E5%9D%91/" class="post-title-link" itemprop="url">记录一下 JavaScript 正则的坑</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-01-29 06:02:00" itemprop="dateCreated datePublished" datetime="2015-01-29T06:02:00+08:00">2015-01-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="坑1"><a href="#坑1" class="headerlink" title="坑1"></a>坑1</h2><p>JS正则的单行模式有点问题  . 符号匹配换行符号会有问题</p>
-<p>暂时的解决方案是 先去掉换行</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html = html.<span class="title function_">replace</span>(<span class="regexp">/[\r\n]/g</span>,<span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="坑2"><a href="#坑2" class="headerlink" title="坑2"></a>坑2</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html = html.<span class="title function_">replace</span>(<span class="regexp">/\s&#123;2,&#125;/g</span>,<span class="string">&quot; &quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>清理多余空格（注意 可能会误伤正文内容 最好对标签内容进行局部处理）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -550,14 +548,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">147</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">216</span>
+        <span class="site-state-item-count">218</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

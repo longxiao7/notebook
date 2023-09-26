@@ -22,16 +22,19 @@
     var CONFIG = {"hostname":"np.lvtoude.ltd","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="凑字数">
+  <meta name="description" content="前言处于安全性考虑，网站需要屏蔽国外IP的访问，仅开放内网和国内网络访问。nginx原来的geo模块ngx_http_geoip已经因为太老而被抛弃了，官方也停止了数据库的维护和更新，推荐使用更新的ngx_http_geoip2替换。 1、安装 libmaxminddb源码编译安装官方地址： https:&#x2F;&#x2F;github.com&#x2F;maxmind&#x2F;libmaxminddb , 在里面找到最新的版本下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx 禁止外国 ip 地址访问同时放行内网 ip">
 <meta property="og:url" content="https://np.lvtoude.ltd/2022/12/24/nginx-%E7%A6%81%E6%AD%A2%E5%A4%96%E5%9B%BD-ip-%E5%9C%B0%E5%9D%80%E8%AE%BF%E9%97%AE%E5%90%8C%E6%97%B6%E6%94%BE%E8%A1%8C%E5%86%85%E7%BD%91-ip/index.html">
 <meta property="og:site_name" content="名字还没想好">
-<meta property="og:description" content="凑字数">
+<meta property="og:description" content="前言处于安全性考虑，网站需要屏蔽国外IP的访问，仅开放内网和国内网络访问。nginx原来的geo模块ngx_http_geoip已经因为太老而被抛弃了，官方也停止了数据库的维护和更新，推荐使用更新的ngx_http_geoip2替换。 1、安装 libmaxminddb源码编译安装官方地址： https:&#x2F;&#x2F;github.com&#x2F;maxmind&#x2F;libmaxminddb , 在里面找到最新的版本下">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-23T17:46:00.000Z">
-<meta property="article:modified_time" content="2023-09-18T03:10:00.775Z">
+<meta property="article:modified_time" content="2023-09-19T04:38:28.441Z">
 <meta property="article:author" content="透明白">
+<meta property="article:tag" content="安全">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="geoip">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://np.lvtoude.ltd/2022/12/24/nginx-%E7%A6%81%E6%AD%A2%E5%A4%96%E5%9B%BD-ip-%E5%9C%B0%E5%9D%80%E8%AE%BF%E9%97%AE%E5%90%8C%E6%97%B6%E6%94%BE%E8%A1%8C%E5%86%85%E7%BD%91-ip/">
@@ -195,7 +198,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>处于安全性考虑，网站需要屏蔽国外IP的访问，仅开放内网和国内网络访问。<br>nginx原来的geo模块ngx_http_geoip已经因为太老而被抛弃了，官方也停止了数据库的维护和更新，推荐使用更新的ngx_http_geoip2替换。</p>
+<h2 id="1、安装-libmaxminddb"><a href="#1、安装-libmaxminddb" class="headerlink" title="1、安装 libmaxminddb"></a>1、安装 libmaxminddb</h2><h3 id="源码编译安装"><a href="#源码编译安装" class="headerlink" title="源码编译安装"></a>源码编译安装</h3><p>官方地址： <a target="_blank" rel="noopener" href="https://github.com/maxmind/libmaxminddb">https://github.com/maxmind/libmaxminddb</a> , 在里面找到最新的版本下载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/maxmind/libmaxminddb/releases/download/1.7.1/libmaxminddb-1.7.1.tar.gz</span><br><span class="line">tar -xf libmaxminddb-1.7.1.tar.gz</span><br><span class="line">cd libmaxminddb </span><br><span class="line">./configure </span><br><span class="line">make &amp;&amp; make install </span><br><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure>
+<h3 id="debian-apt-安装"><a href="#debian-apt-安装" class="headerlink" title="debian apt 安装"></a>debian apt 安装</h3><p>资料来源 <a target="_blank" rel="noopener" href="https://packages.debian.org/source/buster/libmaxminddb">https://packages.debian.org/source/buster/libmaxminddb</a><br><code>apt install libmaxminddb* mmdb-bin -y</code></p>
+<h3 id="rh系-yum安装"><a href="#rh系-yum安装" class="headerlink" title="rh系 yum安装"></a>rh系 yum安装</h3><p><code>yum install libmaxminddb* mmdb-bin -y</code></p>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><p>如果提示缺少libmaxminddb.so.0文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c &quot;echo /usr/local/lib  &gt;&gt; /etc/ld.so.conf.d/local.conf&quot;</span><br><span class="line">ldconfig</span><br></pre></td></tr></table></figure>
+<h2 id="2、安装-ngx-http-geoip2-module"><a href="#2、安装-ngx-http-geoip2-module" class="headerlink" title="2、安装 ngx_http_geoip2_module"></a>2、安装 ngx_http_geoip2_module</h2><p>官方地址： <a target="_blank" rel="noopener" href="https://github.com/leev/ngx_http_geoip2_module%EF%BC%8C%E6%89%BE%E5%88%B0%E9%9C%80%E8%A6%81%E7%9A%84%E7%89%88%E6%9C%AC%E8%BF%9B%E8%A1%8C%E4%B8%8B%E8%BD%BD">https://github.com/leev/ngx_http_geoip2_module，找到需要的版本进行下载</a><br>这里服务器使用的是 lnmp.org 工具包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /root</span><br><span class="line">wget https://github.com/leev/ngx_http_geoip2_module/archive/refs/tags/3.4.tar.gz</span><br><span class="line">tar -xzf ngx_http_geoip2_module-3.4.tar.gz</span><br><span class="line">mv ngx_http_geoip2_module-3.4 ngx_http_geoip2_module </span><br></pre></td></tr></table></figure>
+<p>然后在lnmp解压的目录下找到lnmp.conf 在里面找到nginx编译额外参数 添加</p>
+<blockquote>
+<p>–add-module&#x3D;&#x2F;root&#x2F;ngx_http_geoip2_module<br>最后使用 upgrade.sh 升级nginx即可</p>
+</blockquote>
+<h2 id="3、下载数据文件"><a href="#3、下载数据文件" class="headerlink" title="3、下载数据文件"></a>3、下载数据文件</h2><p>登录 <a target="_blank" rel="noopener" href="https://www.maxmind.com/">https://www.maxmind.com/</a> 如果没有帐号，<a target="_blank" rel="noopener" href="https://www.maxmind.com/en/geolite2/signup?utm_source=kb&utm_medium=kb-link&utm_campaign=kb-create-account">先注册一个</a><br>然后在网站左侧找到 Download Files ，在里面找到GeoLite2 Country ，下载回来解压是一个mmdb文件，放到<br><code>/usr/local/geoip/GeoLite2-Country.mmdb</code></p>
+<h2 id="4、配置nginx"><a href="#4、配置nginx" class="headerlink" title="4、配置nginx"></a>4、配置nginx</h2><p>在nginx.conf中，http区段添加如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">geoip2 /usr/local/geoip/GeoLite2-Country.mmdb &#123;</span><br><span class="line">	auto_reload 5m;</span><br><span class="line">	$geoip2_data_country_code country iso_code;</span><br><span class="line">&#125;</span><br><span class="line">map $geoip2_data_country_code $allowed_country &#123;</span><br><span class="line">	default no;</span><br><span class="line">	CN yes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在server区段添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">set $flag 0;</span><br><span class="line"># 放行内网</span><br><span class="line">if ($remote_addr ~* (127.0.0.\d|10.\d+.\d+.\d+|172.16.\d+.\d+|192.168.\d+.\d+)) &#123;</span><br><span class="line">	set $flag &quot;$&#123;flag&#125;1&quot;;</span><br><span class="line">&#125;</span><br><span class="line"># 放行自己的服务器</span><br><span class="line">if ($remote_addr ~* (你的国外VPS的ip1|你的国外VPS的ip2)) &#123;</span><br><span class="line">	set $flag &quot;$&#123;flag&#125;1&quot;;</span><br><span class="line">&#125;</span><br><span class="line"># 屏蔽外国IP访问</span><br><span class="line">if ($allowed_country = no) &#123;</span><br><span class="line">	set $flag &quot;$&#123;flag&#125;0&quot;;</span><br><span class="line">&#125;</span><br><span class="line"># 放行国内</span><br><span class="line">if ($allowed_country = yes) &#123;</span><br><span class="line">	set $flag &quot;$&#123;flag&#125;1&quot;;</span><br><span class="line">&#125;</span><br><span class="line"># 最后判断国外来源排除本地IP 强制跳转到一个其他网页</span><br><span class="line">if ($flag = &quot;00&quot;) &#123;</span><br><span class="line">	rewrite . http://1.1.1.1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启nginx 注意是重启不是重载，否则可能会不生效</p>
+<h2 id="5、参考资料"><a href="#5、参考资料" class="headerlink" title="5、参考资料"></a>5、参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.foryou.cool/article/12/">nginx平滑升级ngx_http_geoip2 (foryou.cool)</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq522044637/article/details/122703038">nginx-geoip2模块使用详解_一边学习一边哭的博客-CSDN博客_geoip2 nginx</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48321993/article/details/125506726">如何用 Nginx 禁止国外 IP 访问网站？_龍揹仩哋騎仕的博客-CSDN博客_禁止国外ip访问</a><br><a target="_blank" rel="noopener" href="https://jishuin.proginn.com/p/763bfbd5a4cb">通过Nginx来实现禁止国外IP访问网站-技术圈 (proginn.com)</a></p>
+
     </div>
 
     
@@ -203,6 +226,11 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AE%89%E5%85%A8/" rel="tag"># 安全</a>
+              <a href="/tags/nginx/" rel="tag"># nginx</a>
+              <a href="/tags/geoip/" rel="tag"># geoip</a>
+          </div>
 
         
 
@@ -275,6 +303,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-libmaxminddb"><span class="nav-number">1.1.</span> <span class="nav-text">1、安装 libmaxminddb</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.1.</span> <span class="nav-text">源码编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debian-apt-%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.2.</span> <span class="nav-text">debian apt 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rh%E7%B3%BB-yum%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.3.</span> <span class="nav-text">rh系 yum安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQ"><span class="nav-number">1.2.</span> <span class="nav-text">FAQ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85-ngx-http-geoip2-module"><span class="nav-number">1.3.</span> <span class="nav-text">2、安装 ngx_http_geoip2_module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">3、下载数据文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E9%85%8D%E7%BD%AEnginx"><span class="nav-number">1.5.</span> <span class="nav-text">4、配置nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.6.</span> <span class="nav-text">5、参考资料</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -288,14 +317,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">147</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">216</span>
+        <span class="site-state-item-count">218</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

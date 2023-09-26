@@ -155,6 +155,70 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/06/17/%E5%85%B3%E4%BA%8E-Unicode-%E5%92%8C%E4%B9%B1%E7%A0%81%E6%81%A2%E5%A4%8D%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/17/%E5%85%B3%E4%BA%8E-Unicode-%E5%92%8C%E4%B9%B1%E7%A0%81%E6%81%A2%E5%A4%8D%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">关于 Unicode 和乱码恢复的基本原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-17 05:16:00" itemprop="dateCreated datePublished" datetime="2022-06-17T05:16:00+08:00">2022-06-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Unicode是个包含了字符集、编码方案的统一码<br>如果要转换编码，就要先从原始编码转换到Unicode，然后从Unicode再转换到目标编码</p>
+<p>假设现在 有一个日文程序在中文系统下生成了乱码文件名，文件名被复制到utf-8的txt里面以后要如何还原呢？</p>
+<ol>
+<li>将utf-8 转换成 gbk ，也就是先转Unicode，再从Unicode转gbk</li>
+<li>将第一步的gbk字符转Unicode，并设置源编码为 cp932</li>
+<li>将上一步得到的Unicode转成 utf-8。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/06/10/%E4%BF%9D%E6%8A%A4-windows-%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E7%99%BB%E5%BD%95%E4%B8%8D%E8%A2%AB%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%A1%88%EF%BC%88%E6%9C%AA%E5%AE%9E%E9%99%85%E6%B5%8B%E8%AF%95%E4%BB%85%E8%AE%B0%E5%BD%95%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -474,81 +538,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2022/03/16/%E5%AE%B6%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E5%BC%80%E5%90%AF-IPV6%EF%BC%8C-wifi-%E8%AE%BF%E9%97%AE%E5%8F%98%E6%85%A2%E7%94%9A%E8%87%B3%E6%89%93%E4%B8%8D%E5%BC%80%E7%BD%91%E9%A1%B5%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/16/%E5%AE%B6%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E5%BC%80%E5%90%AF-IPV6%EF%BC%8C-wifi-%E8%AE%BF%E9%97%AE%E5%8F%98%E6%85%A2%E7%94%9A%E8%87%B3%E6%89%93%E4%B8%8D%E5%BC%80%E7%BD%91%E9%A1%B5%EF%BC%9F/" class="post-title-link" itemprop="url">家用路由器开启 IPv6， wifi 访问变慢甚至打不开网页？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-03-16 12:43:00" itemprop="dateCreated datePublished" datetime="2022-03-16T12:43:00+08:00">2022-03-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>发现最近经常有人提到开启 IPv6 连接速度慢的问题。目前国内确实存在支持 IPv6 的服务器、CDN 节点不够多，IPv6 国际带宽比 IPv4 带宽小的问题，但也不至于会打开国内网站都卡。通常情况下遇到这个问题说明你到目标服务器的链路上存在 PMTU 黑洞。</p>
-<p>关于 PMTU 黑洞<br>MTU (Maximum transmission unit) 是一条链路上可以通过的三层数据包的最大尺寸（包含 IP 包头）。以太网上默认的 MTU 是 1500 字节，但是你和目标服务器之间的路径上可能存在小于 MTU 1500 的链路。这条路径上最小的 MTU 值就是整条路径的 PMTU 值。路由器在转发包时，超过 MTU 大小的包会被分片（ Fragmentation ），也就是一个大包会被分切为多个不超过 MTU 的小包进行传输，传输效率会下降。</p>
-<p>终端设备在发包时，也可以设置 DF （ Don’t Fragment ）标记来告诉路由器不要分片。这时中间路由器会丢掉超过 MTU 的包，回复一条 ICMP Fragmentation Needed 消息。发送者收到这个包后，下次就会发小一点的包，这个过程叫做 PMTU Discovery 。现实中可以看到 HTTPS （ TLS ）的流量大都是带 DF 标记的。</p>
-<p>然而，互联网上有大量的中间设备为了所谓的“安全”或者没有正确配置，不回应 ICMP Fragmentation Needed 包，这使得访问某些网站时如果某个包的大小超过了 PMTU，会被无声地丢弃，直到 TCP 协议发现超时丢包进行重传，这非常缓慢。遇到这种情况，我们可以说你和目标服务器的路径上存在 PMTU 黑洞。</p>
-<p>此外，IPv6 不支持分片，换句话说可以理解为 IPv6 下所有的包都是带 DF 标记的。中间路由器在遇到包尺寸大于 MTU 的情况时，应该回应 ICMPv6 Packet Too Big 消息。同样的，由于种种原因，某些中间设备可能会直接丢包而不回应 ICMPv6 Packet Too Big 消息，直到 TCP 协议发现超时丢包进行重传。。。</p>
-<p>为什么 IPv4 没有这个问题<br>其实 IPv4 也有这个问题，我不只一次见网友说自己搭的软路由访问某些网站非常慢，而换回硬路由就正常。这是因为多数家用路由器默认对 IPv4 下的 TCP 开启了 MSS (maximum segment size) Clamping （使用 OpenWRT 软路由的朋友们可以在防火墙设置中找到 MSS Clamping 开关）。MSS Clamping 是针对 PMTU 黑洞的 Workaround，简单来说就是 TCP 握手时有个 MSS 字段决定单个 TCP 包的最大尺寸。路由器可以通过嗅探 TCP 握手包，把 MSS 值改小，使最终的三层 IP 包的尺寸（ MSS+TCP 头大小+IP 头大小）不超过某个特定的值。</p>
-<p>总结<br>现在国内 ISP 一般都是通过 PPPoE 虚拟拨号建立 WAN 口连接的。Ethernet 的默认 MTU 是 1500，但是 PPPoE 隧道有 8 个 bytes 的开销，所以 PPPoE 虚连接的 MTU 就是 1500-8&#x3D;1492，减掉 IPv4 包头（ 20 字节）和 TCP 包头（ 20 字节），可以得知 IPv4 下需要把 MSS 设为 1452 以下。</p>
-<p>IPv6 的包头是 40 字节，所以 IPv6 下需要把 MSS 设为 1432 以下。</p>
-<p>这时问题来了，目前很多光猫、家用路由器对 IPv6 的优化很差，不支持对 IPv6 下的 TCP 包进行 MSS Clamping，这就导致访问 IPv6 网站时，若路径中存在 PMTU 黑洞，则打开很慢。</p>
-<p>我前段时间帮朋友配置 IPv6 时发现了很多光猫、家用路由器的固件问题，使得国内使用 IPv6 的体验不太理想。我打算抽空专门开一个帖子去讨论这些问题，声讨那些垃圾厂家。目前来看，要想在国内比较理想地体验 IPv6，你需要把光猫改为桥接模式，并使用 OpenWRT 或者 VyOS 这类对 IPv6 支持较好的软路由。</p>
-<p>附：在基于 Linux 的路由器启用MSS Clamping的命令：</p>
-<p>自动MSS，假设PPPOE虚接口是pppoe0<br>iptables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –clamp-mss-to-pmtu<br>ip6tables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –clamp-mss-to-pmtu</p>
-<p>手动指定MSS，假设PPPOE虚接口是pppoe0<br>$ iptables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –set-mss 1452<br>$ ip6tables -t mangle -A POSTROUTING -p tcp –tcp-flags SYN,RST SYN -o pppoe0 -j TCPMSS –set-mss 1432</p>
-<p>RouterOS里设置MSS的命令。其中pppoe-out1是wan口，1420是要MSS值，请根据需要修改。</p>
-<p>&#x2F;ipv6 firewall mangle add chain&#x3D;forward out-interface&#x3D;pppoe-out1 protocol&#x3D;tcp tcp-flags&#x3D;syn action&#x3D;change-mss new-mss&#x3D;1420</p>
-<p>UBNT Edgerouter 系列的MSS设置方法：</p>
-<p>set firewall options mss-clamp6 interface-type pppoe<br>set firewall options mss-clamp6 mss 1420</p>
-<p>转载：<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/800024">https://www.v2ex.com/t/800024</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -618,14 +607,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">147</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">216</span>
+        <span class="site-state-item-count">218</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

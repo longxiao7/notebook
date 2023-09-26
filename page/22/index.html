@@ -155,6 +155,66 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/06/27/JavaScript%20%E5%8A%A8%E6%80%81%E7%9A%84%E5%9C%A8%E9%A1%B5%E9%9D%A2%E9%87%8C%E6%8F%92%E5%85%A5%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="透明白">
+      <meta itemprop="description" content="凑字数">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="名字还没想好">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/27/JavaScript%20%E5%8A%A8%E6%80%81%E7%9A%84%E5%9C%A8%E9%A1%B5%E9%9D%A2%E9%87%8C%E6%8F%92%E5%85%A5%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">jS动态的在页面里插入脚本文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-27 11:07:00" itemprop="dateCreated datePublished" datetime="2018-06-27T11:07:00+08:00">2018-06-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> obj = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;script&quot;</span>);</span><br><span class="line">  obj.<span class="property">type</span> = <span class="string">&quot;text/javascript&quot;</span>;</span><br><span class="line">  obj.<span class="property">src</span> = <span class="string">&quot;https://your_script_file.js&quot;</span>;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;head&quot;</span>)[<span class="number">0</span>].<span class="title function_">appendChild</span>(obj);</span><br><span class="line">&#125; ());</span><br></pre></td></tr></table></figure>
+<p>按钮化</p>
+<p><code>&lt;a href=&#39;javascript:(function()&#123;var a=document.createElement(&quot;script&quot;);a.type=&quot;text/javascript&quot;;a.src=&quot;https://your_script_file.js&quot;;document.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;());&#39;&gt;插入&lt;/a&gt;</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/05/06/PHP-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%BA%93-iconv-%E7%9A%84%E4%B8%80%E4%B8%AA%E7%BB%86%E8%8A%82%E9%94%99%E8%AF%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -419,68 +479,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://np.lvtoude.ltd/2018/01/05/Yii2-%E8%BE%93%E5%87%BA%E5%9B%BE%E7%89%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="透明白">
-      <meta itemprop="description" content="凑字数">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="名字还没想好">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/05/Yii2-%E8%BE%93%E5%87%BA%E5%9B%BE%E7%89%87/" class="post-title-link" itemprop="url">Yii2 输出图片</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-05 17:53:00" itemprop="dateCreated datePublished" datetime="2018-01-05T17:53:00+08:00">2018-01-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="http://www.yiichina.com/doc/api/2.0/yii-web-response#$format-detail">http://www.yiichina.com/doc/api/2.0/yii-web-response#$format-detail</a></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000002467587/a-1020000002468415">https://segmentfault.com/q/1010000002467587/a-1020000002468415</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">通过以下文档的各种属性，可以看到如何实现你说的例子一样的功能</span><br><span class="line">http://www.yiiframework.com/doc-2.0/yii-web-response.html</span><br><span class="line">首先是 $acceptMimeType 属性，就是设置header</span><br><span class="line">或者通过</span><br><span class="line">$headers 属性，批量设置 header</span><br><span class="line">然后你需要把图片发出去，意味着数据需要使用二进制流的形式发出去。</span><br><span class="line">那么就可以通过设置</span><br><span class="line">$data 属性来做到。因为他是 mixed 类型</span><br><span class="line">$content 属性就不行。因为他是 string 类型</span><br><span class="line">并且</span><br><span class="line">$content 的属性也说明了，仅在 $data 属性没有设置的情况下才会使用</span><br><span class="line">最后发现了一个属性</span><br><span class="line">$format</span><br><span class="line">根据文档的解释为：response的数据格式，用于转换$data或者$content的数据格式。</span><br><span class="line">下面有一些选项。</span><br><span class="line">通常要直接显示为图片都是使用 RAW 格式，即“未经加工”过的数据。</span><br><span class="line">那么通过上面这些属性就能达到你的目的。</span><br><span class="line"></span><br><span class="line">最后说一句，如果你要的是使用简单便捷，那么使用这种方案会让你痛苦。但是如果你想要的是管理简单便捷。那么使用框架的属性、方法去做到这些，当然是更加的舒服。</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="http://www.yiiframework.com/doc-2.0/yii-web-response.html">http://www.yiiframework.com/doc-2.0/yii-web-response.html</a></p>
-<p>不光是输出MIME 这里还可以改各种header信息。略麻烦 不过也还好</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -550,14 +548,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">147</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">216</span>
+        <span class="site-state-item-count">218</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
